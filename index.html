@@ -72,7 +72,7 @@
   ::selection { background: var(--green); color: var(--cream); }
 
   /* === NAV === */
-  nav { position: sticky; top: 0; z-index: 100; background: rgba(251, 247, 238, 0.6); -webkit-backdrop-filter: blur(22px) saturate(1.8); backdrop-filter: blur(22px) saturate(1.8); border-bottom: 1px solid rgba(229, 219, 194, 0.6); box-shadow: 0 1px 12px rgba(74, 59, 42, 0.04); padding: 0 2.5rem; height: 70px; display: flex; align-items: center; justify-content: space-between; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(251, 247, 238, 0.72); -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4); border-bottom: 1px solid rgba(229, 219, 194, 0.6); box-shadow: 0 1px 12px rgba(74, 59, 42, 0.04); padding: 0 2.5rem; height: 70px; display: flex; align-items: center; justify-content: space-between; }
   .logo { font-family: var(--font-serif); font-size: 1.55rem; font-weight: 600; letter-spacing: -0.4px; color: var(--green-d); cursor: pointer; }
   .logo .dot { color: var(--coral); font-style: italic; }
   .nav-links { display: flex; gap: 2.25rem; list-style: none; }
@@ -144,105 +144,8 @@
   .trust-text strong { color: var(--text); font-weight: 600; }
   .stars { color: var(--gold); letter-spacing: 1px; }
 
-  /* === UNIFIED DIETITIAN CHAT HERO === */
-  .dr-chat { background: #fff; border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 14px 50px rgba(74,59,42,0.10); overflow: hidden; max-width: 480px; width: 100%; margin: 0 auto; text-align: left; }
-  .dr-header { padding: 14px 16px; background: linear-gradient(135deg, var(--green-d), #1f4d3f); display: flex; align-items: center; gap: 12px; }
-  .dr-avatar { width: 44px; height: 44px; min-width: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--gold-l), var(--gold)); display: flex; align-items: center; justify-content: center; color: var(--green-d); font-family: var(--font-serif); font-weight: 500; font-size: 16px; border: 2px solid rgba(255,255,255,0.3); position: relative; }
-  .dr-avatar::after { content: ''; position: absolute; bottom: -1px; right: -1px; width: 12px; height: 12px; border-radius: 50%; background: #4caf50; border: 2px solid var(--green-d); }
-  .dr-info { flex: 1; }
-  .dr-name { color: var(--cream); font-family: var(--font-serif); font-size: 14px; font-weight: 500; }
-  .dr-cred { color: rgba(229,187,92,0.85); font-size: 11px; }
-  .dr-status { font-size: 9px; font-weight: 600; color: var(--green-d); background: var(--gold-l); padding: 4px 9px; border-radius: 100px; letter-spacing: 0.5px; }
-
-  .chat-body { padding: 14px 14px; background: var(--cream); display: flex; flex-direction: column; gap: 7px; min-height: 230px; max-height: 230px; overflow: hidden; }
-
-  .bubble-dr { max-width: 82%; background: #fff; padding: 10px 13px; border-radius: 14px 14px 14px 4px; font-size: 13px; line-height: 1.5; color: var(--text); box-shadow: 0 2px 8px rgba(74,59,42,0.06); opacity: 0; animation: bubbleIn 0.4s ease-out forwards; }
-  .bubble-you { max-width: 78%; align-self: flex-end; background: linear-gradient(135deg, var(--green-d), #1f4d3f); padding: 10px 13px; border-radius: 14px 14px 4px 14px; font-size: 13px; line-height: 1.5; color: var(--cream); box-shadow: 0 2px 10px rgba(45,95,79,0.15); opacity: 0; animation: bubbleIn 0.4s ease-out forwards; }
-
-  .bubble-dr.b1 { animation-delay: 0.4s; }
-  .bubble-you.u1 { animation-delay: 2.0s; }
-  .bubble-dr.b3 { animation-delay: 3.2s; }
-  .bubble-you.u2 { animation-delay: 4.8s; }
-
-  .typing-row { display: flex; align-items: center; background: #fff; padding: 10px 12px; border-radius: 14px 14px 14px 4px; width: fit-content; gap: 4px; box-shadow: 0 2px 8px rgba(74,59,42,0.06); opacity: 0; animation: typingShow 1.4s ease-out forwards; }
-  .typing-row.t1 { animation-delay: 0s; }
-  .typing-row.t3 { animation-delay: 2.7s; }
-
-  .you-typing { align-self: flex-end; background: linear-gradient(135deg, var(--green-d), #1f4d3f); padding: 10px 12px; border-radius: 14px 14px 4px 14px; width: fit-content; display: flex; gap: 4px; opacity: 0; animation: typingShow 1.2s ease-out forwards; }
-  .you-typing.yt1 { animation-delay: 1.7s; }
-  .you-typing.yt2 { animation-delay: 4.5s; }
-  .you-typing .t-dot-inline { background: rgba(229,187,92,0.7); }
-
-  .t-dot-inline { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: rgba(45,95,79,0.5); animation: dotBounce 1.4s ease-in-out infinite; }
-
-  @keyframes bubbleIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes typingShow { 0% { opacity: 0; transform: translateY(6px); } 25% { opacity: 1; transform: translateY(0); } 80% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: scale(0.85); } }
-  @keyframes dotBounce { 0%, 60%, 100% { opacity: 0.3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
-
-  .suggestions-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 4px 0; align-self: flex-end; opacity: 0; animation: bubbleIn 0.5s ease-out 5.5s forwards; }
-  .suggestion-chip { padding: 6px 12px; background: #fff; border: 1.5px solid rgba(45,95,79,0.2); border-radius: 100px; font-size: 11.5px; color: var(--green-d); cursor: pointer; font-weight: 500; transition: all 0.2s; }
-  .suggestion-chip:hover { background: rgba(45,95,79,0.06); border-color: var(--green-d); }
-  .suggestion-chip .ask { font-size: 9px; opacity: 0.6; margin-right: 3px; }
-
-  .plan-delivery { padding: 0 14px 14px; background: var(--cream); }
-  .plan-card-hero { background: linear-gradient(135deg, var(--green-d), #1f4d3f); border-radius: 14px; padding: 14px 16px; color: var(--cream); position: relative; overflow: hidden; opacity: 0; animation: bubbleIn 0.6s ease-out 6.0s forwards; }
-  .plan-card-hero::before { content: ''; position: absolute; top: -40px; right: -40px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(229,187,92,0.18), transparent 70%); border-radius: 50%; }
-  .plan-card-hero::after { content: ''; position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: radial-gradient(circle, rgba(216,122,91,0.12), transparent 70%); border-radius: 50%; }
-
-  .plan-head-hero { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; position: relative; z-index: 1; }
-  .plan-eyebrow-hero { font-size: 9px; font-weight: 600; color: var(--gold-l); letter-spacing: 0.8px; text-transform: uppercase; }
-  .plan-title-hero { font-family: var(--font-serif); font-size: 15px; color: var(--cream); margin-top: 2px; font-style: italic; font-weight: 500; }
-  .plan-tag-hero { font-size: 8.5px; font-weight: 600; color: var(--green-d); background: var(--gold-l); padding: 3px 8px; border-radius: 100px; letter-spacing: 0.5px; white-space: nowrap; }
-
-  .plan-week-hero { background: rgba(229,187,92,0.12); border-radius: 8px; padding: 8px; margin-bottom: 10px; position: relative; z-index: 1; }
-  .plan-week-label-hero { font-size: 8.5px; font-weight: 600; color: var(--gold-l); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 5px; }
-  .day-row-hero { display: flex; gap: 4px; }
-  .day-cell-hero { flex: 1; text-align: center; padding: 5px 1px; border-radius: 5px; background: rgba(255,255,255,0.06); font-size: 9px; }
-  .day-cell-hero.highlight { background: rgba(229,187,92,0.25); border: 1px solid var(--gold-l); }
-  .day-name-hero { color: rgba(255,255,255,0.6); font-weight: 600; }
-  .day-meal-hero { color: var(--cream); font-size: 8.5px; margin-top: 2px; line-height: 1.2; }
-  .day-cell-hero.highlight .day-meal-hero { color: var(--gold-l); font-weight: 600; }
-
-  .plan-metrics-hero { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; position: relative; z-index: 1; }
-  .plan-metric-label-hero { font-size: 8.5px; color: rgba(229,187,92,0.85); letter-spacing: 0.5px; font-weight: 600; text-transform: uppercase; margin-bottom: 2px; }
-  .plan-metric-val-hero { font-family: var(--font-serif); font-size: 18px; font-weight: 500; line-height: 1; color: var(--cream); }
-  .plan-metric-val-hero.gold { color: var(--gold-l); }
-  .plan-metric-val-hero.coral { color: var(--coral-l); }
-
-  .plan-cta-hero { width: 100%; padding: 10px; background: #fff; color: var(--green-d); border: none; border-radius: 100px; font-size: 12.5px; font-weight: 600; position: relative; z-index: 1; cursor: pointer; transition: transform .2s; }
-  .plan-cta-hero:hover { transform: translateY(-1px); }
-  .plan-footnote-hero { font-size: 10px; color: rgba(229,187,92,0.7); text-align: center; margin-top: 7px; font-style: italic; position: relative; z-index: 1; }
-
-  .footer-strip { padding: 10px 14px; background: #fff; border-top: 1px solid rgba(74,59,42,0.08); display: flex; align-items: center; gap: 10px; }
-  .footer-input { flex: 1; padding: 9px 14px; background: var(--cream-d); border-radius: 100px; font-size: 12px; color: var(--text); opacity: 0.5; }
-  .footer-send { width: 32px; height: 32px; border-radius: 50%; background: var(--green-d); color: var(--cream); display: flex; align-items: center; justify-content: center; font-size: 14px; }
-
-  /* === HERO VISUAL === */
-  .hero-visual { position: relative; height: 540px; }
-  .visual-card { position: absolute; background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 1.4rem; box-shadow: 0 10px 50px rgba(74,59,42,0.08); }
-  .vc-main { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 320px; }
-  .vc-profile { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
-  .vc-avatar { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--green-l), var(--green-d)); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 600; font-family: var(--font-serif); font-size: 16px; }
-  .vc-profile h4 { font-size: 14px; font-weight: 600; }
-  .vc-profile p { font-size: 11px; color: var(--text-l); }
   .vc-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 20px; background: var(--sage-l); color: var(--green-d); margin-bottom: .8rem; letter-spacing: .5px; text-transform: uppercase; }
-  .vc-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 12px; }
-  .vc-row span:first-child { color: var(--text-l); }
-  .vc-row span:last-child { color: var(--text); font-weight: 600; }
-  .vc-progress { margin-top: .8rem; }
-  .vc-pl { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-l); margin-bottom: 5px; }
-  .vc-track { height: 6px; background: var(--cream-d); border-radius: 100px; overflow: hidden; }
-  .vc-fill { height: 100%; width: 68%; background: linear-gradient(90deg, var(--green-l), var(--green-d)); border-radius: 100px; }
 
-  .vc-meal { top: 0; right: 0; width: 220px; }
-  .vc-meal-img { height: 90px; border-radius: var(--r); margin-bottom: .8rem; background: linear-gradient(135deg, #f0c9a0, #d87a5b); position: relative; overflow: hidden; }
-  .vc-meal-img::before { content: '🥗'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 42px; }
-  .vc-meal h5 { font-family: var(--font-serif); font-size: 15px; margin-bottom: 4px; }
-  .vc-meal p { font-size: 11px; color: var(--text-l); display: flex; justify-content: space-between; }
-
-  .vc-stat { bottom: 30px; left: 0; width: 200px; }
-  .vc-stat-label { font-size: 10px; color: var(--text-l); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px; }
-  .vc-stat-val { font-family: var(--font-serif); font-size: 1.85rem; font-weight: 600; color: var(--green-d); line-height: 1; }
   .vc-stat-sub { font-size: 11px; color: var(--green-l); margin-top: 4px; font-weight: 500; }
 
   /* === BANANA LEAF HERO CARD === */
@@ -657,8 +560,6 @@
     .nav-links a:active { background: rgba(45,95,79,.06); }
     .nav-mobile-only { display: list-item; border-top: 1px solid rgba(43,35,23,.06); }
     .hero { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.25rem 2rem; }
-    .dr-chat { max-width: 100%; }
-    .chat-body { min-height: auto; }
     section.block { padding: 3rem 1.25rem; }
     .steps, .features-grid, .pkg-grid, .stat-grid { grid-template-columns: 1fr; }
     .stat-grid { grid-template-columns: 1fr 1fr; }
@@ -718,11 +619,6 @@
     .time-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 6px; }
     .btn { padding: 9px 18px; font-size: 13.5px; }
     .btn-lg { padding: 11px 22px; font-size: 14px; }
-    .dr-chat { padding: 0; }
-    .dr-header { padding: 12px 14px; }
-    .dr-name { font-size: 14px; }
-    .dr-cred { font-size: 11px; }
-    .bubble-dr, .bubble-you { font-size: 13px; padding: 10px 12px; }
     .day-tabs { gap: 6px; flex-wrap: wrap; }
     .day-tab { padding: 6px 12px; font-size: 12px; }
     .meal-list { gap: 10px; }
@@ -780,6 +676,7 @@
   @media (prefers-reduced-motion: no-preference) { .hero-leaves { animation: leafSway 8.5s ease-in-out infinite; } }
   .hero-text, .food-showcase { position: relative; z-index: 2; }
   @media (max-width: 600px) { .hero-leaves { opacity: .4; } }
+  .hero-leaves.no-leaves { background: radial-gradient(110% 80% at 100% 0%, rgba(45,95,79,.07), transparent 58%), radial-gradient(110% 80% at 0% 100%, rgba(45,95,79,.05), transparent 58%) !important; filter: none !important; animation: none !important; }
 
   /* ===================== PREMIUM FOOD SHOWCASE ===================== */
   .food-showcase { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; width: 100%; }
@@ -797,8 +694,8 @@
   @keyframes fsSpin { to { transform: rotate(360deg); } }
   @keyframes fsSpinRev { to { transform: rotate(-360deg); } }
   @media (prefers-reduced-motion: no-preference) {
-    .fs-ring { animation: fsSpin 64s linear infinite; }
-    .fs-ring .fs-dish-inner { animation: fsSpinRev 64s linear infinite; }
+    .fs-ring { animation: fsSpin 90s linear infinite; }
+    .fs-ring .fs-dish-inner { animation: fsSpinRev 90s linear infinite; }
     .fs-stage:hover .fs-ring, .fs-stage:hover .fs-ring .fs-dish-inner { animation-play-state: paused; }
   }
 
@@ -806,8 +703,13 @@
   .fs-dish-inner { position: relative; width: 100%; height: 100%; }
   .fs-dish-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; box-shadow: 0 10px 26px rgba(74,59,42,.16); background: radial-gradient(circle at 50% 38%, #fff, var(--cream-d)); border: 3px solid #fff; }
   .fs-dot { position: absolute; right: 2%; bottom: 16%; width: 7px; height: 7px; border-radius: 50%; background: var(--green-d); box-shadow: 0 0 0 2px #fff; }
-  .fs-dish-label { position: absolute; top: 50%; left: 110%; transform: translateY(-50%); white-space: nowrap; font-size: 12px; font-weight: 600; color: var(--text-m); line-height: 1.2; }
+  .fs-dish-label { display: none; position: absolute; top: 50%; left: 110%; transform: translateY(-50%); white-space: nowrap; font-size: 12px; font-weight: 600; color: var(--text-m); line-height: 1.2; pointer-events: none; }
   .fs-dish:nth-child(5) .fs-dish-label, .fs-dish:nth-child(6) .fs-dish-label { left: auto; right: 110%; text-align: right; }
+  @media (min-width: 1200px) { .fs-dish-label { display: block; } }
+  .fs-dish:hover .fs-dish-label { display: block; }
+  /* Premium fallback when a food photo is missing — cream/sage circle, never a broken-image icon */
+  .fs-photo.fs-broken { background: radial-gradient(circle at 50% 38%, var(--cream) 0%, #E3EADF 70%, #D6E0CF 100%) !important; position: relative; }
+  .fs-photo.fs-broken::after { content: ""; position: absolute; inset: 28%; background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232D5F4F' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round' opacity='0.45'%3E%3Cpath d='M11 3C7 5 5 9 7 14s7 7 11 5'/%3E%3Cpath d='M11 3c4 2 6 6 4 11'/%3E%3C/svg%3E"); opacity: .6; }
 
   .fs-macros { display: flex; align-items: center; gap: 1.25rem; background: rgba(255,255,255,.5); -webkit-backdrop-filter: blur(14px) saturate(1.1); backdrop-filter: blur(14px) saturate(1.1); border: 1px solid rgba(255,255,255,.65); border-radius: 16px; padding: 13px 26px; box-shadow: 0 10px 30px rgba(74,59,42,.10); }
   .fs-macro { display: flex; align-items: center; gap: 10px; color: var(--gold); }
@@ -884,6 +786,7 @@
 <div class="page active" id="page-home">
 
   <!-- HERO -->
+
   <section class="hero">
     <div class="hero-leaves" aria-hidden="true"></div>
     <div class="blob blob-1"></div>
@@ -954,7 +857,28 @@
     </div>
   </section>
 
-  <!-- WHAT WE DO — short manifesto -->
+  <!-- ===== HERO TRUST SIGNALS ===== -->
+  <div class="hero-trustbar">
+    <div class="htb-inner">
+      <div class="htb-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19a6.5 6.5 0 0 1 13 0"/></svg>
+        <span>Certified Dietitians</span>
+      </div>
+      <div class="htb-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M12 3v3M9 4.5v2M15 4.5v2"/></svg>
+        <span>Regional Indian Cuisines</span>
+      </div>
+      <div class="htb-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg>
+        <span>FSSAI Compliant Kitchens</span>
+      </div>
+      <div class="htb-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.3-7-9.2A3.8 3.8 0 0 1 12 7a3.8 3.8 0 0 1 7 3.8C19 15.7 12 20 12 20z"/></svg>
+        <span>Personalised For You</span>
+      </div>
+    </div>
+  </div>
+
   <section class="block" style="background:var(--cream);padding-top:4rem;padding-bottom:4rem">
     <div class="block-inner" style="max-width:920px;text-align:center">
       <div class="section-eyebrow">What we do</div>
@@ -967,26 +891,284 @@
 
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:780px;margin:0 auto" class="whatwedo-pillars">
         <div style="text-align:center">
-          <div style="width:48px;height:48px;border-radius:14px;background:var(--sage-l);color:var(--green-d);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto .65rem">⚕️</div>
+          <div style="width:48px;height:48px;border-radius:14px;background:var(--sage-l);color:var(--green-d);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto .65rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v4a4 4 0 0 0 8 0V3"/><path d="M10 15v1a4 4 0 0 0 8 0v-2"/><circle cx="18" cy="11" r="2"/></svg></div>
           <div style="font-family:var(--font-serif);font-size:14px;font-weight:500;color:var(--text);line-height:1.3">Certified<br/>dietitians</div>
         </div>
         <div style="text-align:center">
-          <div style="width:48px;height:48px;border-radius:14px;background:#FAE5C3;color:#8a6515;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto .65rem">🌶️</div>
+          <div style="width:48px;height:48px;border-radius:14px;background:#FAE5C3;color:#8a6515;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto .65rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-7 5-12 14-13-1 9-6 14-13 14"/><path d="M9 15c2-2 4-3 7-4"/></svg></div>
           <div style="font-family:var(--font-serif);font-size:14px;font-weight:500;color:var(--text);line-height:1.3">Regional Indian<br/>cuisines</div>
         </div>
         <div style="text-align:center">
-          <div style="width:48px;height:48px;border-radius:14px;background:#f4d4c5;color:var(--coral);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto .65rem">🏠</div>
+          <div style="width:48px;height:48px;border-radius:14px;background:#f4d4c5;color:var(--coral);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto .65rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg></div>
           <div style="font-family:var(--font-serif);font-size:14px;font-weight:500;color:var(--text);line-height:1.3">Cooked<br/>your way</div>
         </div>
         <div style="text-align:center">
-          <div style="width:48px;height:48px;border-radius:14px;background:var(--cream-d);color:var(--brown);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto .65rem">📈</div>
+          <div style="width:48px;height:48px;border-radius:14px;background:var(--cream-d);color:var(--brown);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto .65rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5v14h16"/><path d="M7 14l3-4 3 2 4-6"/></svg></div>
           <div style="font-family:var(--font-serif);font-size:14px;font-weight:500;color:var(--text);line-height:1.3">3-6-12 month<br/>transformations</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- STORY TEASER — short bridge with collapsible founder story -->
+  <section class="block how">
+    <div class="block-inner">
+      <div class="section-head">
+        <div class="section-eyebrow">How it works</div>
+        <h2 class="section-title">From <em>hello</em> to <em>healthier</em>.</h2>
+        <p class="section-sub">A consultative journey — not a checkout funnel. Like a real dietitian would walk you through.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">i.</div>
+          <h3>Share metrics &amp; goals</h3>
+          <p>Height, weight, activity, allergies, favourite dishes — and pick 3, 6 or 12 months. A 4-minute form.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">ii.</div>
+          <h3>Get the right tests</h3>
+          <p>We'll recommend tests for your dietitian. Upload existing reports — or book at partner labs nearby. We don't take a cut.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">iii.</div>
+          <h3>A real dietitian builds your plan</h3>
+          <p>Your certified dietitian reviews everything and personally crafts a plan in your regional cuisine.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">iv.</div>
+          <h3>Choose how you want to eat</h3>
+          <p>Chef-at-home, delivered meals, or recipes you cook yourself. Switch any time.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">v.</div>
+          <h3>Track &amp; adjust together</h3>
+          <p>Weekly check-ins. Bi-weekly plan adjustments. Quarterly re-assessment. You evolve, your plan evolves.</p>
+        </div>
+      </div>
+      <p style="text-align:center;font-size:13px;color:var(--text-l);font-style:italic;margin-top:2rem;max-width:680px;margin-left:auto;margin-right:auto">Tests are recommended based on your medical history. Healthy users with no conditions can skip this step.</p>
+    </div>
+  </section>
+
+  <!-- ===== THREE WAYS WE SERVE YOU ===== -->
+  <section class="block" style="background:linear-gradient(180deg, var(--cream-d) 0%, var(--cream) 100%);position:relative;overflow:hidden">
+    <!-- Decorative botanical SVGs -->
+    <svg viewBox="0 0 120 120" style="position:absolute;top:50px;left:30px;width:90px;height:90px;opacity:0.12;color:var(--green-d);pointer-events:none" fill="currentColor">
+      <path d="M60 5 Q 30 30 30 70 Q 30 105 60 115 Q 90 105 90 70 Q 90 30 60 5 Z"/>
+    </svg>
+    <svg viewBox="0 0 100 100" style="position:absolute;bottom:40px;right:30px;width:80px;height:80px;opacity:0.1;color:var(--coral);pointer-events:none" fill="currentColor">
+      <path d="M50 5 Q 28 25 28 60 Q 28 90 50 95 Q 72 90 72 60 Q 72 25 50 5 Z"/>
+    </svg>
+
+    <div class="block-inner" style="position:relative;z-index:1">
+      <div class="section-head">
+        <div class="section-eyebrow">Three ways we serve you</div>
+        <h2 class="section-title">Your kitchen, <em>your comfort.</em></h2>
+        <p class="section-sub">Different people need different things from a food system. Some want a chef in their own home. Some love the convenience of fresh-cooked delivery. Some prefer recipes to cook themselves. Choose how Annam fits your life.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem" class="serve-grid">
+
+        <!-- Card 1: Chef-at-home -->
+        <div onclick="setPreferredTier('chef');show('assess')" style="background:#f4d4c5;border:2px solid #f4d4c5;border-radius:var(--r-lg);padding:2rem 1.75rem;cursor:pointer;transition:all .3s;position:relative;display:flex;flex-direction:column" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(216,122,91,0.18)';this.style.borderColor='var(--coral)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='#f4d4c5'">
+          <span style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--coral);color:var(--cream);font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;white-space:nowrap">PREMIUM</span>
+          <div style="width:60px;height:60px;border-radius:16px;background:var(--coral);color:var(--cream);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 14h10v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M7 14a3.5 3.5 0 0 1-1-6.5A3.5 3.5 0 0 1 12 5a3.5 3.5 0 0 1 6 2.5A3.5 3.5 0 0 1 17 14"/></svg></div>
+          <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--brown);margin-bottom:.5rem;letter-spacing:-.2px">Chef-at-home</h3>
+          <p style="font-size:13.5px;color:#8a4a30;line-height:1.55;margin-bottom:1.25rem">Our trained cook arrives at your home and prepares fresh meals in your kitchen — exactly the way you like them.</p>
+          <ul style="list-style:none;font-size:13px;color:#8a4a30;line-height:1.7;margin-bottom:1.5rem;flex:1">
+            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--coral);font-weight:700">✓</span><span>Cooked in your home, your way</span></li>
+            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--coral);font-weight:700">✓</span><span>Zero trust gap · you see everything</span></li>
+            <li style="display:flex;gap:8px"><span style="color:var(--coral);font-weight:700">✓</span><span>Best for families & seniors</span></li>
+          </ul>
+          <div style="padding-top:1rem;border-top:1px solid rgba(138,74,48,0.15);display:flex;justify-content:space-between;align-items:flex-end">
+            <div>
+              <div style="font-style:italic;font-size:13px;color:#8a4a30;line-height:1.4">Pricing shared after your dietitian consult</div>
+              <div style="font-size:10.5px;color:#8a4a30;margin-top:4px;opacity:.7">2-3h kitchen visit · ingredients included</div>
+            </div>
+            <span style="font-size:13px;font-weight:600;color:var(--coral)">See more →</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Delivered (default highlighted) -->
+        <div onclick="setPreferredTier('delivered');show('assess')" style="background:var(--green-d);border:2px solid var(--green-d);border-radius:var(--r-lg);padding:2rem 1.75rem;cursor:pointer;transition:all .3s;position:relative;color:var(--cream);transform:translateY(-4px);box-shadow:0 12px 32px rgba(45,95,79,0.22);display:flex;flex-direction:column" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 16px 44px rgba(45,95,79,0.28)'" onmouseout="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(45,95,79,0.22)'">
+          <span style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--brown);font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;white-space:nowrap">MOST POPULAR</span>
+          <div style="width:60px;height:60px;border-radius:16px;background:rgba(229,187,92,0.2);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg></div>
+          <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--cream);margin-bottom:.5rem;letter-spacing:-.2px">Delivered meals</h3>
+          <p style="font-size:13.5px;color:rgba(251,247,238,.85);line-height:1.55;margin-bottom:1.25rem">Cooked fresh in our partner cloud kitchens, delivered hot to your door — on the schedule that fits you.</p>
+          <ul style="list-style:none;font-size:13px;color:rgba(251,247,238,.85);line-height:1.7;margin-bottom:1.5rem;flex:1">
+            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--gold-l);font-weight:700">✓</span><span>Cooked & dispatched within 2 hours</span></li>
+            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--gold-l);font-weight:700">✓</span><span>FSSAI-licensed · monthly audits</span></li>
+            <li style="display:flex;gap:8px"><span style="color:var(--gold-l);font-weight:700">✓</span><span>Best for working professionals</span></li>
+          </ul>
+          <div style="padding-top:1rem;border-top:1px solid rgba(251,247,238,.15);display:flex;justify-content:space-between;align-items:flex-end">
+            <div>
+              <div style="font-style:italic;font-size:13px;color:rgba(251,247,238,.85);line-height:1.4">Pricing shared after your dietitian consult</div>
+              <div style="font-size:10.5px;color:rgba(251,247,238,.55);margin-top:4px">3 meals/day · part of subscription</div>
+            </div>
+            <span style="font-size:13px;font-weight:600;color:var(--gold-l)">See more →</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Recipes -->
+        <div onclick="setPreferredTier('recipes');show('assess')" style="background:var(--sage-l);border:2px solid var(--sage-l);border-radius:var(--r-lg);padding:2rem 1.75rem;cursor:pointer;transition:all .3s;position:relative;display:flex;flex-direction:column" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(45,95,79,0.15)';this.style.borderColor='var(--green-l)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='var(--sage-l)'">
+          <span style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--sage);color:var(--green-d);font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;white-space:nowrap">DIY · LOW-COST</span>
+          <div style="width:60px;height:60px;border-radius:16px;background:var(--green-d);color:var(--cream);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h5v16H6a2 2 0 0 0-2 2z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2z"/></svg></div>
+          <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--green-d);margin-bottom:.5rem;letter-spacing:-.2px">Recipes only</h3>
+          <p style="font-size:13.5px;color:var(--green-d);line-height:1.55;margin-bottom:1.25rem">Get your fully personalised diet as detailed recipes — ingredient lists, step-by-step cooking, prep videos. You cook. We coach.</p>
+          <ul style="list-style:none;font-size:13px;color:var(--green-d);line-height:1.7;margin-bottom:1.5rem;flex:1">
+            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--green-d);font-weight:700">✓</span><span>Recipes · grocery lists · prep videos</span></li>
+            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--green-d);font-weight:700">✓</span><span>Same dietitian guidance, lower cost</span></li>
+            <li style="display:flex;gap:8px"><span style="color:var(--green-d);font-weight:700">✓</span><span>Best for home cooks who love cooking</span></li>
+          </ul>
+          <div style="padding-top:1rem;border-top:1px solid rgba(45,95,79,0.15);display:flex;justify-content:space-between;align-items:flex-end">
+            <div>
+              <div style="font-style:italic;font-size:13px;color:var(--green-d);line-height:1.4">Pricing shared after your dietitian consult</div>
+              <div style="font-size:10.5px;color:var(--green-d);margin-top:4px;opacity:.7">Plan + dietitian + recipes only</div>
+            </div>
+            <span style="font-size:13px;font-weight:600;color:var(--green-d)">See more →</span>
+          </div>
+        </div>
+      </div>
+
+      <p style="text-align:center;color:var(--text-l);font-size:13px;font-style:italic;margin-top:2.5rem">Not sure which one fits you? <a onclick="setPreferredTier('');show('assess')" style="color:var(--green-d);font-weight:600;cursor:pointer;border-bottom:1.5px solid var(--gold-l);padding-bottom:1px">Take the 4-minute assessment</a> — we'll recommend the right mode based on your lifestyle.</p>
+    </div>
+  </section>
+
+  <section class="ck">
+    <div style="max-width:880px;margin:0 auto;text-align:center;padding:0 1.25rem">
+      <div class="section-eyebrow" style="color:var(--gold-l);justify-content:center;display:inline-block">Cloud kitchen network</div>
+      <h2 style="font-family:var(--font-serif);font-size:clamp(2rem,3.5vw,2.6rem);font-weight:500;line-height:1.15;letter-spacing:-.5px;color:var(--cream);margin:1rem 0 1rem">
+        Where your <em style="font-style:italic;color:var(--gold-l)">delivered meals</em> come from.
+      </h2>
+      <p style="color:rgba(251,247,238,.8);font-size:1.05rem;line-height:1.7;max-width:680px;margin:0 auto 2.5rem">
+        We don't just plan diets — we operate a network of FSSAI-certified cloud kitchens that prep your meals fresh, in real time. Cooked in 2 hours. Packed in eco-containers. Delivered hot.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:780px;margin:0 auto" class="ck-trust-row">
+        <div style="text-align:center">
+          <div style="width:52px;height:52px;border-radius:14px;background:rgba(229,187,92,0.15);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto .75rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg></div>
+          <h5 style="font-family:var(--font-serif);font-size:14px;font-weight:500;color:var(--cream);margin-bottom:4px">FSSAI verified</h5>
+          <p style="font-size:11.5px;color:rgba(251,247,238,.55);line-height:1.45">Hygiene audited monthly.</p>
+        </div>
+        <div style="text-align:center">
+          <div style="width:52px;height:52px;border-radius:14px;background:rgba(229,187,92,0.15);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto .75rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg></div>
+          <h5 style="font-family:var(--font-serif);font-size:14px;font-weight:500;color:var(--cream);margin-bottom:4px">2-hour dispatch</h5>
+          <p style="font-size:11.5px;color:rgba(251,247,238,.55);line-height:1.45">Cooked → packed → out.</p>
+        </div>
+        <div style="text-align:center">
+          <div style="width:52px;height:52px;border-radius:14px;background:rgba(229,187,92,0.15);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto .75rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v10l-8 4-8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg></div>
+          <h5 style="font-family:var(--font-serif);font-size:14px;font-weight:500;color:var(--cream);margin-bottom:4px">Eco packaging</h5>
+          <p style="font-size:11.5px;color:rgba(251,247,238,.55);line-height:1.45">Bagasse + paper, no plastic.</p>
+        </div>
+        <div style="text-align:center">
+          <div style="width:52px;height:52px;border-radius:14px;background:rgba(229,187,92,0.15);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto .75rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17"/></svg></div>
+          <h5 style="font-family:var(--font-serif);font-size:14px;font-weight:500;color:var(--cream);margin-bottom:4px">Across India</h5>
+          <p style="font-size:11.5px;color:rgba(251,247,238,.55);line-height:1.45">Mumbai, Pune, Bangalore +.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-inner">
+      <div class="section-head">
+        <div class="section-eyebrow">Why Annam</div>
+        <h2 class="section-title">Built around <em>you,</em> not the other way round.</h2>
+        <p class="section-sub">Most diets fail because they ignore real life. We start with your body, your kitchen-time and your taste — then handle the rest.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feat">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v4a4 4 0 0 0 8 0V3"/><path d="M10 15v1a4 4 0 0 0 8 0v-2"/><circle cx="18" cy="11" r="2"/></svg></div>
+          <h3>Real dietitians, not bots</h3>
+          <p>Every plan is reviewed and signed off by an MSc / RD-certified nutritionist. You talk to a human — not a chatbot.</p>
+        </div>
+        <div class="feat">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg></div>
+          <h3>Chef, delivery, or recipes</h3>
+          <p>Three ways to bring your plan to life. Your kitchen, your time, your budget — switch any time.</p>
+        </div>
+        <div class="feat">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M12 3v3M9 4.5v2M15 4.5v2"/></svg></div>
+          <h3>Cloud kitchen freshness</h3>
+          <p>Meals cooked in FSSAI-licensed kitchens, packed in eco-containers, dispatched within 2 hours of cooking.</p>
+        </div>
+        <div class="feat">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.3-7-9.2A3.8 3.8 0 0 1 12 7a3.8 3.8 0 0 1 7 3.8C19 15.7 12 20 12 20z"/></svg></div>
+          <h3>Built around what you love</h3>
+          <p>Tell us your 3 favourite dishes. Your dietitian builds them in. Eating healthy stops feeling like punishment.</p>
+        </div>
+        <div class="feat">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-7 5-12 14-13-1 9-6 14-13 14"/><path d="M9 15c2-2 4-3 7-4"/></svg></div>
+          <h3>Regional Indian cuisines</h3>
+          <p>8 regional cuisines — North &amp; South Indian, Bengali, Gujarati, Maharashtrian, Punjabi, Multi-cuisine, Indo-Continental. The food you actually grew up eating.</p>
+        </div>
+        <div class="feat">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3l1.5 5-2 1.2a11 11 0 0 0 5 5l1.2-2 5 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></div>
+          <h3>Always within reach</h3>
+          <p>Stuck on day 12? WhatsApp your dietitian or book a video consult. Real humans, fast replies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block packages" id="packages">
+    <div class="block-inner">
+      <div class="section-head">
+        <div class="section-eyebrow">Plans</div>
+        <h2 class="section-title">Pick your <em>transformation</em> length.</h2>
+        <p class="section-sub">All plans include the dietitian-built diet, ongoing dietitian access and your chosen service mode — with <strong style="color:var(--gold-l)">no surprise pricing</strong>. Longer commitments unlock deeper results. <em>Pricing is shared transparently during your dietitian consult — based on your goals, city and meal frequency.</em></p>
+      </div>
+      <div class="pkg-grid">
+        <div class="pkg" data-pkg="kickstart">
+          <h3 class="pkg-name">Kickstart</h3>
+          <p class="pkg-tagline">3-month plan · Best for trial</p>
+          <div style="font-family:var(--font-serif);font-size:2rem;font-weight:500;color:var(--gold-l);line-height:1;letter-spacing:-1px;margin:1.25rem 0 .5rem">3 months</div>
+          <span class="pkg-save" style="color:rgba(251,247,238,.7)">Try it. See if it fits your life.</span>
+          <ul style="margin-top:1.5rem">
+            <li>Personalised dietitian-built plan</li>
+            <li>2 dietitian consultations</li>
+            <li>Your chosen service mode</li>
+            <li>Weekly progress check-in</li>
+            <li>WhatsApp dietitian support</li>
+          </ul>
+          <button class="btn btn-outline" style="border-color:var(--gold-l);color:var(--gold-l)" onclick="show('dietitian')">Start with a consult</button>
+        </div>
+        <div class="pkg featured" data-pkg="transform">
+          <span class="pkg-tag">Most popular</span>
+          <h3 class="pkg-name">Transform</h3>
+          <p class="pkg-tagline">6-month plan · Best results</p>
+          <div style="font-family:var(--font-serif);font-size:2rem;font-weight:500;color:var(--cream);line-height:1;letter-spacing:-1px;margin:1.25rem 0 .5rem">6 months</div>
+          <span class="pkg-save" style="color:var(--gold-l)">The sweet spot for real change.</span>
+          <ul style="margin-top:1.5rem">
+            <li>Everything in Kickstart</li>
+            <li>6 dietitian consultations</li>
+            <li>Bi-weekly plan adjustments</li>
+            <li>Body composition analysis</li>
+            <li>Recipe library access</li>
+            <li>Free re-onboarding</li>
+          </ul>
+          <button class="btn btn-coral" onclick="show('dietitian')">Start with a consult</button>
+        </div>
+        <div class="pkg" data-pkg="lifestyle">
+          <h3 class="pkg-name">Lifestyle</h3>
+          <p class="pkg-tagline">12-month plan · Lasting change</p>
+          <div style="font-family:var(--font-serif);font-size:2rem;font-weight:500;color:var(--gold-l);line-height:1;letter-spacing:-1px;margin:1.25rem 0 .5rem">12 months</div>
+          <span class="pkg-save" style="color:rgba(251,247,238,.7)">For health that becomes second nature.</span>
+          <ul style="margin-top:1.5rem">
+            <li>Everything in Transform</li>
+            <li>Monthly dietitian consults</li>
+            <li>Quarterly health re-assessment</li>
+            <li>Family plan add-on</li>
+            <li>Priority delivery slots</li>
+            <li>Free festival meal swaps</li>
+          </ul>
+          <button class="btn btn-outline" style="border-color:var(--gold-l);color:var(--gold-l)" onclick="show('dietitian')">Start with a consult</button>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:2.5rem;max-width:680px;margin-left:auto;margin-right:auto">
+        <p style="font-size:13.5px;color:rgba(251,247,238,.7);line-height:1.7;margin-bottom:.75rem"><strong style="color:var(--gold-l)">Why no price on this page?</strong> Pricing in nutrition isn't one-size-fits-all. It depends on your goals, your city, how many meals a day, and which service mode (chef / delivered / recipes) you choose. Your dietitian gives you a real, honest quote during your consult — not a generic figure to lure you in.</p>
+        <p style="font-size:12.5px;color:rgba(251,247,238,.55);font-style:italic">₹199 dietitian consult · refunded against any plan you choose.</p>
+      </div>
+    </div>
+  </section>
+
   <section style="padding:4rem 2.5rem;background:linear-gradient(180deg, var(--cream) 0%, var(--cream-d) 100%);position:relative;overflow:hidden">
     <svg viewBox="0 0 200 200" style="position:absolute;top:-30px;right:-30px;width:200px;height:200px;opacity:0.08;color:var(--coral);pointer-events:none" fill="currentColor">
       <path d="M100 20 Q 60 50 60 100 Q 60 150 100 180 Q 140 150 140 100 Q 140 50 100 20 Z"/>
@@ -1052,231 +1234,6 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section class="block how">
-    <div class="block-inner">
-      <div class="section-head">
-        <div class="section-eyebrow">How it works</div>
-        <h2 class="section-title">From <em>hello</em> to <em>healthier</em>.</h2>
-        <p class="section-sub">A consultative journey — not a checkout funnel. Like a real dietitian would walk you through.</p>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">i.</div>
-          <h3>Share metrics &amp; goals</h3>
-          <p>Height, weight, activity, allergies, favourite dishes — and pick 3, 6 or 12 months. A 4-minute form.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">ii.</div>
-          <h3>Get the right tests</h3>
-          <p>We'll recommend tests for your dietitian. Upload existing reports — or book at partner labs nearby. We don't take a cut.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">iii.</div>
-          <h3>A real dietitian builds your plan</h3>
-          <p>Your certified dietitian reviews everything and personally crafts a plan in your regional cuisine.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">iv.</div>
-          <h3>Choose how you want to eat</h3>
-          <p>Chef-at-home, delivered meals, or recipes you cook yourself. Switch any time.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">v.</div>
-          <h3>Track &amp; adjust together</h3>
-          <p>Weekly check-ins. Bi-weekly plan adjustments. Quarterly re-assessment. You evolve, your plan evolves.</p>
-        </div>
-      </div>
-      <p style="text-align:center;font-size:13px;color:var(--text-l);font-style:italic;margin-top:2rem;max-width:680px;margin-left:auto;margin-right:auto">Tests are recommended based on your medical history. Healthy users with no conditions can skip this step.</p>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="block">
-    <div class="block-inner">
-      <div class="section-head">
-        <div class="section-eyebrow">Why Annam</div>
-        <h2 class="section-title">Built around <em>you,</em> not the other way round.</h2>
-        <p class="section-sub">Most diets fail because they ignore real life. We start with your body, your kitchen-time and your taste — then handle the rest.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feat">
-          <div class="feat-icon">👩‍⚕️</div>
-          <h3>Real dietitians, not bots</h3>
-          <p>Every plan is reviewed and signed off by an MSc / RD-certified nutritionist. You talk to a human — not a chatbot.</p>
-        </div>
-        <div class="feat">
-          <div class="feat-icon">🏠</div>
-          <h3>Chef, delivery, or recipes</h3>
-          <p>Three ways to bring your plan to life. Your kitchen, your time, your budget — switch any time.</p>
-        </div>
-        <div class="feat">
-          <div class="feat-icon">🍱</div>
-          <h3>Cloud kitchen freshness</h3>
-          <p>Meals cooked in FSSAI-licensed kitchens, packed in eco-containers, dispatched within 2 hours of cooking.</p>
-        </div>
-        <div class="feat">
-          <div class="feat-icon">❤️</div>
-          <h3>Built around what you love</h3>
-          <p>Tell us your 3 favourite dishes. Your dietitian builds them in. Eating healthy stops feeling like punishment.</p>
-        </div>
-        <div class="feat">
-          <div class="feat-icon">🌶️</div>
-          <h3>Regional Indian cuisines</h3>
-          <p>8 regional cuisines — North &amp; South Indian, Bengali, Gujarati, Maharashtrian, Punjabi, Multi-cuisine, Indo-Continental. The food you actually grew up eating.</p>
-        </div>
-        <div class="feat">
-          <div class="feat-icon">📞</div>
-          <h3>Always within reach</h3>
-          <p>Stuck on day 12? WhatsApp your dietitian or book a video consult. Real humans, fast replies.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ===== HERO TRUST SIGNALS ===== -->
-  <div class="hero-trustbar">
-    <div class="htb-inner">
-      <div class="htb-item">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19a6.5 6.5 0 0 1 13 0"/></svg>
-        <span>Certified Dietitians</span>
-      </div>
-      <div class="htb-item">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M12 3v3M9 4.5v2M15 4.5v2"/></svg>
-        <span>Regional Indian Cuisines</span>
-      </div>
-      <div class="htb-item">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg>
-        <span>FSSAI Compliant Kitchens</span>
-      </div>
-      <div class="htb-item">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.3-7-9.2A3.8 3.8 0 0 1 12 7a3.8 3.8 0 0 1 7 3.8C19 15.7 12 20 12 20z"/></svg>
-        <span>Personalised For You</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== THREE WAYS WE SERVE YOU ===== -->
-  <section class="block" style="background:linear-gradient(180deg, var(--cream-d) 0%, var(--cream) 100%);position:relative;overflow:hidden">
-    <!-- Decorative botanical SVGs -->
-    <svg viewBox="0 0 120 120" style="position:absolute;top:50px;left:30px;width:90px;height:90px;opacity:0.12;color:var(--green-d);pointer-events:none" fill="currentColor">
-      <path d="M60 5 Q 30 30 30 70 Q 30 105 60 115 Q 90 105 90 70 Q 90 30 60 5 Z"/>
-    </svg>
-    <svg viewBox="0 0 100 100" style="position:absolute;bottom:40px;right:30px;width:80px;height:80px;opacity:0.1;color:var(--coral);pointer-events:none" fill="currentColor">
-      <path d="M50 5 Q 28 25 28 60 Q 28 90 50 95 Q 72 90 72 60 Q 72 25 50 5 Z"/>
-    </svg>
-
-    <div class="block-inner" style="position:relative;z-index:1">
-      <div class="section-head">
-        <div class="section-eyebrow">Three ways we serve you</div>
-        <h2 class="section-title">Your kitchen, <em>your comfort.</em></h2>
-        <p class="section-sub">Different people need different things from a food system. Some want a chef in their own home. Some love the convenience of fresh-cooked delivery. Some prefer recipes to cook themselves. Choose how Annam fits your life.</p>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem" class="serve-grid">
-
-        <!-- Card 1: Chef-at-home -->
-        <div onclick="setPreferredTier('chef');show('assess')" style="background:#f4d4c5;border:2px solid #f4d4c5;border-radius:var(--r-lg);padding:2rem 1.75rem;cursor:pointer;transition:all .3s;position:relative;display:flex;flex-direction:column" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(216,122,91,0.18)';this.style.borderColor='var(--coral)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='#f4d4c5'">
-          <span style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--coral);color:var(--cream);font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;white-space:nowrap">PREMIUM</span>
-          <div style="width:60px;height:60px;border-radius:16px;background:var(--coral);color:var(--cream);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem">👨‍🍳</div>
-          <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--brown);margin-bottom:.5rem;letter-spacing:-.2px">Chef-at-home</h3>
-          <p style="font-size:13.5px;color:#8a4a30;line-height:1.55;margin-bottom:1.25rem">Our trained cook arrives at your home and prepares fresh meals in your kitchen — exactly the way you like them.</p>
-          <ul style="list-style:none;font-size:13px;color:#8a4a30;line-height:1.7;margin-bottom:1.5rem;flex:1">
-            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--coral);font-weight:700">✓</span><span>Cooked in your home, your way</span></li>
-            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--coral);font-weight:700">✓</span><span>Zero trust gap · you see everything</span></li>
-            <li style="display:flex;gap:8px"><span style="color:var(--coral);font-weight:700">✓</span><span>Best for families & seniors</span></li>
-          </ul>
-          <div style="padding-top:1rem;border-top:1px solid rgba(138,74,48,0.15);display:flex;justify-content:space-between;align-items:flex-end">
-            <div>
-              <div style="font-style:italic;font-size:13px;color:#8a4a30;line-height:1.4">Pricing shared after your dietitian consult</div>
-              <div style="font-size:10.5px;color:#8a4a30;margin-top:4px;opacity:.7">2-3h kitchen visit · ingredients included</div>
-            </div>
-            <span style="font-size:13px;font-weight:600;color:var(--coral)">See more →</span>
-          </div>
-        </div>
-
-        <!-- Card 2: Delivered (default highlighted) -->
-        <div onclick="setPreferredTier('delivered');show('assess')" style="background:var(--green-d);border:2px solid var(--green-d);border-radius:var(--r-lg);padding:2rem 1.75rem;cursor:pointer;transition:all .3s;position:relative;color:var(--cream);transform:translateY(-4px);box-shadow:0 12px 32px rgba(45,95,79,0.22);display:flex;flex-direction:column" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 16px 44px rgba(45,95,79,0.28)'" onmouseout="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(45,95,79,0.22)'">
-          <span style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--brown);font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;white-space:nowrap">MOST POPULAR</span>
-          <div style="width:60px;height:60px;border-radius:16px;background:rgba(229,187,92,0.2);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem">🚚</div>
-          <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--cream);margin-bottom:.5rem;letter-spacing:-.2px">Delivered meals</h3>
-          <p style="font-size:13.5px;color:rgba(251,247,238,.85);line-height:1.55;margin-bottom:1.25rem">Cooked fresh in our partner cloud kitchens, delivered hot to your door — on the schedule that fits you.</p>
-          <ul style="list-style:none;font-size:13px;color:rgba(251,247,238,.85);line-height:1.7;margin-bottom:1.5rem;flex:1">
-            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--gold-l);font-weight:700">✓</span><span>Cooked & dispatched within 2 hours</span></li>
-            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--gold-l);font-weight:700">✓</span><span>FSSAI-licensed · monthly audits</span></li>
-            <li style="display:flex;gap:8px"><span style="color:var(--gold-l);font-weight:700">✓</span><span>Best for working professionals</span></li>
-          </ul>
-          <div style="padding-top:1rem;border-top:1px solid rgba(251,247,238,.15);display:flex;justify-content:space-between;align-items:flex-end">
-            <div>
-              <div style="font-style:italic;font-size:13px;color:rgba(251,247,238,.85);line-height:1.4">Pricing shared after your dietitian consult</div>
-              <div style="font-size:10.5px;color:rgba(251,247,238,.55);margin-top:4px">3 meals/day · part of subscription</div>
-            </div>
-            <span style="font-size:13px;font-weight:600;color:var(--gold-l)">See more →</span>
-          </div>
-        </div>
-
-        <!-- Card 3: Recipes -->
-        <div onclick="setPreferredTier('recipes');show('assess')" style="background:var(--sage-l);border:2px solid var(--sage-l);border-radius:var(--r-lg);padding:2rem 1.75rem;cursor:pointer;transition:all .3s;position:relative;display:flex;flex-direction:column" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(45,95,79,0.15)';this.style.borderColor='var(--green-l)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='var(--sage-l)'">
-          <span style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--sage);color:var(--green-d);font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;white-space:nowrap">DIY · LOW-COST</span>
-          <div style="width:60px;height:60px;border-radius:16px;background:var(--green-d);color:var(--cream);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem">📖</div>
-          <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--green-d);margin-bottom:.5rem;letter-spacing:-.2px">Recipes only</h3>
-          <p style="font-size:13.5px;color:var(--green-d);line-height:1.55;margin-bottom:1.25rem">Get your fully personalised diet as detailed recipes — ingredient lists, step-by-step cooking, prep videos. You cook. We coach.</p>
-          <ul style="list-style:none;font-size:13px;color:var(--green-d);line-height:1.7;margin-bottom:1.5rem;flex:1">
-            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--green-d);font-weight:700">✓</span><span>Recipes · grocery lists · prep videos</span></li>
-            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--green-d);font-weight:700">✓</span><span>Same dietitian guidance, lower cost</span></li>
-            <li style="display:flex;gap:8px"><span style="color:var(--green-d);font-weight:700">✓</span><span>Best for home cooks who love cooking</span></li>
-          </ul>
-          <div style="padding-top:1rem;border-top:1px solid rgba(45,95,79,0.15);display:flex;justify-content:space-between;align-items:flex-end">
-            <div>
-              <div style="font-style:italic;font-size:13px;color:var(--green-d);line-height:1.4">Pricing shared after your dietitian consult</div>
-              <div style="font-size:10.5px;color:var(--green-d);margin-top:4px;opacity:.7">Plan + dietitian + recipes only</div>
-            </div>
-            <span style="font-size:13px;font-weight:600;color:var(--green-d)">See more →</span>
-          </div>
-        </div>
-      </div>
-
-      <p style="text-align:center;color:var(--text-l);font-size:13px;font-style:italic;margin-top:2.5rem">Not sure which one fits you? <a onclick="setPreferredTier('');show('assess')" style="color:var(--green-d);font-weight:600;cursor:pointer;border-bottom:1.5px solid var(--gold-l);padding-bottom:1px">Take the 4-minute assessment</a> — we'll recommend the right mode based on your lifestyle.</p>
-    </div>
-  </section>
-
-
-  <!-- CLOUD KITCHEN STRIP — customer-facing trust signal -->
-  <section class="ck">
-    <div style="max-width:880px;margin:0 auto;text-align:center;padding:0 1.25rem">
-      <div class="section-eyebrow" style="color:var(--gold-l);justify-content:center;display:inline-block">Cloud kitchen network</div>
-      <h2 style="font-family:var(--font-serif);font-size:clamp(2rem,3.5vw,2.6rem);font-weight:500;line-height:1.15;letter-spacing:-.5px;color:var(--cream);margin:1rem 0 1rem">
-        Where your <em style="font-style:italic;color:var(--gold-l)">delivered meals</em> come from.
-      </h2>
-      <p style="color:rgba(251,247,238,.8);font-size:1.05rem;line-height:1.7;max-width:680px;margin:0 auto 2.5rem">
-        We don't just plan diets — we operate a network of FSSAI-certified cloud kitchens that prep your meals fresh, in real time. Cooked in 2 hours. Packed in eco-containers. Delivered hot.
-      </p>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:780px;margin:0 auto" class="ck-trust-row">
-        <div style="text-align:center">
-          <div style="width:52px;height:52px;border-radius:14px;background:rgba(229,187,92,0.15);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto .75rem">🔒</div>
-          <h5 style="font-family:var(--font-serif);font-size:14px;font-weight:500;color:var(--cream);margin-bottom:4px">FSSAI verified</h5>
-          <p style="font-size:11.5px;color:rgba(251,247,238,.55);line-height:1.45">Hygiene audited monthly.</p>
-        </div>
-        <div style="text-align:center">
-          <div style="width:52px;height:52px;border-radius:14px;background:rgba(229,187,92,0.15);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto .75rem">⚡</div>
-          <h5 style="font-family:var(--font-serif);font-size:14px;font-weight:500;color:var(--cream);margin-bottom:4px">2-hour dispatch</h5>
-          <p style="font-size:11.5px;color:rgba(251,247,238,.55);line-height:1.45">Cooked → packed → out.</p>
-        </div>
-        <div style="text-align:center">
-          <div style="width:52px;height:52px;border-radius:14px;background:rgba(229,187,92,0.15);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto .75rem">📦</div>
-          <h5 style="font-family:var(--font-serif);font-size:14px;font-weight:500;color:var(--cream);margin-bottom:4px">Eco packaging</h5>
-          <p style="font-size:11.5px;color:rgba(251,247,238,.55);line-height:1.45">Bagasse + paper, no plastic.</p>
-        </div>
-        <div style="text-align:center">
-          <div style="width:52px;height:52px;border-radius:14px;background:rgba(229,187,92,0.15);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto .75rem">🌍</div>
-          <h5 style="font-family:var(--font-serif);font-size:14px;font-weight:500;color:var(--cream);margin-bottom:4px">Across India</h5>
-          <p style="font-size:11.5px;color:rgba(251,247,238,.55);line-height:1.45">Mumbai, Pune, Bangalore +.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ====== PARTNER WITH ANNAM ====== -->
   <section class="block" style="background:var(--cream);position:relative;overflow:hidden">
     <svg viewBox="0 0 100 100" style="position:absolute;top:40px;right:50px;width:80px;height:80px;opacity:0.1;color:var(--green-d);pointer-events:none" fill="currentColor">
@@ -1294,7 +1251,7 @@
         <!-- Cook with Annam — existing kitchens, available now -->
         <div onclick="show('cook-with-annam')" style="background:linear-gradient(135deg, var(--green-d), #234e3f);border:2px solid var(--green-d);border-radius:var(--r-lg);padding:2rem 1.75rem;cursor:pointer;transition:all .3s;position:relative;color:var(--cream);display:flex;flex-direction:column" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 44px rgba(45,95,79,0.32)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
           <span style="position:absolute;top:-12px;left:24px;background:var(--gold-l);color:var(--brown);font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;white-space:nowrap">AVAILABLE NOW</span>
-          <div style="width:60px;height:60px;border-radius:16px;background:rgba(229,187,92,0.2);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem">🤝</div>
+          <div style="width:60px;height:60px;border-radius:16px;background:rgba(229,187,92,0.2);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="2.8"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 6.2a2.8 2.8 0 0 1 0 5.6"/><path d="M17.5 19a5.5 5.5 0 0 0-2.8-4.8"/></svg></div>
           <h3 style="font-family:var(--font-serif);font-size:1.5rem;font-weight:500;color:var(--cream);margin-bottom:.5rem;letter-spacing:-.2px">Cook with Annam</h3>
           <p style="font-size:13.5px;color:rgba(251,247,238,.8);line-height:1.55;margin-bottom:1.25rem">For existing FSSAI-licensed kitchens. Plug into our demand — we send you orders matched to your capacity. You cook. We sell. Simple.</p>
           <ul style="list-style:none;font-size:13px;color:rgba(251,247,238,.85);line-height:1.7;margin-bottom:1.5rem;flex:1">
@@ -1311,7 +1268,7 @@
         <!-- Start a Kitchen — incubation, coming soon -->
         <div onclick="show('start-kitchen')" style="background:var(--cream-d);border:2px solid var(--cream-d);border-radius:var(--r-lg);padding:2rem 1.75rem;cursor:pointer;transition:all .3s;position:relative;display:flex;flex-direction:column" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(216,122,91,0.18)';this.style.borderColor='var(--coral)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='var(--cream-d)'">
           <span style="position:absolute;top:-12px;left:24px;background:var(--coral);color:var(--cream);font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;white-space:nowrap">COMING 2027</span>
-          <div style="width:60px;height:60px;border-radius:16px;background:#f4d4c5;color:var(--coral);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem">⭐</div>
+          <div style="width:60px;height:60px;border-radius:16px;background:#f4d4c5;color:var(--coral);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.4 5 5.4.6-4 3.7 1.1 5.3L12 15.4 7.1 18l1.1-5.3-4-3.7 5.4-.6z"/></svg></div>
           <h3 style="font-family:var(--font-serif);font-size:1.5rem;font-weight:500;color:var(--text);margin-bottom:.5rem;letter-spacing:-.2px">Start Your Kitchen</h3>
           <p style="font-size:13.5px;color:var(--text-m);line-height:1.55;margin-bottom:1.25rem">For home cooks, mothers, and women entrepreneurs. We help you build a small certified kitchen, train you, and bring you customers.</p>
           <ul style="list-style:none;font-size:13px;color:var(--text-m);line-height:1.7;margin-bottom:1.5rem;flex:1">
@@ -1328,7 +1285,6 @@
     </div>
   </section>
 
-  <!-- MISSION / WHY NOW — emotional bridge before pricing -->
   <section style="padding:5rem 2.5rem;background:var(--brown);color:var(--cream);position:relative;overflow:hidden">
     <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(232,239,224,.05) 0,transparent 50%),radial-gradient(circle at 80% 70%,rgba(201,151,42,.08) 0,transparent 50%);pointer-events:none"></div>
     <div class="block-inner" style="position:relative;z-index:1;max-width:880px;text-align:center">
@@ -1343,68 +1299,6 @@
         <div style="text-align:center"><div style="font-family:var(--font-serif);font-size:1.8rem;font-weight:500;color:var(--gold-l);line-height:1">77%</div><div style="font-size:11px;color:rgba(251,247,238,.55);text-transform:uppercase;letter-spacing:.5px;margin-top:6px">urban Indians affected</div></div>
         <div style="text-align:center"><div style="font-family:var(--font-serif);font-size:1.8rem;font-weight:500;color:var(--gold-l);line-height:1">₹1.14L Cr</div><div style="font-size:11px;color:rgba(251,247,238,.55);text-transform:uppercase;letter-spacing:.5px;margin-top:6px">market by 2032</div></div>
         <div style="text-align:center"><div style="font-family:var(--font-serif);font-size:1.8rem;font-weight:500;color:var(--gold-l);line-height:1">14%</div><div style="font-size:11px;color:rgba(251,247,238,.55);text-transform:uppercase;letter-spacing:.5px;margin-top:6px">CAGR growth</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PACKAGES — moved here, just before founder story -->
-  <section class="block packages" id="packages">
-    <div class="block-inner">
-      <div class="section-head">
-        <div class="section-eyebrow">Plans</div>
-        <h2 class="section-title">Pick your <em>transformation</em> length.</h2>
-        <p class="section-sub">All plans include the dietitian-built diet, ongoing dietitian access and your chosen service mode — with <strong style="color:var(--gold-l)">no surprise pricing</strong>. Longer commitments unlock deeper results. <em>Pricing is shared transparently during your dietitian consult — based on your goals, city and meal frequency.</em></p>
-      </div>
-      <div class="pkg-grid">
-        <div class="pkg" data-pkg="kickstart">
-          <h3 class="pkg-name">Kickstart</h3>
-          <p class="pkg-tagline">3-month plan · Best for trial</p>
-          <div style="font-family:var(--font-serif);font-size:2rem;font-weight:500;color:var(--gold-l);line-height:1;letter-spacing:-1px;margin:1.25rem 0 .5rem">3 months</div>
-          <span class="pkg-save" style="color:rgba(251,247,238,.7)">Try it. See if it fits your life.</span>
-          <ul style="margin-top:1.5rem">
-            <li>Personalised dietitian-built plan</li>
-            <li>2 dietitian consultations</li>
-            <li>Your chosen service mode</li>
-            <li>Weekly progress check-in</li>
-            <li>WhatsApp dietitian support</li>
-          </ul>
-          <button class="btn btn-outline" style="border-color:var(--gold-l);color:var(--gold-l)" onclick="show('dietitian')">Start with a consult</button>
-        </div>
-        <div class="pkg featured" data-pkg="transform">
-          <span class="pkg-tag">Most popular</span>
-          <h3 class="pkg-name">Transform</h3>
-          <p class="pkg-tagline">6-month plan · Best results</p>
-          <div style="font-family:var(--font-serif);font-size:2rem;font-weight:500;color:var(--cream);line-height:1;letter-spacing:-1px;margin:1.25rem 0 .5rem">6 months</div>
-          <span class="pkg-save" style="color:var(--gold-l)">The sweet spot for real change.</span>
-          <ul style="margin-top:1.5rem">
-            <li>Everything in Kickstart</li>
-            <li>6 dietitian consultations</li>
-            <li>Bi-weekly plan adjustments</li>
-            <li>Body composition analysis</li>
-            <li>Recipe library access</li>
-            <li>Free re-onboarding</li>
-          </ul>
-          <button class="btn btn-coral" onclick="show('dietitian')">Start with a consult</button>
-        </div>
-        <div class="pkg" data-pkg="lifestyle">
-          <h3 class="pkg-name">Lifestyle</h3>
-          <p class="pkg-tagline">12-month plan · Lasting change</p>
-          <div style="font-family:var(--font-serif);font-size:2rem;font-weight:500;color:var(--gold-l);line-height:1;letter-spacing:-1px;margin:1.25rem 0 .5rem">12 months</div>
-          <span class="pkg-save" style="color:rgba(251,247,238,.7)">For health that becomes second nature.</span>
-          <ul style="margin-top:1.5rem">
-            <li>Everything in Transform</li>
-            <li>Monthly dietitian consults</li>
-            <li>Quarterly health re-assessment</li>
-            <li>Family plan add-on</li>
-            <li>Priority delivery slots</li>
-            <li>Free festival meal swaps</li>
-          </ul>
-          <button class="btn btn-outline" style="border-color:var(--gold-l);color:var(--gold-l)" onclick="show('dietitian')">Start with a consult</button>
-        </div>
-      </div>
-      <div style="text-align:center;margin-top:2.5rem;max-width:680px;margin-left:auto;margin-right:auto">
-        <p style="font-size:13.5px;color:rgba(251,247,238,.7);line-height:1.7;margin-bottom:.75rem"><strong style="color:var(--gold-l)">Why no price on this page?</strong> Pricing in nutrition isn't one-size-fits-all. It depends on your goals, your city, how many meals a day, and which service mode (chef / delivered / recipes) you choose. Your dietitian gives you a real, honest quote during your consult — not a generic figure to lure you in.</p>
-        <p style="font-size:12.5px;color:rgba(251,247,238,.55);font-style:italic">₹199 dietitian consult · refunded against any plan you choose.</p>
       </div>
     </div>
   </section>
@@ -1562,7 +1456,7 @@
 
         <div class="form-section-title">Transformation timeline</div>
         <div class="opt-grid" data-group="timeline">
-          <div class="opt" onclick="pickOpt(this)" data-val="3"><span class="opt-emoji">⚡</span><div class="opt-title">3 months</div><div class="opt-sub">Kickstart</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="3"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg></span><div class="opt-title">3 months</div><div class="opt-sub">Kickstart</div></div>
           <div class="opt sel" onclick="pickOpt(this)" data-val="6"><span class="opt-emoji">🌿</span><div class="opt-title">6 months</div><div class="opt-sub">Recommended</div></div>
           <div class="opt" onclick="pickOpt(this)" data-val="12"><span class="opt-emoji">🌳</span><div class="opt-title">12 months</div><div class="opt-sub">Lasting change</div></div>
         </div>
@@ -1596,9 +1490,9 @@
           <div class="opt" onclick="pickOpt(this)" data-val="south"><span class="opt-emoji">🥥</span><div class="opt-title">South Indian</div><div class="opt-sub">Rice · Sambar · Idli</div></div>
           <div class="opt" onclick="pickOpt(this)" data-val="bengali"><span class="opt-emoji">🐟</span><div class="opt-title">Bengali</div><div class="opt-sub">Fish · Rice · Mustard</div></div>
           <div class="opt" onclick="pickOpt(this)" data-val="gujarati"><span class="opt-emoji">🍛</span><div class="opt-title">Gujarati</div><div class="opt-sub">Thepla · Khichdi · Dhokla</div></div>
-          <div class="opt" onclick="pickOpt(this)" data-val="maharashtrian"><span class="opt-emoji">🌶️</span><div class="opt-title">Maharashtrian</div><div class="opt-sub">Bhakri · Pithla · Misal</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="maharashtrian"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-7 5-12 14-13-1 9-6 14-13 14"/><path d="M9 15c2-2 4-3 7-4"/></svg></span><div class="opt-title">Maharashtrian</div><div class="opt-sub">Bhakri · Pithla · Misal</div></div>
           <div class="opt" onclick="pickOpt(this)" data-val="punjabi"><span class="opt-emoji">🧈</span><div class="opt-title">Punjabi</div><div class="opt-sub">Sarson · Chole · Paneer</div></div>
-          <div class="opt" onclick="pickOpt(this)" data-val="multi"><span class="opt-emoji">🌍</span><div class="opt-title">Multi-cuisine</div><div class="opt-sub">A mix of all</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="multi"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17"/></svg></span><div class="opt-title">Multi-cuisine</div><div class="opt-sub">A mix of all</div></div>
           <div class="opt" onclick="pickOpt(this)" data-val="continental"><span class="opt-emoji">🥙</span><div class="opt-title">Indo-Continental</div><div class="opt-sub">Salads · Wraps · Bowls</div></div>
         </div>
 
@@ -1840,7 +1734,7 @@
             <div style="display:flex;gap:10px;align-items:flex-start;padding:10px;background:var(--cream);border-radius:var(--r-sm)"><span style="font-size:16px">🍬</span><div><div style="font-weight:600;font-size:13px">HbA1c + Fasting glucose</div><div style="font-size:11.5px;color:var(--text-l)">Diabetes screening</div></div></div>
             <div style="display:flex;gap:10px;align-items:flex-start;padding:10px;background:var(--cream);border-radius:var(--r-sm)"><span style="font-size:16px">🦴</span><div><div style="font-weight:600;font-size:13px">Vitamin D + B12</div><div style="font-size:11.5px;color:var(--text-l)">Common Indian deficiencies</div></div></div>
             <div style="display:flex;gap:10px;align-items:flex-start;padding:10px;background:var(--cream);border-radius:var(--r-sm)"><span style="font-size:16px">🧬</span><div><div style="font-weight:600;font-size:13px">Thyroid (TSH, T3, T4)</div><div style="font-size:11.5px;color:var(--text-l)">Affects metabolism</div></div></div>
-            <div style="display:flex;gap:10px;align-items:flex-start;padding:10px;background:var(--cream);border-radius:var(--r-sm)"><span style="font-size:16px">⚡</span><div><div style="font-weight:600;font-size:13px">CBC + Iron + Ferritin</div><div style="font-size:11.5px;color:var(--text-l)">Energy & immunity</div></div></div>
+            <div style="display:flex;gap:10px;align-items:flex-start;padding:10px;background:var(--cream);border-radius:var(--r-sm)"><span style="font-size:16px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg></span><div><div style="font-weight:600;font-size:13px">CBC + Iron + Ferritin</div><div style="font-size:11.5px;color:var(--text-l)">Energy & immunity</div></div></div>
             <div style="display:flex;gap:10px;align-items:flex-start;padding:10px;background:var(--cream);border-radius:var(--r-sm)"><span style="font-size:16px">🥜</span><div><div style="font-weight:600;font-size:13px">Food allergy panel</div><div style="font-size:11.5px;color:var(--text-l)">12-allergen screen</div></div></div>
           </div>
 
@@ -1962,16 +1856,16 @@
 
         <div class="form-section-title" style="margin-top:1.25rem;color:var(--text-l)">Service mode</div>
         <div class="opt-grid" style="margin-bottom:1rem" data-group="service-pref">
-          <div class="opt" data-val="chef" onclick="pickServicePref(this)"><span class="opt-emoji">👨‍🍳</span><div class="opt-title">Chef at home</div><div class="opt-sub">Cooked in your kitchen</div></div>
-          <div class="opt sel" data-val="delivered" onclick="pickServicePref(this)"><span class="opt-emoji">🚚</span><div class="opt-title">Delivered meals</div><div class="opt-sub">Fresh from cloud kitchen</div></div>
-          <div class="opt" data-val="recipes" onclick="pickServicePref(this)"><span class="opt-emoji">📖</span><div class="opt-title">Recipes only</div><div class="opt-sub">You cook · lowest cost</div></div>
+          <div class="opt" data-val="chef" onclick="pickServicePref(this)"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 14h10v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M7 14a3.5 3.5 0 0 1-1-6.5A3.5 3.5 0 0 1 12 5a3.5 3.5 0 0 1 6 2.5A3.5 3.5 0 0 1 17 14"/></svg></span><div class="opt-title">Chef at home</div><div class="opt-sub">Cooked in your kitchen</div></div>
+          <div class="opt sel" data-val="delivered" onclick="pickServicePref(this)"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg></span><div class="opt-title">Delivered meals</div><div class="opt-sub">Fresh from cloud kitchen</div></div>
+          <div class="opt" data-val="recipes" onclick="pickServicePref(this)"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h5v16H6a2 2 0 0 0-2 2z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2z"/></svg></span><div class="opt-title">Recipes only</div><div class="opt-sub">You cook · lowest cost</div></div>
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem" class="plan-prefs-grid">
           <div>
             <div class="form-section-title" style="margin-top:.5rem;color:var(--text-l)">Plan duration</div>
             <div class="opt-grid" style="margin-bottom:0">
-              <div class="opt plan-dur" data-dur="3" onclick="pickOpt(this)"><span class="opt-emoji">⚡</span><div class="opt-title">3 months</div><div class="opt-sub">Kickstart</div></div>
+              <div class="opt plan-dur" data-dur="3" onclick="pickOpt(this)"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg></span><div class="opt-title">3 months</div><div class="opt-sub">Kickstart</div></div>
               <div class="opt plan-dur sel" data-dur="6" onclick="pickOpt(this)"><span class="opt-emoji">🌿</span><div class="opt-title">6 months</div><div class="opt-sub">Recommended</div></div>
               <div class="opt plan-dur" data-dur="12" onclick="pickOpt(this)"><span class="opt-emoji">🌳</span><div class="opt-title">12 months</div><div class="opt-sub">Lasting change</div></div>
             </div>
@@ -2501,6 +2395,8 @@
           </div>
         </div>
 
+        <div id="booking-summary" style="margin-top:1rem;padding:.85rem 1.1rem;background:var(--sage-l);border:1px solid var(--green-l);border-radius:var(--r-sm);font-size:13px;color:var(--green-d);line-height:1.55"></div>
+
         <button class="btn btn-primary" id="pay-consult-btn" style="width:100%;margin-top:1rem;justify-content:center" onclick="initiateConsultPayment()">Pay ₹199 & confirm consult →</button>
 
         <div style="display:flex;gap:8px;justify-content:center;margin-top:.85rem;flex-wrap:wrap">
@@ -2614,7 +2510,7 @@
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:920px;margin:3rem auto 0" class="cook-why-grid">
         <div style="display:flex;gap:14px;padding:1.25rem;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg)">
-          <span style="width:36px;height:36px;min-width:36px;border-radius:var(--r-sm);background:var(--sage-l);color:var(--green-d);display:flex;align-items:center;justify-content:center;font-size:18px">📦</span>
+          <span style="width:36px;height:36px;min-width:36px;border-radius:var(--r-sm);background:var(--sage-l);color:var(--green-d);display:flex;align-items:center;justify-content:center;font-size:18px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v10l-8 4-8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg></span>
           <div><h5 style="font-family:var(--font-serif);font-size:1.05rem;font-weight:500;margin-bottom:4px">Steady daily orders</h5><p style="font-size:13px;color:var(--text-m);line-height:1.6">We send you orders matched to your kitchen's capacity. Predictable revenue. No marketing spend on your side.</p></div>
         </div>
         <div style="display:flex;gap:14px;padding:1.25rem;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg)">
@@ -2622,11 +2518,11 @@
           <div><h5 style="font-family:var(--font-serif);font-size:1.05rem;font-weight:500;margin-bottom:4px">Pre-set recipes</h5><p style="font-size:13px;color:var(--text-m);line-height:1.6">Our dietitians build the menus. You receive recipes, portion specs, and macro targets. No menu-development headache.</p></div>
         </div>
         <div style="display:flex;gap:14px;padding:1.25rem;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg)">
-          <span style="width:36px;height:36px;min-width:36px;border-radius:var(--r-sm);background:#f4d4c5;color:var(--coral);display:flex;align-items:center;justify-content:center;font-size:18px">🍱</span>
+          <span style="width:36px;height:36px;min-width:36px;border-radius:var(--r-sm);background:#f4d4c5;color:var(--coral);display:flex;align-items:center;justify-content:center;font-size:18px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M12 3v3M9 4.5v2M15 4.5v2"/></svg></span>
           <div><h5 style="font-family:var(--font-serif);font-size:1.05rem;font-weight:500;margin-bottom:4px">Eco-packaging at cost</h5><p style="font-size:13px;color:var(--text-m);line-height:1.6">Bagasse boxes, paper sleeves, and Annam-branded labels — supplied at our negotiated wholesale rates.</p></div>
         </div>
         <div style="display:flex;gap:14px;padding:1.25rem;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg)">
-          <span style="width:36px;height:36px;min-width:36px;border-radius:var(--r-sm);background:var(--cream-d);color:var(--brown);display:flex;align-items:center;justify-content:center;font-size:18px">📱</span>
+          <span style="width:36px;height:36px;min-width:36px;border-radius:var(--r-sm);background:var(--cream-d);color:var(--brown);display:flex;align-items:center;justify-content:center;font-size:18px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></span>
           <div><h5 style="font-family:var(--font-serif);font-size:1.05rem;font-weight:500;margin-bottom:4px">We handle customer + delivery</h5><p style="font-size:13px;color:var(--text-m);line-height:1.6">No customer support, no rider coordination, no payment chase. Orders come to you via our app. You cook & dispatch.</p></div>
         </div>
         <div style="display:flex;gap:14px;padding:1.25rem;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);grid-column:span 2">
@@ -2795,32 +2691,32 @@
       </div>
       <div class="features-grid">
         <div class="feat">
-          <div class="feat-icon" style="background:#F0C9A0;color:#8a4a30">👩‍🍳</div>
+          <div class="feat-icon" style="background:#F0C9A0;color:#8a4a30"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 14h10v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M7 14a3.5 3.5 0 0 1-1-6.5A3.5 3.5 0 0 1 12 5a3.5 3.5 0 0 1 6 2.5A3.5 3.5 0 0 1 17 14"/></svg></div>
           <h3>You already have the skill</h3>
           <p>The hardest part of running a kitchen is cooking food people love — and you've been doing that for years. We just bring the structure, customers, and certification.</p>
         </div>
         <div class="feat">
-          <div class="feat-icon" style="background:#FAE5C3;color:#8a6515">🏠</div>
+          <div class="feat-icon" style="background:#FAE5C3;color:#8a6515"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg></div>
           <h3>Start from home</h3>
           <p>You don't need a commercial space. Most of our kitchen partners start in their own home kitchen with a few hygiene upgrades. No rent, no commute, no bosses.</p>
         </div>
         <div class="feat">
-          <div class="feat-icon" style="background:var(--sage-l);color:var(--green-d)">📦</div>
+          <div class="feat-icon" style="background:var(--sage-l);color:var(--green-d)"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v10l-8 4-8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg></div>
           <h3>We bring the customers</h3>
           <p>You don't market, advertise, or fight Swiggy/Zomato fees. Our app sends you orders matched to your cuisine and capacity — every day.</p>
         </div>
         <div class="feat">
-          <div class="feat-icon" style="background:#f4d4c5;color:var(--coral)">🤝</div>
+          <div class="feat-icon" style="background:#f4d4c5;color:var(--coral)"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="2.8"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 6.2a2.8 2.8 0 0 1 0 5.6"/><path d="M17.5 19a5.5 5.5 0 0 0-2.8-4.8"/></svg></div>
           <h3>Not a franchise</h3>
           <p>No royalty, no upfront brand fee, no exclusivity. You keep your kitchen, your name, your independence. We share revenue, not control.</p>
         </div>
         <div class="feat">
-          <div class="feat-icon" style="background:var(--cream-d);color:var(--brown)">🛡️</div>
+          <div class="feat-icon" style="background:var(--cream-d);color:var(--brown)"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg></div>
           <h3>Approved kitchens only</h3>
           <p>Every kitchen is reviewed and approved by management before going live. We protect quality — both for customers and for the brand of our partner kitchens.</p>
         </div>
         <div class="feat">
-          <div class="feat-icon" style="background:#E8EFE0;color:var(--green-d)">💸</div>
+          <div class="feat-icon" style="background:#E8EFE0;color:var(--green-d)"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M9 8.5h6M9 11h6M14.5 8.5c0 2.5-2 3.5-5 3.5l4 4"/></svg></div>
           <h3>Real income, weekly payouts</h3>
           <p>Earn ₹40k–₹1.2L+ per month based on orders. Paid every Friday to your bank account or UPI. Transparent dashboard, no hidden cuts.</p>
         </div>
@@ -2971,7 +2867,7 @@
           <div><h5 style="font-family:var(--font-serif);font-size:1.05rem;font-weight:500;margin-bottom:4px">3-day training</h5><p style="font-size:13px;color:var(--text-m);line-height:1.6">Our chefs and dietitians train you on Annam recipes, portion sizes, hygiene SOPs, and order-management software.</p></div>
         </div>
         <div style="display:flex;gap:14px;padding:1.25rem;background:var(--cream);border:1px solid var(--line);border-radius:var(--r-lg)">
-          <span style="width:36px;height:36px;min-width:36px;border-radius:var(--r-sm);background:var(--sage-l);color:var(--green-d);display:flex;align-items:center;justify-content:center;font-size:18px">📦</span>
+          <span style="width:36px;height:36px;min-width:36px;border-radius:var(--r-sm);background:var(--sage-l);color:var(--green-d);display:flex;align-items:center;justify-content:center;font-size:18px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v10l-8 4-8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg></span>
           <div><h5 style="font-family:var(--font-serif);font-size:1.05rem;font-weight:500;margin-bottom:4px">Packaging supply</h5><p style="font-size:13px;color:var(--text-m);line-height:1.6">Bagasse boxes, paper sleeves, branded labels — delivered weekly at wholesale rates.</p></div>
         </div>
         <div style="display:flex;gap:14px;padding:1.25rem;background:var(--cream);border:1px solid var(--line);border-radius:var(--r-lg)">
@@ -3005,11 +2901,11 @@
         </div>
         <div>
           <ul style="list-style:none;display:grid;grid-template-columns:1fr;gap:10px">
-            <li style="display:flex;gap:12px;padding:14px;background:rgba(251,247,238,.06);border-radius:var(--r-sm);border:1px solid rgba(251,247,238,.1)"><span style="font-size:24px">👩‍🍳</span><div><strong style="color:var(--cream);font-size:14px">Home-makers wanting financial independence</strong><p style="font-size:12.5px;color:rgba(251,247,238,.65);margin-top:2px">Earn meaningfully without leaving home or family responsibilities</p></div></li>
+            <li style="display:flex;gap:12px;padding:14px;background:rgba(251,247,238,.06);border-radius:var(--r-sm);border:1px solid rgba(251,247,238,.1)"><span style="font-size:24px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 14h10v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M7 14a3.5 3.5 0 0 1-1-6.5A3.5 3.5 0 0 1 12 5a3.5 3.5 0 0 1 6 2.5A3.5 3.5 0 0 1 17 14"/></svg></span><div><strong style="color:var(--cream);font-size:14px">Home-makers wanting financial independence</strong><p style="font-size:12.5px;color:rgba(251,247,238,.65);margin-top:2px">Earn meaningfully without leaving home or family responsibilities</p></div></li>
             <li style="display:flex;gap:12px;padding:14px;background:rgba(251,247,238,.06);border-radius:var(--r-sm);border:1px solid rgba(251,247,238,.1)"><span style="font-size:24px">🌱</span><div><strong style="color:var(--cream);font-size:14px">Women entrepreneurs starting their first business</strong><p style="font-size:12.5px;color:rgba(251,247,238,.65);margin-top:2px">Lower-risk path than opening a restaurant — no rent for the cuisine, no marketing</p></div></li>
             <li style="display:flex;gap:12px;padding:14px;background:rgba(251,247,238,.06);border-radius:var(--r-sm);border:1px solid rgba(251,247,238,.1)"><span style="font-size:24px">🏆</span><div><strong style="color:var(--cream);font-size:14px">Skilled home cooks praised by family & friends</strong><p style="font-size:12.5px;color:rgba(251,247,238,.65);margin-top:2px">If people regularly tell you "you should sell this" — this is the answer</p></div></li>
             <li style="display:flex;gap:12px;padding:14px;background:rgba(251,247,238,.06);border-radius:var(--r-sm);border:1px solid rgba(251,247,238,.1)"><span style="font-size:24px">👵</span><div><strong style="color:var(--cream);font-size:14px">Retired chefs / second-career seekers</strong><p style="font-size:12.5px;color:rgba(251,247,238,.65);margin-top:2px">Decades of culinary skill, looking for a flexible income source</p></div></li>
-            <li style="display:flex;gap:12px;padding:14px;background:rgba(251,247,238,.06);border-radius:var(--r-sm);border:1px solid rgba(251,247,238,.1)"><span style="font-size:24px">🤝</span><div><strong style="color:var(--cream);font-size:14px">Existing tiffin / catering operators</strong><p style="font-size:12.5px;color:rgba(251,247,238,.65);margin-top:2px">Convert your existing business into a steadier, branded operation</p></div></li>
+            <li style="display:flex;gap:12px;padding:14px;background:rgba(251,247,238,.06);border-radius:var(--r-sm);border:1px solid rgba(251,247,238,.1)"><span style="font-size:24px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="2.8"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 6.2a2.8 2.8 0 0 1 0 5.6"/><path d="M17.5 19a5.5 5.5 0 0 0-2.8-4.8"/></svg></span><div><strong style="color:var(--cream);font-size:14px">Existing tiffin / catering operators</strong><p style="font-size:12.5px;color:rgba(251,247,238,.65);margin-top:2px">Convert your existing business into a steadier, branded operation</p></div></li>
           </ul>
         </div>
       </div>
@@ -3127,9 +3023,11 @@
         <div style="background:linear-gradient(135deg, var(--green-d), #1f4d3f);color:var(--cream);border-radius:var(--r-lg);padding:2rem;margin-bottom:1.25rem;position:relative;overflow:hidden">
           <div style="position:absolute;top:-30px;right:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(229,187,92,.18),transparent 70%);border-radius:50%"></div>
           <div style="position:relative;z-index:1">
-            <div style="font-size:32px;margin-bottom:8px">📱</div>
+            <div style="font-size:32px;margin-bottom:8px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div>
             <h3 style="font-family:var(--font-serif);font-size:1.2rem;font-weight:500;margin-bottom:.5rem;color:var(--cream)">WhatsApp us</h3>
-            <p style="font-size:13.5px;line-height:1.6;color:rgba(251,247,238,.85);margin-bottom:1rem">Faster than email. Best for quick questions or urgent support.</p>
+            <p style="font-size:13.5px;line-height:1.6;color:rgba(251,247,238,.85);margin-bottom:.5rem">Faster than email. Best for quick questions or urgent support.</p>
+            <div style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--gold-l);margin-bottom:1rem"><span style="width:7px;height:7px;border-radius:50%;background:#7CCBA0;box-shadow:0 0 0 3px rgba(124,203,160,.25)"></span>Usually replies in under 2 hours</div>
+            <br/>
             <a href="https://wa.me/917397332865?text=Hi%20Annam%21%20I%20have%20a%20question%20about..." target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--gold-l);color:var(--green-d);padding:10px 18px;border-radius:100px;font-size:13.5px;font-weight:600;text-decoration:none">
               💬 Chat on WhatsApp
             </a>
@@ -3138,9 +3036,9 @@
         </div>
 
         <div style="background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem;margin-bottom:1.25rem">
-          <div style="font-size:24px;margin-bottom:6px">📧</div>
+          <div style="font-size:24px;margin-bottom:6px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></div>
           <h3 style="font-family:var(--font-serif);font-size:1.05rem;font-weight:500;margin-bottom:.4rem">Email</h3>
-          <p style="font-size:13px;color:var(--text-m);margin-bottom:.5rem">For everything else.</p>
+          <p style="font-size:13px;color:var(--text-m);margin-bottom:.5rem">For everything else. <span style="color:var(--green-d);font-weight:600">Typical response: under 24 hours.</span></p>
           <a href="mailto:hello@annam.life" style="color:var(--green-d);font-size:14px;font-weight:600;text-decoration:none">hello@annam.life</a>
         </div>
 
@@ -4268,9 +4166,8 @@
       }
       localStorage.setItem('annam_user', JSON.stringify(u));
     } catch(e) {}
+    updateBookingSummary();
   }
-
-  // ---- DYNAMIC DATE STRIP (next 5 working/normal days starting tomorrow) ----
   const DAY_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
@@ -4349,6 +4246,7 @@
       document.getElementById('date-cal-wrap').appendChild(badge);
     }
     badge.textContent = `✓ Picked: ${label}`;
+    updateBookingSummary();
   }
 
   // ---- LANGUAGE PREFERENCE (optional) ----
@@ -4358,6 +4256,22 @@
       u.consultLanguage = lang || 'english';
       localStorage.setItem('annam_user', JSON.stringify(u));
     } catch(e) {}
+    updateBookingSummary();
+  }
+
+  // Live "You're booking" summary on the consult page
+  function updateBookingSummary() {
+    const box = document.getElementById('booking-summary');
+    if (!box) return;
+    let u = {}; try { u = JSON.parse(localStorage.getItem('annam_user') || '{}'); } catch(e) {}
+    const activeDate = document.querySelector('#date-quick-strip .slot.active');
+    const dateLabel = u.consultDateLabel || (activeDate && activeDate.dataset.label) || 'your selected date';
+    const activeTime = document.querySelector('.time-grid .slot.active');
+    const time = u.consultTime || (activeTime ? activeTime.textContent.trim() : '2:00 PM');
+    const sel = document.getElementById('consult-language');
+    let lang = 'English';
+    if (sel && sel.options[sel.selectedIndex]) lang = sel.options[sel.selectedIndex].text.replace(/.*·\s*/, '').trim();
+    box.innerHTML = '<span style="display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.7px;opacity:.65;margin-bottom:4px;font-weight:600">You\'re booking</span>30-min video consult · <strong>' + dateLabel + '</strong> at <strong>' + time + '</strong> · in <strong>' + lang + '</strong>';
   }
   function restoreLanguagePref() {
     try {
@@ -4368,7 +4282,7 @@
   }
 
   // Build the strip when the dietitian page is shown or on initial load
-  window.addEventListener('DOMContentLoaded', buildDateStrip);
+  window.addEventListener('DOMContentLoaded', function(){ buildDateStrip(); updateBookingSummary(); });
   // Allergies: "None" deselects everything else, any other allergy deselects "None"
   function pickAllergyNone(el) {
     const grid = el.parentElement;
@@ -4679,8 +4593,13 @@
   function fsSetPhoto(id, url, alt) {
     const el = document.getElementById(id);
     if (!el) return;
-    if (url) { el.src = url; el.classList.remove('is-empty'); }
-    else { el.removeAttribute('src'); el.classList.add('is-empty'); }
+    el.classList.remove('fs-broken');
+    if (url) {
+      el.onerror = function () { el.onerror = null; el.removeAttribute('src'); el.classList.add('fs-broken'); };
+      el.src = url; el.classList.remove('is-empty');
+    } else {
+      el.removeAttribute('src'); el.classList.add('is-empty', 'fs-broken');
+    }
     if (alt !== undefined) el.alt = alt || '';
   }
 
@@ -4754,6 +4673,13 @@
       setMealCategory('lunch');
       fsInitParallax();
       fsInitSwipe();
+      // Graceful fallback if the leaf-frame asset is missing
+      const lf = document.querySelector('.hero-leaves');
+      if (lf) {
+        const probe = new Image();
+        probe.onerror = function () { lf.classList.add('no-leaves'); };
+        probe.src = 'leaves-frame.webp';
+      }
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
     else go();
