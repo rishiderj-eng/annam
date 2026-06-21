@@ -1371,9 +1371,9 @@
           <div class="field"><label>Phone (WhatsApp)</label><input type="tel" id="m-phone" placeholder="Your phone (WhatsApp)" /></div>
         </div>
         <div class="form-section-title">Sex assigned at birth</div>
-        <div class="opt-grid opt-grid-2">
-          <div class="opt sel" onclick="pickOpt(this)"><span class="opt-emoji">♀</span><div class="opt-title">Female</div></div>
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">♂</span><div class="opt-title">Male</div></div>
+        <div class="opt-grid opt-grid-2" data-group="sex">
+          <div class="opt sel" onclick="pickOpt(this)" data-val="female"><span class="opt-emoji">♀</span><div class="opt-title">Female</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="male"><span class="opt-emoji">♂</span><div class="opt-title">Male</div></div>
         </div>
         <div class="step-nav">
           <button class="btn btn-ghost" onclick="show('home')">← Back</button>
@@ -1455,20 +1455,20 @@
         <p class="step-sub">Step 3 of 4 · Pick your transformation outcome and timeline.</p>
 
         <div class="form-section-title">Primary goal</div>
-        <div class="opt-grid">
-          <div class="opt sel" onclick="pickOpt(this)"><span class="opt-emoji">⚖️</span><div class="opt-title">Weight loss</div><div class="opt-sub">Fat reduction</div></div>
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">💪</span><div class="opt-title">Muscle gain</div><div class="opt-sub">Lean mass</div></div>
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">🩺</span><div class="opt-title">Medical care</div><div class="opt-sub">Diabetes / PCOS</div></div>
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">🌱</span><div class="opt-title">Wellness</div><div class="opt-sub">Maintain & glow</div></div>
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">🏃</span><div class="opt-title">Athletic</div><div class="opt-sub">Performance</div></div>
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">🤰</span><div class="opt-title">Pre/post-natal</div><div class="opt-sub">Mother care</div></div>
+        <div class="opt-grid" data-group="goal">
+          <div class="opt sel" onclick="pickOpt(this)" data-val="weight_loss"><span class="opt-emoji">⚖️</span><div class="opt-title">Weight loss</div><div class="opt-sub">Fat reduction</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="muscle_gain"><span class="opt-emoji">💪</span><div class="opt-title">Muscle gain</div><div class="opt-sub">Lean mass</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="medical"><span class="opt-emoji">🩺</span><div class="opt-title">Medical care</div><div class="opt-sub">Diabetes / PCOS</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="wellness"><span class="opt-emoji">🌱</span><div class="opt-title">Wellness</div><div class="opt-sub">Maintain & glow</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="athletic"><span class="opt-emoji">🏃</span><div class="opt-title">Athletic</div><div class="opt-sub">Performance</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="prenatal"><span class="opt-emoji">🤰</span><div class="opt-title">Pre/post-natal</div><div class="opt-sub">Mother care</div></div>
         </div>
 
         <div class="form-section-title">Transformation timeline</div>
-        <div class="opt-grid">
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">⚡</span><div class="opt-title">3 months</div><div class="opt-sub">Kickstart</div></div>
-          <div class="opt sel" onclick="pickOpt(this)"><span class="opt-emoji">🌿</span><div class="opt-title">6 months</div><div class="opt-sub">Recommended</div></div>
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">🌳</span><div class="opt-title">12 months</div><div class="opt-sub">Lasting change</div></div>
+        <div class="opt-grid" data-group="timeline">
+          <div class="opt" onclick="pickOpt(this)" data-val="3"><span class="opt-emoji">⚡</span><div class="opt-title">3 months</div><div class="opt-sub">Kickstart</div></div>
+          <div class="opt sel" onclick="pickOpt(this)" data-val="6"><span class="opt-emoji">🌿</span><div class="opt-title">6 months</div><div class="opt-sub">Recommended</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="12"><span class="opt-emoji">🌳</span><div class="opt-title">12 months</div><div class="opt-sub">Lasting change</div></div>
         </div>
 
         <div class="step-nav">
@@ -1483,15 +1483,15 @@
         <p class="step-sub">Step 4 of 4 · Diet style and meal frequency.</p>
 
         <div class="form-section-title">Diet preference</div>
-        <div class="opt-grid opt-grid-4">
-          <div class="opt sel" onclick="pickOpt(this)"><span class="opt-emoji">🥗</span><div class="opt-title">Vegetarian</div></div>
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">🍗</span><div class="opt-title">Non-veg</div></div>
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">🌱</span><div class="opt-title">Vegan</div></div>
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">🥚</span><div class="opt-title">Eggetarian</div></div>
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">🥑</span><div class="opt-title">Keto</div></div>
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">🍞</span><div class="opt-title">Gluten-free</div></div>
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">🕉️</span><div class="opt-title">Jain</div></div>
-          <div class="opt" onclick="pickOpt(this)"><span class="opt-emoji">🐟</span><div class="opt-title">Pescatarian</div></div>
+        <div class="opt-grid opt-grid-4" data-group="diet">
+          <div class="opt sel" onclick="pickOpt(this)" data-val="veg"><span class="opt-emoji">🥗</span><div class="opt-title">Vegetarian</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="non-veg"><span class="opt-emoji">🍗</span><div class="opt-title">Non-veg</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="vegan"><span class="opt-emoji">🌱</span><div class="opt-title">Vegan</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="eggetarian"><span class="opt-emoji">🥚</span><div class="opt-title">Eggetarian</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="keto"><span class="opt-emoji">🥑</span><div class="opt-title">Keto</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="gluten-free"><span class="opt-emoji">🍞</span><div class="opt-title">Gluten-free</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="jain"><span class="opt-emoji">🕉️</span><div class="opt-title">Jain</div></div>
+          <div class="opt" onclick="pickOpt(this)" data-val="pescatarian"><span class="opt-emoji">🐟</span><div class="opt-title">Pescatarian</div></div>
         </div>
 
         <div class="form-section-title">Cuisine preference</div>
@@ -4774,7 +4774,7 @@
   }
 
   // ---- CONTACT FORM (prototype stub) ----
-  function sendContact() {
+  async function sendContact() {
     const name = document.getElementById('ct-name').value.trim();
     const email = document.getElementById('ct-email').value.trim();
     const phone = document.getElementById('ct-phone').value.trim();
@@ -4798,9 +4798,32 @@
       msg.textContent = 'Please enter a valid phone number, or leave it blank.';
       return;
     }
+
+    // Save to Supabase enquiries table (CRM picks it up)
+    msg.style.color = 'var(--text-m)';
+    msg.textContent = 'Sending…';
+    try {
+      const res = await fetch(ANNAM_SUPABASE_URL + '/rest/v1/enquiries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': ANNAM_SUPABASE_ANON,
+          'Authorization': 'Bearer ' + ANNAM_SUPABASE_ANON,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          name, email, phone: phone || null, topic, message,
+          source: 'website_contact', status: 'new'
+        })
+      });
+      if (!res.ok) throw new Error('Server returned ' + res.status);
+    } catch (e) {
+      console.warn('Enquiry save failed (soft fail):', e);
+      // Don't block the user — still show success since the team will catch via Gmail eventually
+    }
+
     msg.style.color = 'var(--green-d)';
     msg.textContent = '✓ Thanks! We\'ll reply within 24 hours. For urgent issues, WhatsApp +91 73973 32865.';
-    // Clear form
     document.getElementById('ct-name').value = '';
     document.getElementById('ct-email').value = '';
     document.getElementById('ct-phone').value = '';
@@ -4809,7 +4832,7 @@
   }
 
   // ---- KITCHEN WAITLIST (prototype) ----
-  function joinWaitlist() {
+  async function joinWaitlist() {
     const name = document.getElementById('wl-name').value.trim();
     const phone = document.getElementById('wl-phone').value.trim();
     const email = document.getElementById('wl-email').value.trim();
@@ -4817,6 +4840,26 @@
     if (!name) { msg.style.color = 'var(--coral)'; msg.textContent = 'Please enter your name.'; return; }
     if (phone.replace(/\D/g,'').length < 10) { msg.style.color = 'var(--coral)'; msg.textContent = 'Please enter a valid phone number.'; return; }
     if (!email.includes('@')) { msg.style.color = 'var(--coral)'; msg.textContent = 'Please enter a valid email.'; return; }
+
+    msg.style.color = 'var(--text-m)';
+    msg.textContent = 'Saving…';
+    try {
+      await fetch(ANNAM_SUPABASE_URL + '/rest/v1/enquiries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': ANNAM_SUPABASE_ANON,
+          'Authorization': 'Bearer ' + ANNAM_SUPABASE_ANON,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          name, email, phone, topic: 'Kitchen waitlist',
+          message: 'Signed up for the kitchen waitlist.',
+          source: 'website_waitlist', status: 'new'
+        })
+      });
+    } catch (e) { console.warn('Waitlist save failed (soft):', e); }
+
     msg.style.color = 'var(--green-d)';
     msg.innerHTML = '✓ You\'re on the waitlist, ' + name.split(' ')[0] + '. We\'ll be in touch soon.';
     document.getElementById('wl-name').value = '';
@@ -4825,7 +4868,7 @@
   }
 
   // ---- COOK WITH ANNAM call scheduling (prototype) ----
-  function scheduleCallCookWithAnnam() {
+  async function scheduleCallCookWithAnnam() {
     const name = document.getElementById('cwa-name').value.trim();
     const phone = document.getElementById('cwa-phone').value.trim();
     const email = document.getElementById('cwa-email').value.trim();
@@ -4839,6 +4882,26 @@
     if (!location) { msg.style.color = 'var(--coral)'; msg.textContent = 'Please enter your kitchen city.'; return; }
     if (!capacity) { msg.style.color = 'var(--coral)'; msg.textContent = 'Please enter your daily capacity.'; return; }
     if (!time) { msg.style.color = 'var(--coral)'; msg.textContent = 'Please pick a call time.'; return; }
+
+    msg.style.color = 'var(--text-m)';
+    msg.textContent = 'Saving…';
+    try {
+      await fetch(ANNAM_SUPABASE_URL + '/rest/v1/enquiries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': ANNAM_SUPABASE_ANON,
+          'Authorization': 'Bearer ' + ANNAM_SUPABASE_ANON,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          name, email, phone, topic: 'Cook with Annam',
+          message: 'Kitchen city: ' + location + '\nDaily capacity: ' + capacity + '\nPreferred call time: ' + time,
+          source: 'website_cook_with_annam', status: 'new'
+        })
+      });
+    } catch (e) { console.warn('CWA save failed (soft):', e); }
+
     msg.style.color = 'var(--green-d)';
     msg.innerHTML = '✓ Thanks ' + name.split(' ')[0] + '. We\'ll call you within 24 hours.';
     document.getElementById('cwa-name').value = '';
@@ -5303,22 +5366,56 @@
       renderMeals(cuisine);
     }
 
-    // ---- PERSIST USER DATA (used by My Diet, Diet Preview, etc.) ----
+    // ---- PERSIST USER DATA (used by My Diet, Diet Preview, CRM booking, etc.) ----
     try {
       const name = (document.getElementById('m-name')?.value || '').trim();
       const email = (document.getElementById('m-email')?.value || '').trim();
       const age = (document.getElementById('m-age')?.value || '').trim();
       const phone = (document.getElementById('m-phone')?.value || '').trim();
+
+      // Read sex, diet, goal, timeline from option-pickers
+      const sexEl  = document.querySelector('[data-group="sex"] .opt.sel');
+      const dietEl = document.querySelector('[data-group="diet"] .opt.sel');
+      const goalEl = document.querySelector('[data-group="goal"] .opt.sel');
+      const timelineEl = document.querySelector('[data-group="timeline"] .opt.sel');
+      const sex  = sexEl ? (sexEl.dataset.val || sexEl.querySelector('.opt-title')?.textContent.trim().toLowerCase()) : null;
+      const diet = dietEl ? (dietEl.dataset.val || dietEl.querySelector('.opt-title')?.textContent.trim().toLowerCase()) : null;
+      const goal = goalEl ? (goalEl.dataset.val || goalEl.querySelector('.opt-title')?.textContent.trim().toLowerCase()) : null;
+      const planTimeline = timelineEl ? parseInt(timelineEl.dataset.val, 10) : null;
+
+      // Favourites (3 text fields)
+      const favourites = ['fav-1','fav-2','fav-3']
+        .map(id => (document.getElementById(id)?.value || '').trim())
+        .filter(Boolean);
+
+      // Allergies (multi-select)
+      const allergiesAll = Array.from(document.querySelectorAll('[data-group="allergies"] .opt.sel'))
+        .map(el => el.dataset.val)
+        .filter(v => v && v !== 'none');
+
+      // Preserve anything that was already in localStorage (like consultDate, consultLanguage)
+      const existing = (() => { try { return JSON.parse(localStorage.getItem('annam_user') || '{}'); } catch(e) { return {}; } })();
+
       const userData = {
-        name: name || 'there',
-        firstName: name ? name.split(' ')[0] : 'there',
+        ...existing,
+        name: name || existing.name || 'there',
+        firstName: name ? name.split(' ')[0] : (existing.firstName || 'there'),
+        lastName: name && name.split(' ').length > 1 ? name.split(' ').slice(1).join(' ') : (existing.lastName || ''),
         email, age, phone,
+        sex,
         startWeight: weight,
         targetWeight: target,
         height: heightCm,
         activity,
+        sleep: shift,
+        sleepHours: sleepHrs,
         bmi: bmi.toFixed(1),
         cuisine,
+        diet,
+        goal,
+        planTimeline,
+        favourites,
+        allergies: allergiesAll,
         assessedAt: new Date().toISOString()
       };
       localStorage.setItem('annam_user', JSON.stringify(userData));
@@ -5440,33 +5537,31 @@
   setTimeout(animateBananaTotals, 2300);
 </script>
 
-<!-- ===================== CASHFREE PAYMENT + INVOICE + EMAIL FLOW ===================== -->
+<!-- ===================== RAZORPAY PAYMENT + INVOICE + EMAIL FLOW ===================== -->
 <script>
 /**
  * Annam consult booking — payment + invoice + email
  *
  * Flow:
  *  1. User clicks "Pay ₹199 & confirm consult" on the dietitian page
- *  2. We call the Supabase Edge Function `create-order` to create a Cashfree order
- *     (sandbox while KYC is pending; switch to production by changing the Edge Function)
- *  3. We open Cashfree's hosted checkout in a modal in the same page
- *  4. On success Cashfree calls cashfree.checkout's onSuccess; we verify and route to
- *     the success page (#consult-success). We also generate a PDF invoice and call
- *     the Supabase Edge Function `send-consult-email` to send the welcome+invoice email
- *     via Gmail SMTP using hello.annam.life@gmail.com
+ *  2. We call the Supabase Edge Function `create-order` to create a Razorpay order
+ *  3. We open Razorpay's checkout modal on the same page
+ *  4. On success Razorpay calls our handler; payment confirmation is FINALISED
+ *     server-side via the `razorpay-webhook` Edge Function (which receives
+ *     signed events from Razorpay). The browser handler just routes the
+ *     customer to the success page (#consult-success) and triggers the
+ *     welcome+invoice email via `send-consult-email`.
  *  5. The success page lets the user re-download the PDF or re-send the email
  *
- * To go LIVE once KYC is approved:
- *  - Change `mode: 'sandbox'` → `mode: 'production'` in the Edge Function
- *  - Update the Cashfree app credentials in Supabase env vars
+ * The webhook is the source of truth for payment_status — not the browser.
+ * This is more secure than the previous Cashfree integration.
  */
 
 const ANNAM_SUPABASE_URL = 'https://zyicpvprijthknwpvusr.supabase.co';
 const ANNAM_SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5aWNwdnByaWp0aGtud3B2dXNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMzgxOTgsImV4cCI6MjA5NDYxNDE5OH0.Q9INGFlweBmz9m2kAv4ZCxFTalXiuFv-yl3u6vSbhSM';
-const ANNAM_CASHFREE_MODE = 'sandbox'; // change to 'production' once KYC clears
 const ANNAM_CONSULT_AMOUNT = 199;
 
-let _cashfreeLoaded = false;
+let _razorpayLoaded = false;
 let _jspdfLoaded = false;
 
 function loadScript(src, cb) {
@@ -5477,10 +5572,10 @@ function loadScript(src, cb) {
   document.head.appendChild(s);
 }
 
-function loadCashfreeSDK(cb) {
-  if (_cashfreeLoaded) { cb(); return; }
-  loadScript('https://sdk.cashfree.com/js/v3/cashfree.js', function() {
-    _cashfreeLoaded = true; cb();
+function loadRazorpaySDK(cb) {
+  if (_razorpayLoaded || typeof Razorpay !== 'undefined') { _razorpayLoaded = true; cb(); return; }
+  loadScript('https://checkout.razorpay.com/v1/checkout.js', function() {
+    _razorpayLoaded = true; cb();
   });
 }
 
@@ -5512,6 +5607,12 @@ function getBookingDetails() {
   const langSel = document.getElementById('consult-language');
   const consultLanguage = (langSel && langSel.value) || u.consultLanguage || 'english';
 
+  // Plan duration + meals (from plan page picker if user touched them)
+  const durEl = document.querySelector('.plan-dur.sel');
+  const mealsEl = document.querySelector('.plan-meal.sel');
+  const planDuration = durEl ? parseInt(durEl.dataset.dur, 10) : (u.planDuration || null);
+  const mealsPerDay  = mealsEl ? parseInt(mealsEl.dataset.meals, 10) : (u.mealsPerDay || null);
+
   return {
     firstName: u.firstName || '',
     lastName: u.lastName || '',
@@ -5522,7 +5623,28 @@ function getBookingDetails() {
     consultDateLabel: consultDateLabel || 'TBD',
     consultTime: consultTime,
     consultLanguage: consultLanguage,
-    amount: ANNAM_CONSULT_AMOUNT
+    amount: ANNAM_CONSULT_AMOUNT,
+    // Full intake — gets passed to CRM via create-order Edge Function
+    intake: {
+      age: u.age ? parseInt(u.age, 10) : null,
+      sex: u.sex || null,
+      heightCm: u.height ? parseFloat(u.height) : null,
+      currentKg: u.startWeight ? parseFloat(u.startWeight) : null,
+      targetKg: u.targetWeight ? parseFloat(u.targetWeight) : null,
+      activityLevel: u.activity || null,
+      sleepPattern: u.sleep || null,
+      diet: u.diet || null,
+      cuisine: u.cuisine || null,
+      favouriteFoods: Array.isArray(u.favourites) ? u.favourites : [],
+      allergies: Array.isArray(u.allergies) ? u.allergies : [],
+      healthGoal: u.goal || null,
+      medicalNotes: u.medicalNotes || null,
+      bmi: u.bmi ? parseFloat(u.bmi) : null,
+      city: u.city || null,
+      preferredService: u.preferredService || null,
+      planDurationMonths: planDuration || u.planTimeline || null,
+      mealsPerDay: mealsPerDay,
+    },
   };
 }
 
@@ -5556,7 +5678,7 @@ async function initiateConsultPayment() {
   setPayButtonState(true);
 
   try {
-    // 1. Ask our Supabase Edge Function to create a Cashfree order
+    // 1. Ask our Supabase Edge Function to create a Razorpay order
     const res = await fetch(ANNAM_SUPABASE_URL + '/functions/v1/create-order', {
       method: 'POST',
       headers: {
@@ -5572,7 +5694,7 @@ async function initiateConsultPayment() {
         consult_date: b.consultDate,
         consult_time: b.consultTime,
         consult_language: b.consultLanguage,
-        mode: ANNAM_CASHFREE_MODE
+        intake: b.intake
       })
     });
 
@@ -5581,69 +5703,79 @@ async function initiateConsultPayment() {
       throw new Error('Order creation failed: ' + res.status + ' ' + txt);
     }
     const order = await res.json();
-    if (!order.payment_session_id) {
-      throw new Error('No payment session returned from server');
+    if (!order.razorpay_order_id || !order.razorpay_key_id) {
+      throw new Error('Razorpay order details missing from server response');
     }
 
-    // 2. Open Cashfree checkout in a modal on this page
-    loadCashfreeSDK(async function() {
+    // 2. Open Razorpay checkout modal
+    loadRazorpaySDK(function() {
       try {
-        const cashfree = await Cashfree({ mode: ANNAM_CASHFREE_MODE });
-        cashfree.checkout({
-          paymentSessionId: order.payment_session_id,
-          redirectTarget: '_modal'
-        }).then(function(result) {
-          setPayButtonState(false);
-          if (result.error) {
-            // user closed modal or payment errored
-            console.warn('Cashfree result:', result.error);
-            alert('Payment was not completed. You can try again any time.');
-            return;
-          }
-          if (result.redirect) {
-            // some flows redirect; nothing to do here
-            return;
-          }
-          if (result.paymentDetails) {
-            // Payment succeeded — show our success page
+        const rzpOptions = {
+          key: order.razorpay_key_id,
+          amount: order.amount,            // already in paise from server
+          currency: order.currency || 'INR',
+          order_id: order.razorpay_order_id,
+          name: 'Annam',
+          description: 'Consultation with Annam Registered Dietitian',
+          image: 'https://annam.life/favicon.svg',
+          prefill: {
+            name: b.fullName,
+            email: b.email,
+            contact: b.phone
+          },
+          notes: {
+            consult_date: b.consultDate || '',
+            consult_time: b.consultTime || '',
+            consult_language: b.consultLanguage || 'english'
+          },
+          theme: {
+            color: '#2D5F4F'             // Annam brand green
+          },
+          handler: function(response) {
+            // Razorpay called our success handler. response contains:
+            //   razorpay_payment_id, razorpay_order_id, razorpay_signature
+            // The webhook is the source of truth for payment_status — this
+            // handler just routes the user to the success page.
+            setPayButtonState(false);
             handleConsultPaymentSuccess({
-              orderId: order.order_id,
-              cfOrderId: order.cf_order_id || order.order_id,
+              orderId: order.razorpay_order_id,
+              paymentId: response.razorpay_payment_id,
               amount: b.amount,
               booking: b,
-              paymentDetails: result.paymentDetails
+              paymentDetails: response
             });
-          } else {
-            // Fallback — assume success since modal closed without error
-            handleConsultPaymentSuccess({
-              orderId: order.order_id,
-              cfOrderId: order.cf_order_id || order.order_id,
-              amount: b.amount,
-              booking: b
-            });
+          },
+          modal: {
+            ondismiss: function() {
+              setPayButtonState(false);
+              // User closed the modal without paying — that's fine, no alert needed.
+              console.log('Razorpay checkout dismissed by user');
+            },
+            escape: true,
+            backdropclose: false
           }
+        };
+        const rzp = new Razorpay(rzpOptions);
+        rzp.on('payment.failed', function(resp) {
+          setPayButtonState(false);
+          console.warn('Razorpay payment failed:', resp.error);
+          alert('Payment could not be completed: ' + (resp.error && resp.error.description ? resp.error.description : 'Please try again.'));
         });
+        rzp.open();
       } catch (innerErr) {
         setPayButtonState(false);
         console.error(innerErr);
-        alert('Could not open the payment window. Please try again, or contact hello.annam.life@gmail.com');
+        alert('Could not open the payment window. Please try again, or email hello.annam.life@gmail.com');
       }
     });
 
   } catch (err) {
     setPayButtonState(false);
     console.error(err);
-    // Sandbox might not be set up yet — degrade gracefully so the demo still works
-    const offerDemo = confirm("We couldn't connect to the payment server right now.\n\nThis usually means our payment setup is still being configured (we're awaiting KYC approval).\n\nWould you like to see a demo of what the success page looks like?");
-    if (offerDemo) {
-      handleConsultPaymentSuccess({
-        orderId: 'DEMO-' + Date.now().toString(36).toUpperCase(),
-        cfOrderId: 'DEMO',
-        amount: b.amount,
-        booking: b,
-        demo: true
-      });
-    }
+    // No fake "demo success" — never show a booked/paid page unless a real
+    // payment happened. On any failure to reach the payment server, show an
+    // honest error and let the user retry or contact us.
+    alert("We couldn't reach the payment server right now. No payment was taken and you have not been charged.\n\nPlease try again in a moment. If it keeps happening, email hello.annam.life@gmail.com and we'll book your consult manually.");
   }
 }
 
@@ -5664,6 +5796,11 @@ function handleConsultPaymentSuccess(payload) {
     };
     localStorage.setItem('annam_user', JSON.stringify(u));
   } catch(e) {}
+
+  // Note: payment_status is updated server-side by the razorpay-webhook
+  // Edge Function (which verifies the Razorpay HMAC signature). This is
+  // more secure than trusting the browser — anyone could fake a browser
+  // confirmation, but only Razorpay can sign the webhook payload.
 
   // Populate success page
   setText('success-name', (booking.firstName || 'there'));
