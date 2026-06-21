@@ -72,7 +72,7 @@
   ::selection { background: var(--green); color: var(--cream); }
 
   /* === NAV === */
-  nav { position: sticky; top: 0; z-index: 100; background: rgba(251, 247, 238, 0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); padding: 0 2.5rem; height: 70px; display: flex; align-items: center; justify-content: space-between; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(251, 247, 238, 0.6); -webkit-backdrop-filter: blur(18px) saturate(1.15); backdrop-filter: blur(18px) saturate(1.15); border-bottom: 1px solid rgba(229, 219, 194, 0.6); box-shadow: 0 1px 12px rgba(74, 59, 42, 0.04); padding: 0 2.5rem; height: 70px; display: flex; align-items: center; justify-content: space-between; }
   .logo { font-family: var(--font-serif); font-size: 1.55rem; font-weight: 600; letter-spacing: -0.4px; color: var(--green-d); cursor: pointer; }
   .logo .dot { color: var(--coral); font-style: italic; }
   .nav-links { display: flex; gap: 2.25rem; list-style: none; }
@@ -639,7 +639,7 @@
     .bmi-scale span:nth-child(1) { margin-left: 25%; }
   }
   @media (max-width: 900px) {
-    nav { padding: 0 1.25rem; position: relative; }
+    nav { padding: 0 1.25rem; position: sticky; }
     .nav-actions { display: none; }
     .nav-hamburger { display: flex; }
     .nav-links {
