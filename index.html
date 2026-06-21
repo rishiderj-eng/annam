@@ -53,6 +53,7 @@
     --gold:    #C9972A;
     --gold-l:  #E5BB5C;
     --coral:   #D87A5B;
+    --coral-l: #ECA98E;
     --text:    #1F1A14;
     --text-m:  #5A4F40;
     --text-l:  #8A7E6E;
@@ -77,6 +78,12 @@
   .nav-links { display: flex; gap: 2.25rem; list-style: none; }
   .nav-links a { font-size: 14px; color: var(--text-m); font-weight: 500; transition: color .2s; cursor: pointer; }
   .nav-links a:hover, .nav-links a.active { color: var(--green-d); }
+  .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; background: none; border: none; cursor: pointer; padding: 10px; }
+  .nav-hamburger span { display: block; height: 2px; width: 22px; background: var(--green-d); border-radius: 2px; transition: transform .25s, opacity .25s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-mobile-only { display: none; }
   .nav-actions { display: flex; gap: 10px; align-items: center; }
   .btn { padding: 10px 22px; border-radius: 100px; font-size: 14px; font-weight: 500; transition: all .25s; display: inline-flex; align-items: center; gap: 8px; }
   .btn-ghost { color: var(--text-m); }
@@ -353,9 +360,13 @@
   .assess-page { padding: 4rem 2rem; min-height: calc(100vh - 70px); }
   .assess-wrap { max-width: 720px; margin: 0 auto; }
   .assess-progress { display: flex; gap: 8px; margin-bottom: 2.5rem; }
-  .ap-step { flex: 1; height: 4px; background: var(--cream-d); border-radius: 100px; overflow: hidden; position: relative; }
-  .ap-step.done::after, .ap-step.current::after { content: ''; position: absolute; inset: 0; background: var(--green-d); border-radius: 100px; }
+  .ap-step { flex: 1; height: 5px; background: var(--cream-d); border-radius: 100px; overflow: hidden; position: relative; }
+  .ap-step::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 0; background: var(--green-d); border-radius: 100px; transition: width .5s cubic-bezier(.4, 0, .2, 1); }
   .ap-step.current::after { width: 50%; }
+  .ap-step.done::after { width: 100%; }
+  .ap-step.current::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 50%; border-radius: 100px; background: linear-gradient(90deg, transparent, rgba(229,187,92,.7), transparent); animation: apShimmer 1.6s ease-in-out infinite; z-index: 1; }
+  @keyframes apShimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+  @media (prefers-reduced-motion: reduce) { .ap-step::after { transition: none; } .ap-step.current::before { animation: none; } }
   .assess-step { background: var(--cream); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 2.5rem; }
   .assess-step.hidden { display: none; }
   .assess-step h2 { font-family: var(--font-serif); font-size: 2rem; font-weight: 500; letter-spacing: -.5px; margin-bottom: .5rem; line-height: 1.15; }
@@ -628,8 +639,23 @@
     .bmi-scale span:nth-child(1) { margin-left: 25%; }
   }
   @media (max-width: 900px) {
-    nav { padding: 0 1.25rem; }
-    .nav-links { display: none; }
+    nav { padding: 0 1.25rem; position: relative; }
+    .nav-actions { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-links {
+      display: none;
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; gap: 0;
+      background: var(--cream);
+      border-top: 1px solid rgba(43,35,23,.08);
+      box-shadow: 0 12px 28px rgba(43,35,23,.12);
+      padding: 8px 0;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a { display: block; padding: 14px 1.5rem; font-size: 15px; min-height: 48px; box-sizing: border-box; }
+    .nav-links a:active { background: rgba(45,95,79,.06); }
+    .nav-mobile-only { display: list-item; border-top: 1px solid rgba(43,35,23,.06); }
     .hero { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.25rem 2rem; }
     .dr-chat { max-width: 100%; }
     .chat-body { min-height: auto; }
@@ -719,7 +745,108 @@
   html, body { max-width: 100vw; overflow-x: hidden; }
   img, svg, video { max-width: 100%; height: auto; }
   table { max-width: 100%; }
+
+  /* === Reusable dashboard grid (extracted from inline styles) === */
+  .grid-dash-3 { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+
+  /* === Tablet (601–900px): dashboard 3-col → 2-col instead of collapsing straight to 1-col === */
+  @media (min-width: 601px) and (max-width: 900px) {
+    .mydiet-bottom, .grid-dash-3 { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
+    .footer-inner { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  }
+
+  /* === Vendor / comparison tables: horizontal scroll on mobile instead of forcing page-wide overflow === */
+  @media (max-width: 900px) {
+    table.orders, .cmp-table {
+      display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap;
+    }
+  }
+
+  /* === CTA buttons: consistent min tap target on mobile === */
+  @media (max-width: 600px) {
+    .btn { min-height: 44px; }
+  }
+
+  /* === Very small screens (≤ 430px): stack meal rows so the kcal block doesn't squeeze the dish name === */
+  @media (max-width: 430px) {
+    .meal-row { flex-direction: column; align-items: flex-start; gap: 6px !important; }
+    .meal-kcal { text-align: left; }
+    .meal-kcal small { display: inline; }
+  }
   pre, code { white-space: pre-wrap; word-break: break-word; }
+  /* ===== HERO LEAF FRAME (decorative corners) ===== */
+  .hero-leaves { position: absolute; inset: 0; background: url('leaves-frame.webp') no-repeat center center; background-size: cover; pointer-events: none; z-index: 0; }
+  .hero-text, .food-showcase { position: relative; z-index: 2; }
+  @media (max-width: 600px) { .hero-leaves { opacity: .4; } }
+
+  /* ===================== PREMIUM FOOD SHOWCASE ===================== */
+  .food-showcase { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; width: 100%; }
+  .fs-tabs { display: inline-flex; gap: 4px; background: #fff; border: 1px solid var(--line); border-radius: 100px; padding: 4px; box-shadow: 0 4px 16px rgba(74,59,42,.06); }
+  .fs-tab { padding: 8px 22px; border: none; background: none; border-radius: 100px; font-family: var(--font-sans); font-size: 13.5px; font-weight: 600; color: var(--text-m); cursor: pointer; transition: background .25s, color .25s; }
+  .fs-tab:hover { color: var(--green-d); }
+  .fs-tab.active { background: var(--green-d); color: var(--cream); }
+
+  .fs-stage { position: relative; width: min(520px, 100%); aspect-ratio: 1 / 1; margin: .25rem auto; transition: transform .15s ease-out, opacity .22s ease; will-change: transform; }
+  .fs-orbit-guide { position: absolute; inset: 7%; border: 1.5px dashed rgba(45,95,79,.22); border-radius: 50%; }
+  .fs-center { position: absolute; left: 50%; top: 50%; width: 49%; aspect-ratio: 1 / 1; transform: translate(-50%, -50%); border-radius: 50%; overflow: hidden; box-shadow: 0 20px 55px rgba(74,59,42,.20); background: radial-gradient(circle at 50% 38%, var(--sage-l), var(--cream-d)); border: 5px solid #fff; }
+  .fs-center-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .fs-ring { position: absolute; inset: 0; }
+  @keyframes fsSpin { to { transform: rotate(360deg); } }
+  @keyframes fsSpinRev { to { transform: rotate(-360deg); } }
+  @media (prefers-reduced-motion: no-preference) {
+    .fs-ring { animation: fsSpin 64s linear infinite; }
+    .fs-ring .fs-dish-inner { animation: fsSpinRev 64s linear infinite; }
+    .fs-stage:hover .fs-ring, .fs-stage:hover .fs-ring .fs-dish-inner { animation-play-state: paused; }
+  }
+
+  .fs-dish { position: absolute; width: 22%; aspect-ratio: 1 / 1; transform: translate(-50%, -50%); }
+  .fs-dish-inner { position: relative; width: 100%; height: 100%; }
+  .fs-dish-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; box-shadow: 0 10px 26px rgba(74,59,42,.16); background: radial-gradient(circle at 50% 38%, #fff, var(--cream-d)); border: 3px solid #fff; }
+  .fs-dot { position: absolute; right: 2%; bottom: 16%; width: 7px; height: 7px; border-radius: 50%; background: var(--green-d); box-shadow: 0 0 0 2px #fff; }
+  .fs-dish-label { position: absolute; top: 50%; left: 110%; transform: translateY(-50%); white-space: nowrap; font-size: 12px; font-weight: 600; color: var(--text-m); line-height: 1.2; }
+  .fs-dish:nth-child(5) .fs-dish-label, .fs-dish:nth-child(6) .fs-dish-label { left: auto; right: 110%; text-align: right; }
+
+  .fs-macros { display: flex; align-items: center; gap: 1.25rem; background: rgba(255,255,255,.5); -webkit-backdrop-filter: blur(14px) saturate(1.1); backdrop-filter: blur(14px) saturate(1.1); border: 1px solid rgba(255,255,255,.65); border-radius: 16px; padding: 13px 26px; box-shadow: 0 10px 30px rgba(74,59,42,.10); }
+  .fs-macro { display: flex; align-items: center; gap: 10px; color: var(--gold); }
+  .fs-macro strong { display: block; font-family: var(--font-serif); font-size: 1.4rem; font-weight: 500; color: var(--text); line-height: 1; }
+  .fs-macro small { font-size: 11px; color: var(--text-l); }
+  .fs-macro-div { width: 1px; height: 34px; background: var(--line); }
+
+  .fs-signature { font-family: var(--font-serif); font-size: 1.35rem; font-style: italic; color: var(--text); text-align: center; margin: .25rem 0; }
+  .fs-sig-underline { position: relative; }
+  .fs-sig-underline::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--gold-l); opacity: .75; border-radius: 2px; }
+
+  .fs-check { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: var(--green-d); color: var(--cream); font-size: 11px; flex-shrink: 0; }
+
+  /* category fade */
+  .food-showcase.fs-fading .fs-stage, .food-showcase.fs-fading .fs-macros, .food-showcase.fs-fading .fs-signature { opacity: .2; }
+
+  /* hero trust bar */
+  .hero-trustbar { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--cream); }
+  .htb-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); padding: 1.1rem 2rem; }
+  .htb-item { display: flex; align-items: center; gap: 10px; justify-content: center; font-size: 13.5px; font-weight: 600; color: var(--text-m); }
+  .htb-item svg { color: var(--green-d); flex-shrink: 0; }
+  .htb-item + .htb-item { border-left: 1px solid var(--line); }
+
+  /* showcase responsive */
+  @media (max-width: 900px) {
+    .fs-stage { width: min(420px, 84vw); }
+    .htb-inner { grid-template-columns: 1fr 1fr; gap: .4rem 0; padding: 1rem 1.25rem; }
+    .htb-item:nth-child(3) { border-left: none; }
+    .htb-item:nth-child(odd) { justify-content: flex-start; }
+  }
+  @media (max-width: 600px) {
+    .fs-stage { width: min(320px, 78vw); }
+    .fs-ring, .fs-ring .fs-dish-inner { animation: none !important; }
+    .fs-dish:nth-child(3), .fs-dish:nth-child(4), .fs-dish:nth-child(6) { display: none; }
+    .fs-dish-label { font-size: 10.5px; }
+    .fs-macros { gap: .8rem; padding: 11px 16px; }
+    .fs-macro strong { font-size: 1.2rem; }
+    .fs-macro small { font-size: 10px; }
+    .fs-signature { font-size: 1.1rem; }
+  }
+
 </style>
 </head>
 <body>
@@ -727,17 +854,22 @@
 <!-- =================== NAV =================== -->
 <nav>
   <div class="logo" onclick="show('home')">Annam<span class="dot">.</span></div>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a onclick="show('home')" id="nl-home" class="active">Home</a></li>
     <li><a onclick="show('assess')" id="nl-assess">Get Plan</a></li>
     <li><a onclick="show('mydiet')" id="nl-plan">My Diet</a></li>
     <li><a onclick="show('dietitian')" id="nl-dietitian">Consult</a></li>
     <li><a onclick="show('home'); setTimeout(()=>document.getElementById('packages').scrollIntoView({behavior:'smooth'}),100)">Plans</a></li>
+    <li class="nav-mobile-only"><a onclick="show('login')" id="nl-signin-m">Sign in</a></li>
+    <li class="nav-mobile-only"><a onclick="show('assess')" id="nl-startfree-m" style="color:var(--green-d);font-weight:700">Start free →</a></li>
   </ul>
   <div class="nav-actions" id="nav-actions">
     <button class="btn btn-ghost" id="nav-signin-btn" onclick="show('login')">Sign in</button>
     <button class="btn btn-primary" id="nav-startfree-btn" onclick="show('assess')">Start free</button>
   </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- =================== HOME =================== -->
@@ -745,6 +877,7 @@
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-leaves" aria-hidden="true"></div>
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <!-- Decorative botanical illustrations -->
@@ -756,134 +889,66 @@
     </svg>
 
     <div class="hero-text">
-    <div class="hero-eyebrow">Designed by certified food scientists</div>
     <h1>Annam is <em>life.</em><br/>We make yours <span class="underline">healthier.</span></h1>
-    <p class="hero-sub">In Tamil and Sanskrit, <em>annam</em> means food — the most sacred form of life itself. Tell us your body and goals; our dietitians craft a regional Indian meal plan that fits your life, not the other way around.</p>
+    <p class="hero-sub">Personalised Indian diets by certified dietitians. Cooked with care. Delivered fresh to your door.</p>
 
     <div class="hero-cta">
-      <button class="btn btn-primary btn-lg" onclick="show('assess')">Start a healthier you →</button>
-      <button class="btn btn-ghost btn-lg" onclick="show('dietitian')">Talk to a dietitian</button>
+      <button class="btn btn-primary btn-lg" onclick="show('assess')">Start Free Assessment →</button>
+      <button class="btn btn-outline btn-lg" onclick="show('dietitian')">Book ₹199 Dietitian Consult</button>
     </div>
 
-    <div class="hero-trust" style="flex-direction:column;gap:8px;padding-top:1.5rem;align-items:flex-start;text-align:left">
-      <div style="font-family:var(--font-serif);font-size:1rem;font-weight:500;color:var(--green-d);letter-spacing:.3px">
-        Annam <span style="color:var(--text-l);opacity:.5">·</span> अन्नम् <span style="color:var(--text-l);opacity:.5">·</span> அன்னம்
-      </div>
-      <div style="font-size:12px;color:var(--text-l);font-style:italic">food, in three Indian languages</div>
-      <div style="display:inline-flex;align-items:center;gap:10px;margin-top:6px;cursor:pointer" onclick="show('assess')">
-        <span style="font-size:9.5px;font-weight:600;color:var(--green-d);background:var(--sage-l);padding:4px 10px;border-radius:100px;letter-spacing:.8px">JUST LAUNCHED</span>
-        <span style="font-size:13px;color:var(--text-m)">Be among our <strong style="color:var(--green-d)">first 100 members</strong></span>
-      </div>
+    <div class="hero-trust" style="padding-top:1.25rem;align-items:center;gap:10px">
+      <span class="fs-check" aria-hidden="true">✓</span>
+      <span style="font-size:13.5px;color:var(--text-m)">No fads. No shortcuts. Just real food.</span>
     </div>
     </div>
 
-    <!-- UNIFIED DIETITIAN CHAT COMPOSITION -->
-    <div class="dr-chat">
+    <!-- ===== PREMIUM FOOD SHOWCASE (replaces the old dietitian-chat hero) ===== -->
+    <!-- DROP YOUR PHOTOS HERE: edit the MEALS object in the <script> (search "MEALS ="). -->
+    <!-- Each category needs 1 center thali image + 6 dish images (transparent-bg cutouts look best). -->
+    <div class="food-showcase" id="food-showcase">
 
-      <div class="dr-header">
-        <div class="dr-avatar">🌿</div>
-        <div class="dr-info">
-          <div class="dr-name">Your Annam Dietitian</div>
-          <div class="dr-cred">MSc / RD certified · Assigned after booking</div>
-        </div>
-        <span class="dr-status">ONLINE</span>
+      <div class="fs-tabs" role="tablist" aria-label="Meal category">
+        <button class="fs-tab" role="tab" data-cat="breakfast" onclick="setMealCategory('breakfast')">Breakfast</button>
+        <button class="fs-tab active" role="tab" aria-selected="true" data-cat="lunch" onclick="setMealCategory('lunch')">Lunch</button>
+        <button class="fs-tab" role="tab" data-cat="dinner" onclick="setMealCategory('dinner')">Dinner</button>
       </div>
 
-      <div class="chat-body">
-        <div class="typing-row t1">
-          <span class="t-dot-inline"></span>
-          <span class="t-dot-inline" style="animation-delay:0.2s"></span>
-          <span class="t-dot-inline" style="animation-delay:0.4s"></span>
+      <div class="fs-stage" id="fs-stage">
+        <div class="fs-orbit-guide" aria-hidden="true"></div>
+
+        <div class="fs-center">
+          <img id="fs-center-img" class="fs-photo fs-center-img" alt="Today's plated meal" />
         </div>
 
-        <div class="bubble-dr b1">
-          Hi 👋 I'm your Annam dietitian. <strong style="color:var(--green-d)">What's something you can't give up?</strong> <em>Biryani? Chai?</em> Most plans fail because they kill what you love.
-        </div>
-
-        <div class="you-typing yt1">
-          <span class="t-dot-inline"></span>
-          <span class="t-dot-inline" style="animation-delay:0.2s"></span>
-          <span class="t-dot-inline" style="animation-delay:0.4s"></span>
-        </div>
-
-        <div class="bubble-you u1">
-          Honestly? Biryani 🍛
-        </div>
-
-        <div class="typing-row t3">
-          <span class="t-dot-inline"></span>
-          <span class="t-dot-inline" style="animation-delay:0.2s"></span>
-          <span class="t-dot-inline" style="animation-delay:0.4s"></span>
-        </div>
-
-        <div class="bubble-dr b3">
-          Then biryani <strong style="color:var(--gold)">stays</strong> ✨ Sunday lunch — proper portion, with raita. Mon &amp; Tue we'll go lighter. You'll still lose weight.
-        </div>
-
-        <div class="you-typing yt2">
-          <span class="t-dot-inline"></span>
-          <span class="t-dot-inline" style="animation-delay:0.2s"></span>
-          <span class="t-dot-inline" style="animation-delay:0.4s"></span>
-        </div>
-
-        <div class="bubble-you u2">
-          Wait — really? 😮
-        </div>
-
-        <div class="suggestions-row">
-          <div class="suggestion-chip" onclick="show('dietitian')"><span class="ask">try:</span>Can I have chai?</div>
-          <div class="suggestion-chip" onclick="show('dietitian')"><span class="ask">try:</span>I'm diabetic</div>
+        <div class="fs-ring" id="fs-ring">
+          <div class="fs-dish" style="left:27%;top:10%"><div class="fs-dish-inner"><img class="fs-photo fs-dish-img" id="fs-img-0" alt="" /><i class="fs-dot"></i><span class="fs-dish-label" id="fs-lbl-0"></span></div></div>
+          <div class="fs-dish" style="left:73%;top:10%"><div class="fs-dish-inner"><img class="fs-photo fs-dish-img" id="fs-img-1" alt="" /><i class="fs-dot"></i><span class="fs-dish-label" id="fs-lbl-1"></span></div></div>
+          <div class="fs-dish" style="left:96%;top:50%"><div class="fs-dish-inner"><img class="fs-photo fs-dish-img" id="fs-img-2" alt="" /><i class="fs-dot"></i><span class="fs-dish-label" id="fs-lbl-2"></span></div></div>
+          <div class="fs-dish" style="left:73%;top:90%"><div class="fs-dish-inner"><img class="fs-photo fs-dish-img" id="fs-img-3" alt="" /><i class="fs-dot"></i><span class="fs-dish-label" id="fs-lbl-3"></span></div></div>
+          <div class="fs-dish" style="left:27%;top:90%"><div class="fs-dish-inner"><img class="fs-photo fs-dish-img" id="fs-img-4" alt="" /><i class="fs-dot"></i><span class="fs-dish-label" id="fs-lbl-4"></span></div></div>
+          <div class="fs-dish" style="left:4%;top:50%"><div class="fs-dish-inner"><img class="fs-photo fs-dish-img" id="fs-img-5" alt="" /><i class="fs-dot"></i><span class="fs-dish-label" id="fs-lbl-5"></span></div></div>
         </div>
       </div>
 
-      <div class="plan-delivery">
-        <div class="plan-card-hero">
-          <div class="plan-head-hero">
-            <div>
-              <div class="plan-eyebrow-hero">Your sample plan</div>
-              <div class="plan-title-hero">Transform · Biryani-friendly</div>
-            </div>
-            <span class="plan-tag-hero">SAMPLE</span>
-          </div>
-
-          <div class="plan-week-hero">
-            <div class="plan-week-label-hero">Week 1 highlights</div>
-            <div class="day-row-hero">
-              <div class="day-cell-hero"><div class="day-name-hero">M</div><div class="day-meal-hero">Dal·rice</div></div>
-              <div class="day-cell-hero"><div class="day-name-hero">T</div><div class="day-meal-hero">Ragi roti</div></div>
-              <div class="day-cell-hero"><div class="day-name-hero">W</div><div class="day-meal-hero">Sambar</div></div>
-              <div class="day-cell-hero"><div class="day-name-hero">T</div><div class="day-meal-hero">Poha</div></div>
-              <div class="day-cell-hero"><div class="day-name-hero">F</div><div class="day-meal-hero">Curd-rice</div></div>
-              <div class="day-cell-hero"><div class="day-name-hero">S</div><div class="day-meal-hero">Chapati</div></div>
-              <div class="day-cell-hero highlight"><div class="day-name-hero">S</div><div class="day-meal-hero">Biryani 🍛</div></div>
-            </div>
-          </div>
-
-          <div class="plan-metrics-hero">
-            <div>
-              <div class="plan-metric-label-hero">Daily kcal</div>
-              <div class="plan-metric-val-hero">1,650</div>
-            </div>
-            <div>
-              <div class="plan-metric-label-hero">Protein</div>
-              <div class="plan-metric-val-hero gold">92g</div>
-            </div>
-            <div>
-              <div class="plan-metric-label-hero">Meals</div>
-              <div class="plan-metric-val-hero coral">3/day</div>
-            </div>
-          </div>
-
-          <button class="plan-cta-hero" onclick="show('dietitian')">See full plan &amp; talk to your dietitian →</button>
-          <div class="plan-footnote-hero">✨ Personalised in detail after your ₹199 consult</div>
+      <div class="fs-macros">
+        <div class="fs-macro">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c0 3-4 4-4 8a4 4 0 0 0 8 0c0-2-1-3-1-3 0 1-1 2-2 2 0-3 1-5-1-7z"/></svg>
+          <div><strong id="fs-kcal">1650</strong><small>kcal</small></div>
+        </div>
+        <div class="fs-macro-div"></div>
+        <div class="fs-macro">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3C7 5 5 9 7 14s7 7 11 5"/><path d="M11 3c4 2 6 6 4 11"/></svg>
+          <div><strong id="fs-protein">92g</strong><small>protein</small></div>
+        </div>
+        <div class="fs-macro-div"></div>
+        <div class="fs-macro">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18a8 8 0 0 1-16 0z"/><path d="M12 3v3"/></svg>
+          <div><strong id="fs-meals">3</strong><small>meals/day</small></div>
         </div>
       </div>
 
-      <div class="footer-strip">
-        <div class="footer-input">Type a message...</div>
-        <span class="footer-send" onclick="show('dietitian')" style="cursor:pointer">→</span>
-      </div>
-
+      <p class="fs-signature">Biryani <span class="fs-sig-underline">stays</span>. The weight goes.</p>
     </div>
   </section>
 
@@ -1067,6 +1132,28 @@
     </div>
   </section>
 
+
+  <!-- ===== HERO TRUST SIGNALS ===== -->
+  <div class="hero-trustbar">
+    <div class="htb-inner">
+      <div class="htb-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19a6.5 6.5 0 0 1 13 0"/></svg>
+        <span>Certified Dietitians</span>
+      </div>
+      <div class="htb-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M12 3v3M9 4.5v2M15 4.5v2"/></svg>
+        <span>Regional Indian Cuisines</span>
+      </div>
+      <div class="htb-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg>
+        <span>FSSAI Compliant Kitchens</span>
+      </div>
+      <div class="htb-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.3-7-9.2A3.8 3.8 0 0 1 12 7a3.8 3.8 0 0 1 7 3.8C19 15.7 12 20 12 20z"/></svg>
+        <span>Personalised For You</span>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== THREE WAYS WE SERVE YOU ===== -->
   <section class="block" style="background:linear-gradient(180deg, var(--cream-d) 0%, var(--cream) 100%);position:relative;overflow:hidden">
@@ -1351,6 +1438,10 @@
 <div class="page" id="page-assess">
   <div class="assess-page">
     <div class="assess-wrap">
+      <div id="assess-welcome-banner" style="display:none;align-items:center;gap:10px;background:var(--gold-l);border:1px solid var(--gold);border-radius:12px;padding:12px 16px;margin-bottom:1.25rem;font-size:13.5px;color:var(--green-d);font-weight:500">
+        <span style="font-size:16px">✓</span>
+        <span>Account created — complete your assessment.</span>
+      </div>
       <div class="assess-progress">
         <div class="ap-step current" id="aps-1"></div>
         <div class="ap-step" id="aps-2"></div>
@@ -1377,7 +1468,7 @@
         </div>
         <div class="step-nav">
           <button class="btn btn-ghost" onclick="show('home')">← Back</button>
-          <button class="btn btn-primary" onclick="goStep(2)">Continue →</button>
+          <button class="btn btn-primary" onclick="nextStep(1)">Continue →</button>
         </div>
       </div>
 
@@ -1424,6 +1515,9 @@
         </div>
 
         <div class="form-section-title">Sleep & schedule</div>
+        <div class="form-row" style="margin-bottom:1rem">
+          <div class="field"><label>Average sleep (hours per night)</label><input type="number" id="m-sleep" placeholder="e.g. 7" min="3" max="14" step="0.5" /></div>
+        </div>
         <div class="opt-grid opt-grid-4" data-group="shift">
           <div class="opt sel" onclick="pickOpt(this)" data-val="regular"><span class="opt-emoji">🌙</span><div class="opt-title">Regular</div><div class="opt-sub">10 PM – 6 AM</div></div>
           <div class="opt" onclick="pickOpt(this)" data-val="early"><span class="opt-emoji">🌅</span><div class="opt-title">Early bird</div><div class="opt-sub">9 PM – 5 AM</div></div>
@@ -1445,7 +1539,7 @@
 
         <div class="step-nav">
           <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
-          <button class="btn btn-primary" onclick="goStep(3)">Continue →</button>
+          <button class="btn btn-primary" onclick="nextStep(2)">Continue →</button>
         </div>
       </div>
 
@@ -1473,7 +1567,7 @@
 
         <div class="step-nav">
           <button class="btn btn-ghost" onclick="goStep(2)">← Back</button>
-          <button class="btn btn-primary" onclick="goStep(4)">Continue →</button>
+          <button class="btn btn-primary" onclick="nextStep(3)">Continue →</button>
         </div>
       </div>
 
@@ -1881,7 +1975,7 @@
             </div>
           </div>
           <div>
-            <div class="form-section-title" style="margin-top:.5rem;color:var(--text-l)">Meals per day</div>
+            <div class="form-section-title" style="margin-top:.5rem;color:var(--text-l)">Meals per day <span id="meals-mode-label" style="font-weight:400;color:var(--text-l);font-size:.85em"></span></div>
             <div class="opt-grid" style="margin-bottom:0">
               <div class="opt plan-meal" data-meals="1" onclick="pickOpt(this)"><span class="opt-emoji">🍽️</span><div class="opt-title">1 meal</div></div>
               <div class="opt plan-meal" data-meals="2" onclick="pickOpt(this)"><span class="opt-emoji">🍽️🍽️</span><div class="opt-title">2 meals</div></div>
@@ -1971,8 +2065,8 @@
           <h3 style="font-family:var(--font-serif);font-size:1.35rem;font-weight:500;color:var(--cream);margin-bottom:.4rem;font-style:italic">Bi-weekly review</h3>
           <p style="font-size:13.5px;color:rgba(251,247,238,.85);margin-bottom:1.25rem;line-height:1.5">Thu <strong style="color:var(--cream)">14 May, 5:00 PM</strong> · 30 min with your dietitian</p>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="btn" style="background:var(--gold-l);color:var(--green-d);padding:9px 18px;font-size:13px;font-weight:600">Join video call →</button>
-            <button class="btn btn-outline" style="border-color:rgba(251,247,238,.4);color:rgba(251,247,238,.85);background:transparent;padding:9px 16px;font-size:13px">Reschedule</button>
+            <button class="btn" style="background:var(--gold-l);color:var(--green-d);padding:9px 18px;font-size:13px;font-weight:600" onclick="comingSoon('Join video call')">Join video call →</button>
+            <button class="btn btn-outline" style="border-color:rgba(251,247,238,.4);color:rgba(251,247,238,.85);background:transparent;padding:9px 16px;font-size:13px" onclick="comingSoon('Reschedule')">Reschedule</button>
           </div>
         </div>
       </div>
@@ -2127,7 +2221,7 @@
     </div>
 
     <!-- BOTTOM ROW: Water + Shopping + Subscription -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:1.25rem;margin-bottom:1.25rem" class="mydiet-bottom">
+    <div class="mydiet-bottom grid-dash-3">
 
       <!-- Water tracker -->
       <div style="background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem">
@@ -2158,7 +2252,7 @@
           <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" style="accent-color:var(--green-d)" /><span>Spinach (palak) — 250g</span></label>
           <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" style="accent-color:var(--green-d)" /><span>Apples — 6 pcs</span></label>
         </div>
-        <button class="btn btn-ghost" style="width:100%;justify-content:center;padding:9px;font-size:12.5px;margin-top:1rem">📋 Full list (24 items) →</button>
+        <button class="btn btn-ghost" style="width:100%;justify-content:center;padding:9px;font-size:12.5px;margin-top:1rem" onclick="comingSoon('Full grocery list')">📋 Full list (24 items) →</button>
       </div>
 
       <!-- Subscription / Plan management -->
@@ -2176,7 +2270,7 @@
           </div>
         </div>
         <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px;font-size:13px" onclick="openUpgradeModal()">Change my plan →</button>
-        <button class="btn btn-ghost" style="width:100%;justify-content:center;padding:9px;font-size:12px;margin-top:6px">Cancel subscription</button>
+        <button class="btn btn-ghost" style="width:100%;justify-content:center;padding:9px;font-size:12px;margin-top:6px" onclick="comingSoon('Cancel subscription')">Cancel subscription</button>
       </div>
     </div>
 
@@ -2430,6 +2524,7 @@
       </div>
 
       <h1 style="font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.4rem);font-weight:500;color:var(--text);margin-bottom:.5rem;letter-spacing:-.5px">Payment <em style="font-style:italic;color:var(--green-d)">successful.</em></h1>
+      <div id="success-test-banner" style="display:none;background:#FBEFD6;border:1px solid var(--gold);border-radius:10px;padding:10px 16px;margin:0 auto 1rem;max-width:480px;font-size:12.5px;color:var(--brown);font-weight:600">⚠️ Test mode — this is a test/demo booking. No real payment was taken.</div>
       <p style="font-size:15px;color:var(--text-m);line-height:1.6;margin-bottom:.5rem">Thank you for booking your consult with Annam, <strong id="success-name">there</strong>.</p>
       <p style="font-size:13.5px;color:var(--text-l);line-height:1.6;margin-bottom:2rem">A welcome email with your appointment details and invoice has been sent to <strong id="success-email">your email</strong>. Please check your inbox (and spam folder, just in case).</p>
 
@@ -2443,7 +2538,7 @@
           <div><div style="color:var(--text-l);font-size:11.5px;margin-bottom:2px;text-transform:uppercase;letter-spacing:.5px">Consult time</div><div style="font-weight:600;color:var(--text)" id="success-time">—</div></div>
           <div><div style="color:var(--text-l);font-size:11.5px;margin-bottom:2px;text-transform:uppercase;letter-spacing:.5px">Mode</div><div style="font-weight:600;color:var(--text)">📹 Video call</div></div>
           <div><div style="color:var(--text-l);font-size:11.5px;margin-bottom:2px;text-transform:uppercase;letter-spacing:.5px">Language</div><div style="font-weight:600;color:var(--text)" id="success-language">English</div></div>
-          <div><div style="color:var(--text-l);font-size:11.5px;margin-bottom:2px;text-transform:uppercase;letter-spacing:.5px">Status</div><div style="font-weight:600;color:#4caf50">● Confirmed</div></div>
+          <div><div style="color:var(--text-l);font-size:11.5px;margin-bottom:2px;text-transform:uppercase;letter-spacing:.5px">Status</div><div style="font-weight:600;color:#4caf50" id="success-status">● Confirmed</div></div>
         </div>
       </div>
 
@@ -2799,7 +2894,7 @@
           <div style="font-family:var(--font-serif);font-size:2.2rem;font-weight:500;color:var(--cream);line-height:1">₹<span style="color:var(--gold-l)">2.0–2.5 L</span><span style="font-size:13px;font-family:var(--font-sans);font-weight:400;color:rgba(251,247,238,.55);margin-left:6px">total setup</span></div>
           <div style="font-size:12.5px;color:var(--gold-l);margin-top:6px;font-weight:500">Typically recovered in 4–6 months</div>
 
-          <table style="width:100%;margin:1.25rem 0;border-collapse:collapse;font-size:13.5px">
+          <table class="cmp-table" style="width:100%;margin:1.25rem 0;border-collapse:collapse;font-size:13.5px">
             <tbody>
               <tr><td style="padding:8px 0;color:rgba(251,247,238,.75);border-bottom:1px solid rgba(251,247,238,.1)">Commercial-grade gas stove + cylinders</td><td style="text-align:right;padding:8px 0;border-bottom:1px solid rgba(251,247,238,.1)">₹35,000</td></tr>
               <tr><td style="padding:8px 0;color:rgba(251,247,238,.75);border-bottom:1px solid rgba(251,247,238,.1)">Stainless steel work tables + storage</td><td style="text-align:right;padding:8px 0;border-bottom:1px solid rgba(251,247,238,.1)">₹25,000</td></tr>
@@ -2829,7 +2924,7 @@
           <div style="font-family:var(--font-serif);font-size:2.2rem;font-weight:500;color:var(--cream);line-height:1">₹<span style="color:var(--gold-l)">5.0–7.0 L</span><span style="font-size:13px;font-family:var(--font-sans);font-weight:400;color:rgba(251,247,238,.55);margin-left:6px">total setup</span></div>
           <div style="font-size:12.5px;color:var(--gold-l);margin-top:6px;font-weight:500">Typically recovered in 6–9 months</div>
 
-          <table style="width:100%;margin:1.25rem 0;border-collapse:collapse;font-size:13.5px">
+          <table class="cmp-table" style="width:100%;margin:1.25rem 0;border-collapse:collapse;font-size:13.5px">
             <tbody>
               <tr><td style="padding:8px 0;color:rgba(251,247,238,.75);border-bottom:1px solid rgba(251,247,238,.1)">Rental deposit (200–400 sqft kitchen)</td><td style="text-align:right;padding:8px 0;border-bottom:1px solid rgba(251,247,238,.1)">₹80,000</td></tr>
               <tr><td style="padding:8px 0;color:rgba(251,247,238,.75);border-bottom:1px solid rgba(251,247,238,.1)">Larger commercial kitchen equipment</td><td style="text-align:right;padding:8px 0;border-bottom:1px solid rgba(251,247,238,.1)">₹2,40,000</td></tr>
@@ -3246,7 +3341,7 @@
         <p class="login-sub">Sign in to view your plan, meals and consultations.</p>
         <div class="field"><label>Email or phone</label><input type="text" id="si-email" placeholder="Your email" /></div>
         <div class="field"><label>Password</label><input type="password" id="si-pass" placeholder="••••••••" /></div>
-        <div style="display:flex;justify-content:flex-end;margin-top:-6px;margin-bottom:6px"><a style="font-size:12px;color:var(--green-d);font-weight:500;cursor:pointer">Forgot password?</a></div>
+        <div style="display:flex;justify-content:flex-end;margin-top:-6px;margin-bottom:6px"><a style="font-size:12px;color:var(--green-d);font-weight:500;cursor:pointer" onclick="comingSoon('Password reset')">Forgot password?</a></div>
         <button class="btn btn-primary" onclick="handleSignIn()">Sign in →</button>
         <div id="si-error" style="color:var(--coral);font-size:12.5px;margin-top:8px;text-align:center;min-height:18px"></div>
         <div class="login-divider">or</div>
@@ -3282,190 +3377,6 @@
   </div>
 </div>
 
-<!-- =================== CUSTOMER DASHBOARD =================== -->
-<div class="page" id="page-dashboard">
-  <div class="vendor-page" style="background:var(--cream-d)">
-    <div class="vendor-wrap">
-
-      <div class="vendor-head">
-        <div>
-          <h1>Welcome back, <em id="dash-name">Priya</em>.</h1>
-          <p>Day 56 of your 6-month transformation. Keep going — you're 33% there.</p>
-        </div>
-        <div class="v-toolbar">
-          <button class="btn btn-outline" style="padding:9px 18px" onclick="show('plan')">View full plan</button>
-          <button class="btn btn-primary" style="padding:9px 18px" onclick="show('dietitian')">Book consult</button>
-        </div>
-      </div>
-
-      <!-- KPI cards -->
-      <div class="stat-grid">
-        <div class="stat-card">
-          <div class="lbl">Current weight</div>
-          <div class="val">63.8 <small style="font-size:13px;color:var(--text-l);font-family:var(--font-sans);font-weight:400">kg</small></div>
-          <div class="delta up">↓ 4.2 kg since start</div>
-        </div>
-        <div class="stat-card">
-          <div class="lbl">Goal progress</div>
-          <div class="val">42<small style="font-size:13px;color:var(--text-l);font-family:var(--font-sans);font-weight:400">%</small></div>
-          <div class="delta up">on track</div>
-        </div>
-        <div class="stat-card">
-          <div class="lbl">Days streak</div>
-          <div class="val">52</div>
-          <div class="delta up">↑ keep going</div>
-        </div>
-        <div class="stat-card">
-          <div class="lbl">Next delivery</div>
-          <div class="val" style="font-size:1.5rem;line-height:1.2">Today<br/><small style="font-size:12px;font-family:var(--font-sans);font-weight:400;color:var(--text-l)">12:30 PM</small></div>
-          <div class="delta up">3 meals</div>
-        </div>
-      </div>
-
-      <div class="vendor-grid">
-        <!-- Weight progress chart -->
-        <div class="vendor-card">
-          <div class="vc-head">
-            <div>
-              <h3>Weight progress</h3>
-              <p style="font-size:12.5px;color:var(--text-l);margin-top:4px">Started at 68 kg · Target 58 kg</p>
-            </div>
-            <div class="filter-group">
-              <span class="filter-pill">Week</span>
-              <span class="filter-pill active">Month</span>
-              <span class="filter-pill">All</span>
-            </div>
-          </div>
-          <!-- Simple SVG line chart -->
-          <svg viewBox="0 0 600 220" style="width:100%;height:auto;margin-top:1rem">
-            <!-- Grid lines -->
-            <line x1="40" y1="20"  x2="580" y2="20"  stroke="var(--line)" stroke-dasharray="2,4"/>
-            <line x1="40" y1="65"  x2="580" y2="65"  stroke="var(--line)" stroke-dasharray="2,4"/>
-            <line x1="40" y1="110" x2="580" y2="110" stroke="var(--line)" stroke-dasharray="2,4"/>
-            <line x1="40" y1="155" x2="580" y2="155" stroke="var(--line)" stroke-dasharray="2,4"/>
-            <line x1="40" y1="200" x2="580" y2="200" stroke="var(--line)"/>
-            <!-- Y axis labels -->
-            <text x="32" y="24"  text-anchor="end" font-size="10" fill="var(--text-l)">68</text>
-            <text x="32" y="69"  text-anchor="end" font-size="10" fill="var(--text-l)">66</text>
-            <text x="32" y="114" text-anchor="end" font-size="10" fill="var(--text-l)">64</text>
-            <text x="32" y="159" text-anchor="end" font-size="10" fill="var(--text-l)">62</text>
-            <text x="32" y="204" text-anchor="end" font-size="10" fill="var(--text-l)">60</text>
-            <!-- Target band -->
-            <line x1="40" y1="200" x2="580" y2="200" stroke="#D87A5B" stroke-width="1.5" stroke-dasharray="6,4"/>
-            <text x="585" y="204" font-size="10" fill="#D87A5B" font-weight="600">target</text>
-            <!-- Plot area: Week 1 to Week 8 -->
-            <polyline points="60,20 130,40 200,60 270,75 340,90 410,100 480,105 550,110"
-                      fill="none" stroke="var(--green-d)" stroke-width="2.5" stroke-linecap="round"/>
-            <!-- Filled area -->
-            <polyline points="60,20 130,40 200,60 270,75 340,90 410,100 480,105 550,110 550,200 60,200"
-                      fill="var(--sage-l)" opacity="0.5"/>
-            <!-- Data points -->
-            <circle cx="60"  cy="20"  r="4" fill="var(--green-d)" stroke="#fff" stroke-width="2"/>
-            <circle cx="130" cy="40"  r="4" fill="var(--green-d)" stroke="#fff" stroke-width="2"/>
-            <circle cx="200" cy="60"  r="4" fill="var(--green-d)" stroke="#fff" stroke-width="2"/>
-            <circle cx="270" cy="75"  r="4" fill="var(--green-d)" stroke="#fff" stroke-width="2"/>
-            <circle cx="340" cy="90"  r="4" fill="var(--green-d)" stroke="#fff" stroke-width="2"/>
-            <circle cx="410" cy="100" r="4" fill="var(--green-d)" stroke="#fff" stroke-width="2"/>
-            <circle cx="480" cy="105" r="4" fill="var(--green-d)" stroke="#fff" stroke-width="2"/>
-            <circle cx="550" cy="110" r="5" fill="var(--coral)" stroke="#fff" stroke-width="2"/>
-            <!-- X axis labels -->
-            <text x="60"  y="218" text-anchor="middle" font-size="10" fill="var(--text-l)">W1</text>
-            <text x="130" y="218" text-anchor="middle" font-size="10" fill="var(--text-l)">W2</text>
-            <text x="200" y="218" text-anchor="middle" font-size="10" fill="var(--text-l)">W3</text>
-            <text x="270" y="218" text-anchor="middle" font-size="10" fill="var(--text-l)">W4</text>
-            <text x="340" y="218" text-anchor="middle" font-size="10" fill="var(--text-l)">W5</text>
-            <text x="410" y="218" text-anchor="middle" font-size="10" fill="var(--text-l)">W6</text>
-            <text x="480" y="218" text-anchor="middle" font-size="10" fill="var(--text-l)">W7</text>
-            <text x="550" y="218" text-anchor="middle" font-size="10" fill="var(--text-l)" font-weight="600">W8</text>
-          </svg>
-          <div style="display:flex;gap:1rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);font-size:12.5px;color:var(--text-m);flex-wrap:wrap">
-            <span>📉 Lost <strong style="color:var(--green-d)">4.2 kg</strong> in 8 weeks</span>
-            <span>🎯 <strong style="color:var(--green-d)">5.8 kg</strong> to go</span>
-            <span>📅 ETA: <strong style="color:var(--green-d)">Sep 2026</strong></span>
-          </div>
-          <div style="margin-top:1.25rem">
-            <button class="btn btn-outline" style="width:100%;justify-content:center;padding:10px">+ Log this week's weight</button>
-          </div>
-        </div>
-
-        <!-- Today's meals + plan summary -->
-        <div class="vendor-card">
-          <h3 style="font-family:var(--font-serif);font-size:1.3rem;font-weight:500;margin-bottom:.4rem">Today's meals</h3>
-          <p style="font-size:12.5px;color:var(--text-l);margin-bottom:1rem">North Indian · 1,650 kcal</p>
-          <div class="menu-item" style="padding:10px 0">
-            <div class="menu-img bf" style="background:linear-gradient(135deg,#FAE5C3,#E5BB5C)">🥣</div>
-            <div class="menu-info">
-              <h5>Stuffed paneer paratha</h5>
-              <p>340 kcal · 8:00 AM · delivered</p>
-            </div>
-            <span class="badge b-done">✓</span>
-          </div>
-          <div class="menu-item" style="padding:10px 0">
-            <div class="menu-img" style="background:linear-gradient(135deg,#C8D5BC,#6FA888)">🍛</div>
-            <div class="menu-info">
-              <h5>Rajma + jeera rice</h5>
-              <p>520 kcal · 1:30 PM · out for delivery</p>
-            </div>
-            <span class="badge b-out">↗</span>
-          </div>
-          <div class="menu-item" style="padding:10px 0">
-            <div class="menu-img" style="background:linear-gradient(135deg,#F0C9A0,#D87A5B)">🥘</div>
-            <div class="menu-info">
-              <h5>Palak paneer + 2 phulka</h5>
-              <p>560 kcal · 8:00 PM · scheduled</p>
-            </div>
-            <span class="badge b-prep">⏰</span>
-          </div>
-          <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--cream-d)">
-            <button class="btn btn-outline" style="width:100%;justify-content:center;padding:10px" onclick="show('plan')">View full week →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bottom row: dietitian + plan + quick actions -->
-      <div class="vendor-grid" style="margin-top:1.5rem">
-        <div class="vendor-card">
-          <h3 style="font-family:var(--font-serif);font-size:1.3rem;font-weight:500;margin-bottom:1rem">Your dietitian</h3>
-          <div class="doc-row" style="margin-bottom:1rem;padding-bottom:1rem">
-            <div class="doc-avatar">🌿</div>
-            <div class="doc-info">
-              <h3 style="font-family:var(--font-serif);font-size:1.1rem">Your Annam Dietitian</h3>
-              <p>MSc / RD certified</p>
-              <span class="live-pill">Available today</span>
-            </div>
-          </div>
-          <div style="font-size:13.5px;color:var(--text-m);margin-bottom:1rem;line-height:1.6;padding:12px;background:var(--cream-d);border-radius:var(--r-sm);border-left:3px solid var(--green-l)">
-            <strong style="color:var(--green-d)">Last note (Apr 28):</strong> Great progress this week! Let's add 5g more protein at breakfast. Consider switching one paratha for besan chilla on Wednesdays.
-          </div>
-          <div style="display:flex;gap:8px">
-            <button class="btn btn-outline" style="flex:1;justify-content:center;padding:9px" onclick="show('dietitian')">Book consult</button>
-            <button class="btn btn-primary" style="flex:1;justify-content:center;padding:9px">Message →</button>
-          </div>
-        </div>
-
-        <div class="vendor-card">
-          <h3 style="font-family:var(--font-serif);font-size:1.3rem;font-weight:500;margin-bottom:1rem">Plan & billing</h3>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--cream-d);font-size:13.5px"><span style="color:var(--text-l)">Active plan</span><strong>Transform · 6 mo</strong></div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--cream-d);font-size:13.5px"><span style="color:var(--text-l)">Meals/day</span><strong>3×</strong></div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--cream-d);font-size:13.5px"><span style="color:var(--text-l)">Cuisine</span><strong>North Indian</strong></div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--cream-d);font-size:13.5px"><span style="color:var(--text-l)">Monthly cost</span><strong>₹16,874</strong></div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:13.5px"><span style="color:var(--text-l)">Next billing</span><strong>1 Jun 2026</strong></div>
-          <div style="display:flex;gap:8px;margin-top:1rem">
-            <button class="btn btn-outline" style="flex:1;justify-content:center;padding:9px;font-size:13px">Pause plan</button>
-            <button class="btn btn-outline" style="flex:1;justify-content:center;padding:9px;font-size:13px">Manage</button>
-          </div>
-        </div>
-      </div>
-
-      <p style="text-align:center;font-size:13px;color:var(--text-m);margin-top:2.5rem">
-        <a onclick="signOut()" style="cursor:pointer;color:var(--coral);font-weight:600">Sign out</a>
-        &nbsp;·&nbsp;
-        <a onclick="show('home')" style="cursor:pointer;color:var(--green-d);font-weight:600">Back to home</a>
-      </p>
-    </div>
-  </div>
-</div>
-
 <!-- =================== VENDOR LOGIN =================== -->
 <div class="page" id="page-vendor-login">
   <div class="login-page" style="background:linear-gradient(180deg,var(--cream) 0%,var(--cream-d) 100%);align-items:flex-start;padding-top:4rem">
@@ -3487,7 +3398,7 @@
         <p class="login-sub">Sign in to manage orders, menu, and payouts.</p>
         <div class="field"><label>Kitchen email</label><input type="email" id="vsi-email" placeholder="kitchen@yourplace.com" /></div>
         <div class="field"><label>Password</label><input type="password" id="vsi-pass" placeholder="••••••••" /></div>
-        <div style="display:flex;justify-content:flex-end;margin-top:-6px;margin-bottom:6px"><a style="font-size:12px;color:var(--coral);font-weight:500;cursor:pointer">Forgot password?</a></div>
+        <div style="display:flex;justify-content:flex-end;margin-top:-6px;margin-bottom:6px"><a style="font-size:12px;color:var(--coral);font-weight:500;cursor:pointer" onclick="comingSoon('Password reset')">Forgot password?</a></div>
         <button class="btn btn-coral" style="width:100%;justify-content:center" onclick="handleVendorSignIn()">Enter dashboard →</button>
         <div id="vsi-error" style="color:var(--coral);font-size:12.5px;margin-top:8px;text-align:center;min-height:18px"></div>
         <div class="login-foot">
@@ -3599,7 +3510,7 @@
 
           <label style="display:flex;align-items:flex-start;gap:8px;margin:8px 0 12px;font-size:12.5px;color:var(--text-m);line-height:1.5;cursor:pointer">
             <input type="checkbox" id="va-terms" style="margin-top:3px" />
-            <span>I confirm the information above is accurate and agree to Annam's <a style="color:var(--coral);font-weight:500">Vendor Agreement</a> (revenue share, hygiene standards, dispute resolution).</span>
+            <span>I confirm the information above is accurate and agree to Annam's <a style="color:var(--coral);font-weight:500;cursor:pointer" onclick="comingSoon('Vendor Agreement')">Vendor Agreement</a> (revenue share, hygiene standards, dispute resolution).</span>
           </label>
           <label style="display:flex;align-items:flex-start;gap:8px;margin:0 0 12px;font-size:12.5px;color:var(--text-m);line-height:1.5;cursor:pointer">
             <input type="checkbox" id="va-audit" style="margin-top:3px" />
@@ -3670,8 +3581,8 @@
           <p>Here's your live operations dashboard for Tuesday, 12 May.</p>
         </div>
         <div class="v-toolbar">
-          <button class="btn btn-outline" style="padding:9px 18px">+ Add menu item</button>
-          <button class="btn btn-primary" style="padding:9px 18px">Open shift</button>
+          <button class="btn btn-outline" style="padding:9px 18px" onclick="comingSoon('Add menu item')">+ Add menu item</button>
+          <button class="btn btn-primary" style="padding:9px 18px" onclick="comingSoon('Open shift')">Open shift</button>
         </div>
       </div>
 
@@ -3721,42 +3632,42 @@
                 <td><div class="cust-cell"><div class="cust-av">PS</div><div><strong>Priya Sharma</strong><small>Andheri W</small></div></div></td>
                 <td>Paneer Bhurji + Roti<br/><small style="color:var(--text-l)">1× · veg</small></td>
                 <td><span class="badge b-prep">Cooking</span></td>
-                <td><div class="row-actions"><button class="icon-btn">✓</button><button class="icon-btn">⋯</button></div></td>
+                <td><div class="row-actions"><button class="icon-btn" onclick="comingSoon('Mark order ready')">✓</button><button class="icon-btn" onclick="comingSoon('Order options')">⋯</button></div></td>
               </tr>
               <tr>
                 <td><span class="order-id-tag">#4822</span><br/><small style="color:var(--text-l);font-size:11px">8 min ago</small></td>
                 <td><div class="cust-cell"><div class="cust-av" style="background:linear-gradient(135deg,var(--green-l),var(--green-d))">RK</div><div><strong>Rohan Khanna</strong><small>Bandra E</small></div></div></td>
                 <td>Grilled Paneer Salad<br/><small style="color:var(--text-l)">2× · high-protein</small></td>
                 <td><span class="badge b-ready">Ready</span></td>
-                <td><div class="row-actions"><button class="icon-btn">✓</button><button class="icon-btn">⋯</button></div></td>
+                <td><div class="row-actions"><button class="icon-btn" onclick="comingSoon('Mark order ready')">✓</button><button class="icon-btn" onclick="comingSoon('Order options')">⋯</button></div></td>
               </tr>
               <tr>
                 <td><span class="order-id-tag">#4823</span><br/><small style="color:var(--text-l);font-size:11px">14 min ago</small></td>
                 <td><div class="cust-cell"><div class="cust-av" style="background:linear-gradient(135deg,var(--brown-l),var(--brown))">KM</div><div><strong>Kavya Menon</strong><small>Juhu</small></div></div></td>
                 <td>Egg-white Omelette + Toast<br/><small style="color:var(--text-l)">1× · diabetic</small></td>
                 <td><span class="badge b-out">Out for delivery</span></td>
-                <td><div class="row-actions"><button class="icon-btn">✓</button><button class="icon-btn">⋯</button></div></td>
+                <td><div class="row-actions"><button class="icon-btn" onclick="comingSoon('Mark order ready')">✓</button><button class="icon-btn" onclick="comingSoon('Order options')">⋯</button></div></td>
               </tr>
               <tr>
                 <td><span class="order-id-tag">#4824</span><br/><small style="color:var(--text-l);font-size:11px">21 min ago</small></td>
                 <td><div class="cust-cell"><div class="cust-av" style="background:linear-gradient(135deg,#D87A5B,#A85439)">AM</div><div><strong>Aarav Mehta</strong><small>Versova</small></div></div></td>
                 <td>Diabetic Roti Combo<br/><small style="color:var(--text-l)">1× · low GI</small></td>
                 <td><span class="badge b-prep">Cooking</span></td>
-                <td><div class="row-actions"><button class="icon-btn">✓</button><button class="icon-btn">⋯</button></div></td>
+                <td><div class="row-actions"><button class="icon-btn" onclick="comingSoon('Mark order ready')">✓</button><button class="icon-btn" onclick="comingSoon('Order options')">⋯</button></div></td>
               </tr>
               <tr>
                 <td><span class="order-id-tag">#4825</span><br/><small style="color:var(--text-l);font-size:11px">28 min ago</small></td>
                 <td><div class="cust-cell"><div class="cust-av" style="background:linear-gradient(135deg,#C9972A,#8a6515)">SN</div><div><strong>Sneha Naik</strong><small>Khar</small></div></div></td>
                 <td>High-protein Khichdi<br/><small style="color:var(--text-l)">1× · vegan</small></td>
                 <td><span class="badge b-ready">Ready</span></td>
-                <td><div class="row-actions"><button class="icon-btn">✓</button><button class="icon-btn">⋯</button></div></td>
+                <td><div class="row-actions"><button class="icon-btn" onclick="comingSoon('Mark order ready')">✓</button><button class="icon-btn" onclick="comingSoon('Order options')">⋯</button></div></td>
               </tr>
               <tr>
                 <td><span class="order-id-tag">#4820</span><br/><small style="color:var(--text-l);font-size:11px">42 min ago</small></td>
                 <td><div class="cust-cell"><div class="cust-av" style="background:linear-gradient(135deg,#6FA888,#3F7D5C)">VS</div><div><strong>Vikram Singh</strong><small>Andheri E</small></div></div></td>
                 <td>Muscle-gain Combo<br/><small style="color:var(--text-l)">3× · non-veg</small></td>
                 <td><span class="badge b-done">Delivered</span></td>
-                <td><div class="row-actions"><button class="icon-btn">✓</button><button class="icon-btn">⋯</button></div></td>
+                <td><div class="row-actions"><button class="icon-btn" onclick="comingSoon('Mark order ready')">✓</button><button class="icon-btn" onclick="comingSoon('Order options')">⋯</button></div></td>
               </tr>
             </tbody>
           </table>
@@ -3805,7 +3716,7 @@
             </div>
             <div class="toggle" onclick="this.classList.toggle('on')"></div>
           </div>
-          <button class="btn btn-outline" style="width:100%;justify-content:center;margin-top:1rem;padding:9px">+ Add menu item</button>
+          <button class="btn btn-outline" style="width:100%;justify-content:center;margin-top:1rem;padding:9px" onclick="comingSoon('Add menu item')">+ Add menu item</button>
         </div>
       </div>
 
@@ -3818,7 +3729,24 @@
 
 <script>
   // ---- page routing ----
+  // ---- MOBILE NAV ----
+  function toggleMobileNav() {
+    const links = document.getElementById('nav-links');
+    const ham = document.getElementById('nav-hamburger');
+    if (!links || !ham) return;
+    const open = links.classList.toggle('open');
+    ham.classList.toggle('open', open);
+    ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  function closeMobileNav() {
+    const links = document.getElementById('nav-links');
+    const ham = document.getElementById('nav-hamburger');
+    if (links) links.classList.remove('open');
+    if (ham) { ham.classList.remove('open'); ham.setAttribute('aria-expanded', 'false'); }
+  }
+
   function show(id, fromPopState) {
+    closeMobileNav();
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     const target = document.getElementById('page-' + id);
     if (target) target.classList.add('active');
@@ -4520,6 +4448,37 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  // ---- ASSESSMENT VALIDATION: block advancing with empty/invalid required fields ----
+  function flagField(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.focus();
+    el.style.borderColor = 'var(--coral)';
+    setTimeout(function(){ el.style.borderColor = ''; }, 2500);
+  }
+  function validateAssessStep(n) {
+    if (n === 1) {
+      const name = (document.getElementById('m-name').value || '').trim();
+      if (!name) { annamToast('Please enter your name to continue.', 'error'); flagField('m-name'); return false; }
+      const age = parseInt(document.getElementById('m-age').value, 10);
+      if (!age || age < 13 || age > 100) { annamToast('Please enter a valid age (13–100).', 'error'); flagField('m-age'); return false; }
+      if (!document.querySelector('[data-group="sex"] .opt.sel')) { annamToast('Please select your sex.', 'error'); return false; }
+    } else if (n === 2) {
+      const w = parseFloat(document.getElementById('m-weight').value);
+      if (!w || w < 25 || w > 300) { annamToast('Please enter a valid current weight in kg.', 'error'); flagField('m-weight'); return false; }
+      const t = parseFloat(document.getElementById('m-target').value);
+      if (!t || t < 25 || t > 300) { annamToast('Please enter a valid target weight in kg.', 'error'); flagField('m-target'); return false; }
+      if (!document.querySelector('[data-group="activity"] .opt.sel')) { annamToast('Please select your activity level.', 'error'); return false; }
+    } else if (n === 3) {
+      if (!document.querySelector('[data-group="goal"] .opt.sel')) { annamToast('Please pick your primary goal.', 'error'); return false; }
+    }
+    return true;
+  }
+  function nextStep(current) {
+    if (!validateAssessStep(current)) return;
+    goStep(current + 1);
+  }
+
   // ---- LIFESTYLE INSIGHTS GENERATOR ----
   // Reads metrics from the assessment form, computes BMI, weight delta, sleep guidance,
   // populates the lifestyle page, then routes to it.
@@ -4580,60 +4539,6 @@
     return sex === 'male' ? base + 5 : base - 161;
   }
 
-  function generateInsights() {
-    // Read form values with sensible fallbacks for the demo
-    const height = getHeightCm() || 165;
-    const weight = parseFloat(document.getElementById('m-weight').value) || 68;
-    const target = parseFloat(document.getElementById('m-target').value) || 58;
-    const sleep  = (function(){var el=document.getElementById('m-sleep');return el?(parseFloat(el.value)||7):7;})();
-    const shift  = readSelected('shift') || 'regular';
-    const activity = readSelected('activity') || 'light';
-
-    // BMI
-    const bmi = weight / Math.pow(height / 100, 2);
-    const bucket = bmiBucket(bmi);
-    document.getElementById('bmi-val').textContent = bmi.toFixed(1);
-    document.getElementById('bmi-cat').textContent = bucket.cat;
-    document.getElementById('bmi-marker').style.left = bucket.pct + '%';
-    document.getElementById('bmi-note').textContent = bucket.note;
-
-    // Weight change card
-    const change = target - weight;
-    const months = 6; // could be wired to step 3 selection
-    document.getElementById('ls-current').innerHTML = Math.round(weight) + '<small>kg</small>';
-    document.getElementById('ls-target').innerHTML  = Math.round(target) + '<small>kg</small>';
-    const direction = change < 0 ? '−' : '+';
-    const absChange = Math.abs(change);
-    document.getElementById('ls-change').textContent = `${direction}${absChange.toFixed(1)} kg in ${months} months`;
-    const weeks = months * 4.33;
-    const perWeek = absChange / weeks;
-    document.getElementById('ls-weekly').textContent = `${direction}${perWeek.toFixed(2)} kg / week`;
-    // 1 kg fat ≈ 7700 kcal. Daily deficit:
-    const dailyDeficit = Math.round((perWeek * 7700) / 7);
-    document.getElementById('ls-deficit').textContent = `≈ ${dailyDeficit} kcal`;
-
-    // Steps target by activity & BMI
-    let steps = 8500;
-    if (bmi >= 30)            steps = 6500;
-    else if (bmi >= 25)       steps = 8000;
-    else if (activity === 'sedentary') steps = 9000;
-    else if (activity === 'athlete')   steps = 7000;
-    document.getElementById('ls-steps').innerHTML = steps.toLocaleString('en-IN') + '<small>steps/day</small>';
-
-    // Sleep
-    const adv = sleepAdvice(sleep, shift);
-    document.getElementById('ls-sleep-actual').textContent = sleep;
-    document.getElementById('ls-sleep-target').textContent = adv.target;
-    document.getElementById('ls-sleep-msg').textContent = adv.msg;
-    document.getElementById('ls-sleep-tip').innerHTML = adv.tip;
-
-    // Hydration: ~35 ml per kg, capped sanely
-    const water = Math.max(2.0, Math.min(4.0, weight * 0.035));
-    document.getElementById('ls-water').innerHTML = water.toFixed(1) + '<small>L water/day</small>';
-
-    show('lifestyle');
-  }
-
   // ---- AUTH (prototype only — see notes for production) ----
   function switchAuthTab(tab) {
     document.getElementById('auth-tab-signin').classList.toggle('active', tab === 'signin');
@@ -4669,8 +4574,6 @@
     } catch (e) {}
 
     // Update old dashboard if present
-    const dashName = document.getElementById('dash-name');
-    if (dashName) dashName.textContent = displayName;
     errEl.textContent = '';
     refreshNavAuth();
     show('mydiet');
@@ -4704,11 +4607,155 @@
       }));
     } catch (e) {}
 
-    const dashName = document.getElementById('dash-name');
-    if (dashName) dashName.textContent = first;
     refreshNavAuth();
     show('assess');
+    // Surface the account-created banner + toast
+    const banner = document.getElementById('assess-welcome-banner');
+    if (banner) banner.style.display = 'flex';
+    annamToast('Account created — complete your assessment.', 'success');
   }
+
+  // ---- TOAST (lightweight, no dependencies) ----
+  function annamToast(msg, type) {
+    let wrap = document.getElementById('annam-toast-wrap');
+    if (!wrap) {
+      wrap = document.createElement('div');
+      wrap.id = 'annam-toast-wrap';
+      wrap.style.cssText = 'position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;width:calc(100% - 32px);max-width:420px';
+      document.body.appendChild(wrap);
+    }
+    const bg = type === 'error' ? '#B5532F' : (type === 'info' ? '#2D5F4F' : '#2D5F4F');
+    const t = document.createElement('div');
+    t.setAttribute('role', 'status');
+    t.style.cssText = 'pointer-events:auto;background:' + bg + ';color:#FBF7EE;padding:12px 18px;border-radius:12px;font-size:13.5px;font-weight:500;box-shadow:0 8px 24px rgba(43,35,23,.22);opacity:0;transform:translateY(10px);transition:opacity .25s ease,transform .25s ease;max-width:100%;text-align:center';
+    t.textContent = msg;
+    wrap.appendChild(t);
+    requestAnimationFrame(function(){ t.style.opacity = '1'; t.style.transform = 'translateY(0)'; });
+    setTimeout(function(){
+      t.style.opacity = '0'; t.style.transform = 'translateY(10px)';
+      setTimeout(function(){ if (t.parentNode) t.parentNode.removeChild(t); }, 300);
+    }, 3200);
+  }
+
+  // ---- COMING SOON / DEMO-ONLY (for prototype buttons not yet wired) ----
+  function comingSoon(feature) {
+    annamToast((feature ? feature + ': ' : '') + 'coming soon — this is a demo button.', 'info');
+  }
+
+  /* ===================== PREMIUM FOOD SHOWCASE ===================== */
+  // DROP YOUR PHOTOS HERE. Put each image URL in the matching "img" field below.
+  // centerImg = the large thali for that category. dishes[] = the 6 orbit dishes (clockwise from top-left).
+  // Leave a URL empty ('') to show the elegant placeholder circle until you have the photo.
+  // NOTE: the kcal/protein numbers are PLACEHOLDERS — your dietitian sets the real clinical values.
+  const MEALS = {
+    breakfast: {
+      centerImg: 'thali-lunch.webp', centerAlt: 'Annam breakfast thali',
+      macros: { kcal: '420', protein: '18g', meals: '3' },
+      dishes: [
+        { img: 'idli-sambar.webp', label: 'Idli & Sambar' }, { img: 'rajma-rice.webp', label: 'Rajma Rice' }, { img: 'paneer.webp', label: 'Paneer Bowl' },
+        { img: 'khichdi.webp', label: 'Khichdi' }, { img: 'ragi-dosa.webp', label: 'Ragi Dosa' }, { img: 'biryani.webp', label: 'Biryani' }
+      ]
+    },
+    lunch: {
+      centerImg: 'thali-lunch.webp', centerAlt: 'Annam lunch thali',
+      macros: { kcal: '1650', protein: '92g', meals: '3' },
+      dishes: [
+        { img: 'idli-sambar.webp', label: 'Idli & Sambar' }, { img: 'rajma-rice.webp', label: 'Rajma Rice' }, { img: 'paneer.webp', label: 'Paneer Bowl' },
+        { img: 'khichdi.webp', label: 'Khichdi' }, { img: 'ragi-dosa.webp', label: 'Ragi Dosa' }, { img: 'biryani.webp', label: 'Biryani' }
+      ]
+    },
+    dinner: {
+      centerImg: 'thali-lunch.webp', centerAlt: 'Annam dinner thali',
+      macros: { kcal: '560', protein: '30g', meals: '3' },
+      dishes: [
+        { img: 'idli-sambar.webp', label: 'Idli & Sambar' }, { img: 'rajma-rice.webp', label: 'Rajma Rice' }, { img: 'paneer.webp', label: 'Paneer Bowl' },
+        { img: 'khichdi.webp', label: 'Khichdi' }, { img: 'ragi-dosa.webp', label: 'Ragi Dosa' }, { img: 'biryani.webp', label: 'Biryani' }
+      ]
+    }
+  };
+
+  function fsSetPhoto(id, url, alt) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (url) { el.src = url; el.classList.remove('is-empty'); }
+    else { el.removeAttribute('src'); el.classList.add('is-empty'); }
+    if (alt !== undefined) el.alt = alt || '';
+  }
+
+  function setMealCategory(cat) {
+    const data = MEALS[cat];
+    if (!data) return;
+    document.querySelectorAll('.fs-tab').forEach(function (t) {
+      const on = t.dataset.cat === cat;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    const fs = document.getElementById('food-showcase');
+    if (!fs) return;
+    fs.classList.add('fs-fading');
+    setTimeout(function () {
+      fsSetPhoto('fs-center-img', data.centerImg, data.centerAlt);
+      for (let i = 0; i < 6; i++) {
+        fsSetPhoto('fs-img-' + i, data.dishes[i].img, data.dishes[i].label);
+        const l = document.getElementById('fs-lbl-' + i);
+        if (l) l.textContent = data.dishes[i].label;
+      }
+      const k = document.getElementById('fs-kcal'); if (k) k.textContent = data.macros.kcal;
+      const p = document.getElementById('fs-protein'); if (p) p.textContent = data.macros.protein;
+      const m = document.getElementById('fs-meals'); if (m) m.textContent = data.macros.meals;
+      fs.classList.remove('fs-fading');
+    }, 220);
+  }
+
+  // Subtle desktop-only parallax (≤12px), disabled on mobile + reduced-motion
+  function fsInitParallax() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(max-width: 900px)').matches) return;
+    const stage = document.getElementById('fs-stage');
+    const hero = document.querySelector('.hero');
+    if (!stage || !hero) return;
+    let tx = 0, ty = 0, raf = null;
+    function apply() { stage.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px)'; raf = null; }
+    hero.addEventListener('mousemove', function (e) {
+      const r = hero.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+      const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+      tx = Math.max(-1, Math.min(1, dx)) * 12;
+      ty = Math.max(-1, Math.min(1, dy)) * 12;
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+    hero.addEventListener('mouseleave', function () { tx = 0; ty = 0; if (!raf) raf = requestAnimationFrame(apply); });
+  }
+
+  // Mobile swipe to change category
+  function fsInitSwipe() {
+    const stage = document.getElementById('fs-stage');
+    if (!stage) return;
+    const order = ['breakfast', 'lunch', 'dinner'];
+    let x0 = null;
+    stage.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if (Math.abs(dx) < 40) return;
+      const cur = document.querySelector('.fs-tab.active');
+      let i = order.indexOf(cur ? cur.dataset.cat : 'lunch');
+      i = dx < 0 ? Math.min(order.length - 1, i + 1) : Math.max(0, i - 1);
+      setMealCategory(order[i]);
+    }, { passive: true });
+  }
+
+  // Init the showcase once the DOM is ready
+  (function fsInit() {
+    function go() {
+      if (!document.getElementById('food-showcase')) return;
+      setMealCategory('lunch');
+      fsInitParallax();
+      fsInitSwipe();
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
+    else go();
+  })();
 
   function signOut() {
     // Clear inputs and login state
@@ -5050,191 +5097,6 @@
     }
   }
 
-  // ---- INDIAN CUISINE MEAL DATABASE (7 days × 8 cuisines) ----
-  // Calories tuned to a 1,650 kcal/day plan.
-  // Structure: each cuisine has fixed snacks (mid-morning + evening) and a 7-day array of {breakfast, lunch, dinner}.
-  const M = (img, icon, name, desc, tags, cal) => ({ img, icon, name, desc, tags, cal });
-
-  const CUISINE_MEALS = {
-    north: {
-      label: 'North Indian',
-      snacks: {
-        mid:     M('sn','🥒','Cucumber-tomato chaat + buttermilk','Light kachumber-style salad with chaat masala, glass of jeera buttermilk.',['Hydrating','Probiotic'],120),
-        evening: M('sn','🍵','Masala chai + roasted chana','Low-sugar masala chai with toned milk, handful of roasted chana.',['Antioxidants'],110),
-      },
-      days: {
-        Mon: { bf: M('bf','🥣','Stuffed paneer paratha + curd','Whole-wheat paratha stuffed with low-fat paneer, hung curd & mint chutney.',['18g protein','Filling'],340), ln: M('ln','🍛','Rajma + jeera rice + salad','Kidney beans in tomato-onion gravy, half cup brown jeera rice, kachumber.',['Plant protein','Iron'],520), dn: M('dn','🥘','Palak paneer + 2 phulka','Spinach-paneer in light gravy, 2 hand-rolled phulkas, side of curd.',['High calcium','Iron'],560) },
-        Tue: { bf: M('bf','🌯','Aloo-methi paratha + dahi','Whole-wheat paratha with potato-fenugreek filling, low-fat curd.',['Iron','Filling'],340), ln: M('ln','🍲','Chana masala + 2 phulka + sabzi','Slow-cooked chickpeas, hand-rolled phulkas, lauki sabzi.',['Plant protein','Fibre'],520), dn: M('dn','🥘','Mixed-veg curry + brown rice','Seasonal vegetables in light onion-tomato gravy with brown rice.',['Whole grain'],560) },
-        Wed: { bf: M('bf','🥚','Egg bhurji + 2 multigrain toast','Spiced scrambled eggs with onion-tomato, multigrain bread.',['22g protein'],340), ln: M('ln','🍛','Dal makhani (light) + jeera rice','Lower-fat version of dal makhani with brown jeera rice.',['Plant protein'],520), dn: M('dn','🥘','Bhindi masala + 2 phulka + raita','Dry okra masala, phulkas, mint cucumber raita.',['Fibre','Probiotic'],560) },
-        Thu: { bf: M('bf','🥣','Vegetable upma + sprouts','South-Indian style upma with mixed sprouts on side.',['Fibre','Plant protein'],340), ln: M('ln','🍛','Kadhi pakora + brown rice','Light gram-flour kadhi with steamed pakoras, brown rice.',['Probiotic'],520), dn: M('dn','🥘','Methi-aloo + 2 phulka + curd','Fenugreek-potato sabzi, phulkas, side of curd.',['Iron','Calcium'],560) },
-        Fri: { bf: M('bf','🌯','Besan chilla + green chutney','Two savoury gram-flour pancakes with green chutney.',['Plant protein','Gluten-free'],340), ln: M('ln','🍛','Mixed dal + jeera rice + salad','Three-dal mix tempered with cumin, brown jeera rice, salad.',['Mixed protein','Fibre'],520), dn: M('dn','🥘','Lauki kofta (steamed) + 2 phulka','Steamed bottle-gourd dumplings in light gravy with phulkas.',['Light','Hydrating'],560) },
-        Sat: { bf: M('bf','🥞','Sooji uttapam + sambar','Semolina uttapam with onion, tomato, served with veg sambar.',['Light','Veggies'],340), ln: M('ln','🍛','Chole + 2 phulka + onion-mint salad','Slow-cooked chickpeas, hand-rolled phulkas, fresh kachumber.',['Plant protein','Fibre'],520), dn: M('dn','🥘','Sarson saag + makki roti (1) + curd','Mustard-leaf saag, one corn-flour roti, curd. Punjabi classic.',['Iron','Calcium'],560) },
-        Sun: { bf: M('bf','🥚','Anda paratha + curd','Egg stuffed in whole-wheat paratha, low-fat curd.',['25g protein','Filling'],340), ln: M('ln','🍛','Veg pulao + raita + salad','Brown rice pulao with mixed veg, mint raita, kachumber salad.',['Whole grain'],520), dn: M('dn','🥘','Moong dal khichdi + sautéed greens','Easy-to-digest comfort food with garlic palak on the side.',['Easy digest','Iron'],560) },
-      }
-    },
-
-    south: {
-      label: 'South Indian',
-      snacks: {
-        mid:     M('sn','🥥','Tender coconut water + 4 almonds','Naturally hydrating, electrolyte-rich. Almonds soaked overnight.',['Potassium'],120),
-        evening: M('sn','☕','Filter coffee + 2 idlis','Single shot of filter coffee, 2 small steamed idlis with chutney.',['Light','Steamed'],110),
-      },
-      days: {
-        Mon: { bf: M('bf','🥞','2 Ragi dosa + coconut chutney + sambar','Finger-millet dosas with veggie sambar and fresh coconut chutney.',['Whole grain','Calcium'],340), ln: M('ln','🍚','Curd rice + rasam + beetroot poriyal','Brown rice with curd, ghee-tempered rasam, beetroot stir-fry.',['Probiotic','Iron'],520), dn: M('dn','🍲','Veg sambar + 2 ragi balls + thoran','Mixed-veg sambar, ragi mudde (finger-millet balls), cabbage thoran.',['Whole grain','Fibre'],560) },
-        Tue: { bf: M('bf','🥞','3 Idli + sambar + tomato chutney','Steamed idlis with light veg sambar.',['Steamed','Light'],340), ln: M('ln','🍚','Vegetable bisi bele bath','Karnataka-style rice-lentil-veg one-pot meal, brown rice base.',['Plant protein'],520), dn: M('dn','🍲','Avial + 2 millet roti','Mixed-veg coconut stew with millet flatbread.',['Whole grain'],560) },
-        Wed: { bf: M('bf','🥞','Pesarattu (moong dosa) + ginger chutney','Andhra-style green gram dosa, side of ginger chutney.',['Plant protein','Iron'],340), ln: M('ln','🍚','Lemon rice + raita + papad','Brown rice tempered with lemon, mint raita, baked papad.',['Light','Refreshing'],520), dn: M('dn','🍲','Drumstick sambar + steamed rice + cabbage poriyal','Sambar with drumsticks, half cup rice, cabbage poriyal.',['Calcium','Fibre'],560) },
-        Thu: { bf: M('bf','🥞','Oats dosa + tomato chutney','Oats-based dosa, light tomato chutney with curry leaves.',['High fibre'],340), ln: M('ln','🍚','Sambar rice + beans poriyal','Mixed-veg sambar with brown rice, beans stir-fry.',['Plant protein'],520), dn: M('dn','🍲','Mor kuzhambu + 2 ragi roti','Buttermilk-coconut curry with ragi flatbread.',['Probiotic','Whole grain'],560) },
-        Fri: { bf: M('bf','🥞','Adai (mixed-dal dosa) + avial','Multi-lentil dosa with mixed-veg coconut stew.',['Mixed protein','Fibre'],340), ln: M('ln','🍚','Tamarind rice + curd + roasted papad','Pulihora with brown rice, side curd.',['Refreshing'],520), dn: M('dn','🍲','Kadalai (chana) curry + 2 appam','Chickpea curry Kerala-style with rice-flour appams.',['Plant protein'],560) },
-        Sat: { bf: M('bf','🥞','Rava idli + coriander chutney','Semolina idlis with cashew bits, light coriander chutney.',['Steamed'],340), ln: M('ln','🍚','Vegetable kootu + rice + rasam','Mixed-veg kootu (lentil-veg stew), rice, light rasam.',['Plant protein','Comfort'],520), dn: M('dn','🍲','Kerala veg stew + 2 appam','Coconut-milk veg stew with rice-flour appams.',['Hydrating'],560) },
-        Sun: { bf: M('bf','🥞','Set dosa + sagu + chutney','Soft Karnataka-style mini dosas with veg sagu.',['Light'],340), ln: M('ln','🍚','Sambar rice + cabbage poriyal + papad','Brown rice with sambar, cabbage stir-fry.',['Comfort'],520), dn: M('dn','🍲','Moru kuzhambu + ragi mudde + thoran','Buttermilk curry with ragi balls and beetroot thoran.',['Probiotic','Iron'],560) },
-      }
-    },
-
-    bengali: {
-      label: 'Bengali',
-      snacks: {
-        mid:     M('sn','🍌','Fresh fruit bowl + curd','Seasonal fruits with a dollop of plain curd.',['Fibre','Probiotic'],120),
-        evening: M('sn','🍵','Lebu cha + muri','Lemon tea with puffed rice — classic Bengali snack, low-cal.',['Light'],110),
-      },
-      days: {
-        Mon: { bf: M('bf','🥚','Vegetable poha + boiled egg','Light flattened-rice poha with peas & carrots, boiled egg.',['Protein','Light'],340), ln: M('ln','🐟','Macher jhol + bhaat + shukto','Light fish curry (rohu) with steamed rice and Bengali bitter veg.',['Omega-3','Lean protein'],520), dn: M('dn','🥘','Cholar dal + luchi (1) + aloo posto','Bengali chana dal, one whole-wheat luchi, potatoes in poppy paste.',['Plant protein'],560) },
-        Tue: { bf: M('bf','🥣','Suji upma (Bengali style) + curd','Light semolina upma with veggies, side curd.',['Calcium'],340), ln: M('ln','🐟','Bhetki paturi + steamed rice + sukto','Banana-leaf-steamed fish, rice, bitter veg.',['Omega-3'],520), dn: M('dn','🥘','Mishti pulao (light) + chhanar dalna','Light sweet pulao with paneer-cube curry.',['Calcium'],560) },
-        Wed: { bf: M('bf','🥚','Begun bhaja + 2 luchi (small) + curd','Pan-fried brinjal slices with mini luchis and curd.',['Light'],340), ln: M('ln','🐟','Doi maach + bhaat + ucche bhaja','Yogurt-based fish curry with rice and pan-fried bitter gourd.',['Probiotic','Omega-3'],520), dn: M('dn','🥘','Aloo kopir dalna + 2 phulka','Cauliflower-potato curry with phulkas.',['Light'],560) },
-        Thu: { bf: M('bf','🥣','Veg khichuri (light)','Bengali-style moong-dal-rice khichuri with veggies.',['Easy digest'],340), ln: M('ln','🐟','Maach er kalia (small) + bhaat','Lightly spiced fish kalia with steamed rice and salad.',['Omega-3'],520), dn: M('dn','🥘','Chana ghugni + 2 phulka','Chickpea ghugni with phulkas, side cucumber salad.',['Plant protein'],560) },
-        Fri: { bf: M('bf','🥚','Egg toast + green chutney','Egg-soaked multigrain toast with mint chutney.',['25g protein'],340), ln: M('ln','🐟','Sorshe ilish (small) + rice + saag','Mustard hilsa (small portion), rice, sautéed greens.',['Omega-3','Iron'],520), dn: M('dn','🥘','Mochar ghonto + 2 phulka','Banana-flower vegetable curry with phulkas.',['Iron','Fibre'],560) },
-        Sat: { bf: M('bf','🥣','Vegetable poha + boiled egg','Light flattened-rice poha with veggies, boiled egg.',['Protein'],340), ln: M('ln','🐟','Chingri malai curry (light) + rice','Coconut-milk prawn curry (small portion), brown rice, salad.',['Lean protein'],520), dn: M('dn','🥘','Niramish dal + aloor dom + 2 phulka','Plain dal with potato curry and phulkas.',['Plant protein'],560) },
-        Sun: { bf: M('bf','🥚','2 Luchi + cholar dal + curd','Two small luchis with chana dal and curd.',['Plant protein'],340), ln: M('ln','🐟','Bhuna khichuri + maach bhaja','Bengali bhuna khichuri with a small piece of pan-fried fish.',['Omega-3','Comfort'],520), dn: M('dn','🥘','Posto bora + dal + rice','Steamed poppy-seed patties with dal and rice.',['Healthy fats'],560) },
-      }
-    },
-
-    gujarati: {
-      label: 'Gujarati',
-      snacks: {
-        mid:     M('sn','🥗','Sprouted moong chaat','Steamed sprouts with onion, tomato, coriander, lemon, chaat masala.',['Protein','Raw'],120),
-        evening: M('sn','🍪','2 Steamed dhokla + green chutney','Fermented chickpea-flour dhoklas, steamed not fried.',['Steamed','Light'],110),
-      },
-      days: {
-        Mon: { bf: M('bf','🌯','2 Methi thepla + curd + chunda','Fenugreek-leaf flatbreads with curd and a touch of mango chunda.',['Iron','Fibre'],340), ln: M('ln','🍛','Khichdi + kadhi + steamed veg','Moong-dal khichdi, light Gujarati kadhi, steamed lauki & beans.',['Comfort','Easy digest'],520), dn: M('dn','🥘','Gujarati dal + bajra rotla + sabzi','Sweet-tangy dal, pearl-millet flatbread, seasonal sabzi.',['Whole grain'],560) },
-        Tue: { bf: M('bf','🌯','Handvo (mini) + green chutney','Savoury fermented vegetable cake with chutney.',['Steamed'],340), ln: M('ln','🍛','Gujarati thali (light): rotli + dal + sabzi','One rotli, sweet-tangy dal, ringan-bateta sabzi.',['Plant protein'],520), dn: M('dn','🥘','Khaman + steamed bhaat + curd','Light steamed besan khaman, half cup rice, curd.',['Light'],560) },
-        Wed: { bf: M('bf','🌯','Khakhra + nuts + chai','Two whole-wheat khakhras with mixed nuts and masala chai.',['Crunchy','Healthy fats'],340), ln: M('ln','🍛','Bhindi sabzi + 2 rotli + dal','Dry okra, soft rotlis, plain dal, salad.',['Fibre'],520), dn: M('dn','🥘','Vaal nu shaak + bajra rotla','Field-bean curry with millet flatbread.',['Plant protein'],560) },
-        Thu: { bf: M('bf','🌯','Muthia (steamed) + kadhi','Steamed bottle-gourd muthia with light kadhi.',['Steamed','Probiotic'],340), ln: M('ln','🍛','Tuvar dal + jeera rice + sambharo','Pigeon-pea dal, jeera rice, raw cabbage sambharo.',['Plant protein'],520), dn: M('dn','🥘','Patra + 2 rotli + dahi','Steamed colocasia-leaf patra with rotlis and curd.',['Iron','Fibre'],560) },
-        Fri: { bf: M('bf','🌯','Poha + masala chai','Gujarati-style poha with peanuts, masala chai.',['Light'],340), ln: M('ln','🍛','Undhiyu (light) + 2 rotli + chaas','Mixed winter veg undhiyu (low-oil version), rotlis, buttermilk.',['Mixed veg','Probiotic'],520), dn: M('dn','🥘','Khichu + dal + chaas','Steamed rice-flour khichu with dal and buttermilk.',['Easy digest'],560) },
-        Sat: { bf: M('bf','🌯','Thepla + curd + sukha bhaji','Methi thepla, low-fat curd, dry potato bhaji.',['Iron'],340), ln: M('ln','🍛','Lauki muthia + dal + rice','Bottle-gourd muthia in tomato gravy with dal-rice.',['Hydrating'],520), dn: M('dn','🥘','Kathiawadi sev tameta + bajra rotla','Tomato-sev curry with millet flatbread.',['Whole grain'],560) },
-        Sun: { bf: M('bf','🌯','Khaman dhokla + chutney + chai','Soft steamed besan dhokla with green chutney and chai.',['Steamed'],340), ln: M('ln','🍛','Gujarati kadhi + khichdi + sabzi','Comfort meal: kadhi, khichdi, simple sabzi.',['Comfort'],520), dn: M('dn','🥘','Bhinda nu shaak + 2 rotli + dal','Stuffed okra sabzi, rotlis, plain dal.',['Fibre'],560) },
-      }
-    },
-
-    maharashtrian: {
-      label: 'Maharashtrian',
-      snacks: {
-        mid:     M('sn','🥒','Kakdi koshimbir','Cucumber salad with peanut powder, curd, coriander, lemon.',['Hydrating'],120),
-        evening: M('sn','🍵','Adrak chai + 1 thalipeeth','Ginger tea with one thalipeeth (multigrain savoury flatbread).',['Multigrain'],110),
-      },
-      days: {
-        Mon: { bf: M('bf','🌽','Veg poha + peanut + curd','Maharashtrian-style poha with mustard-curry leaves, peanuts, curd.',['Light','Iron'],340), ln: M('ln','🍛','Varan-bhaat + tondli bhaji + koshimbir','Plain dal, brown rice, ivy-gourd stir-fry, salad.',['Plant protein'],520), dn: M('dn','🥘','Pithla + jowar bhakri + kadhi','Besan curry, jowar millet flatbread, light buttermilk kadhi.',['Whole grain','Iron'],560) },
-        Tue: { bf: M('bf','🌽','Sabudana khichdi + curd','Sago khichdi with peanuts, side curd (small portion).',['Light'],340), ln: M('ln','🍛','Amti + bhaat + cabbage bhaji','Maharashtrian dal, rice, cabbage stir-fry.',['Plant protein'],520), dn: M('dn','🥘','Misal + 2 pav (small)','Sprouts curry with two small whole-wheat pavs.',['Plant protein','Iron'],560) },
-        Wed: { bf: M('bf','🌽','Thalipeeth + curd + chutney','Multigrain thalipeeth with curd and dry garlic chutney.',['Multigrain'],340), ln: M('ln','🍛','Masale bhaat + raita + papad','Spiced rice with veggies, mint raita, baked papad.',['Comfort'],520), dn: M('dn','🥘','Bharli vangi + jowar bhakri','Stuffed brinjal sabzi with millet flatbread.',['Iron','Fibre'],560) },
-        Thu: { bf: M('bf','🌽','Upma + green chutney + boiled egg','Light upma with vegetables and boiled egg on side.',['Protein'],340), ln: M('ln','🍛','Tomato saar + bhaat + bhaji','Tangy tomato saar, rice, dry vegetable bhaji.',['Light'],520), dn: M('dn','🥘','Matki usal + 2 phulka','Sprouted-moth-bean curry with phulkas.',['Plant protein','Iron'],560) },
-        Fri: { bf: M('bf','🌽','Zunka bhakri + onion','Besan zunka with millet bhakri and raw onion-lemon.',['Plant protein'],340), ln: M('ln','🍛','Aamras (seasonal) + 2 phulka + dal + sabzi','Light fruit pulp, phulkas, dal, sabzi.',['Vitamins'],520), dn: M('dn','🥘','Methiche dhirde + chutney','Fenugreek pancakes with green chutney and side curd.',['Iron'],560) },
-        Sat: { bf: M('bf','🌽','Pohe + peanut chikki (small)','Light poha with a small piece of peanut chikki.',['Energy'],340), ln: M('ln','🍛','Kalavan dal + jeera rice + bharit','Maharashtrian dal, jeera rice, smoky brinjal bharit.',['Plant protein'],520), dn: M('dn','🥘','Bhakarwadi-style filling on phulka + dal','Spiced veg filling rolled in phulka with dal.',['Comfort'],560) },
-        Sun: { bf: M('bf','🌽','Kanda poha + sev (light) + lemon','Onion poha topped with light sev and lemon.',['Light'],340), ln: M('ln','🍛','Puran poli (1, small) + dal + sabzi','One small puran poli, dal, sabzi, salad.',['Comfort'],520), dn: M('dn','🥘','Bharli mirchi + jowar bhakri + kadhi','Stuffed mild chillies with millet bhakri and kadhi.',['Whole grain'],560) },
-      }
-    },
-
-    punjabi: {
-      label: 'Punjabi',
-      snacks: {
-        mid:     M('sn','🥛','Lassi (low-fat) + 4 walnuts','Plain salted lassi with toned curd, handful of walnuts.',['Probiotic','Omega-3'],120),
-        evening: M('sn','🍵','Masala chai + roasted makhana','Toned-milk tea, foxnuts roasted in minimal ghee.',['Light snack'],110),
-      },
-      days: {
-        Mon: { bf: M('bf','🥞','Aloo-methi paratha + curd','Whole-wheat paratha with potato-fenugreek filling, curd.',['Iron','Filling'],340), ln: M('ln','🍛','Chole + 2 phulka + onion-mint salad','Slow-cooked chickpeas, phulkas, fresh kachumber.',['Plant protein','Fibre'],520), dn: M('dn','🥘','Sarson saag + makki roti (1) + curd','Mustard-leaf saag, one corn-flour roti, curd.',['Iron','Calcium'],560) },
-        Tue: { bf: M('bf','🥞','Stuffed paneer paratha + curd','Whole-wheat paratha with paneer filling, low-fat curd.',['25g protein'],340), ln: M('ln','🍛','Rajma + 2 phulka + boondi raita','Kidney beans curry, phulkas, light boondi raita.',['Plant protein'],520), dn: M('dn','🥘','Palak paneer + 2 phulka','Spinach-paneer in light gravy with phulkas.',['Calcium','Iron'],560) },
-        Wed: { bf: M('bf','🥞','Gobi paratha + curd + pickle','Cauliflower-stuffed paratha with curd.',['Filling'],340), ln: M('ln','🍛','Dal makhani (light) + 2 phulka + salad','Lower-fat dal makhani with phulkas.',['Plant protein'],520), dn: M('dn','🥘','Bhindi do pyaza + 2 phulka + raita','Okra with onions, phulkas, mint raita.',['Fibre','Probiotic'],560) },
-        Thu: { bf: M('bf','🥞','Methi paratha + curd','Fenugreek-leaf paratha with side curd.',['Iron'],340), ln: M('ln','🍛','Chana masala + 2 phulka + salad','Spiced chickpeas with phulkas and onion-mint salad.',['Plant protein'],520), dn: M('dn','🥘','Bharta + 2 phulka + dal','Smoky brinjal bharta with phulkas and dal.',['Smoky'],560) },
-        Fri: { bf: M('bf','🥞','Amritsari kulcha (small) + chole','Half kulcha with chole and onion salad.',['Comfort'],340), ln: M('ln','🍛','Kadhi-pakora (light) + brown rice','Punjabi kadhi with steamed pakoras, brown rice.',['Probiotic'],520), dn: M('dn','🥘','Paneer bhurji + 2 phulka','Scrambled paneer with phulkas, side cucumber salad.',['25g protein'],560) },
-        Sat: { bf: M('bf','🥞','Bedmi puri (1, small) + aloo sabzi','One small bedmi puri with aloo sabzi.',['Treat'],340), ln: M('ln','🍛','Mah ki dal (light) + jeera rice','Black-gram dal with jeera rice and salad.',['Plant protein'],520), dn: M('dn','🥘','Saag paneer + 2 phulka + curd','Mixed-greens saag with paneer cubes and phulkas.',['Iron','Calcium'],560) },
-        Sun: { bf: M('bf','🥞','Anda paratha + curd','Egg-stuffed paratha with curd.',['28g protein'],340), ln: M('ln','🍛','Veg pulao + dal + raita','Brown rice pulao, plain dal, mint raita.',['Whole grain'],520), dn: M('dn','🥘','Shahi paneer (light) + 2 phulka','Light shahi paneer in cashew-tomato gravy with phulkas.',['Calcium'],560) },
-      }
-    },
-
-    multi: {
-      label: 'Multi-cuisine',
-      snacks: {
-        mid:     M('sn','🍎','Apple + 4 almonds','A whole apple and a handful of soaked almonds.',['Fibre','Healthy fats'],120),
-        evening: M('sn','🍵','Green tea + 2 multigrain crackers','Antioxidant tea with multigrain crackers and hummus.',['Antioxidants'],110),
-      },
-      days: {
-        Mon: { bf: M('bf','🥣','Vegetable upma + boiled egg','Rava upma with veggies and boiled egg.',['Protein'],340), ln: M('ln','🍛','Dal-tadka + 2 phulka + bhindi sabzi','Yellow dal, phulkas, dry okra stir-fry, salad.',['Plant protein'],520), dn: M('dn','🥘','Moong dal khichdi + sautéed greens','Light comfort food with garlic palak.',['Easy digest','Iron'],560) },
-        Tue: { bf: M('bf','🥣','Idli + sambar + chutney','Two idlis with veg sambar and tomato chutney.',['Steamed'],340), ln: M('ln','🍛','Rajma + jeera rice + salad','Kidney beans, brown rice, kachumber.',['Plant protein','Iron'],520), dn: M('dn','🥘','Veg pulao + raita','Brown rice pulao with mint raita.',['Whole grain'],560) },
-        Wed: { bf: M('bf','🥣','Oats with banana, flax & milk','Steel-cut oats with banana, flaxseed, toned milk.',['Fibre'],340), ln: M('ln','🍛','Curd rice + rasam + poriyal','Brown curd rice with rasam and beetroot poriyal.',['Probiotic'],520), dn: M('dn','🥘','Palak paneer + 2 phulka','Spinach-paneer with phulkas.',['Calcium','Iron'],560) },
-        Thu: { bf: M('bf','🥣','Besan chilla + green chutney','Two savoury gram-flour pancakes.',['Plant protein','GF'],340), ln: M('ln','🍛','Chole + 2 phulka + onion salad','Chickpeas with phulkas and onion-mint salad.',['Plant protein'],520), dn: M('dn','🥘','Veg sambar + 2 ragi balls + thoran','Sambar with ragi mudde and thoran.',['Whole grain'],560) },
-        Fri: { bf: M('bf','🥣','Poha + peanuts + curd','Light poha with peanuts and curd.',['Light'],340), ln: M('ln','🍛','Khichdi + kadhi + steamed veg','Moong-dal khichdi with kadhi.',['Comfort'],520), dn: M('dn','🥘','Paneer bhurji + 2 phulka','Scrambled paneer with phulkas.',['25g protein'],560) },
-        Sat: { bf: M('bf','🥣','Veg sandwich (multigrain)','Multigrain sandwich with veggies and hummus.',['Fibre'],340), ln: M('ln','🍛','Bisi bele bath + raita','Karnataka one-pot rice with raita.',['Plant protein'],520), dn: M('dn','🥘','Bhindi do pyaza + 2 phulka','Okra with onions and phulkas.',['Fibre'],560) },
-        Sun: { bf: M('bf','🥣','Anda paratha + curd','Egg-stuffed paratha with curd.',['25g protein'],340), ln: M('ln','🍛','Veg biryani (light) + raita','Brown rice biryani with mint raita.',['Whole grain'],520), dn: M('dn','🥘','Sarson saag + makki roti + curd','Mustard saag with makki roti.',['Iron'],560) },
-      }
-    },
-
-    continental: {
-      label: 'Indo-Continental',
-      snacks: {
-        mid:     M('sn','🥕','Carrot sticks + hummus','Crunchy raw carrots with chickpea hummus, lemon, herbs.',['Light','Plant protein'],120),
-        evening: M('sn','🍵','Green tea + roasted chickpeas','Antioxidant tea with crunchy spiced roasted chickpeas.',['Antioxidants'],110),
-      },
-      days: {
-        Mon: { bf: M('bf','🥣','Oats with banana, flax & almonds','Steel-cut oats with toned milk, banana, flax, almonds.',['Fibre','Plant protein'],340), ln: M('ln','🥗','Quinoa-paneer bowl + grilled veg','Quinoa with paneer, peppers, broccoli, olive oil drizzle.',['28g protein','Whole grain'],520), dn: M('dn','🍲','Veg soup + grilled paneer wrap','Clear veg soup with whole-wheat paneer wrap.',['Light','Protein'],560) },
-        Tue: { bf: M('bf','🥣','Greek yogurt parfait + granola','Hung-curd parfait with granola and berries.',['Probiotic','Protein'],340), ln: M('ln','🥗','Mediterranean grilled veg salad + hummus','Grilled bell peppers, zucchini, eggplant on greens.',['Plant protein'],520), dn: M('dn','🍲','Paneer steak + roasted veg','Pan-grilled paneer steak with rosemary roasted veg.',['Calcium'],560) },
-        Wed: { bf: M('bf','🥣','Avocado toast (multigrain) + egg','Mashed avocado on multigrain toast with poached egg.',['Healthy fats'],340), ln: M('ln','🥗','Buddha bowl: brown rice + chickpeas + tahini','Brown rice, roasted chickpeas, tahini drizzle.',['Plant protein'],520), dn: M('dn','🍲','Veg lasagna (light) + side salad','Whole-wheat lasagna sheets, light cheese.',['Comfort'],560) },
-        Thu: { bf: M('bf','🥣','Smoothie bowl + chia + nuts','Banana-spinach smoothie bowl with chia and nuts.',['Antioxidants'],340), ln: M('ln','🥗','Falafel + pita + tzatziki','Baked falafel with pita, salad, light tzatziki.',['Plant protein'],520), dn: M('dn','🍲','Grilled veg pasta (whole-wheat)','Whole-wheat pasta with grilled veggies and pesto.',['Whole grain'],560) },
-        Fri: { bf: M('bf','🥣','Scrambled tofu + multigrain toast','Spiced scrambled tofu with toast and tomato.',['Plant protein','Vegan'],340), ln: M('ln','🥗','Greek salad + grilled paneer','Greek salad with feta-style paneer, olives, oregano.',['Calcium'],520), dn: M('dn','🍲','Quinoa stuffed peppers','Quinoa-stuffed bell peppers with light cheese.',['Whole grain'],560) },
-        Sat: { bf: M('bf','🥣','French toast (multigrain, sugar-free)','Egg-soaked multigrain toast with cinnamon, no sugar.',['Protein'],340), ln: M('ln','🥗','Pesto pasta salad + cherry tomato','Whole-wheat pasta salad with pesto and cherry tomatoes.',['Healthy fats'],520), dn: M('dn','🍲','Mushroom risotto (light)','Brown-rice mushroom risotto with parmesan.',['Comfort'],560) },
-        Sun: { bf: M('bf','🥣','Frittata (egg + spinach + paneer)','Baked egg-spinach-paneer frittata.',['25g protein'],340), ln: M('ln','🥗','Mexican bowl: brown rice + beans + corn','Brown rice with rajma, corn, salsa, lime.',['Plant protein'],520), dn: M('dn','🍲','Veg shepherds pie (whole grain)','Veg lentil base with mashed sweet potato top.',['Comfort'],560) },
-      }
-    },
-  };
-
-  // Track current selection state
-  let CURRENT_CUISINE = 'north';
-  let CURRENT_DAY     = 'Mon';
-
-  function renderMeals(cuisine, day) {
-    if (cuisine) CURRENT_CUISINE = cuisine;
-    if (day)     CURRENT_DAY     = day;
-    const data = CUISINE_MEALS[CURRENT_CUISINE] || CUISINE_MEALS.north;
-    const dayData = data.days[CURRENT_DAY] || data.days.Mon;
-    // Build meal sequence: breakfast, mid-morning snack, lunch, evening snack, dinner
-    const sequence = [
-      { ...dayData.bf,        time: 'Breakfast · 8:00 AM' },
-      { ...data.snacks.mid,   time: 'Mid-morning · 11:00 AM' },
-      { ...dayData.ln,        time: 'Lunch · 1:30 PM' },
-      { ...data.snacks.evening,time:'Evening · 5:00 PM' },
-      { ...dayData.dn,        time: 'Dinner · 8:00 PM' },
-    ];
-    const list = document.getElementById('meal-list');
-    if (!list) return;
-    let total = 0;
-    list.innerHTML = sequence.map(m => {
-      total += m.cal;
-      const tagHtml = m.tags.map(t => `<span class="meal-tag">${t}</span>`).join('');
-      return `
-        <div class="meal">
-          <div class="meal-img ${m.img}">${m.icon}</div>
-          <div>
-            <div class="meal-time">${m.time}</div>
-            <h4>${m.name}</h4>
-            <p class="meal-desc">${m.desc}</p>
-            <div class="meal-tags">${tagHtml}</div>
-          </div>
-          <div class="meal-cal">${m.cal}<small>kcal</small></div>
-        </div>`;
-    }).join('');
-    const totalEl = document.getElementById('meal-total');
-    if (totalEl) totalEl.textContent = total.toLocaleString('en-IN') + ' kcal';
-  }
-
-  // Render default cuisine + day on load
-  if (document.getElementById('meal-list')) renderMeals('north', 'Mon');
-
   // ---- INSIGHTS ENGINE: BMI, weight change, sleep, steps, activity ----
   function generateInsights() {
     // 1. HEIGHT — read from whichever unit is active
@@ -5360,11 +5222,6 @@
     // ---- CUISINE: pass user's choice through to the diet plan ----
     const cuisineEl = document.querySelector('[data-group="cuisine"] .opt.sel');
     const cuisine = cuisineEl ? cuisineEl.dataset.val : 'north';
-    const cuisineSelect = document.getElementById('cuisine-select');
-    if (cuisineSelect) {
-      cuisineSelect.value = cuisine;
-      renderMeals(cuisine);
-    }
 
     // ---- PERSIST USER DATA (used by My Diet, Diet Preview, CRM booking, etc.) ----
     try {
@@ -5506,10 +5363,6 @@
         group.querySelectorAll('.day-tab').forEach(x => x.classList.remove('active'));
         t.classList.add('active');
         // If this is the diet plan's day-tabs, re-render meals for selected day
-        if (group.closest('.plan-card') && document.getElementById('meal-list')) {
-          const day = t.textContent.trim();
-          renderMeals(null, day); // null cuisine = keep current
-        }
       };
     });
   });
@@ -5742,7 +5595,8 @@ async function initiateConsultPayment() {
               paymentId: response.razorpay_payment_id,
               amount: b.amount,
               booking: b,
-              paymentDetails: response
+              paymentDetails: response,
+              isTest: String(order.razorpay_key_id || '').indexOf('rzp_test_') === 0
             });
           },
           modal: {
@@ -5809,6 +5663,19 @@ function handleConsultPaymentSuccess(payload) {
   setText('success-date', booking.consultDateLabel || formatDateIso(booking.consultDate));
   setText('success-time', booking.consultTime || '—');
   setText('success-language', formatLanguage(booking.consultLanguage));
+
+  // Test-mode honesty: when a Razorpay TEST key was used, the booking is not a
+  // real paid consult. Surface this clearly so test bookings are never mistaken
+  // for live ones. This disappears automatically once live (rzp_live_) keys are used.
+  const testBanner = document.getElementById('success-test-banner');
+  const statusEl = document.getElementById('success-status');
+  if (payload.isTest) {
+    if (testBanner) testBanner.style.display = 'block';
+    if (statusEl) { statusEl.textContent = '● Test booking (no real payment)'; statusEl.style.color = '#B5532F'; }
+  } else {
+    if (testBanner) testBanner.style.display = 'none';
+    if (statusEl) { statusEl.textContent = '● Confirmed'; statusEl.style.color = '#4caf50'; }
+  }
 
   // Try to send the email (non-blocking — if it fails the user can retry from the page)
   sendConsultEmail({
