@@ -706,6 +706,46 @@
   .fs-dish-label { display: none; position: absolute; top: 50%; left: 110%; transform: translateY(-50%); white-space: nowrap; font-size: 12px; font-weight: 600; color: var(--text-m); line-height: 1.2; pointer-events: none; }
   .fs-dish:nth-child(5) .fs-dish-label, .fs-dish:nth-child(6) .fs-dish-label { left: auto; right: 110%; text-align: right; }
   @media (min-width: 1200px) { .fs-dish-label { display: block; } }
+
+  /* ===== LARGE-SCREEN TIER (27"+ monitors, >=1600px) =====
+     Unifies inconsistent section caps, scales base font + spacing so the
+     design feels intentional on big displays — not zoomed-out or floating.
+     Everything below 1600px (mobile, laptop, 1440p) is untouched. */
+  @media (min-width: 1600px) {
+    html, body { font-size: 16.5px; }
+    .block-inner,
+    .plan-wrap,
+    .dt-grid,
+    .ck-inner,
+    .footer-inner { max-width: 1320px; }
+    .vendor-wrap { max-width: 1360px; }
+    /* keep text-heavy blocks at a readable line length — do NOT widen these */
+    .section-head { max-width: 760px; }
+    .assess-wrap { max-width: 760px; }
+    .hero-sub { max-width: 520px; }
+    /* more vertical breathing room between sections */
+    section.block { padding: 7rem clamp(2.5rem, 6vw, 7rem); }
+    .section-head { margin-bottom: 4.25rem; }
+    /* hero gets a touch more room without stretching its text */
+    .hero { padding: 6.5rem clamp(2.5rem, 6vw, 7rem) 5.5rem; gap: 4.5rem; }
+    /* keep the decorative leaf frame at content proportions & centered, so
+       leaves stay framing the content instead of over-zooming/cropping on
+       wide monitors (background-size:cover misbehaves on very wide boxes).
+       Center via inset offsets — NOT transform, which leafSway animates. */
+    .hero-leaves { left: max(0px, calc(50% - 740px)); right: max(0px, calc(50% - 740px)); }
+  }
+
+  /* very large / ultra-wide (>=2100px): nudge the cap up once more so the
+     content doesn't look marooned, while still protecting line length. */
+  @media (min-width: 2100px) {
+    .block-inner,
+    .plan-wrap,
+    .dt-grid,
+    .ck-inner,
+    .footer-inner { max-width: 1440px; }
+    .vendor-wrap { max-width: 1480px; }
+    html, body { font-size: 17.5px; }
+  }
   .fs-dish:hover .fs-dish-label { display: block; }
   /* Premium fallback when a food photo is missing — cream/sage circle, never a broken-image icon */
   .fs-photo.fs-broken { background: radial-gradient(circle at 50% 38%, var(--cream) 0%, #E3EADF 70%, #D6E0CF 100%) !important; position: relative; }
