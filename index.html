@@ -746,7 +746,10 @@
     /* keep text-heavy blocks at a readable line length — do NOT widen these */
     .section-head { max-width: 760px; }
     .assess-wrap { max-width: 760px; }
-    .hero-sub { max-width: 520px; }
+    .hero-sub { max-width: 560px; font-size: 1.2rem; line-height: 1.75; }
+    /* let the headline grow into the wider hero so the center isn't blank */
+    .hero h1 { font-size: clamp(3.6rem, 4.2vw, 4.6rem); }
+    .hero-eyebrow { font-size: 13px; }
     /* more vertical breathing room between sections */
     section.block { padding: 7rem clamp(2.5rem, 6vw, 7rem); }
     .section-head { margin-bottom: 4.25rem; }
@@ -767,6 +770,8 @@
     .vendor-wrap { max-width: 1480px; }
     html, body { font-size: 17.5px; }
     .fs-stage { width: min(680px, 100%); }
+    .hero h1 { font-size: clamp(4.6rem, 4vw, 5.4rem); }
+    .hero-sub { max-width: 620px; font-size: 1.3rem; }
   }
   .fs-dish:hover .fs-dish-label { display: block; }
   /* Premium fallback when a food photo is missing — cream/sage circle, never a broken-image icon */
