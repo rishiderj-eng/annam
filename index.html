@@ -674,6 +674,22 @@
   .hero-leaves { position: absolute; inset: 0; background: url('leaves-frame.webp') no-repeat center center; background-size: cover; pointer-events: none; z-index: 0; filter: drop-shadow(0 14px 22px rgba(45,55,20,.20)); transform-origin: 50% 30%; will-change: transform; }
   @keyframes leafSway { 0%, 100% { transform: rotate(-0.5deg) translateY(0); } 50% { transform: rotate(0.55deg) translateY(-5px); } }
   @media (prefers-reduced-motion: no-preference) { .hero-leaves { animation: leafSway 8.5s ease-in-out infinite; } }
+  /* Mirrored leaf layer — flips the (left-weighted) frame onto the right side
+     so the hero is symmetrically framed on wide screens. Hidden below 1100px,
+     where the single frame already looks balanced. Its sway keyframes bake in
+     the scaleX(-1) flip so the animation can't undo the mirror. */
+  .hero-leaves-mirror { display: none; transform: scaleX(-1); }
+  @media (min-width: 1100px) { .hero-leaves-mirror { display: block; } }
+  @keyframes leafSwayMirror {
+    0%, 100% { transform: scaleX(-1) rotate(-0.5deg) translateY(0); }
+    50%      { transform: scaleX(-1) rotate(0.55deg) translateY(-5px); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-leaves-mirror { animation: leafSwayMirror 8.5s ease-in-out infinite; }
+  }
+  /* if the asset is missing, the JS adds .no-leaves — hide the mirror's gradient
+     twin so we don't double up the fallback glow */
+  .hero-leaves-mirror.no-leaves { display: none !important; }
   .hero-text, .food-showcase { position: relative; z-index: 2; }
   @media (max-width: 600px) { .hero-leaves { opacity: .4; } }
   .hero-leaves.no-leaves { background: radial-gradient(110% 80% at 100% 0%, rgba(45,95,79,.07), transparent 58%), radial-gradient(110% 80% at 0% 100%, rgba(45,95,79,.05), transparent 58%) !important; filter: none !important; animation: none !important; }
@@ -829,6 +845,7 @@
 
   <section class="hero">
     <div class="hero-leaves" aria-hidden="true"></div>
+    <div class="hero-leaves hero-leaves-mirror" aria-hidden="true"></div>
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <!-- Decorative botanical illustrations -->
@@ -4714,10 +4731,10 @@
       fsInitParallax();
       fsInitSwipe();
       // Graceful fallback if the leaf-frame asset is missing
-      const lf = document.querySelector('.hero-leaves');
-      if (lf) {
+      const lfs = document.querySelectorAll('.hero-leaves');
+      if (lfs.length) {
         const probe = new Image();
-        probe.onerror = function () { lf.classList.add('no-leaves'); };
+        probe.onerror = function () { lfs.forEach(function(el){ el.classList.add('no-leaves'); }); };
         probe.src = 'leaves-frame.webp';
       }
     }
