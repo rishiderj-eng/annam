@@ -122,7 +122,7 @@
   .meal-kcal small { font-size: 10px; color: var(--text-l); display: block; text-transform: uppercase; letter-spacing: .5px; }
 
   /* === HERO === */
-  .hero { padding: 5rem clamp(2.5rem, 6vw, 7rem) 4rem; max-width: none; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; position: relative; overflow: hidden; }
+  .hero { padding: 5rem clamp(2.5rem, 6vw, 7rem) 4rem; max-width: none; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; position: relative; overflow: hidden; min-height: calc(100vh - 76px); }
   .hero-text { position: relative; z-index: 1; padding-top: 1rem; }
   .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; background: var(--sage-l); color: var(--green-d); font-size: 12px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; padding: 7px 16px; border-radius: 100px; margin-bottom: 1.75rem; }
   .hero-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--green-l); border-radius: 50%; animation: pulse 2s infinite; }
@@ -671,28 +671,36 @@
   }
   pre, code { white-space: pre-wrap; word-break: break-word; }
   /* ===== HERO LEAF FRAME (decorative corners) ===== */
-  .hero-leaves { position: absolute; inset: 0; background: url('leaves-frame.webp') no-repeat center center; background-size: cover; pointer-events: none; z-index: 0; filter: drop-shadow(0 14px 22px rgba(45,55,20,.20)); transform-origin: 50% 30%; will-change: transform; }
-  @keyframes leafSway { 0%, 100% { transform: rotate(-0.5deg) translateY(0); } 50% { transform: rotate(0.55deg) translateY(-5px); } }
-  @media (prefers-reduced-motion: no-preference) { .hero-leaves { animation: leafSway 8.5s ease-in-out infinite; } }
-  /* Mirrored leaf layer — flips the (left-weighted) frame onto the right side
-     so the hero is symmetrically framed on wide screens. Hidden below 1100px,
-     where the single frame already looks balanced. Its sway keyframes bake in
-     the scaleX(-1) flip so the animation can't undo the mirror. */
-  .hero-leaves-mirror { display: none; transform: scaleX(-1); }
-  @media (min-width: 1100px) { .hero-leaves-mirror { display: block; } }
-  @keyframes leafSwayMirror {
-    0%, 100% { transform: scaleX(-1) rotate(-0.5deg) translateY(0); }
-    50%      { transform: scaleX(-1) rotate(0.55deg) translateY(-5px); }
-  }
+  /* ===== HERO CORNER LEAVES =====
+     Four instances of one transparent leaf asset, pinned to each corner.
+     The base asset points down-right (stem top-left); each corner flips it
+     via transform so the stem always tucks into its corner. Percentage-based
+     widths scale with the hero; max-width caps them on ultrawide screens.
+     Each corner has its own sway keyframes that BAKE IN the corner's flip,
+     so the animation can't undo the orientation. */
+  .hero-corner-leaves { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  .hcl { position: absolute; width: 16%; max-width: 230px; min-width: 120px;
+         filter: drop-shadow(0 14px 22px rgba(45,55,20,.18)); will-change: transform; }
+  /* corners — base art reads stem-top-left, leaves fanning down-right */
+  .hcl-tl { top: -2%;  left: -1%;  transform: rotate(0deg); }
+  .hcl-tr { top: -2%;  right: -1%; transform: scaleX(-1); }
+  .hcl-bl { bottom: -3%; left: -1%;  transform: scaleY(-1); }
+  .hcl-br { bottom: -3%; right: -1%; transform: scale(-1,-1); }
+
   @media (prefers-reduced-motion: no-preference) {
-    .hero-leaves-mirror { animation: leafSwayMirror 8.5s ease-in-out infinite; }
+    .hcl-tl { animation: hclSwayTL 8.5s ease-in-out infinite; }
+    .hcl-tr { animation: hclSwayTR 9.2s ease-in-out infinite; }
+    .hcl-bl { animation: hclSwayBL 9.8s ease-in-out infinite; }
+    .hcl-br { animation: hclSwayBR 8.9s ease-in-out infinite; }
   }
-  /* if the asset is missing, the JS adds .no-leaves — hide the mirror's gradient
-     twin so we don't double up the fallback glow */
-  .hero-leaves-mirror.no-leaves { display: none !important; }
+  @keyframes hclSwayTL { 0%,100%{transform:rotate(-1deg) translateY(0)} 50%{transform:rotate(1.4deg) translateY(-5px)} }
+  @keyframes hclSwayTR { 0%,100%{transform:scaleX(-1) rotate(-1deg) translateY(0)} 50%{transform:scaleX(-1) rotate(1.4deg) translateY(-5px)} }
+  @keyframes hclSwayBL { 0%,100%{transform:scaleY(-1) rotate(-1deg) translateY(0)} 50%{transform:scaleY(-1) rotate(1.4deg) translateY(-5px)} }
+  @keyframes hclSwayBR { 0%,100%{transform:scale(-1,-1) rotate(-1deg) translateY(0)} 50%{transform:scale(-1,-1) rotate(1.4deg) translateY(-5px)} }
+
   .hero-text, .food-showcase { position: relative; z-index: 2; }
-  @media (max-width: 600px) { .hero-leaves { opacity: .4; } }
-  .hero-leaves.no-leaves { background: radial-gradient(110% 80% at 100% 0%, rgba(45,95,79,.07), transparent 58%), radial-gradient(110% 80% at 0% 100%, rgba(45,95,79,.05), transparent 58%) !important; filter: none !important; animation: none !important; }
+  /* on phones, soften the corner leaves so they don't crowd the stacked layout */
+  @media (max-width: 600px) { .hcl { opacity: .5; width: 22%; max-width: 130px; } }
 
   /* ===================== PREMIUM FOOD SHOWCASE ===================== */
   .food-showcase { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; width: 100%; }
@@ -744,11 +752,8 @@
     .section-head { margin-bottom: 4.25rem; }
     /* hero gets a touch more room without stretching its text */
     .hero { padding: 6.5rem clamp(2.5rem, 6vw, 7rem) 5.5rem; gap: 4.5rem; }
-    /* keep the decorative leaf frame at content proportions & centered, so
-       leaves stay framing the content instead of over-zooming/cropping on
-       wide monitors (background-size:cover misbehaves on very wide boxes).
-       Center via inset offsets — NOT transform, which leafSway animates. */
-    .hero-leaves { left: max(0px, calc(50% - 740px)); right: max(0px, calc(50% - 740px)); }
+    /* scale the rotating food orbit up so it fills the larger hero properly */
+    .fs-stage { width: min(600px, 100%); }
   }
 
   /* very large / ultra-wide (>=2100px): nudge the cap up once more so the
@@ -761,6 +766,7 @@
     .footer-inner { max-width: 1440px; }
     .vendor-wrap { max-width: 1480px; }
     html, body { font-size: 17.5px; }
+    .fs-stage { width: min(680px, 100%); }
   }
   .fs-dish:hover .fs-dish-label { display: block; }
   /* Premium fallback when a food photo is missing — cream/sage circle, never a broken-image icon */
@@ -844,17 +850,14 @@
   <!-- HERO -->
 
   <section class="hero">
-    <div class="hero-leaves" aria-hidden="true"></div>
-    <div class="hero-leaves hero-leaves-mirror" aria-hidden="true"></div>
+    <div class="hero-corner-leaves" aria-hidden="true">
+      <img class="hcl hcl-tl" src="leaf-corner.webp" alt="">
+      <img class="hcl hcl-tr" src="leaf-corner.webp" alt="">
+      <img class="hcl hcl-bl" src="leaf-corner.webp" alt="">
+      <img class="hcl hcl-br" src="leaf-corner.webp" alt="">
+    </div>
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
-    <!-- Decorative botanical illustrations -->
-    <svg viewBox="0 0 60 80" style="position:absolute;top:80px;left:30px;width:50px;height:65px;opacity:.25;color:var(--green-l);pointer-events:none;z-index:0" fill="none" stroke="currentColor" stroke-width="1.5">
-      <path d="M30 75 Q 30 40, 30 5" stroke-linecap="round"/>
-      <path d="M30 25 Q 18 22, 10 15 Q 18 28, 30 30" fill="currentColor" opacity=".35"/>
-      <path d="M30 40 Q 42 37, 50 30 Q 42 43, 30 45" fill="currentColor" opacity=".35"/>
-      <path d="M30 55 Q 18 52, 10 45 Q 18 58, 30 60" fill="currentColor" opacity=".35"/>
-    </svg>
 
     <div class="hero-text">
     <h1>Annam is <em>life.</em><br/>We make yours <span class="underline">healthier.</span></h1>
@@ -4730,12 +4733,12 @@
       setMealCategory('lunch');
       fsInitParallax();
       fsInitSwipe();
-      // Graceful fallback if the leaf-frame asset is missing
-      const lfs = document.querySelectorAll('.hero-leaves');
+      // Graceful fallback if the leaf asset is missing — hide the corner leaves
+      const lfs = document.querySelectorAll('.hcl');
       if (lfs.length) {
         const probe = new Image();
-        probe.onerror = function () { lfs.forEach(function(el){ el.classList.add('no-leaves'); }); };
-        probe.src = 'leaves-frame.webp';
+        probe.onerror = function () { lfs.forEach(function(el){ el.style.display = 'none'; }); };
+        probe.src = 'leaf-corner.webp';
       }
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
