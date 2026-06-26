@@ -5,27 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- ============== SEO + Social previews ============== -->
-<title>Annam — Personalised Indian diets, delivered.</title>
-<meta name="description" content="Annam is a personalised diet & cloud-kitchen platform for India. Certified dietitians design your plan in your favourite regional cuisine — North Indian, South Indian, Bengali, Gujarati and more. Delivered fresh daily." />
-<meta name="keywords" content="diet plan india, meal delivery india, personalised diet, cloud kitchen, dietitian consultation, weight loss meals, indian diet plan, healthy meal subscription" />
+<title>Annam — Personalised Indian diet plans by certified dietitians.</title>
+<meta name="description" content="Annam is a personalised nutrition platform for India. Certified MSc/RD dietitians design an evidence-based diet plan around your goals, lifestyle and favourite regional cuisine — North Indian, South Indian, Bengali, Gujarati and more." />
+<meta name="keywords" content="diet plan india, personalised diet, dietitian consultation india, indian diet plan, nutrition plan, weight loss diet plan, PCOS diet, diabetes diet plan, regional indian diet" />
 <meta name="author" content="Annam" />
 <meta name="theme-color" content="#3F7D5C" />
 
 <!-- Open Graph (WhatsApp, Facebook, LinkedIn, iMessage) -->
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Annam — Personalised Indian diets, delivered." />
-<meta property="og:description" content="Tell us your body & goals. Our dietitians craft a regional Indian meal plan and our cloud kitchens cook it fresh daily — for 3, 6 or 12 months." />
+<meta property="og:title" content="Annam — Personalised Indian diet plans by certified dietitians." />
+<meta property="og:description" content="Tell us your body & goals. Our certified dietitians craft an evidence-based, personalised regional Indian diet plan around the food you already enjoy — for 3, 6 or 12 months." />
 <meta property="og:image" content="og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Annam — Personalised Indian diets, delivered." />
+<meta property="og:image:alt" content="Annam — Personalised Indian diet plans by certified dietitians." />
 <meta property="og:site_name" content="Annam" />
 <meta property="og:locale" content="en_IN" />
 
 <!-- Twitter / X cards -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Annam — Personalised Indian diets, delivered." />
-<meta name="twitter:description" content="Personalised diet plans by certified dietitians, delivered fresh from our cloud kitchens. North Indian, South Indian, Bengali, Gujarati & more." />
+<meta name="twitter:title" content="Annam — Personalised Indian diet plans by certified dietitians." />
+<meta name="twitter:description" content="Evidence-based, personalised diet plans by certified MSc/RD dietitians — built around your goals and favourite regional cuisine. North Indian, South Indian, Bengali, Gujarati & more." />
 <meta name="twitter:image" content="og-image.png" />
 
 <!-- Favicons + app icons -->
@@ -833,16 +833,14 @@
   <div class="logo" onclick="show('home')">Annam<span class="dot">.</span></div>
   <ul class="nav-links" id="nav-links">
     <li><a onclick="show('home')" id="nl-home" class="active">Home</a></li>
-    <li><a onclick="show('assess')" id="nl-assess">Get Plan</a></li>
-    <li><a onclick="show('mydiet')" id="nl-plan">My Diet</a></li>
     <li><a onclick="show('dietitian')" id="nl-dietitian">Consult</a></li>
-    <li><a onclick="show('home'); setTimeout(()=>document.getElementById('packages').scrollIntoView({behavior:'smooth'}),100)">Plans</a></li>
+    <li><a onclick="show('mydiet')" id="nl-plan">My Diet</a></li>
     <li class="nav-mobile-only"><a onclick="show('login')" id="nl-signin-m">Sign in</a></li>
-    <li class="nav-mobile-only"><a onclick="show('assess')" id="nl-startfree-m" style="color:var(--green-d);font-weight:700">Start free →</a></li>
+    <li class="nav-mobile-only"><a onclick="show('dietitian')" id="nl-startfree-m" style="color:var(--green-d);font-weight:700">Book consult →</a></li>
   </ul>
   <div class="nav-actions" id="nav-actions">
     <button class="btn btn-ghost" id="nav-signin-btn" onclick="show('login')">Sign in</button>
-    <button class="btn btn-primary" id="nav-startfree-btn" onclick="show('assess')">Start free</button>
+    <button class="btn btn-primary" id="nav-startfree-btn" onclick="show('dietitian')">Book consult</button>
   </div>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileNav()">
     <span></span><span></span><span></span>
@@ -866,16 +864,17 @@
 
     <div class="hero-text">
     <h1>Annam is <em>life.</em><br/>We make yours <span class="underline">healthier.</span></h1>
-    <p class="hero-sub">Personalised Indian diets by certified dietitians. Cooked with care. Delivered fresh to your door.</p>
+    <p class="hero-clarity" style="font-family:var(--font-serif);font-size:clamp(1.15rem,2vw,1.5rem);color:var(--green-d);font-weight:500;line-height:1.4;margin:1rem 0 .6rem;letter-spacing:-.2px">Personalised Indian diet plans.<br/>Built around the food you already love.</p>
+    <p class="hero-sub">Designed and approved by a certified dietitian — never an algorithm. Real food, real habits, real follow-up.</p>
 
     <div class="hero-cta">
-      <button class="btn btn-primary btn-lg" onclick="show('assess')">Start Free Assessment →</button>
-      <button class="btn btn-outline btn-lg" onclick="show('dietitian')">Book ₹199 Dietitian Consult</button>
+      <button class="btn btn-primary btn-lg" onclick="show('dietitian')">Book ₹199 Dietitian Consult →</button>
+      <button class="btn btn-outline btn-lg" onclick="show('assess')">Take the free assessment</button>
     </div>
 
     <div class="hero-trust" style="padding-top:1.25rem;align-items:center;gap:10px">
       <span class="fs-check" aria-hidden="true">✓</span>
-      <span style="font-size:13.5px;color:var(--text-m)">No fads. No shortcuts. Just real food.</span>
+      <span style="font-size:13.5px;color:var(--text-m)">Every plan created &amp; approved by a qualified human dietitian.</span>
     </div>
     </div>
 
@@ -948,11 +947,11 @@
     <div class="block-inner" style="max-width:920px;text-align:center">
       <div class="section-eyebrow">What we do</div>
       <h2 style="font-family:var(--font-serif);font-size:clamp(1.6rem,2.6vw,2.1rem);font-weight:500;line-height:1.3;letter-spacing:-.3px;color:var(--text);margin:.75rem 0 .5rem">
-        We design <em style="font-style:italic;color:var(--green-d)">personalised Indian diets.</em><br/>
-        We get them to you the way that <em style="font-style:italic;color:var(--green-d)">fits your life.</em><br/>
-        Cooked, delivered or guided — for <em style="font-style:italic;color:var(--green-d)">3, 6 or 12 months.</em>
+        We design <em style="font-style:italic;color:var(--green-d)">personalised Indian diet plans.</em><br/>
+        Built around your body, goals and <em style="font-style:italic;color:var(--green-d)">favourite food.</em><br/>
+        Guided by a real dietitian — for <em style="font-style:italic;color:var(--green-d)">3, 6 or 12 months.</em>
       </h2>
-      <p style="color:var(--text-m);font-size:1rem;line-height:1.7;max-width:680px;margin:1.25rem auto 2.5rem">All with a real dietitian who knows your body, your goals, and your favourite dish — delivered the way that suits your kitchen.</p>
+      <p style="color:var(--text-m);font-size:1rem;line-height:1.7;max-width:680px;margin:1.25rem auto 2.5rem">A certified dietitian who learns your body, your goals, and your favourite dishes — then builds a plan you can actually live with, using the food you already enjoy.</p>
 
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:780px;margin:0 auto" class="whatwedo-pillars">
         <div style="text-align:center">
@@ -965,7 +964,7 @@
         </div>
         <div style="text-align:center">
           <div style="width:48px;height:48px;border-radius:14px;background:#f4d4c5;color:var(--coral);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto .65rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg></div>
-          <div style="font-family:var(--font-serif);font-size:14px;font-weight:500;color:var(--text);line-height:1.3">Cooked<br/>your way</div>
+          <div style="font-family:var(--font-serif);font-size:14px;font-weight:500;color:var(--text);line-height:1.3">Planned<br/>your way</div>
         </div>
         <div style="text-align:center">
           <div style="width:48px;height:48px;border-radius:14px;background:var(--cream-d);color:var(--brown);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto .65rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5v14h16"/><path d="M7 14l3-4 3 2 4-6"/></svg></div>
@@ -1000,8 +999,8 @@
         </div>
         <div class="step">
           <div class="step-num">iv.</div>
-          <h3>Choose how you want to eat</h3>
-          <p>Chef-at-home, delivered meals, or recipes you cook yourself. Switch any time.</p>
+          <h3>Get your personalised plan</h3>
+          <p>Your full plan — what to eat, how much and when — built around the food you love. Meal delivery & chef-at-home coming soon.</p>
         </div>
         <div class="step">
           <div class="step-num">v.</div>
@@ -1025,86 +1024,64 @@
 
     <div class="block-inner" style="position:relative;z-index:1">
       <div class="section-head">
-        <div class="section-eyebrow">Three ways we serve you</div>
-        <h2 class="section-title">Your kitchen, <em>your comfort.</em></h2>
-        <p class="section-sub">Different people need different things from a food system. Some want a chef in their own home. Some love the convenience of fresh-cooked delivery. Some prefer recipes to cook themselves. Choose how Annam fits your life.</p>
+        <div class="section-eyebrow">What you get today</div>
+        <h2 class="section-title">Your personalised plan, <em>your way.</em></h2>
+        <p class="section-sub">At launch, Annam gives you a fully personalised diet plan designed by a certified dietitian — built around your goals, your lifestyle, and the regional food you already love. Meal delivery and chef-at-home are on our roadmap, coming soon.</p>
       </div>
 
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem" class="serve-grid">
 
-        <!-- Card 1: Chef-at-home -->
-        <div onclick="setPreferredTier('chef');show('assess')" style="background:#f4d4c5;border:2px solid #f4d4c5;border-radius:var(--r-lg);padding:2rem 1.75rem;cursor:pointer;transition:all .3s;position:relative;display:flex;flex-direction:column" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(216,122,91,0.18)';this.style.borderColor='var(--coral)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='#f4d4c5'">
-          <span style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--coral);color:var(--cream);font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;white-space:nowrap">PREMIUM</span>
-          <div style="width:60px;height:60px;border-radius:16px;background:var(--coral);color:var(--cream);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 14h10v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M7 14a3.5 3.5 0 0 1-1-6.5A3.5 3.5 0 0 1 12 5a3.5 3.5 0 0 1 6 2.5A3.5 3.5 0 0 1 17 14"/></svg></div>
-          <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--brown);margin-bottom:.5rem;letter-spacing:-.2px">Chef-at-home</h3>
-          <p style="font-size:13.5px;color:#8a4a30;line-height:1.55;margin-bottom:1.25rem">Our trained cook arrives at your home and prepares fresh meals in your kitchen — exactly the way you like them.</p>
-          <ul style="list-style:none;font-size:13px;color:#8a4a30;line-height:1.7;margin-bottom:1.5rem;flex:1">
-            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--coral);font-weight:700">✓</span><span>Cooked in your home, your way</span></li>
-            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--coral);font-weight:700">✓</span><span>Zero trust gap · you see everything</span></li>
-            <li style="display:flex;gap:8px"><span style="color:var(--coral);font-weight:700">✓</span><span>Best for families & seniors</span></li>
-          </ul>
-          <div style="padding-top:1rem;border-top:1px solid rgba(138,74,48,0.15);display:flex;justify-content:space-between;align-items:flex-end">
-            <div>
-              <div style="font-style:italic;font-size:13px;color:#8a4a30;line-height:1.4">Pricing shared after your dietitian consult</div>
-              <div style="font-size:10.5px;color:#8a4a30;margin-top:4px;opacity:.7">2-3h kitchen visit · ingredients included</div>
-            </div>
-            <span style="font-size:13px;font-weight:600;color:var(--coral)">See more →</span>
-          </div>
-        </div>
-
-        <!-- Card 2: Delivered (default highlighted) -->
-        <div onclick="setPreferredTier('delivered');show('assess')" style="background:var(--green-d);border:2px solid var(--green-d);border-radius:var(--r-lg);padding:2rem 1.75rem;cursor:pointer;transition:all .3s;position:relative;color:var(--cream);transform:translateY(-4px);box-shadow:0 12px 32px rgba(45,95,79,0.22);display:flex;flex-direction:column" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 16px 44px rgba(45,95,79,0.28)'" onmouseout="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(45,95,79,0.22)'">
-          <span style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--brown);font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;white-space:nowrap">MOST POPULAR</span>
-          <div style="width:60px;height:60px;border-radius:16px;background:rgba(229,187,92,0.2);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg></div>
-          <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--cream);margin-bottom:.5rem;letter-spacing:-.2px">Delivered meals</h3>
-          <p style="font-size:13.5px;color:rgba(251,247,238,.85);line-height:1.55;margin-bottom:1.25rem">Cooked fresh in our partner cloud kitchens, delivered hot to your door — on the schedule that fits you.</p>
+        <!-- Card 1: Personalised Diet Plan (ACTIVE launch offering) -->
+        <div onclick="setPreferredTier('recipes');show('assess')" style="background:var(--green-d);border:2px solid var(--green-d);border-radius:var(--r-lg);padding:2rem 1.75rem;cursor:pointer;transition:all .3s;position:relative;color:var(--cream);transform:translateY(-4px);box-shadow:0 12px 32px rgba(45,95,79,0.22);display:flex;flex-direction:column" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 16px 44px rgba(45,95,79,0.28)'" onmouseout="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(45,95,79,0.22)'">
+          <span style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--brown);font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;white-space:nowrap">AVAILABLE NOW</span>
+          <div style="width:60px;height:60px;border-radius:16px;background:rgba(229,187,92,0.2);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h5v16H6a2 2 0 0 0-2 2z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2z"/></svg></div>
+          <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--cream);margin-bottom:.5rem;letter-spacing:-.2px">Personalised diet plan</h3>
+          <p style="font-size:13.5px;color:rgba(251,247,238,.85);line-height:1.55;margin-bottom:1.25rem">A certified dietitian designs your full plan after a 30-min consult — what to eat, how much, and when, using the home-style food you already enjoy.</p>
           <ul style="list-style:none;font-size:13px;color:rgba(251,247,238,.85);line-height:1.7;margin-bottom:1.5rem;flex:1">
-            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--gold-l);font-weight:700">✓</span><span>Cooked & dispatched within 2 hours</span></li>
-            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--gold-l);font-weight:700">✓</span><span>FSSAI-licensed · monthly audits</span></li>
-            <li style="display:flex;gap:8px"><span style="color:var(--gold-l);font-weight:700">✓</span><span>Best for working professionals</span></li>
+            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--gold-l);font-weight:700">✓</span><span>Designed by a qualified MSc/RD dietitian</span></li>
+            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--gold-l);font-weight:700">✓</span><span>Regional, practical, built around your habits</span></li>
+            <li style="display:flex;gap:8px"><span style="color:var(--gold-l);font-weight:700">✓</span><span>Check-ins & plan adjustments over time</span></li>
           </ul>
           <div style="padding-top:1rem;border-top:1px solid rgba(251,247,238,.15);display:flex;justify-content:space-between;align-items:flex-end">
             <div>
               <div style="font-style:italic;font-size:13px;color:rgba(251,247,238,.85);line-height:1.4">Pricing shared after your dietitian consult</div>
-              <div style="font-size:10.5px;color:rgba(251,247,238,.55);margin-top:4px">3 meals/day · part of subscription</div>
+              <div style="font-size:10.5px;color:rgba(251,247,238,.55);margin-top:4px">Starts with a ₹199 consult</div>
             </div>
-            <span style="font-size:13px;font-weight:600;color:var(--gold-l)">See more →</span>
+            <span style="font-size:13px;font-weight:600;color:var(--gold-l)">Start →</span>
           </div>
         </div>
 
-        <!-- Card 3: Recipes -->
-        <div onclick="setPreferredTier('recipes');show('assess')" style="background:var(--sage-l);border:2px solid var(--sage-l);border-radius:var(--r-lg);padding:2rem 1.75rem;cursor:pointer;transition:all .3s;position:relative;display:flex;flex-direction:column" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(45,95,79,0.15)';this.style.borderColor='var(--green-l)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='var(--sage-l)'">
-          <span style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--sage);color:var(--green-d);font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;white-space:nowrap">DIY · LOW-COST</span>
-          <div style="width:60px;height:60px;border-radius:16px;background:var(--green-d);color:var(--cream);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h5v16H6a2 2 0 0 0-2 2z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2z"/></svg></div>
-          <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--green-d);margin-bottom:.5rem;letter-spacing:-.2px">Recipes only</h3>
-          <p style="font-size:13.5px;color:var(--green-d);line-height:1.55;margin-bottom:1.25rem">Get your fully personalised diet as detailed recipes — ingredient lists, step-by-step cooking, prep videos. You cook. We coach.</p>
-          <ul style="list-style:none;font-size:13px;color:var(--green-d);line-height:1.7;margin-bottom:1.5rem;flex:1">
-            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--green-d);font-weight:700">✓</span><span>Recipes · grocery lists · prep videos</span></li>
-            <li style="display:flex;gap:8px;margin-bottom:6px"><span style="color:var(--green-d);font-weight:700">✓</span><span>Same dietitian guidance, lower cost</span></li>
-            <li style="display:flex;gap:8px"><span style="color:var(--green-d);font-weight:700">✓</span><span>Best for home cooks who love cooking</span></li>
-          </ul>
-          <div style="padding-top:1rem;border-top:1px solid rgba(45,95,79,0.15);display:flex;justify-content:space-between;align-items:flex-end">
-            <div>
-              <div style="font-style:italic;font-size:13px;color:var(--green-d);line-height:1.4">Pricing shared after your dietitian consult</div>
-              <div style="font-size:10.5px;color:var(--green-d);margin-top:4px;opacity:.7">Plan + dietitian + recipes only</div>
-            </div>
-            <span style="font-size:13px;font-weight:600;color:var(--green-d)">See more →</span>
-          </div>
+        <!-- Card 2: Delivered meals — COMING SOON (non-clickable) -->
+        <div style="background:var(--sage-l);border:2px dashed var(--line);border-radius:var(--r-lg);padding:2rem 1.75rem;position:relative;display:flex;flex-direction:column;opacity:.72">
+          <span style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--text-l);color:var(--cream);font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;white-space:nowrap">COMING SOON</span>
+          <div style="width:60px;height:60px;border-radius:16px;background:var(--cream-d);color:var(--text-l);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg></div>
+          <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--text-m);margin-bottom:.5rem;letter-spacing:-.2px">Delivered meals</h3>
+          <p style="font-size:13.5px;color:var(--text-m);line-height:1.55;margin-bottom:1.25rem">Fresh, plan-aligned meals cooked and delivered to your door. We're building this carefully — it'll arrive once we can do it reliably.</p>
+          <div style="margin-top:auto;padding-top:1rem;border-top:1px solid var(--line)"><span style="font-size:12.5px;font-style:italic;color:var(--text-l)">On our roadmap</span></div>
+        </div>
+
+        <!-- Card 3: Chef-at-home — COMING SOON (non-clickable) -->
+        <div style="background:var(--sage-l);border:2px dashed var(--line);border-radius:var(--r-lg);padding:2rem 1.75rem;position:relative;display:flex;flex-direction:column;opacity:.72">
+          <span style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--text-l);color:var(--cream);font-size:10.5px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;white-space:nowrap">COMING SOON</span>
+          <div style="width:60px;height:60px;border-radius:16px;background:var(--cream-d);color:var(--text-l);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:1.25rem"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 14h10v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M7 14a3.5 3.5 0 0 1-1-6.5A3.5 3.5 0 0 1 12 5a3.5 3.5 0 0 1 6 2.5A3.5 3.5 0 0 1 17 14"/></svg></div>
+          <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--text-m);margin-bottom:.5rem;letter-spacing:-.2px">Chef-at-home</h3>
+          <p style="font-size:13.5px;color:var(--text-m);line-height:1.55;margin-bottom:1.25rem">A trained cook prepares your plan in your own kitchen. A premium experience we'll offer once it's ready in your city.</p>
+          <div style="margin-top:auto;padding-top:1rem;border-top:1px solid var(--line)"><span style="font-size:12.5px;font-style:italic;color:var(--text-l)">On our roadmap</span></div>
         </div>
       </div>
 
-      <p style="text-align:center;color:var(--text-l);font-size:13px;font-style:italic;margin-top:2.5rem">Not sure which one fits you? <a onclick="setPreferredTier('');show('assess')" style="color:var(--green-d);font-weight:600;cursor:pointer;border-bottom:1.5px solid var(--gold-l);padding-bottom:1px">Take the 4-minute assessment</a> — we'll recommend the right mode based on your lifestyle.</p>
+      <p style="text-align:center;color:var(--text-l);font-size:13px;font-style:italic;margin-top:2.5rem"><a onclick="show('assess')" style="color:var(--green-d);font-weight:600;cursor:pointer;border-bottom:1.5px solid var(--gold-l);padding-bottom:1px">Take the 4-minute assessment</a> — and a certified dietitian will build your personalised plan.</p>
     </div>
   </section>
 
   <section class="ck">
     <div style="max-width:880px;margin:0 auto;text-align:center;padding:0 1.25rem">
-      <div class="section-eyebrow" style="color:var(--gold-l);justify-content:center;display:inline-block">Cloud kitchen network</div>
+      <div class="section-eyebrow" style="color:var(--gold-l);justify-content:center;display:inline-block">On our roadmap · coming soon</div>
       <h2 style="font-family:var(--font-serif);font-size:clamp(2rem,3.5vw,2.6rem);font-weight:500;line-height:1.15;letter-spacing:-.5px;color:var(--cream);margin:1rem 0 1rem">
-        Where your <em style="font-style:italic;color:var(--gold-l)">delivered meals</em> come from.
+        Meal delivery is <em style="font-style:italic;color:var(--gold-l)">coming soon.</em>
       </h2>
       <p style="color:rgba(251,247,238,.8);font-size:1.05rem;line-height:1.7;max-width:680px;margin:0 auto 2.5rem">
-        We don't just plan diets — we operate a network of FSSAI-certified cloud kitchens that prep your meals fresh, in real time. Cooked in 2 hours. Packed in eco-containers. Delivered hot.
+        Today we focus on getting your nutrition right — a personalised plan from a real dietitian. Next, we're building a network of FSSAI-certified cloud kitchens so we can cook and deliver your plan for you. Here's the standard we're building toward.
       </p>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:780px;margin:0 auto" class="ck-trust-row">
         <div style="text-align:center">
@@ -1146,13 +1123,13 @@
         </div>
         <div class="feat">
           <div class="feat-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg></div>
-          <h3>Chef, delivery, or recipes</h3>
-          <p>Three ways to bring your plan to life. Your kitchen, your time, your budget — switch any time.</p>
+          <h3>Built around your life</h3>
+          <p>Your plan fits your routine, your budget, and the regional food you already love — and adapts as you progress.</p>
         </div>
         <div class="feat">
           <div class="feat-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M12 3v3M9 4.5v2M15 4.5v2"/></svg></div>
-          <h3>Cloud kitchen freshness</h3>
-          <p>Meals cooked in FSSAI-licensed kitchens, packed in eco-containers, dispatched within 2 hours of cooking.</p>
+          <h3>Ongoing dietitian support</h3>
+          <p>Regular check-ins and plan adjustments as your body and goals change — your dietitian stays with you, not just day one.</p>
         </div>
         <div class="feat">
           <div class="feat-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.3-7-9.2A3.8 3.8 0 0 1 12 7a3.8 3.8 0 0 1 7 3.8C19 15.7 12 20 12 20z"/></svg></div>
@@ -1221,14 +1198,14 @@
             <li>Monthly dietitian consults</li>
             <li>Quarterly health re-assessment</li>
             <li>Family plan add-on</li>
-            <li>Priority delivery slots</li>
-            <li>Free festival meal swaps</li>
+            <li>Priority dietitian access</li>
+            <li>Festival & travel plan adjustments</li>
           </ul>
           <button class="btn btn-outline" style="border-color:var(--gold-l);color:var(--gold-l)" onclick="show('dietitian')">Start with a consult</button>
         </div>
       </div>
       <div style="text-align:center;margin-top:2.5rem;max-width:680px;margin-left:auto;margin-right:auto">
-        <p style="font-size:13.5px;color:rgba(251,247,238,.7);line-height:1.7;margin-bottom:.75rem"><strong style="color:var(--gold-l)">Why no price on this page?</strong> Pricing in nutrition isn't one-size-fits-all. It depends on your goals, your city, how many meals a day, and which service mode (chef / delivered / recipes) you choose. Your dietitian gives you a real, honest quote during your consult — not a generic figure to lure you in.</p>
+        <p style="font-size:13.5px;color:rgba(251,247,238,.7);line-height:1.7;margin-bottom:.75rem"><strong style="color:var(--gold-l)">Why no price on this page?</strong> Pricing in nutrition isn't one-size-fits-all. It depends on your goals, your health needs, and how long a plan you choose. Your dietitian gives you a real, honest quote during your consult — not a generic figure to lure you in.</p>
         <p style="font-size:12.5px;color:rgba(251,247,238,.55);font-style:italic">₹199 dietitian consult · refunded against any plan you choose.</p>
       </div>
     </div>
@@ -1358,12 +1335,12 @@
         India eats well. <em style="font-style:italic;color:var(--gold-l)">But not for itself.</em>
       </h2>
       <p style="color:rgba(251,247,238,.8);font-size:1.05rem;line-height:1.75;max-width:680px;margin:0 auto 2rem">
-        77% of urban Indians live with at least one diet-related condition — diabetes, PCOS, hypertension, obesity. The food we eat is making us sick. The food we're told to eat is unaffordable, foreign, or both. Annam exists to make eating well in India feel natural, regional, and yours.
+        Most urban Indians live with at least one diet-related condition — diabetes, PCOS, hypertension, obesity. The food we're often told to eat is unaffordable, foreign, or both. Annam exists to make eating well in India feel natural, regional, and yours — designed by a real dietitian around the food you already love.
       </p>
       <div style="display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;padding-top:1.5rem;border-top:1px solid rgba(229,187,92,.2)">
-        <div style="text-align:center"><div style="font-family:var(--font-serif);font-size:1.8rem;font-weight:500;color:var(--gold-l);line-height:1">77%</div><div style="font-size:11px;color:rgba(251,247,238,.55);text-transform:uppercase;letter-spacing:.5px;margin-top:6px">urban Indians affected</div></div>
-        <div style="text-align:center"><div style="font-family:var(--font-serif);font-size:1.8rem;font-weight:500;color:var(--gold-l);line-height:1">₹1.14L Cr</div><div style="font-size:11px;color:rgba(251,247,238,.55);text-transform:uppercase;letter-spacing:.5px;margin-top:6px">market by 2032</div></div>
-        <div style="text-align:center"><div style="font-family:var(--font-serif);font-size:1.8rem;font-weight:500;color:var(--gold-l);line-height:1">14%</div><div style="font-size:11px;color:rgba(251,247,238,.55);text-transform:uppercase;letter-spacing:.5px;margin-top:6px">CAGR growth</div></div>
+        <div style="text-align:center;max-width:200px"><div style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--gold-l);line-height:1.2">Certified dietitians</div><div style="font-size:12px;color:rgba(251,247,238,.6);line-height:1.5;margin-top:8px">Every plan is designed by a qualified MSc/RD dietitian — never an algorithm alone.</div></div>
+        <div style="text-align:center;max-width:200px"><div style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--gold-l);line-height:1.2">Evidence-based</div><div style="font-size:12px;color:rgba(251,247,238,.6);line-height:1.5;margin-top:8px">Grounded in clinical nutrition science, tailored to your body and goals.</div></div>
+        <div style="text-align:center;max-width:200px"><div style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--gold-l);line-height:1.2">Real regional food</div><div style="font-size:12px;color:rgba(251,247,238,.6);line-height:1.5;margin-top:8px">Built around the home-style Indian food you already know and enjoy.</div></div>
       </div>
     </div>
   </section>
@@ -1373,11 +1350,11 @@
     <div class="footer-inner">
       <div class="ft-brand">
         <div class="logo">Annam<span class="dot">.</span></div>
-        <p>Food is life. We make yours healthier. Founded by certified food scientists. Powered by Annam-certified kitchens across India.</p>
+        <p>Food is life. We make yours healthier. Dietitian-led, personalised nutrition built around the regional Indian food you already love.</p>
       </div>
       <div class="ft-col">
         <h5>Product</h5>
-        <ul><li onclick="show('assess')">Get a plan</li><li onclick="show('home');setTimeout(()=>document.getElementById('packages').scrollIntoView({behavior:'smooth'}),100)">Plans</li><li onclick="show('dietitian')">Consult dietitian</li><li onclick="show('plan')">Sample menu</li></ul>
+        <ul><li onclick="show('dietitian')">Book a consult</li><li onclick="show('home');setTimeout(()=>document.getElementById('packages').scrollIntoView({behavior:'smooth'}),100)">Our programs</li><li onclick="show('mydiet')">My Diet</li><li onclick="show('plan')">Sample plan</li></ul>
       </div>
       <div class="ft-col">
         <h5>Partners</h5>
@@ -1864,7 +1841,7 @@
       <div class="plan-head">
         <span class="vc-tag" style="margin-bottom:1rem;display:inline-block">Sample preview · Based on your metrics</span>
         <h1 id="plan-greeting">Hey there, here's what your plan <em>could look like</em>.</h1>
-        <p id="plan-subtitle">Vegetarian · 1,650 kcal/day · 3 meals delivered · Goal: −10 kg in 24 weeks. Your dietitian will personalise everything after the consult.</p>
+        <p id="plan-subtitle">Vegetarian · 1,650 kcal/day · 3 meals/day · Goal: −10 kg in 24 weeks. Your dietitian will personalise everything after the consult.</p>
       </div>
 
       <!-- ===== DAILY TARGETS — horizontal strip, full width ===== -->
@@ -1910,20 +1887,20 @@
         </div>
       </div>
 
-      <!-- ===== HOW YOU WANT YOUR MEALS — full width card ===== -->
+      <!-- ===== YOUR PLAN — full width card ===== -->
       <div class="plan-card" id="plan-pkg-card">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;margin-bottom:1rem">
           <div style="flex:1;min-width:240px">
-            <h3 class="plan-card-title" style="margin-bottom:.4rem">📦 How would you like to receive your meals?</h3>
-            <p style="font-size:13px;color:var(--text-m);line-height:1.6;margin-bottom:0">Pick the service mode that fits your home, time and budget. You can switch any time. <strong>Pricing depends on your city and meal frequency</strong> — your dietitian will give you a transparent quote during your ₹199 consult.</p>
+            <h3 class="plan-card-title" style="margin-bottom:.4rem">🌿 Your personalised plan</h3>
+            <p style="font-size:13px;color:var(--text-m);line-height:1.6;margin-bottom:0">At launch, Annam delivers a fully personalised diet plan designed by your dietitian. <strong>Your dietitian gives you a transparent quote</strong> during your ₹199 consult — no surprise pricing. Meal delivery and chef-at-home are coming soon.</p>
           </div>
         </div>
 
-        <div class="form-section-title" style="margin-top:1.25rem;color:var(--text-l)">Service mode</div>
+        <div class="form-section-title" style="margin-top:1.25rem;color:var(--text-l)">Plan format</div>
         <div class="opt-grid" style="margin-bottom:1rem" data-group="service-pref">
-          <div class="opt" data-val="chef" onclick="pickServicePref(this)"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 14h10v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M7 14a3.5 3.5 0 0 1-1-6.5A3.5 3.5 0 0 1 12 5a3.5 3.5 0 0 1 6 2.5A3.5 3.5 0 0 1 17 14"/></svg></span><div class="opt-title">Chef at home</div><div class="opt-sub">Cooked in your kitchen</div></div>
-          <div class="opt sel" data-val="delivered" onclick="pickServicePref(this)"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg></span><div class="opt-title">Delivered meals</div><div class="opt-sub">Fresh from cloud kitchen</div></div>
-          <div class="opt" data-val="recipes" onclick="pickServicePref(this)"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h5v16H6a2 2 0 0 0-2 2z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2z"/></svg></span><div class="opt-title">Recipes only</div><div class="opt-sub">You cook · lowest cost</div></div>
+          <div class="opt sel" data-val="recipes" onclick="pickServicePref(this)"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h5v16H6a2 2 0 0 0-2 2z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2z"/></svg></span><div class="opt-title">Personalised diet plan</div><div class="opt-sub">Designed by your dietitian</div></div>
+          <div class="opt" data-val="delivered" style="opacity:.5;cursor:not-allowed" title="Coming soon"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg></span><div class="opt-title">Delivered meals</div><div class="opt-sub">Coming soon</div></div>
+          <div class="opt" data-val="chef" style="opacity:.5;cursor:not-allowed" title="Coming soon"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 14h10v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M7 14a3.5 3.5 0 0 1-1-6.5A3.5 3.5 0 0 1 12 5a3.5 3.5 0 0 1 6 2.5A3.5 3.5 0 0 1 17 14"/></svg></span><div class="opt-title">Chef at home</div><div class="opt-sub">Coming soon</div></div>
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem" class="plan-prefs-grid">
@@ -2341,9 +2318,9 @@
         <div style="margin-bottom:1.5rem">
           <div style="font-size:11px;color:var(--text-l);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:8px">Service tier</div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-            <button class="up-opt" data-up-tier="chef" onclick="upgradePick('tier', 'chef', this)">👨‍🍳 Chef</button>
-            <button class="up-opt sel" data-up-tier="delivered" onclick="upgradePick('tier', 'delivered', this)">🍱 Delivered</button>
-            <button class="up-opt" data-up-tier="recipes" onclick="upgradePick('tier', 'recipes', this)">📝 Recipes</button>
+            <button class="up-opt sel" data-up-tier="recipes" onclick="upgradePick('tier', 'recipes', this)">📝 Diet plan</button>
+            <button class="up-opt" data-up-tier="delivered" style="opacity:.5;cursor:not-allowed" title="Coming soon" disabled>🍱 Delivered · soon</button>
+            <button class="up-opt" data-up-tier="chef" style="opacity:.5;cursor:not-allowed" title="Coming soon" disabled>👨‍🍳 Chef · soon</button>
           </div>
         </div>
         <!-- Live price -->
