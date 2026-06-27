@@ -639,7 +639,8 @@
 
   /* === Prevent horizontal overflow anywhere === */
   html, body { max-width: 100vw; overflow-x: clip; }
-  img, svg, video { max-width: 100%; height: auto; }
+  img, video { max-width: 100%; height: auto; }
+  svg { max-width: 100%; height: auto; }
   table { max-width: 100%; }
 
   /* === Reusable dashboard grid (extracted from inline styles) === */
@@ -822,12 +823,13 @@
     .fs-macro strong { font-size: 1.15rem; }
     .fs-macro small { font-size: 10px; }
     .fs-signature { font-size: 1.1rem; }
-  /* ===== Batch 2 — trust/membership helpers ===== */
+  }
+  /* ===== Batch 2 — trust/membership helpers (global) ===== */
   .b2-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:1.25rem; margin-top:2.5rem; }
   .b2-card { background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); padding:1.75rem 1.5rem; transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
   .b2-card:hover { transform:translateY(-5px); box-shadow:0 14px 38px rgba(74,59,42,.10); border-color:var(--sage); }
-  .b2-icon { width:52px; height:52px; border-radius:14px; background:var(--sage-l); color:var(--green-d); display:flex; align-items:center; justify-content:center; margin-bottom:1.1rem; }
-  .b2-icon svg { width:24px; height:24px; }
+  .b2-icon { width:52px; height:52px; min-width:52px; border-radius:14px; background:var(--sage-l); color:var(--green-d); display:flex; align-items:center; justify-content:center; margin-bottom:1.1rem; overflow:hidden; }
+  .b2-icon svg { width:24px !important; height:24px !important; max-width:24px !important; max-height:24px !important; flex-shrink:0; display:block; }
   .b2-card h3 { font-family:var(--font-serif); font-size:1.2rem; font-weight:500; color:var(--text); margin-bottom:.5rem; letter-spacing:-.2px; }
   .b2-card p { font-size:13.5px; color:var(--text-m); line-height:1.6; }
   .b2-checks { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:.9rem 1.5rem; margin-top:2.5rem; }
