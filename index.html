@@ -3370,7 +3370,7 @@
     <div class="login-wrap">
       <div id="auth-gate-notice" style="display:none;align-items:flex-start;gap:10px;background:var(--sage-l);border:1px solid var(--sage);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:1.25rem">
         <span aria-hidden="true" style="font-size:16px;line-height:1.3">🔒</span>
-        <span style="font-size:13px;color:var(--green-d);line-height:1.5">Create a free account to begin your assessment — it keeps your health information private and tied securely to you.</span>
+        <span style="font-size:13px;color:var(--green-d);line-height:1.5">Create a free account to continue — it keeps your health information private and tied securely to you.</span>
       </div>
       <div class="login-tabs">
         <div class="login-tab active" onclick="switchAuthTab('signin')" id="auth-tab-signin">Sign in</div>
@@ -3789,7 +3789,7 @@
 
   // ===== Sprint 2B (Option A): protect the assessment behind auth =====
   var annamPendingDest = null;
-  var ANNAM_PROTECTED = ['assess-welcome', 'assess', 'lifestyle'];
+  var ANNAM_PROTECTED = ['assess-welcome', 'assess', 'lifestyle', 'dietitian'];
   function annamCachedLoggedIn() {
     try { return !!(JSON.parse(localStorage.getItem('annam_user') || '{}').loggedIn); }
     catch (e) { return false; }
