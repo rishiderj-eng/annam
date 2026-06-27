@@ -134,7 +134,7 @@
   .hero h1 .underline::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 8px; background: var(--gold-l); opacity: .55; z-index: -1; border-radius: 2px; }
   .hero-sub { font-size: 1.05rem; color: var(--text-m); line-height: 1.7; max-width: 480px; margin-bottom: 2rem; }
   .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-  .hero-trust { display: flex; align-items: center; gap: 16px; margin-top: 2rem; padding-top: 1.75rem; border-top: 1px solid var(--line); position: relative; z-index: 3; }
+  .hero-trust { display: flex; align-items: center; gap: 16px; margin-top: 2rem; padding-top: 1.75rem; border-top: 1px solid var(--line); position: relative; z-index: 3; background: var(--cream); }
   .trust-avatars { display: flex; }
   .trust-avatars div { width: 34px; height: 34px; border-radius: 50%; border: 2.5px solid var(--cream); margin-left: -10px; background-size: cover; background-position: center; font-family: var(--font-serif); display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:12px;}
   .trust-avatars div:first-child { margin-left: 0; background: linear-gradient(135deg,#D87A5B,#A85439); }
@@ -692,8 +692,8 @@
   /* corners — base art reads stem-top-left, leaves fanning down-right */
   .hcl-tl { top: -2%;  left: -1%;  transform: rotate(0deg); }
   .hcl-tr { top: -2%;  right: -1%; transform: scaleX(-1); }
-  .hcl-bl { bottom: -7%; left: -4%;  max-width: 170px; transform: scaleY(-1); }
-  .hcl-br { bottom: -7%; right: -4%; max-width: 170px; transform: scale(-1,-1); }
+  .hcl-bl { bottom: -8%; left: -4%;  max-width: 130px; opacity: .6; transform: scaleY(-1); }
+  .hcl-br { bottom: -8%; right: -4%; max-width: 130px; opacity: .6; transform: scale(-1,-1); }
 
   @media (prefers-reduced-motion: no-preference) {
     .hcl-tl { animation: hclSwayTL 8.5s ease-in-out infinite; }
@@ -835,8 +835,32 @@
   .b2-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:1.25rem; margin-top:2.5rem; }
   .b2-card { background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); padding:1.75rem 1.5rem; transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
   .b2-card:hover { transform:translateY(-5px); box-shadow:0 14px 38px rgba(74,59,42,.10); border-color:var(--sage); }
-  .b2-icon { width:52px; height:52px; min-width:52px; border-radius:14px; background:var(--sage-l); color:var(--green-d); display:flex; align-items:center; justify-content:center; margin-bottom:1.1rem; overflow:hidden; }
+  .b2-icon { width:52px; height:52px; min-width:52px; border-radius:12px; background:var(--sage-l); color:var(--green-d); display:flex; align-items:center; justify-content:center; margin-bottom:1.1rem; overflow:hidden; }
   .b2-icon svg { width:24px !important; height:24px !important; max-width:24px !important; max-height:24px !important; flex-shrink:0; display:block; }
+  /* ---- Weekly Support / Membership card refinement (patch) ---- */
+  .b2-grid .b2-card, .b2-grid .card { display: flex; flex-direction: column; min-height: 348px; }
+  .b2-grid .b2-card > p, .b2-grid .card > p { margin-bottom: 0.9rem; }
+  .b2-detail-list { list-style: none; margin: 0.2rem 0 0; padding-top: 0.9rem; border-top: 1px solid rgba(229, 219, 194, 0.9); display: grid; gap: 0.45rem; }
+  .b2-detail-list li { display: flex; align-items: flex-start; gap: 0.5rem; color: var(--text-m); font-size: 12.75px; line-height: 1.45; }
+  .b2-detail-list li::before { content: "•"; color: var(--green-d); font-weight: 700; line-height: 1; margin-top: 0.1rem; }
+  .weekly-support-grid .b2-card p, .weekly-support-grid .b2-detail-list li { max-width: 34ch; }
+  .pkg, .program-card { min-height: 100%; }
+  .assessment-hero-image { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: inherit; }
+  .assessment-hero-image > img, .assessment-hero-image > picture, .assessment-hero-image > video, .assessment-hero-image > svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+  @supports not (aspect-ratio: 16 / 9) {
+    .assessment-hero-image::before { content: ""; display: block; padding-top: 56.25%; }
+    .assessment-hero-image > img, .assessment-hero-image > picture, .assessment-hero-image > video, .assessment-hero-image > svg { position: absolute; inset: 0; }
+  }
+  @media (max-width: 1024px) {
+    .b2-grid .b2-card, .b2-grid .card { min-height: 0; }
+    .b2-grid.b2-grid-center .b2-card { flex: 1 1 calc(50% - 1rem); max-width: none; }
+  }
+  @media (max-width: 640px) {
+    .b2-grid.b2-grid-center { gap: 1rem; }
+    .b2-grid.b2-grid-center .b2-card { flex: 1 1 100%; }
+    .b2-grid .b2-card, .b2-grid .card { padding: 1.4rem 1.2rem; }
+    .b2-detail-list { gap: 0.4rem; }
+  }
   .b2-card h3 { font-family:var(--font-serif); font-size:1.2rem; font-weight:500; color:var(--text); margin-bottom:.5rem; letter-spacing:-.2px; }
   .b2-card p { font-size:13.5px; color:var(--text-m); line-height:1.6; }
   .b2-checks { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:.9rem 1.5rem; margin-top:2.5rem; }
@@ -1089,34 +1113,62 @@
 
       <div class="b2-grid b2-grid-center">
         <div class="b2-card">
-          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/></svg></div>
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path><path d="M9 16l2 2 4-4"></path></svg></div>
           <h3>Weekly follow-ups</h3>
           <p>Your dietitian checks your progress every single week — adjusting before small slips become setbacks.</p>
+          <ul class="b2-detail-list">
+            <li>Catch small issues before they slow your progress.</li>
+            <li>Stay consistent even during busy or stressful weeks.</li>
+            <li>See clear next steps after every review.</li>
+          </ul>
         </div>
         <div class="b2-card">
-          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div>
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"></path><path d="M21 3v5h-5"></path></svg></div>
           <h3>Plan adjustments</h3>
           <p>Every body changes. Your nutrition changes with it — your plan is refined as your results, schedule and life evolve.</p>
+          <ul class="b2-detail-list">
+            <li>Your plan evolves with travel, work, and routines.</li>
+            <li>Progress plateaus are addressed before frustration builds.</li>
+            <li>Meals stay realistic as your schedule changes.</li>
+          </ul>
         </div>
         <div class="b2-card">
-          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 0 1-.9-3.8A8.38 8.38 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></div>
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 0 1-.9-3.8A8.38 8.38 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"></path></svg></div>
           <h3>WhatsApp support</h3>
           <p>Ask questions whenever you need guidance — a quick check before you order, travel, or try something new.</p>
+          <ul class="b2-detail-list">
+            <li>Get quick answers before eating out or ordering.</li>
+            <li>Travel, festivals, and cravings feel easier to manage.</li>
+            <li>Feel supported between calls, not left guessing.</li>
+          </ul>
         </div>
         <div class="b2-card">
-          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg></div>
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="M9 11l3 3L22 4"></path></svg></div>
           <h3>Accountability</h3>
           <p>Someone keeps you consistent. Not motivated for a week? Your dietitian notices — and helps you get back on track.</p>
+          <ul class="b2-detail-list">
+            <li>Miss a week, and someone helps you restart.</li>
+            <li>Check-ins keep momentum high when motivation drops.</li>
+            <li>Consistency feels easier when someone is in your corner.</li>
+          </ul>
         </div>
         <div class="b2-card">
-          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3c0 1.5 1 2 1 3H8a2 2 0 0 0 0 4h1c0 1-1 1.5-1 3a3 3 0 0 0 6 0c0-1.5-1-2-1-3h1a2 2 0 0 0 0-4h-1c0-1 1-1.5 1-3a3 3 0 0 0-3-3z"/></svg></div>
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-8"></path><path d="M12 14c0-4 3-7 7-7 0 4-3 7-7 7Z"></path><path d="M12 10c0-3-2.5-5-6-5 0 3.5 2 6 6 6"></path></svg></div>
           <h3>Habit coaching</h3>
           <p>Learn sustainable eating instead of temporary dieting — the skills that keep results long after the program ends.</p>
+          <ul class="b2-detail-list">
+            <li>Build routines that still work during real life.</li>
+            <li>Learn flexible eating without guilt or overthinking.</li>
+          </ul>
         </div>
         <div class="b2-card">
-          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg></div>
           <h3>Progress reviews</h3>
           <p>Regular reviews of weight, body measurements, energy, adherence and challenges — so progress is measured, not guessed.</p>
+          <ul class="b2-detail-list">
+            <li>Track trends across weight, energy, hunger, and sleep.</li>
+            <li>Celebrate wins early and correct issues sooner.</li>
+          </ul>
         </div>
         <div class="b2-card">
           <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="3.2"/><path d="M22 20v-2a4 4 0 0 0-3-3.87M16 3.5a4 4 0 0 1 0 7"/></svg></div>
