@@ -3328,6 +3328,10 @@
 <div class="page" id="page-login">
   <div class="login-page">
     <div class="login-wrap">
+      <div id="auth-gate-notice" style="display:none;align-items:flex-start;gap:10px;background:var(--sage-l);border:1px solid var(--sage);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:1.25rem">
+        <span aria-hidden="true" style="font-size:16px;line-height:1.3">🔒</span>
+        <span style="font-size:13px;color:var(--green-d);line-height:1.5">Create a free account to begin your assessment — it keeps your health information private and tied securely to you.</span>
+      </div>
       <div class="login-tabs">
         <div class="login-tab active" onclick="switchAuthTab('signin')" id="auth-tab-signin">Sign in</div>
         <div class="login-tab" onclick="switchAuthTab('signup')" id="auth-tab-signup">Create account</div>
@@ -3743,8 +3747,39 @@
     if (ham) { ham.classList.remove('open'); ham.setAttribute('aria-expanded', 'false'); }
   }
 
+  // ===== Sprint 2B (Option A): protect the assessment behind auth =====
+  var annamPendingDest = null;
+  var ANNAM_PROTECTED = ['assess-welcome', 'assess', 'lifestyle'];
+  function annamCachedLoggedIn() {
+    try { return !!(JSON.parse(localStorage.getItem('annam_user') || '{}').loggedIn); }
+    catch (e) { return false; }
+  }
+  function annamAuthGateNotice(showIt) {
+    var el = document.getElementById('auth-gate-notice');
+    if (el) el.style.display = showIt ? 'flex' : 'none';
+  }
+  // After a successful login/signup, resume the intended destination.
+  function annamResumeAfterAuth(fallback) {
+    var dest = annamPendingDest;
+    if (!dest) { try { dest = sessionStorage.getItem('annam_pending_dest'); } catch (e) {} }
+    annamPendingDest = null;
+    try { sessionStorage.removeItem('annam_pending_dest'); } catch (e) {}
+    annamAuthGateNotice(false);
+    show(dest || fallback);
+  }
+
   function show(id, fromPopState) {
     closeMobileNav();
+    // Auth gate: anonymous users cannot begin/submit the assessment.
+    if (ANNAM_PROTECTED.indexOf(id) !== -1 && !annamCachedLoggedIn()) {
+      annamPendingDest = id;
+      try { sessionStorage.setItem('annam_pending_dest', id); } catch (e) {}
+      show('login', fromPopState);
+      if (typeof switchAuthTab === 'function') switchAuthTab('signup');
+      annamAuthGateNotice(true);
+      return;
+    }
+    if (id !== 'login') annamAuthGateNotice(false);
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     const target = document.getElementById('page-' + id);
     if (target) target.classList.add('active');
@@ -4481,8 +4516,8 @@
       }
       annamSyncCache(data.session);
       refreshNavAuth();
-      show('mydiet');
       annamToast('Welcome back.', 'success');
+      annamResumeAfterAuth('mydiet');
     } catch (e) {
       errEl.textContent = 'Could not sign in right now. Please try again.';
     } finally {
@@ -4533,10 +4568,8 @@
         // Email confirmation is OFF — user is signed in immediately.
         annamSyncCache(data.session);
         refreshNavAuth();
-        show('assess');
-        const banner = document.getElementById('assess-welcome-banner');
-        if (banner) banner.style.display = 'flex';
         annamToast('Account created — complete your assessment.', 'success');
+        annamResumeAfterAuth('assess-welcome');
       } else {
         // Email confirmation is ON — guide the user to confirm, then sign in.
         switchAuthTab('signin');
@@ -4716,8 +4749,12 @@
       existing.loggedIn = false; delete existing.authUserId;
       localStorage.setItem('annam_user', JSON.stringify(existing));
     } catch (e) {}
-    refreshNavAuth();
+    annamPendingDest = null;
+    try { sessionStorage.removeItem('annam_pending_dest'); } catch (e) {}
+    annamAuthGateNotice(false);
+    // Re-render polish: leave any protected/account page and visibly refresh the UI.
     show('home');
+    refreshNavAuth();
     annamToast('Signed out.', 'info');
   }
 
@@ -5406,6 +5443,12 @@ if (annamAuth) {
     if (typeof refreshNavAuth === 'function') refreshNavAuth();
     const cur = document.querySelector('.page.active');
     if (cur && cur.id === 'page-mydiet' && typeof renderMyDiet === 'function') renderMyDiet();
+    // If the auth gate bounced a logged-in user to login during load, resume.
+    if (data.session) {
+      let pend = annamPendingDest;
+      try { if (!pend) pend = sessionStorage.getItem('annam_pending_dest'); } catch (e) {}
+      if (pend && cur && cur.id === 'page-login') annamResumeAfterAuth('assess-welcome');
+    }
   });
   annamAuth.auth.onAuthStateChange((_event, session) => {
     annamSyncCache(session);
