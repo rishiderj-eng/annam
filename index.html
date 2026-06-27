@@ -937,6 +937,50 @@
   .aw-fade { opacity: 0; animation: awFade .6s ease forwards; }
   @keyframes awFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   @media (prefers-reduced-motion: reduce) { .aw-fade { opacity: 1 !important; animation: none !important; transform: none !important; } }
+
+  /* ===== Sprint 2C — My Diet health record (EHR) ===== */
+  .ehr-card { background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); padding:1.5rem; margin-bottom:1.1rem; box-shadow:0 4px 24px rgba(74,59,42,.04); }
+  .ehr-card-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:1rem; }
+  .ehr-h { font-family:var(--font-serif); font-size:1.2rem; font-weight:500; color:var(--text); letter-spacing:-.2px; }
+  .ehr-tag { font-size:11px; font-weight:600; letter-spacing:.4px; text-transform:uppercase; color:var(--green-d); background:var(--sage-l); border:1px solid rgba(45,95,79,.18); padding:3px 10px; border-radius:100px; }
+  .ehr-pill { display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:500; color:var(--text-m); background:var(--cream-d); border:1px solid var(--line); padding:6px 12px; border-radius:100px; }
+  .ehr-pill strong { color:var(--green-d); font-weight:600; }
+  .ehr-journey { list-style:none; margin:0; padding:0; }
+  .ehr-journey li { display:flex; align-items:center; gap:11px; padding:8px 0; }
+  .ehr-jdot { width:26px; height:26px; min-width:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; background:rgba(251,247,238,.16); color:rgba(251,247,238,.7); border:1.5px solid rgba(251,247,238,.25); }
+  .ehr-journey li.done .ehr-jdot { background:var(--gold-l); color:var(--green-d); border-color:var(--gold-l); }
+  .ehr-journey li.active .ehr-jdot { background:var(--cream); color:var(--green-d); border-color:var(--cream); box-shadow:0 0 0 4px rgba(251,247,238,.18); }
+  .ehr-jlabel { font-size:13.5px; color:rgba(251,247,238,.78); }
+  .ehr-journey li.done .ehr-jlabel { color:var(--cream); }
+  .ehr-journey li.active .ehr-jlabel { color:var(--cream); font-weight:600; }
+  .ehr-metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:14px; }
+  .ehr-metric { background:var(--cream-d); border:1px solid var(--line); border-radius:var(--r-sm); padding:12px 14px; }
+  .ehr-metric .k { font-size:11px; text-transform:uppercase; letter-spacing:.6px; color:var(--text-l); font-weight:600; margin-bottom:4px; }
+  .ehr-metric .v { font-size:1.05rem; color:var(--text); font-weight:500; font-family:var(--font-serif); }
+  .ehr-row { display:flex; align-items:flex-start; gap:14px; padding:12px 0; border-bottom:1px solid var(--line); }
+  .ehr-row:last-child { border-bottom:none; }
+  .ehr-row-ic { width:40px; height:40px; min-width:40px; border-radius:10px; background:var(--sage-l); display:flex; align-items:center; justify-content:center; font-size:18px; }
+  .ehr-row .t { font-weight:600; color:var(--text); font-size:14px; }
+  .ehr-row .s { font-size:12.5px; color:var(--text-m); margin-top:2px; line-height:1.5; }
+  .ehr-status { display:inline-block; font-size:11px; font-weight:600; padding:2px 9px; border-radius:100px; text-transform:capitalize; }
+  .ehr-status.ok { background:#e7f3ec; color:#1f6b46; }
+  .ehr-status.wait { background:#fdf3e0; color:#9a6b14; }
+  .ehr-empty { text-align:center; padding:1.75rem 1rem; }
+  .ehr-empty .e-ic { font-size:30px; opacity:.45; margin-bottom:.6rem; }
+  .ehr-empty .e-t { font-family:var(--font-serif); font-size:1.05rem; color:var(--text); margin-bottom:.35rem; font-weight:500; }
+  .ehr-empty .e-s { font-size:13px; color:var(--text-l); line-height:1.6; max-width:430px; margin:0 auto; }
+  .ehr-timeline { list-style:none; margin:0; padding:0; }
+  .ehr-timeline li { position:relative; padding:0 0 18px 26px; }
+  .ehr-timeline li:before { content:''; position:absolute; left:5px; top:16px; bottom:-4px; width:2px; background:var(--line); }
+  .ehr-timeline li:last-child:before { display:none; }
+  .ehr-timeline li:after { content:''; position:absolute; left:0; top:3px; width:12px; height:12px; border-radius:50%; background:var(--green-d); border:2px solid var(--cream); }
+  .ehr-timeline .tl-t { font-weight:600; color:var(--text); font-size:13.5px; }
+  .ehr-timeline .tl-d { font-size:12px; color:var(--text-l); margin-top:1px; }
+  .ehr-skel { background:linear-gradient(90deg,var(--cream-d) 25%,#f0ebe0 50%,var(--cream-d) 75%); background-size:200% 100%; animation:ehrShimmer 1.3s infinite; border-radius:8px; }
+  @keyframes ehrShimmer { 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+  @media (prefers-reduced-motion: reduce){ .ehr-skel{ animation:none; } }
+  .ehr-btn-soon { opacity:.5; cursor:not-allowed; }
+  @media (max-width:600px){ #mydiet-loggedin{ padding:1.5rem 1rem 3rem; } .ehr-card{ padding:1.25rem 1.1rem; } }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -2276,72 +2320,68 @@
   </div>
 
   <!-- LOGGED-IN STATE (full dashboard) -->
-  <div id="mydiet-loggedin" style="display:none;padding:2.5rem 2rem 4rem;max-width:1240px;margin:0 auto">
-    <!-- Welcome bar -->
-    <div style="margin-bottom:2rem">
-      <div style="font-size:12px;color:var(--text-l);text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:4px" id="mydiet-today">TODAY</div>
-      <h1 style="font-family:var(--font-serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:500;line-height:1.1;letter-spacing:-.6px;color:var(--text)" id="mydiet-welcome">Welcome back, <em style="font-style:italic;color:var(--green-d)">there.</em></h1>
-      <p style="color:var(--text-m);font-size:14px;margin-top:6px">Your dashboard is ready and waiting for your dietitian.</p>
-    </div>
+  <div id="mydiet-loggedin" style="display:none;padding:2.25rem 1.5rem 4rem;max-width:1080px;margin:0 auto">
 
-    <!-- PLAN PENDING — hero empty state -->
-    <div style="background:var(--green-d);color:var(--cream);border-radius:var(--r-lg);padding:2.5rem 2rem;text-align:center;position:relative;overflow:hidden;margin-bottom:1.25rem">
-      <div style="font-size:40px;margin-bottom:1rem">🌿</div>
-      <h2 style="font-family:var(--font-serif);font-size:clamp(1.4rem,3vw,1.9rem);font-weight:500;line-height:1.25;color:var(--cream);max-width:620px;margin:0 auto .75rem">Your personalised diet plan will appear here after your dietitian creates it.</h2>
-      <p style="font-size:14px;color:rgba(251,247,238,.85);line-height:1.7;max-width:560px;margin:0 auto 1.5rem"><strong style="color:var(--gold-l)">No AI-generated plans.</strong> Your plan is created by a qualified human dietitian — after they review your assessment and meet you in your consultation.</p>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <button class="btn" style="background:var(--gold-l);color:var(--green-d);padding:12px 22px;font-weight:600" onclick="show('dietitian')">Book ₹199 consult →</button>
-        <button class="btn btn-outline" style="border-color:rgba(251,247,238,.5);color:var(--cream);padding:12px 22px" onclick="show('assess')">Complete assessment</button>
-      </div>
+    <!-- 1 · WELCOME -->
+    <header style="margin-bottom:1.75rem">
+      <div style="font-size:11.5px;color:var(--text-l);text-transform:uppercase;letter-spacing:1.2px;font-weight:600;margin-bottom:6px" id="ehr-today">TODAY</div>
+      <h1 style="font-family:var(--font-serif);font-size:clamp(1.7rem,3vw,2.2rem);font-weight:500;line-height:1.12;letter-spacing:-.5px;color:var(--text)" id="ehr-welcome">Welcome back.</h1>
+      <div id="ehr-meta" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"></div>
+    </header>
 
-      <!-- Journey tracker -->
-      <ol class="jt" aria-label="Your Annam journey" style="margin-top:2.5rem">
-        <li class="jt-step done"><span class="jt-dot" aria-hidden="true">✓</span><span class="jt-label">Assessment completed</span></li>
-        <li class="jt-step active"><span class="jt-dot" aria-hidden="true">2</span><span class="jt-label">Consultation pending</span></li>
-        <li class="jt-step"><span class="jt-dot" aria-hidden="true">3</span><span class="jt-label">Dietitian review</span></li>
-        <li class="jt-step"><span class="jt-dot" aria-hidden="true">4</span><span class="jt-label">Plan creation</span></li>
-        <li class="jt-step"><span class="jt-dot" aria-hidden="true">5</span><span class="jt-label">Weekly check-ins</span></li>
-        <li class="jt-step"><span class="jt-dot" aria-hidden="true">6</span><span class="jt-label">Progress tracking</span></li>
-      </ol>
-    </div>
+    <section class="ehr-card" aria-labelledby="ehr-journey-h" style="background:var(--green-d);border:none">
+      <h2 id="ehr-journey-h" class="ehr-h" style="color:var(--cream);margin-bottom:1rem">Your care journey</h2>
+      <ol class="ehr-journey" id="ehr-journey" aria-label="Your Annam care journey"></ol>
+    </section>
 
-    <!-- What will appear here -->
-    <p style="text-align:center;font-size:13px;color:var(--text-l);line-height:1.6;max-width:640px;margin:0 auto 2rem">After your consult, this dashboard will show your plan, your dietitian's notes, your progress, reports, and weekly follow-ups.</p>
+    <!-- 2 · ASSESSMENT SUMMARY -->
+    <section class="ehr-card" aria-labelledby="ehr-assessment-h">
+      <div class="ehr-card-head"><h2 id="ehr-assessment-h" class="ehr-h">Assessment summary</h2><span class="ehr-tag" id="ehr-assessment-tag"></span></div>
+      <div id="ehr-assessment"></div>
+    </section>
 
-    <!-- Empty-state cards -->
-    <div class="mydiet-bottom grid-dash-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:1.25rem">
+    <!-- 3 · CONSULTATION -->
+    <section class="ehr-card" aria-labelledby="ehr-consult-h">
+      <div class="ehr-card-head"><h2 id="ehr-consult-h" class="ehr-h">Consultation</h2></div>
+      <div id="ehr-consult"></div>
+    </section>
 
-      <div style="background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem;text-align:center">
-        <div style="font-size:28px;margin-bottom:.6rem;opacity:.5">🍽️</div>
-        <h3 style="font-family:var(--font-serif);font-size:1.1rem;font-weight:500;color:var(--text);margin-bottom:.4rem">Your diet plan</h3>
-        <p style="font-size:12.5px;color:var(--text-l);line-height:1.6">Pending dietitian review. Your plan appears here once your dietitian creates it.</p>
-      </div>
+    <!-- 4 · DIETITIAN -->
+    <section class="ehr-card" aria-labelledby="ehr-diet-h">
+      <div class="ehr-card-head"><h2 id="ehr-diet-h" class="ehr-h">Your dietitian</h2></div>
+      <div id="ehr-dietitian"></div>
+    </section>
 
-      <div style="background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem;text-align:center">
-        <div style="font-size:28px;margin-bottom:.6rem;opacity:.5">📄</div>
-        <h3 style="font-family:var(--font-serif);font-size:1.1rem;font-weight:500;color:var(--text);margin-bottom:.4rem">Reports</h3>
-        <p style="font-size:12.5px;color:var(--text-l);line-height:1.6">Reports pending. Your dietitian's reports and notes will appear here after your consultation.</p>
-      </div>
+    <!-- 5 · DIET PLAN -->
+    <section class="ehr-card" aria-labelledby="ehr-plan-h">
+      <div class="ehr-card-head"><h2 id="ehr-plan-h" class="ehr-h">Your diet plan</h2></div>
+      <div id="ehr-plan"></div>
+    </section>
 
-      <div style="background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem;text-align:center">
-        <div style="font-size:28px;margin-bottom:.6rem;opacity:.5">📈</div>
-        <h3 style="font-family:var(--font-serif);font-size:1.1rem;font-weight:500;color:var(--text);margin-bottom:.4rem">Progress</h3>
-        <p style="font-size:12.5px;color:var(--text-l);line-height:1.6">Progress tracking will begin after your plan starts.</p>
-      </div>
+    <!-- 6 · LAB REPORTS -->
+    <section class="ehr-card" aria-labelledby="ehr-labs-h">
+      <div class="ehr-card-head"><h2 id="ehr-labs-h" class="ehr-h">Lab reports</h2></div>
+      <div id="ehr-labs"></div>
+    </section>
 
-    </div>
+    <!-- 7 · PROGRESS -->
+    <section class="ehr-card" aria-labelledby="ehr-prog-h">
+      <div class="ehr-card-head"><h2 id="ehr-prog-h" class="ehr-h">Progress</h2></div>
+      <div id="ehr-progress"></div>
+    </section>
 
-    <!-- Dietitian / messaging — pending -->
-    <div style="background:var(--cream-d);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
-      <div style="display:flex;align-items:center;gap:14px">
-        <div style="width:52px;height:52px;min-width:52px;border-radius:50%;background:var(--sage-l);display:flex;align-items:center;justify-content:center;font-size:24px">🌿</div>
-        <div>
-          <div style="font-family:var(--font-serif);font-size:1.05rem;font-weight:500;color:var(--text)">Your dietitian</div>
-          <div style="font-size:12.5px;color:var(--text-l);margin-top:2px">Assigned after you book your consultation.</div>
-        </div>
-      </div>
-      <button class="btn btn-ghost" style="opacity:.55;cursor:not-allowed" disabled title="Available after your dietitian is assigned">💬 Message dietitian · pending</button>
-    </div>
+    <!-- 8 · WEEKLY REVIEWS -->
+    <section class="ehr-card" aria-labelledby="ehr-rev-h">
+      <div class="ehr-card-head"><h2 id="ehr-rev-h" class="ehr-h">Weekly reviews</h2></div>
+      <div id="ehr-reviews"></div>
+    </section>
+
+    <!-- 9 · SECURE DOCUMENTS -->
+    <section class="ehr-card" aria-labelledby="ehr-docs-h">
+      <div class="ehr-card-head"><h2 id="ehr-docs-h" class="ehr-h">Secure documents</h2></div>
+      <div id="ehr-docs"></div>
+    </section>
+
   </div>
 
   <!-- CHAT PANEL (slide-in) -->
@@ -3829,154 +3869,169 @@
   function goFaq(topic){ show('faqs'); setTimeout(()=>{ const el=document.querySelector('#page-faqs [data-faq="'+topic+'"]'); if(el){ el.open=true; el.scrollIntoView({behavior:'smooth',block:'center'}); } },420); }
 
   // ---- MY DIET: render dashboard with user data ----
+  // ===== Sprint 2C — My Diet customer health record (real Supabase data, RLS-scoped) =====
+  function annamEsc(v){ return String(v==null?'':v).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function annamTitle(v){ if(!v && v!==0) return ''; return String(v).replace(/_/g,' ').replace(/\b\w/g,function(m){return m.toUpperCase();}); }
+  function annamDate(v){ if(!v) return ''; try{ var x=new Date(v); if(isNaN(x.getTime())) return String(v); return x.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}); }catch(e){ return String(v); } }
+  function annamEmpty(ic,t,sub){ return '<div class="ehr-empty"><div class="e-ic" aria-hidden="true">'+ic+'</div><div class="e-t">'+annamEsc(t)+'</div><div class="e-s">'+annamEsc(sub)+'</div></div>'; }
+
   async function renderMyDiet() {
     // Authoritative gate: My Diet is protected behind a real Supabase session.
     const session = await annamGetSession();
     annamSyncCache(session);
-    let u = {};
-    try { u = JSON.parse(localStorage.getItem('annam_user') || '{}'); } catch (e) {}
-
+    let u = {}; try { u = JSON.parse(localStorage.getItem('annam_user') || '{}'); } catch (e) {}
     const loggedOut = document.getElementById('mydiet-loggedout');
-    const loggedIn = document.getElementById('mydiet-loggedin');
+    const loggedIn  = document.getElementById('mydiet-loggedin');
     if (!loggedOut || !loggedIn) return;
+    if (!session || !u.loggedIn) { loggedOut.style.display='flex'; loggedIn.style.display='none'; return; }
+    loggedOut.style.display='none'; loggedIn.style.display='block';
 
-    if (!session || !u.loggedIn) {
-      loggedOut.style.display = 'flex';
-      loggedIn.style.display = 'none';
-      return;
-    }
-    loggedOut.style.display = 'none';
-    loggedIn.style.display = 'block';
+    // Header
+    var first = u.firstName || (session.user && session.user.email ? session.user.email.split('@')[0] : 'there');
+    var wel = document.getElementById('ehr-welcome');
+    if (wel) wel.innerHTML = 'Welcome back, <em style="font-style:italic;color:var(--green-d)">'+annamEsc(first)+'.</em>';
+    var td = document.getElementById('ehr-today');
+    if (td) { var D=['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'],M=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],d=new Date(); td.textContent=D[d.getDay()]+' \u00b7 '+d.getDate()+' '+M[d.getMonth()]; }
 
-    // Greeting
-    const firstName = u.firstName || 'there';
-    const welcome = document.getElementById('mydiet-welcome');
-    if (welcome) welcome.innerHTML = `Welcome back, <em style="font-style:italic;color:var(--green-d)">${firstName}.</em>`;
+    // Skeletons while loading (no layout shift)
+    ['ehr-assessment','ehr-consult','ehr-dietitian','ehr-plan','ehr-labs','ehr-progress'].forEach(function(id){ var el=document.getElementById(id); if(el) el.innerHTML='<div class="ehr-skel" style="height:64px"></div>'; });
+    annamEhrStatic();
 
-    // Today date
-    const today = document.getElementById('mydiet-today');
-    if (today) {
-      const days = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
-      const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-      const d = new Date();
-      today.textContent = `${days[d.getDay()]} · ${d.getDate()} ${months[d.getMonth()]}`;
-    }
+    if (!annamAuth) return;
+    // All reads go through the authenticated client → RLS returns only this customer's own rows.
+    var pick0 = function(r){ return (r && r.data && r.data[0]) || null; };
+    var arr   = function(r){ return (r && r.data) || []; };
+    var customerP = annamAuth.from('customers').select('*').then(pick0).catch(function(){return null;});
+    var assessP   = annamAuth.from('assessments').select('*').order('created_at',{ascending:false}).limit(1).then(pick0).catch(function(){return null;});
+    var consultP  = annamAuth.from('consultations').select('*').order('consult_date',{ascending:false}).then(arr).catch(function(){return [];});
+    var subsP     = annamAuth.from('subscriptions').select('*').order('start_date',{ascending:false}).then(arr).catch(function(){return [];});
+    var payP      = annamAuth.from('payments').select('*').order('created_at',{ascending:false}).then(arr).catch(function(){return [];});
+    var labsP     = annamAuth.from('lab_uploads').select('*').then(arr).catch(function(){return [];});
 
-    // Progress numbers from assessment data (if available)
-    if (u.startWeight) {
-      const startEl = document.getElementById('progress-start');
-      const currentEl = document.getElementById('progress-current');
-      const goalEl = document.getElementById('progress-goal');
-      const lossEl = document.getElementById('progress-loss');
-      // Simulate 5 weeks of progress: -0.65kg/week
-      const weeksDone = 5;
-      const loss = weeksDone * 0.65;
-      const currentW = Math.max(u.targetWeight || u.startWeight, u.startWeight - loss);
-      if (startEl) startEl.textContent = `${u.startWeight} kg`;
-      if (currentEl) currentEl.textContent = `${currentW.toFixed(1)} kg`;
-      if (goalEl && u.targetWeight) goalEl.textContent = `${u.targetWeight} kg`;
-      if (lossEl) lossEl.textContent = `−${loss.toFixed(1)} kg`;
-    }
+    var r = await Promise.all([customerP, assessP, consultP, subsP, payP, labsP]);
+    var customer=r[0], assessment=r[1], consults=r[2], subs=r[3], pays=r[4], labs=r[5];
 
-    // Render today's meals (Mon by default)
-    renderMydietDay(0);
+    annamEhrMeta(customer, subs);
+    annamEhrJourney(customer, assessment, consults, pays, subs);
+    annamEhrAssessment(assessment);
+    annamEhrConsult(consults, customer);
+    annamEhrDietitian(customer);
+    annamEhrPlan();
+    annamEhrLabs(labs);
+    annamEhrProgress(customer, assessment, consults, pays, subs, labs);
   }
 
-  // ---- MY DIET: meal data ----
-  const MYDIET_MEALS = {
-    0: [ // Monday
-      { time: 'Breakfast · 8:00 AM', emoji: '🥣', name: 'Vegetable upma + boiled egg', desc: 'Rava upma with veggies and boiled egg.', kcal: 340 },
-      { time: 'Mid-morning · 11:00 AM', emoji: '🍎', name: 'Apple + 4 almonds', desc: 'A whole apple and a handful of soaked almonds.', kcal: 120 },
-      { time: 'Lunch · 1:30 PM', emoji: '🍲', name: 'Dal-tadka + 2 phulka + bhindi sabzi', desc: 'Yellow dal, phulkas, dry okra stir-fry, salad.', kcal: 520 },
-      { time: 'Evening · 5:00 PM', emoji: '🍵', name: 'Green tea + 2 multigrain crackers', desc: 'Antioxidant tea with multigrain crackers.', kcal: 110 },
-      { time: 'Dinner · 8:00 PM', emoji: '🍛', name: 'Moong dal khichdi + sautéed greens', desc: 'Light comfort food with garlic palak.', kcal: 560 }
-    ],
-    1: [ // Tuesday
-      { time: 'Breakfast · 8:00 AM', emoji: '🥞', name: 'Oats idli + sambar', desc: 'Steamed oats idli with vegetable sambar.', kcal: 330 },
-      { time: 'Mid-morning · 11:00 AM', emoji: '🥛', name: 'Buttermilk + roasted chana', desc: 'Spiced buttermilk with roasted chickpeas.', kcal: 130 },
-      { time: 'Lunch · 1:30 PM', emoji: '🍱', name: 'Brown rice + rajma + cucumber salad', desc: 'Kidney beans curry with brown rice.', kcal: 540 },
-      { time: 'Evening · 5:00 PM', emoji: '🍌', name: 'Banana + green tea', desc: 'Small banana with antioxidant tea.', kcal: 120 },
-      { time: 'Dinner · 8:00 PM', emoji: '🥘', name: 'Paneer bhurji + 2 jowar roti', desc: 'Scrambled paneer with millet flatbread.', kcal: 540 }
-    ],
-    2: [
-      { time: 'Breakfast · 8:00 AM', emoji: '🍳', name: 'Besan chilla + mint chutney', desc: 'Chickpea pancake with fresh mint chutney.', kcal: 320 },
-      { time: 'Mid-morning · 11:00 AM', emoji: '🥥', name: 'Tender coconut water + 4 walnuts', desc: 'Hydrating coconut water with walnuts.', kcal: 140 },
-      { time: 'Lunch · 1:30 PM', emoji: '🍲', name: 'Sambar rice + poriyal', desc: 'Tamarind sambar with rice and vegetable poriyal.', kcal: 530 },
-      { time: 'Evening · 5:00 PM', emoji: '🍵', name: 'Masala chai + 2 marie biscuits', desc: 'Sugar-free chai with whole-wheat biscuits.', kcal: 110 },
-      { time: 'Dinner · 8:00 PM', emoji: '🍛', name: 'Vegetable pulao + raita', desc: 'Mixed vegetable pulao with cooling raita.', kcal: 550 }
-    ],
-    3: [
-      { time: 'Breakfast · 8:00 AM', emoji: '🥣', name: 'Poha with peanuts', desc: 'Flattened rice with peanuts and turmeric.', kcal: 330 },
-      { time: 'Mid-morning · 11:00 AM', emoji: '🍊', name: 'Orange + 4 almonds', desc: 'A whole orange with almonds.', kcal: 130 },
-      { time: 'Lunch · 1:30 PM', emoji: '🥗', name: 'Chana masala + 2 roti + salad', desc: 'Spiced chickpeas with whole-wheat rotis.', kcal: 530 },
-      { time: 'Evening · 5:00 PM', emoji: '🥒', name: 'Cucumber sticks + hummus', desc: 'Fresh cucumber with home-made hummus.', kcal: 110 },
-      { time: 'Dinner · 8:00 PM', emoji: '🍲', name: 'Mixed dal + lauki sabzi + rice', desc: 'Two-lentil dal with bottle gourd sabzi.', kcal: 560 }
-    ],
-    4: [
-      { time: 'Breakfast · 8:00 AM', emoji: '🥯', name: 'Multigrain toast + avocado', desc: 'Toasted multigrain bread with mashed avocado.', kcal: 340 },
-      { time: 'Mid-morning · 11:00 AM', emoji: '🍎', name: 'Apple + peanut butter', desc: 'Apple slices with 1 tsp peanut butter.', kcal: 130 },
-      { time: 'Lunch · 1:30 PM', emoji: '🍛', name: 'Curd rice + lemon pickle + papad', desc: 'Cooling curd rice with lemon pickle.', kcal: 520 },
-      { time: 'Evening · 5:00 PM', emoji: '🍵', name: 'Green tea + handful trail mix', desc: 'Antioxidant tea with dry fruits.', kcal: 110 },
-      { time: 'Dinner · 8:00 PM', emoji: '🥘', name: 'Methi paratha + curd + pickle', desc: 'Fenugreek flatbread with thick curd.', kcal: 550 }
-    ],
-    5: [
-      { time: 'Breakfast · 8:00 AM', emoji: '🥞', name: 'Ragi dosa + coconut chutney', desc: 'Finger millet dosa with fresh chutney.', kcal: 330 },
-      { time: 'Mid-morning · 11:00 AM', emoji: '🥭', name: 'Fruit bowl (papaya + watermelon)', desc: 'Mixed seasonal fruit bowl.', kcal: 120 },
-      { time: 'Lunch · 1:30 PM', emoji: '🍲', name: 'Vegetable thali — sabzi, dal, rice', desc: 'Wholesome thali with two seasonal sabzis.', kcal: 540 },
-      { time: 'Evening · 5:00 PM', emoji: '☕', name: 'Filter coffee + 2 cookies', desc: 'South Indian filter coffee, low sugar.', kcal: 110 },
-      { time: 'Dinner · 8:00 PM', emoji: '🍜', name: 'Vegetable soup + grilled paneer', desc: 'Light dinner — soup with grilled paneer.', kcal: 510 }
-    ],
-    6: [ // Sunday — biryani day! 🍛
-      { time: 'Breakfast · 8:00 AM', emoji: '🥣', name: 'Light oats with fruit', desc: 'Smaller breakfast to balance Sunday lunch.', kcal: 280 },
-      { time: 'Mid-morning · 11:00 AM', emoji: '🥒', name: 'Cucumber + lemon water', desc: 'Hydration before the special lunch.', kcal: 50 },
-      { time: 'Lunch · 1:30 PM', emoji: '🍛', name: 'Veg biryani + raita 🌟', desc: 'Your weekly biryani — proper portion, with raita & salad.', kcal: 680 },
-      { time: 'Evening · 5:00 PM', emoji: '🍵', name: 'Green tea + 4 almonds', desc: 'Light snack — Sunday lunch is satisfying.', kcal: 100 },
-      { time: 'Dinner · 8:00 PM', emoji: '🥗', name: 'Soup + grilled vegetables', desc: 'Light dinner to balance the biryani lunch.', kcal: 380 }
-    ]
-  };
-
-  function renderMydietDay(dayIdx) {
-    const meals = MYDIET_MEALS[dayIdx] || MYDIET_MEALS[0];
-    const container = document.getElementById('mydiet-meals');
-    if (!container) return;
-    container.innerHTML = meals.map(m => `
-      <div class="meal-row">
-        <div class="meal-emoji">${m.emoji}</div>
-        <div class="meal-info">
-          <div class="meal-time">${m.time}</div>
-          <div class="meal-name">${m.name}</div>
-          <div class="meal-desc">${m.desc}</div>
-        </div>
-        <div class="meal-kcal">
-          <strong>${m.kcal}</strong>
-          <small>kcal</small>
-        </div>
-      </div>
-    `).join('');
+  function annamEhrMeta(customer, subs){
+    var el=document.getElementById('ehr-meta'); if(!el) return;
+    var pills=[];
+    var active=(subs||[]).filter(function(s){return ['active','ending_soon','renewal_due','renewed'].indexOf(s.status)>=0;})[0];
+    if(active) pills.push('<span class="ehr-pill">\ud83d\udfe2 <strong>'+annamTitle(active.plan_type)+'</strong> membership</span>');
+    else if(customer && customer.payment_status==='paid') pills.push('<span class="ehr-pill">\u2713 <strong>Consultation paid</strong></span>');
+    else pills.push('<span class="ehr-pill">Membership <strong>not active yet</strong></span>');
+    if(customer && customer.account_no) pills.push('<span class="ehr-pill">Account <strong>'+annamEsc(customer.account_no)+'</strong></span>');
+    el.innerHTML=pills.join('');
   }
 
-  function mydietPickDay(el, dayIdx) {
-    document.querySelectorAll('#mydiet-days .day-pill').forEach(p => p.classList.remove('sel'));
-    el.classList.add('sel');
-    renderMydietDay(dayIdx);
+  function annamEhrJourney(customer, assessment, consults, pays, subs){
+    var el=document.getElementById('ehr-journey'); if(!el) return;
+    var pipe=customer?(customer.pipeline_status||''):'';
+    var activeSub=(subs||[]).some(function(s){return ['active','ending_soon','renewal_due','renewed'].indexOf(s.status)>=0;});
+    var consultBooked=(consults&&consults.length>0)||(customer&&customer.consult_date);
+    var consultDone=(consults||[]).some(function(c){return c.status==='completed';});
+    var dietReview=(customer&&customer.dietitian_id)||consultDone||['with_dietitian','plan_ready','active'].indexOf(pipe)>=0;
+    var planStage=['plan_ready','active'].indexOf(pipe)>=0;
+    var steps=[
+      {label:'Assessment completed', done:!!assessment},
+      {label:'Consultation scheduled', done:!!consultBooked},
+      {label:'Dietitian review', done:!!dietReview},
+      {label:'Plan creation', done:!!planStage},
+      {label:'Weekly follow-ups', done:!!activeSub},
+      {label:'Active membership', done:!!activeSub}
+    ];
+    var current=-1; for(var k=0;k<steps.length;k++){ if(!steps[k].done){ current=k; break; } }
+    if(current===-1) current=steps.length-1;
+    el.innerHTML=steps.map(function(s,i){
+      var cls=s.done?'done':(i===current?'active':'');
+      var dot=s.done?'\u2713':(i+1);
+      return '<li class="'+cls+'"><span class="ehr-jdot" aria-hidden="true">'+dot+'</span><span class="ehr-jlabel">'+s.label+'</span></li>';
+    }).join('');
   }
 
-  // ---- WATER TRACKER ----
-  let _waterGlasses = 6;
-  function adjustWater(delta) {
-    _waterGlasses = Math.max(0, Math.min(12, _waterGlasses + delta));
-    const container = document.getElementById('water-glasses');
-    const current = document.getElementById('water-current');
-    if (container) {
-      container.innerHTML = '';
-      for (let i = 0; i < 12; i++) {
-        const span = document.createElement('span');
-        span.className = i < _waterGlasses ? 'glass full' : 'glass';
-        span.textContent = i < _waterGlasses ? '💧' : '○';
-        container.appendChild(span);
-      }
-    }
-    if (current) current.textContent = (_waterGlasses * 0.25).toFixed(2) + 'L';
+  function annamEhrAssessment(a){
+    var el=document.getElementById('ehr-assessment'); var tag=document.getElementById('ehr-assessment-tag');
+    if(!el) return;
+    if(!a){ if(tag) tag.textContent=''; el.innerHTML=annamEmpty('\ud83d\udccb','No assessment on file yet','Complete your free assessment and your health summary will appear here for your dietitian to review.'); return; }
+    if(tag) tag.textContent='On file';
+    var rows=[
+      ['Height', a.height_cm?annamEsc(a.height_cm)+' cm':null],
+      ['Weight', a.weight_kg?annamEsc(a.weight_kg)+' kg':null],
+      ['BMI', a.bmi?annamEsc(a.bmi):null],
+      ['Goal', a.goal?annamTitle(a.goal):null],
+      ['Activity', a.activity_level?annamTitle(a.activity_level):null],
+      ['Diet', a.dietary_preference?annamTitle(a.dietary_preference):null],
+      ['Allergies', a.allergies?annamEsc(a.allergies):null],
+      ['Medical', a.medical_conditions?annamEsc(a.medical_conditions):null]
+    ].filter(function(x){return x[1];});
+    el.innerHTML='<div class="ehr-metrics">'+rows.map(function(x){return '<div class="ehr-metric"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div></div>';}).join('')+'</div>'+
+      '<p style="font-size:12px;color:var(--text-l);margin-top:12px">Submitted '+annamDate(a.created_at)+' \u00b7 Read-only. Your dietitian reviews this before building your plan.</p>';
+  }
+
+  function annamEhrConsult(consults, customer){
+    var el=document.getElementById('ehr-consult'); if(!el) return;
+    var c=(consults&&consults[0]) || (customer&&customer.consult_date?{consult_date:customer.consult_date,consult_time:customer.consult_time,status:'scheduled',language:null}:null);
+    if(!c){ el.innerHTML=annamEmpty('\ud83d\uddd3\ufe0f','No consultation booked yet','Book your \u20b9199 consultation and a certified dietitian will meet you to discuss your assessment.')+'<div style="text-align:center;margin-top:4px"><button class="btn btn-primary" onclick="show(\'dietitian\')">Book \u20b9199 consultation \u2192</button></div>'; return; }
+    var statusCls=(c.status==='completed')?'ok':'wait';
+    el.innerHTML='<div class="ehr-row"><div class="ehr-row-ic" aria-hidden="true">\ud83d\uddd3\ufe0f</div><div style="flex:1"><div class="t">'+annamDate(c.consult_date)+(c.consult_time?' \u00b7 '+annamEsc(c.consult_time):'')+'</div><div class="s">'+(c.language?annamTitle(c.language)+' \u00b7 ':'')+'Video consultation</div><div style="margin-top:6px"><span class="ehr-status '+statusCls+'">'+annamTitle(c.status||'scheduled')+'</span></div></div></div>'+
+      '<p style="font-size:12px;color:var(--text-l);margin-top:10px">Your secure joining link will appear here before your call.</p>';
+  }
+
+  function annamEhrDietitian(customer){
+    var el=document.getElementById('ehr-dietitian'); if(!el) return;
+    var pipe=customer?(customer.pipeline_status||''):'';
+    var assigned=customer&&customer.dietitian_id;
+    var txt;
+    if(!customer) txt='Your dietitian will be assigned after you book your consultation.';
+    else if(assigned && ['plan_ready','active'].indexOf(pipe)>=0) txt='Your dietitian has prepared your plan.';
+    else if(assigned) txt='Your dietitian is reviewing your assessment.';
+    else txt='Your dietitian will be assigned after your consultation.';
+    el.innerHTML='<div class="ehr-row" style="border:none;padding-top:0"><div class="ehr-row-ic" aria-hidden="true">\ud83c\udf3f</div><div style="flex:1"><div class="t">'+(assigned?'Dietitian assigned':'Awaiting assignment')+'</div><div class="s">'+txt+'</div></div></div>'+
+      '<p style="font-size:12px;color:var(--text-l);margin-top:6px">Every Annam plan is created by a qualified human dietitian \u2014 never AI.</p>';
+  }
+
+  function annamEhrPlan(){
+    var el=document.getElementById('ehr-plan'); if(!el) return;
+    el.innerHTML=annamEmpty('\ud83c\udf7d\ufe0f','Your personalised plan is being prepared','Your dietitian creates your plan after reviewing your assessment and consultation. It will appear here \u2014 built for you by a human, never AI.')+
+      '<div style="text-align:center;margin-top:4px"><button class="btn btn-ghost ehr-btn-soon" disabled title="Available once your plan is ready">\u2b07 Download PDF \u00b7 with your plan</button></div>';
+  }
+
+  function annamEhrLabs(labs){
+    var el=document.getElementById('ehr-labs'); if(!el) return;
+    if(!labs || !labs.length){ el.innerHTML=annamEmpty('\ud83e\uddea','No lab reports yet','When your dietitian requests lab work, your uploaded reports will appear here. Secure upload arrives in a later update.'); return; }
+    el.innerHTML=labs.map(function(l){
+      var name=l.file_name||l.name||l.filename||'Lab report';
+      var when=l.created_at||l.uploaded_at||l.created;
+      var st=l.status||l.review_status||'uploaded';
+      return '<div class="ehr-row"><div class="ehr-row-ic" aria-hidden="true">\ud83e\uddea</div><div style="flex:1"><div class="t">'+annamEsc(name)+'</div><div class="s">Uploaded '+annamDate(when)+'</div><div style="margin-top:6px"><span class="ehr-status wait">'+annamTitle(st)+'</span></div></div></div>';
+    }).join('');
+  }
+
+  function annamEhrProgress(customer, assessment, consults, pays, subs, labs){
+    var el=document.getElementById('ehr-progress'); if(!el) return;
+    var items=[];
+    if(customer && customer.created_at) items.push({d:customer.created_at,t:'Account created'});
+    if(assessment && assessment.created_at) items.push({d:assessment.created_at,t:'Assessment submitted'});
+    (consults||[]).forEach(function(c){ if(c.consult_date) items.push({d:c.consult_date,t:'Consultation '+(c.status==='completed'?'completed':'scheduled')}); });
+    (pays||[]).forEach(function(p){ if(p.status==='paid' && p.created_at) items.push({d:p.created_at,t:'Payment received'}); });
+    (subs||[]).forEach(function(s){ if(s.start_date) items.push({d:s.start_date,t:annamTitle(s.plan_type)+' membership started'}); });
+    (labs||[]).forEach(function(l){ var w=l.created_at||l.uploaded_at; if(w) items.push({d:w,t:'Lab report uploaded'}); });
+    if(!items.length){ el.innerHTML=annamEmpty('\ud83d\udcc8','Your journey will appear here','As you complete your assessment, consultation and plan, each milestone is recorded here.'); return; }
+    items.sort(function(a,b){ return new Date(a.d)-new Date(b.d); });
+    el.innerHTML='<ul class="ehr-timeline">'+items.map(function(it){ return '<li><div class="tl-t">'+annamEsc(it.t)+'</div><div class="tl-d">'+annamDate(it.d)+'</div></li>'; }).join('')+'</ul>';
+  }
+
+  function annamEhrStatic(){
+    var rv=document.getElementById('ehr-reviews'); if(rv) rv.innerHTML=annamEmpty('\ud83d\uddd2\ufe0f','No weekly reviews yet','After your plan begins, your dietitian\u2019s weekly observations, weight updates and notes will appear here.');
+    var dc=document.getElementById('ehr-docs'); if(dc) dc.innerHTML=annamEmpty('\ud83d\udd12','No documents yet','Your plans, reports and invoices will be stored here securely for you to access anytime.');
   }
 
   // ---- CHAT PANEL ----
