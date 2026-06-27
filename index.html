@@ -912,6 +912,29 @@
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
   }
+  /* ===== Assessment welcome (marketing → healthcare intercept) ===== */
+  .aw-wrap { max-width: 720px; margin: 0 auto; padding: 4.5rem 1.5rem 5rem; }
+  .aw-hero { text-align: center; margin-bottom: 2.75rem; }
+  .aw-leaf { font-size: 46px; line-height: 1; margin-bottom: 1.25rem; }
+  .aw-hero h1 { font-family: var(--font-serif); font-size: clamp(1.9rem, 4vw, 2.7rem); font-weight: 500; color: var(--text); letter-spacing: -.5px; line-height: 1.15; margin-bottom: 1.1rem; }
+  .aw-hero p { color: var(--text-m); font-size: 15px; line-height: 1.7; max-width: 540px; margin: 0 auto .8rem; }
+  .aw-cards { display: grid; gap: .9rem; }
+  .aw-card { display: flex; gap: 1rem; align-items: flex-start; background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 1.35rem 1.5rem; }
+  .aw-card .aw-ico { font-size: 22px; line-height: 1.4; flex-shrink: 0; width: 30px; text-align: center; }
+  .aw-card h3 { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 500; color: var(--text); margin-bottom: .3rem; letter-spacing: -.2px; }
+  .aw-card p { font-size: 13.5px; color: var(--text-m); line-height: 1.6; }
+  .aw-need { background: var(--sage-l); border: 1px solid var(--sage); border-radius: var(--r-lg); padding: 1.75rem; margin-top: 1.75rem; }
+  .aw-need h3 { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 500; color: var(--green-d); margin-bottom: 1rem; }
+  .aw-need ul { list-style: none; display: grid; gap: .6rem; }
+  .aw-need li { display: flex; gap: .65rem; align-items: center; font-size: 14px; color: var(--text); }
+  .aw-need li .tk { color: var(--green-d); font-weight: 700; }
+  .aw-need-foot { margin-top: 1.1rem; font-size: 12.5px; color: var(--text-m); font-style: italic; line-height: 1.55; }
+  .aw-cta { text-align: center; margin-top: 2.5rem; }
+  .aw-back { display: inline-block; margin-top: 1.15rem; font-size: 13.5px; color: var(--text-m); cursor: pointer; border-bottom: 1px solid var(--line); }
+  .aw-back:hover { color: var(--green-d); }
+  .aw-fade { opacity: 0; animation: awFade .6s ease forwards; }
+  @keyframes awFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) { .aw-fade { opacity: 1 !important; animation: none !important; transform: none !important; } }
 </style>
 </head>
 <body>
@@ -958,7 +981,7 @@
     <p class="hero-sub">Designed and approved by a certified dietitian — never an algorithm. Real food, real habits, real follow-up.</p>
 
     <div class="hero-cta">
-      <button class="btn btn-primary btn-lg" onclick="show('assess')">Start free assessment →</button>
+      <button class="btn btn-primary btn-lg" onclick="show('assess-welcome')">Start free assessment →</button>
       <button class="btn btn-outline btn-lg" onclick="show('dietitian')">Already completed your assessment? Book ₹199 Consultation</button>
     </div>
 
@@ -1238,7 +1261,7 @@
         </div>
       </div>
 
-      <p style="text-align:center;color:var(--text-l);font-size:13px;font-style:italic;margin-top:2.5rem"><a onclick="show('assess')" style="color:var(--green-d);font-weight:600;cursor:pointer;border-bottom:1.5px solid var(--gold-l);padding-bottom:1px">Take the 4-minute assessment</a> — and a certified dietitian will build your personalised plan.</p>
+      <p style="text-align:center;color:var(--text-l);font-size:13px;font-style:italic;margin-top:2.5rem"><a onclick="show('assess-welcome')" style="color:var(--green-d);font-weight:600;cursor:pointer;border-bottom:1.5px solid var(--gold-l);padding-bottom:1px">Take the 4-minute assessment</a> — and a certified dietitian will build your personalised plan.</p>
     </div>
   </section>
 
@@ -1608,7 +1631,7 @@
       <h2 id="final-cta-heading" style="font-family:var(--font-serif);font-size:clamp(1.9rem,3.4vw,2.6rem);font-weight:500;line-height:1.18;letter-spacing:-.5px;color:var(--cream);margin:.75rem 0 1rem">Ready to begin your <em style="font-style:italic;color:var(--gold-l)">health journey?</em></h2>
       <p style="color:rgba(251,247,238,.85);font-size:1.05rem;line-height:1.7;max-width:600px;margin:0 auto 2rem">Take the free assessment today. Understand your body before you speak with your dietitian — your answers help them prepare for a consultation that truly counts.</p>
       <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-        <button class="btn btn-lg" style="background:var(--gold-l);color:var(--green-d);font-weight:600;padding:14px 28px" onclick="show('assess')">Start free assessment →</button>
+        <button class="btn btn-lg" style="background:var(--gold-l);color:var(--green-d);font-weight:600;padding:14px 28px" onclick="show('assess-welcome')">Start free assessment →</button>
         <button class="btn btn-outline btn-lg" style="border-color:rgba(251,247,238,.55);color:var(--cream);padding:14px 28px" onclick="show('dietitian')">Book ₹199 Consultation</button>
       </div>
       <p style="font-size:12.5px;color:rgba(251,247,238,.6);margin-top:1.5rem;font-style:italic">No payment to take the assessment. Your plan is always created by a qualified human dietitian.</p>
@@ -1720,10 +1743,46 @@
 
       <div style="margin-top:2.5rem;padding:1.5rem;background:var(--sage-l);border-radius:var(--r-lg);text-align:center">
         <p style="font-size:13.5px;color:var(--green-d);line-height:1.6;margin:0 0 1rem"><strong>Customer stories are on the way.</strong> We're a new platform and would rather show you real results than invent them — verified stories will appear once our first beta members complete their programs. Until then: a qualified human dietitian, a plan built around your life, and weekly support.</p>
-        <button class="btn btn-primary" onclick="show('assess')">Start free assessment →</button>
+        <button class="btn btn-primary" onclick="show('assess-welcome')">Start free assessment →</button>
       </div>
     </div>
   </section>
+</div>
+
+<!-- =================== ASSESSMENT WELCOME (intercept) =================== -->
+<div class="page" id="page-assess-welcome" role="main" tabindex="-1">
+  <div class="aw-wrap">
+    <div class="aw-hero aw-fade" style="animation-delay:.05s">
+      <div class="aw-leaf" aria-hidden="true">🌿</div>
+      <h1>Welcome to your health journey.</h1>
+      <p>In the next 4 minutes, we'll understand your body, your lifestyle and the food you already love.</p>
+      <p>Everything you share helps your certified dietitian create a nutrition plan built specifically for you.</p>
+    </div>
+
+    <div class="aw-cards" role="list" aria-label="What to expect">
+      <div class="aw-card aw-fade" role="listitem" style="animation-delay:.15s"><span class="aw-ico" aria-hidden="true">⏱️</span><div><h3>Takes around 4 minutes</h3><p>Simple questions about your lifestyle, eating habits and health.</p></div></div>
+      <div class="aw-card aw-fade" role="listitem" style="animation-delay:.25s"><span class="aw-ico" aria-hidden="true">👩‍⚕️</span><div><h3>Reviewed by a certified dietitian</h3><p>Every assessment is personally reviewed before your nutrition plan is created.</p></div></div>
+      <div class="aw-card aw-fade" role="listitem" style="animation-delay:.35s"><span class="aw-ico" aria-hidden="true">🔒</span><div><h3>Your health data stays private</h3><p>Encrypted and securely stored. Only you and your assigned dietitian can access it.</p></div></div>
+      <div class="aw-card aw-fade" role="listitem" style="animation-delay:.45s"><span class="aw-ico" aria-hidden="true">💳</span><div><h3>Completely free</h3><p>The assessment costs nothing. You'll only pay if you later choose to book a consultation.</p></div></div>
+      <div class="aw-card aw-fade" role="listitem" style="animation-delay:.55s"><span class="aw-ico" aria-hidden="true">🤖</span><div><h3>No AI-generated diet plans</h3><p>Technology helps organise your information. Every customer diet plan is created by a qualified human dietitian.</p></div></div>
+    </div>
+
+    <div class="aw-need aw-fade" style="animation-delay:.65s">
+      <h3>Before you begin</h3>
+      <ul>
+        <li><span class="tk" aria-hidden="true">✓</span>Your height &amp; weight</li>
+        <li><span class="tk" aria-hidden="true">✓</span>Your health goals</li>
+        <li><span class="tk" aria-hidden="true">✓</span>Favourite foods</li>
+        <li><span class="tk" aria-hidden="true">✓</span>Recent blood reports (optional)</li>
+      </ul>
+      <p class="aw-need-foot">The more accurately you answer, the better your dietitian can personalise your plan.</p>
+    </div>
+
+    <div class="aw-cta aw-fade" style="animation-delay:.75s">
+      <button class="btn btn-primary btn-lg" onclick="show('assess')">Start Free Assessment →</button>
+      <div><a class="aw-back" onclick="show('home')" role="link" tabindex="0">Back to Home</a></div>
+    </div>
+  </div>
 </div>
 
 <!-- =================== ASSESSMENT =================== -->
@@ -4639,7 +4698,7 @@
       } else {
         navActions.innerHTML = `
           <button class="btn btn-ghost" onclick="show('login')">Sign in</button>
-          <button class="btn btn-primary" onclick="show('assess')">Start free</button>
+          <button class="btn btn-primary" onclick="show('assess-welcome')">Start free</button>
         `;
       }
     } catch (e) {}
