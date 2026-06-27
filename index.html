@@ -822,7 +822,20 @@
     .fs-macro strong { font-size: 1.15rem; }
     .fs-macro small { font-size: 10px; }
     .fs-signature { font-size: 1.1rem; }
-  }
+  /* ===== Batch 2 — trust/membership helpers ===== */
+  .b2-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:1.25rem; margin-top:2.5rem; }
+  .b2-card { background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); padding:1.75rem 1.5rem; transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
+  .b2-card:hover { transform:translateY(-5px); box-shadow:0 14px 38px rgba(74,59,42,.10); border-color:var(--sage); }
+  .b2-icon { width:52px; height:52px; border-radius:14px; background:var(--sage-l); color:var(--green-d); display:flex; align-items:center; justify-content:center; margin-bottom:1.1rem; }
+  .b2-icon svg { width:24px; height:24px; }
+  .b2-card h3 { font-family:var(--font-serif); font-size:1.2rem; font-weight:500; color:var(--text); margin-bottom:.5rem; letter-spacing:-.2px; }
+  .b2-card p { font-size:13.5px; color:var(--text-m); line-height:1.6; }
+  .b2-checks { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:.9rem 1.5rem; margin-top:2.5rem; }
+  .b2-check { display:flex; align-items:flex-start; gap:12px; padding:14px 16px; background:#fff; border:1px solid var(--line); border-radius:var(--r-sm); transition:border-color .25s ease, transform .25s ease; }
+  .b2-check:hover { border-color:var(--sage); transform:translateY(-2px); }
+  .b2-check .tick { width:24px; height:24px; min-width:24px; border-radius:50%; background:var(--green-d); color:var(--cream); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; }
+  .b2-check span.lbl { font-size:13.5px; color:var(--text); font-weight:500; line-height:1.4; align-self:center; }
+  @media (max-width:520px){ .b2-grid, .b2-checks { grid-template-columns:1fr; } }
 
 </style>
 </head>
@@ -1012,6 +1025,51 @@
     </div>
   </section>
 
+  <!-- =================== WEEKLY DIETITIAN SUPPORT =================== -->
+  <section class="block" style="background:var(--cream)">
+    <div class="block-inner">
+      <div class="section-head">
+        <div class="section-eyebrow">Continuous care</div>
+        <h2 class="section-title">Your dietitian <em>stays with you.</em></h2>
+        <p class="section-sub">Real transformation happens through continuous support — not one consultation. You're not buying a plan; you're getting a professional who walks the whole way with you.</p>
+      </div>
+
+      <div class="b2-grid">
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/></svg></div>
+          <h3>Weekly follow-ups</h3>
+          <p>Your dietitian checks your progress every single week — adjusting before small slips become setbacks.</p>
+        </div>
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div>
+          <h3>Plan adjustments</h3>
+          <p>Every body changes. Your nutrition changes with it — your plan is refined as your results, schedule and life evolve.</p>
+        </div>
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 0 1-.9-3.8A8.38 8.38 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></div>
+          <h3>WhatsApp support</h3>
+          <p>Ask questions whenever you need guidance — a quick check before you order, travel, or try something new.</p>
+        </div>
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg></div>
+          <h3>Accountability</h3>
+          <p>Someone keeps you consistent. Not motivated for a week? Your dietitian notices — and helps you get back on track.</p>
+        </div>
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3c0 1.5 1 2 1 3H8a2 2 0 0 0 0 4h1c0 1-1 1.5-1 3a3 3 0 0 0 6 0c0-1.5-1-2-1-3h1a2 2 0 0 0 0-4h-1c0-1 1-1.5 1-3a3 3 0 0 0-3-3z"/></svg></div>
+          <h3>Habit coaching</h3>
+          <p>Learn sustainable eating instead of temporary dieting — the skills that keep results long after the program ends.</p>
+        </div>
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+          <h3>Progress reviews</h3>
+          <p>Regular reviews of weight, body measurements, energy, adherence and challenges — so progress is measured, not guessed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
   <!-- ===== THREE WAYS WE SERVE YOU ===== -->
   <section class="block" style="background:linear-gradient(180deg, var(--cream-d) 0%, var(--cream) 100%);position:relative;overflow:hidden">
     <!-- Decorative botanical SVGs -->
@@ -1150,6 +1208,65 @@
     </div>
   </section>
 
+
+  <!-- =================== HUMAN vs AI POSITIONING =================== -->
+  <section class="block" style="background:linear-gradient(180deg, var(--cream) 0%, var(--cream-d) 100%)">
+    <div class="block-inner" style="max-width:920px">
+      <div class="section-head">
+        <div class="section-eyebrow">Human-first</div>
+        <h2 class="section-title">Designed by humans.<br/><em>Supported by technology.</em></h2>
+        <p class="section-sub">Most nutrition apps hand you an algorithm. Annam doesn't. Your diet is the work of a qualified dietitian who knows your name, your history and your goals.</p>
+      </div>
+
+      <div class="b2-grid" style="grid-template-columns:repeat(auto-fit, minmax(260px, 1fr))">
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <h3>Plans created by people</h3>
+          <p>Annam does not use AI to generate your diet. Only certified dietitians create and approve every customer plan.</p>
+        </div>
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 7v6c0 5 3.5 7.5 8 9 4.5-1.5 8-4 8-9V7z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3>Reviewed, never automated</h3>
+          <p>No instant AI-generated diets. No automated nutrition advice. Every recommendation is reviewed by a qualified human before it reaches you.</p>
+        </div>
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v2M15 1v2M9 21v2M15 21v2M1 9h2M1 15h2M21 9h2M21 15h2"/></svg></div>
+          <h3>Technology stays behind the scenes</h3>
+          <p>We use technology to organise your information, schedule your follow-ups and keep your records secure — so your dietitian can focus on you.</p>
+        </div>
+      </div>
+
+      <p style="text-align:center;font-size:13.5px;color:var(--text-m);font-style:italic;margin-top:2.25rem;max-width:640px;margin-left:auto;margin-right:auto">This is what makes Annam different from app-first platforms — your care is human, and it stays that way.</p>
+    </div>
+  </section>
+
+
+  <!-- =================== EVERY MEMBERSHIP INCLUDES =================== -->
+  <section class="block" style="background:var(--cream)">
+    <div class="block-inner">
+      <div class="section-head">
+        <div class="section-eyebrow">What's included</div>
+        <h2 class="section-title">Everything <em>every member</em> receives.</h2>
+        <p class="section-sub">Whichever program your dietitian recommends, this is the care that comes with it — every time.</p>
+      </div>
+
+      <div class="b2-checks">
+        <div class="b2-check"><span class="tick">✓</span><span class="lbl">Certified dietitian</span></div>
+        <div class="b2-check"><span class="tick">✓</span><span class="lbl">Personalised diet plan</span></div>
+        <div class="b2-check"><span class="tick">✓</span><span class="lbl">Weekly follow-ups</span></div>
+        <div class="b2-check"><span class="tick">✓</span><span class="lbl">Unlimited plan adjustments</span></div>
+        <div class="b2-check"><span class="tick">✓</span><span class="lbl">WhatsApp support</span></div>
+        <div class="b2-check"><span class="tick">✓</span><span class="lbl">Progress tracking</span></div>
+        <div class="b2-check"><span class="tick">✓</span><span class="lbl">Lab report review</span></div>
+        <div class="b2-check"><span class="tick">✓</span><span class="lbl">Regional Indian diet planning</span></div>
+        <div class="b2-check"><span class="tick">✓</span><span class="lbl">Personalised recipes</span></div>
+        <div class="b2-check"><span class="tick">✓</span><span class="lbl">My Diet dashboard</span></div>
+        <div class="b2-check"><span class="tick">✓</span><span class="lbl">Behaviour coaching</span></div>
+        <div class="b2-check"><span class="tick">✓</span><span class="lbl">Monthly progress review</span></div>
+      </div>
+    </div>
+  </section>
+
   <section class="block packages" id="packages">
     <div class="block-inner">
       <div class="section-head">
@@ -1160,50 +1277,52 @@
       <div class="pkg-grid">
         <div class="pkg" data-pkg="kickstart">
           <h3 class="pkg-name">Foundation</h3>
-          <p class="pkg-tagline">3 months · Begin your health journey</p>
+          <p class="pkg-tagline">3 months · For getting started</p>
           <div style="font-family:var(--font-serif);font-size:2rem;font-weight:500;color:var(--gold-l);line-height:1;letter-spacing:-1px;margin:1.25rem 0 .5rem">3 months</div>
-          <span class="pkg-save" style="color:rgba(251,247,238,.7)">Perfect for starting strong with expert guidance.</span>
+          <span class="pkg-save" style="color:rgba(251,247,238,.7)">For anyone beginning their health journey who wants expert structure and early momentum.</span>
           <ul style="margin-top:1.5rem">
-            <li>Personal dietitian</li>
+            <li>Your own certified dietitian</li>
             <li>Personalised diet plan</li>
             <li>Weekly follow-ups</li>
-            <li>Progress tracking</li>
-            <li>Monthly review</li>
+            <li>Plan adjustments as you go</li>
+            <li>Monthly progress review</li>
             <li>My Diet dashboard</li>
           </ul>
+          <p style="font-size:11.5px;color:rgba(251,247,238,.6);font-style:italic;margin:0 0 1rem">Outcome: a clear, livable plan — and the habits to follow it.</p>
           <button class="btn btn-outline" style="border-color:var(--gold-l);color:var(--gold-l)" onclick="show('dietitian')">Start with a consult</button>
         </div>
         <div class="pkg featured" data-pkg="transform">
           <span class="pkg-tag">Most popular</span>
           <h3 class="pkg-name">Transformation</h3>
-          <p class="pkg-tagline">6 months · Long-term lifestyle change</p>
+          <p class="pkg-tagline">6 months · For lasting change</p>
           <div style="font-family:var(--font-serif);font-size:2rem;font-weight:500;color:var(--cream);line-height:1;letter-spacing:-1px;margin:1.25rem 0 .5rem">6 months</div>
-          <span class="pkg-save" style="color:var(--gold-l)">Perfect for lasting lifestyle transformation.</span>
+          <span class="pkg-save" style="color:var(--gold-l)">For people serious about a real lifestyle shift, with deeper support and ongoing coaching.</span>
           <ul style="margin-top:1.5rem">
             <li>Everything in Foundation</li>
-            <li>Lifestyle coaching</li>
-            <li>Priority support</li>
+            <li>Lifestyle &amp; behaviour coaching</li>
+            <li>Priority dietitian support</li>
             <li>Advanced progress reviews</li>
-            <li>Dining-out guidance</li>
-            <li>Festival planning</li>
+            <li>Dining-out &amp; festival guidance</li>
             <li>Nutritional deficiency review</li>
           </ul>
+          <p style="font-size:11.5px;color:rgba(251,247,238,.75);font-style:italic;margin:0 0 1rem">Outcome: sustainable change that holds through real life.</p>
           <button class="btn btn-coral" onclick="show('dietitian')">Start with a consult</button>
         </div>
         <div class="pkg" data-pkg="lifestyle">
           <h3 class="pkg-name">Lifestyle</h3>
-          <p class="pkg-tagline">12 months · Preventive, sustained health</p>
+          <p class="pkg-tagline">12 months · A long-term health membership</p>
           <div style="font-family:var(--font-serif);font-size:2rem;font-weight:500;color:var(--gold-l);line-height:1;letter-spacing:-1px;margin:1.25rem 0 .5rem">12 months</div>
-          <span class="pkg-save" style="color:rgba(251,247,238,.7)">Perfect for long-term preventive healthcare.</span>
+          <span class="pkg-save" style="color:rgba(251,247,238,.7)">For those investing in preventive, year-round health with a dedicated dietitian relationship.</span>
           <ul style="margin-top:1.5rem">
             <li>Everything in Transformation</li>
             <li>Dedicated long-term dietitian</li>
             <li>Annual nutrition roadmap</li>
             <li>Quarterly comprehensive reviews</li>
             <li>Preventive health planning</li>
-            <li>Priority scheduling</li>
-            <li>Premium progress reports</li>
+            <li>Monthly video consultation</li>
+            <li>Priority scheduling &amp; premium reports</li>
           </ul>
+          <p style="font-size:11.5px;color:rgba(251,247,238,.6);font-style:italic;margin:0 0 1rem">Outcome: enduring health, guided every season.</p>
           <button class="btn btn-outline" style="border-color:var(--gold-l);color:var(--gold-l)" onclick="show('dietitian')">Start with a consult</button>
         </div>
       </div>
@@ -1214,6 +1333,46 @@
       </div>
     </div>
   </section>
+
+  <!-- =================== MEMBERSHIP FLEXIBILITY =================== -->
+  <section class="block" style="background:linear-gradient(180deg, var(--cream-d) 0%, var(--cream) 100%)">
+    <div class="block-inner">
+      <div class="section-head">
+        <div class="section-eyebrow">No pressure</div>
+        <h2 class="section-title">Membership designed around <em>real life.</em></h2>
+        <p class="section-sub">Life isn't linear, and your membership shouldn't be either. Everything is built to remove the anxiety of committing.</p>
+      </div>
+
+      <div class="b2-grid">
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg></div>
+          <h3>Pause anytime</h3>
+          <p>Travelling? On vacation? Work got busy? Pause your membership and resume whenever you're ready — your journey waits for you.</p>
+        </div>
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></div>
+          <h3>Upgrade anytime</h3>
+          <p>Need more support? Move up to a longer program whenever it suits you — no penalty, no friction.</p>
+        </div>
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div>
+          <h3>Continue monthly</h3>
+          <p>Continue after your selected duration — only if both you and your dietitian feel it's still helping. Never a silent auto-renewal.</p>
+        </div>
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6M9 11h6"/></svg></div>
+          <h3>Your progress never disappears</h3>
+          <p>Your reports, history, plans and progress stay available in My Diet — your health record is yours to keep.</p>
+        </div>
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 4.5 1.5c0 1.5-2.5 2-2.5 3.5M12 17h.01"/></svg></div>
+          <h3>No hidden charges</h3>
+          <p>Everything is explained clearly before you pay anything. The price you agree on with your dietitian is the price — full stop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <section style="padding:4rem 2.5rem;background:linear-gradient(180deg, var(--cream) 0%, var(--cream-d) 100%);position:relative;overflow:hidden">
     <svg viewBox="0 0 200 200" style="position:absolute;top:-30px;right:-30px;width:200px;height:200px;opacity:0.08;color:var(--coral);pointer-events:none" fill="currentColor">
@@ -1591,6 +1750,7 @@
   <div class="plan-page">
     <div class="plan-wrap">
       <div class="plan-head">
+        <div class="assess-complete-badge" style="display:inline-flex;align-items:center;gap:8px;background:var(--sage-l);color:var(--green-d);padding:7px 16px;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:.3px;margin-bottom:1.25rem"><span style="width:18px;height:18px;border-radius:50%;background:var(--green-d);color:var(--cream);display:flex;align-items:center;justify-content:center;font-size:11px">✓</span>Assessment complete</div><br/>
         <span class="vc-tag" style="margin-bottom:1rem;display:inline-block">Your assessment summary</span>
         <h1>Here's <em>where you stand</em> today.</h1>
         <p>Based on the details you shared, this is a summary of your starting point. Your certified dietitian will review this before your consultation — and build your personalised plan from it.</p>
@@ -1833,137 +1993,6 @@
       <div style="display:flex;justify-content:space-between;margin-top:2rem;flex-wrap:wrap;gap:1rem">
         <button class="btn btn-ghost" onclick="show('assess')">← Edit my metrics</button>
         <button class="btn btn-primary btn-lg" onclick="show('dietitian')">Book my ₹199 consult →</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =================== DIET PLAN RESULT =================== -->
-<div class="page" id="page-plan">
-  <div class="plan-page">
-    <div class="plan-wrap">
-      <!-- Sample banner -->
-      <div style="background:linear-gradient(90deg, var(--gold-l), var(--coral-l));color:var(--brown);padding:14px 2rem;text-align:center;font-size:13.5px;font-weight:500;border-radius:var(--r-sm);margin-bottom:1.5rem;border:1px solid rgba(201,151,42,.3)">
-        ✨ <strong>This is a sample preview.</strong> Personalised by a certified MSc/RD dietitian after your 30-min consult — for ₹199 (credited back if you subscribe).
-      </div>
-      <div class="plan-head">
-        <span class="vc-tag" style="margin-bottom:1rem;display:inline-block">Sample preview · Based on your metrics</span>
-        <h1 id="plan-greeting">Hey there, here's what your plan <em>could look like</em>.</h1>
-        <p id="plan-subtitle">Vegetarian · 1,650 kcal/day · 3 meals/day · Goal: −10 kg in 24 weeks. Your dietitian will personalise everything after the consult.</p>
-      </div>
-
-      <!-- ===== DAILY TARGETS — horizontal strip, full width ===== -->
-      <div class="plan-card dark" style="margin-bottom:1.5rem">
-        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem">
-          <h3 class="plan-card-title" style="margin-bottom:0">📊 Your daily targets</h3>
-          <div style="font-size:11px;color:rgba(251,247,238,.6);font-style:italic;max-width:380px;text-align:right;line-height:1.5">Calculated using Mifflin-St Jeor BMR × 1.375 activity factor, with a 22% deficit safe for your profile.</div>
-        </div>
-
-        <!-- 5 metrics in a single horizontal row (wraps to 2-col on mobile) -->
-        <div class="targets-row" style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px">
-          <div style="background:rgba(251,247,238,.08);border-radius:12px;padding:1rem 1.1rem">
-            <div style="font-size:10.5px;color:rgba(251,247,238,.6);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Calories</div>
-            <div style="font-family:var(--font-serif);font-size:1.8rem;font-weight:500;line-height:1;color:var(--cream)">1,650<small style="font-size:11px;color:rgba(251,247,238,.55);margin-left:2px;font-weight:400">kcal</small></div>
-          </div>
-          <div style="background:rgba(251,247,238,.08);border-radius:12px;padding:1rem 1.1rem">
-            <div style="font-size:10.5px;color:rgba(251,247,238,.6);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Water</div>
-            <div style="font-family:var(--font-serif);font-size:1.8rem;font-weight:500;line-height:1;color:var(--cream)">2.8<small style="font-size:11px;color:rgba(251,247,238,.55);margin-left:2px;font-weight:400">L</small></div>
-          </div>
-          <div style="background:rgba(251,247,238,.08);border-radius:12px;padding:1rem 1.1rem">
-            <div style="font-size:10.5px;color:rgba(251,247,238,.6);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Protein</div>
-            <div style="font-family:var(--font-serif);font-size:1.8rem;font-weight:500;line-height:1;color:var(--gold-l)">92<small style="font-size:11px;color:rgba(251,247,238,.55);margin-left:2px;font-weight:400">g</small></div>
-          </div>
-          <div style="background:rgba(251,247,238,.08);border-radius:12px;padding:1rem 1.1rem">
-            <div style="font-size:10.5px;color:rgba(251,247,238,.6);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Carbs</div>
-            <div style="font-family:var(--font-serif);font-size:1.8rem;font-weight:500;line-height:1;color:var(--gold-l)">180<small style="font-size:11px;color:rgba(251,247,238,.55);margin-left:2px;font-weight:400">g</small></div>
-          </div>
-          <div style="background:rgba(251,247,238,.08);border-radius:12px;padding:1rem 1.1rem">
-            <div style="font-size:10.5px;color:rgba(251,247,238,.6);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Fats</div>
-            <div style="font-family:var(--font-serif);font-size:1.8rem;font-weight:500;line-height:1;color:var(--gold-l)">52<small style="font-size:11px;color:rgba(251,247,238,.55);margin-left:2px;font-weight:400">g</small></div>
-          </div>
-        </div>
-
-        <!-- Habits row — horizontal at desktop, 2-col on mobile -->
-        <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(251,247,238,.15)">
-          <div style="font-size:10.5px;color:var(--gold-l);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:.85rem">✨ Four habits that compound your results</div>
-          <div class="habits-row" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
-            <div style="font-size:12.5px;line-height:1.5;color:rgba(251,247,238,.88)"><strong style="display:block;color:var(--cream);font-size:13px;margin-bottom:4px">① 12-hour eating window</strong>Dinner by 8 PM, breakfast after 8 AM. Improves insulin sensitivity.</div>
-            <div style="font-size:12.5px;line-height:1.5;color:rgba(251,247,238,.88)"><strong style="display:block;color:var(--cream);font-size:13px;margin-bottom:4px">② Protein at every meal</strong>20–30g per meal preserves muscle, reduces cravings.</div>
-            <div style="font-size:12.5px;line-height:1.5;color:rgba(251,247,238,.88)"><strong style="display:block;color:var(--cream);font-size:13px;margin-bottom:4px">③ 10-min post-meal walk</strong>Drops post-meal blood sugar by up to 30%.</div>
-            <div style="font-size:12.5px;line-height:1.5;color:rgba(251,247,238,.88)"><strong style="display:block;color:var(--cream);font-size:13px;margin-bottom:4px">④ Weekly weigh-in only</strong>Same day, same time. Daily numbers mislead.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ===== YOUR PLAN — full width card ===== -->
-      <div class="plan-card" id="plan-pkg-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;margin-bottom:1rem">
-          <div style="flex:1;min-width:240px">
-            <h3 class="plan-card-title" style="margin-bottom:.4rem">🌿 Your personalised plan</h3>
-            <p style="font-size:13px;color:var(--text-m);line-height:1.6;margin-bottom:0">At launch, Annam delivers a fully personalised diet plan designed by your dietitian. <strong>Your dietitian gives you a transparent quote</strong> during your ₹199 consult — no surprise pricing. Meal delivery and chef-at-home are coming soon.</p>
-          </div>
-        </div>
-
-        <div class="form-section-title" style="margin-top:1.25rem;color:var(--text-l)">Plan format</div>
-        <div class="opt-grid" style="margin-bottom:1rem" data-group="service-pref">
-          <div class="opt sel" data-val="recipes" onclick="pickServicePref(this)"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h5v16H6a2 2 0 0 0-2 2z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2z"/></svg></span><div class="opt-title">Personalised diet plan</div><div class="opt-sub">Designed by your dietitian</div></div>
-          <div class="opt" data-val="delivered" style="opacity:.5;cursor:not-allowed" title="Coming soon"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg></span><div class="opt-title">Delivered meals</div><div class="opt-sub">Coming soon</div></div>
-          <div class="opt" data-val="chef" style="opacity:.5;cursor:not-allowed" title="Coming soon"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 14h10v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M7 14a3.5 3.5 0 0 1-1-6.5A3.5 3.5 0 0 1 12 5a3.5 3.5 0 0 1 6 2.5A3.5 3.5 0 0 1 17 14"/></svg></span><div class="opt-title">Chef at home</div><div class="opt-sub">Coming soon</div></div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem" class="plan-prefs-grid">
-          <div>
-            <div class="form-section-title" style="margin-top:.5rem;color:var(--text-l)">Plan duration</div>
-            <div class="opt-grid" style="margin-bottom:0">
-              <div class="opt plan-dur" data-dur="3" onclick="pickOpt(this)"><span class="opt-emoji"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg></span><div class="opt-title">3 months</div><div class="opt-sub">Foundation</div></div>
-              <div class="opt plan-dur sel" data-dur="6" onclick="pickOpt(this)"><span class="opt-emoji">🌿</span><div class="opt-title">6 months</div><div class="opt-sub">Recommended</div></div>
-              <div class="opt plan-dur" data-dur="12" onclick="pickOpt(this)"><span class="opt-emoji">🌳</span><div class="opt-title">12 months</div><div class="opt-sub">Lasting change</div></div>
-            </div>
-          </div>
-          <div>
-            <div class="form-section-title" style="margin-top:.5rem;color:var(--text-l)">Meals per day <span id="meals-mode-label" style="font-weight:400;color:var(--text-l);font-size:.85em"></span></div>
-            <div class="opt-grid" style="margin-bottom:0">
-              <div class="opt plan-meal" data-meals="1" onclick="pickOpt(this)"><span class="opt-emoji">🍽️</span><div class="opt-title">1 meal</div></div>
-              <div class="opt plan-meal" data-meals="2" onclick="pickOpt(this)"><span class="opt-emoji">🍽️🍽️</span><div class="opt-title">2 meals</div></div>
-              <div class="opt plan-meal sel" data-meals="3" onclick="pickOpt(this)"><span class="opt-emoji">🍽️🍽️🍽️</span><div class="opt-title">3 meals</div></div>
-            </div>
-          </div>
-        </div>
-
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--line);flex-wrap:wrap;gap:1rem">
-          <div style="font-size:12.5px;color:var(--text-l);line-height:1.5;flex:1;min-width:200px">
-            ✨ Your dietitian will share a transparent, personalised quote during your consult — no surprise pricing.
-          </div>
-          <button class="btn btn-primary" onclick="show('dietitian')">Book consult · ₹199 →</button>
-        </div>
-      </div>
-
-      <!-- Personalised preview teaser - based on user's cuisine + diet preferences -->
-      <div class="plan-card" id="plan-preview-card">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;margin-bottom:.4rem">
-          <h3 class="plan-card-title" style="margin-bottom:0">🌿 A taste of your <em style="font-style:italic;color:var(--green-d)" id="preview-cuisine-label">plan</em></h3>
-          <span style="font-size:10.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--brown);background:var(--gold-l);padding:4px 10px;border-radius:100px">PREVIEW ONLY</span>
-        </div>
-        <p style="font-size:13.5px;color:var(--text-m);line-height:1.6;margin-bottom:1.25rem">A small sample of dishes your dietitian could weave into your week — chosen from your selected cuisine and diet preference. <strong>Your real plan is built around your body, goals, schedule and favourite foods during your consult.</strong></p>
-
-        <div class="meal-list" id="preview-meal-list"></div>
-
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--line);flex-wrap:wrap;gap:.75rem">
-          <span style="font-size:12.5px;color:var(--text-l);font-style:italic">Preview only · Not the final plan</span>
-          <button class="btn btn-outline" onclick="show('dietitian')">Build my real plan →</button>
-        </div>
-      </div>
-
-      <!-- Final CTAs: Book consult is primary, direct subscribe is secondary -->
-      <div style="margin-top:3rem;background:linear-gradient(135deg, var(--green-d), #1f4d3f);border-radius:var(--r-lg);padding:2rem;display:grid;grid-template-columns:1.5fr 1fr;gap:1.5rem;align-items:center;color:var(--cream)" class="final-cta-grid">
-        <div>
-          <div style="font-size:11px;font-weight:600;color:var(--gold-l);letter-spacing:1px;text-transform:uppercase;margin-bottom:.5rem">Get your real plan</div>
-          <h4 style="font-family:var(--font-serif);font-size:1.45rem;font-weight:500;margin-bottom:.5rem;color:var(--cream)">Talk to a certified dietitian · ₹199</h4>
-          <p style="font-size:13.5px;color:rgba(251,247,238,.85);line-height:1.6">A 30-min consult to fine-tune your plan to your body, goals, and what you love eating. ₹199 is fully credited if you subscribe.</p>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <button class="btn" style="justify-content:center;padding:13px;font-size:14px;background:var(--gold-l);color:var(--green-d);font-weight:600" onclick="show('dietitian')">Book consult · ₹199 →</button>
-        </div>
       </div>
     </div>
   </div>
@@ -3447,10 +3476,6 @@
       } catch (e) {}
     }
     // If user landed on the diet plan page with a pre-selected tier, apply it
-    if (id === 'plan') {
-      setTimeout(applyPreferredTierToPlan, 50);
-      setTimeout(personalizeDietPreview, 50);
-    }
     if (id === 'mydiet') {
       setTimeout(renderMyDiet, 50);
     }
@@ -3476,105 +3501,6 @@
       try { window.history.replaceState({ page: 'home' }, '', window.location.pathname); } catch(e){}
     }
   });
-
-  // ---- DIET PREVIEW: use real name from assessment ----
-  function personalizeDietPreview() {
-    try {
-      const u = JSON.parse(localStorage.getItem('annam_user') || '{}');
-      const firstName = u.firstName || 'there';
-      const greet = document.getElementById('plan-greeting');
-      if (greet) {
-        greet.innerHTML = `Hey ${firstName}, here's what your plan <em style="font-style:italic;color:var(--green-d)">could look like</em>.`;
-      }
-      renderPreviewMeals(u);
-    } catch (e) {}
-  }
-
-  // ---- PERSONALISED PREVIEW MEALS ----
-  // Reads cuisine + diet from localStorage and renders 4 sample dishes
-  // that respect both. Clearly marked as preview only.
-  const PREVIEW_DISHES = {
-    north: {
-      veg:    [{e:'🥣',n:'Vegetable upma + curd',d:'Light semolina with veggies and protein-rich curd',k:340},{e:'🍛',n:'Dal-tadka + 2 phulka + bhindi',d:'Yellow dal, phulkas, dry okra stir-fry, salad',k:520},{e:'🍎',n:'Apple + 4 almonds',d:'Whole apple and a handful of soaked almonds',k:130},{e:'🥘',n:'Moong dal khichdi + greens',d:'Light comfort food with garlic palak',k:560}],
-      nonveg: [{e:'🍳',n:'Egg bhurji + 2 phulka',d:'Scrambled eggs with whole-wheat flatbread',k:380},{e:'🍗',n:'Chicken curry + brown rice',d:'Lean chicken in onion-tomato gravy with brown rice',k:540},{e:'🍎',n:'Apple + 4 almonds',d:'Whole apple and a handful of soaked almonds',k:130},{e:'🥘',n:'Grilled chicken + dal + salad',d:'Tandoori-style chicken with dal and kachumber',k:560}],
-      vegan:  [{e:'🥣',n:'Vegan upma + peanut chutney',d:'Semolina with veggies, peanut chutney',k:330},{e:'🍛',n:'Chana masala + 2 phulka + salad',d:'Spiced chickpeas with whole-wheat phulkas',k:530},{e:'🍎',n:'Apple + 4 walnuts',d:'Whole apple with omega-rich walnuts',k:140},{e:'🥘',n:'Moong dal khichdi + greens',d:'Plant-protein khichdi with sautéed palak',k:550}]
-    },
-    south: {
-      veg:    [{e:'🥞',n:'Idli + sambar + chutney',d:'Steamed idlis with vegetable sambar and coconut chutney',k:340},{e:'🍛',n:'Sambar rice + poriyal + curd',d:'Tamarind sambar with rice, veg poriyal, fresh curd',k:530},{e:'🥥',n:'Tender coconut + 4 cashews',d:'Hydrating coconut water with cashews',k:140},{e:'🥘',n:'Curd rice + lemon pickle',d:'Cooling curd rice with a touch of lemon pickle',k:520}],
-      nonveg: [{e:'🍳',n:'Idli + egg curry',d:'Steamed idlis with mild egg curry',k:380},{e:'🍗',n:'Chicken Chettinad + rice',d:'Spiced South Indian chicken with rice',k:550},{e:'🥥',n:'Tender coconut + 4 cashews',d:'Hydrating coconut water with cashews',k:140},{e:'🐟',n:'Fish curry + rice + porial',d:'Coastal-style fish curry with rice',k:540}],
-      vegan:  [{e:'🥞',n:'Ragi dosa + coconut chutney',d:'Finger millet dosa with fresh chutney',k:330},{e:'🍛',n:'Sambar rice + poriyal',d:'Tamarind sambar with rice and veg poriyal',k:540},{e:'🥥',n:'Tender coconut + 4 cashews',d:'Hydrating coconut water with cashews',k:140},{e:'🥘',n:'Lemon rice + peanut chutney',d:'Tangy lemon rice with protein-rich chutney',k:520}]
-    },
-    bengali: {
-      veg:    [{e:'🥣',n:'Luchi + cholar dal',d:'Whole-wheat luchi with sweet Bengali chana dal',k:380},{e:'🍛',n:'Bhaat + posto + dal',d:'Steamed rice, poppy-seed alu posto, dal',k:520},{e:'🍎',n:'Apple + 4 almonds',d:'Whole apple and soaked almonds',k:130},{e:'🥘',n:'Khichuri + labra',d:'Bengali-style khichdi with mixed vegetable curry',k:550}],
-      nonveg: [{e:'🍳',n:'Luchi + egg curry',d:'Bengali-style flatbread with mild egg curry',k:400},{e:'🐟',n:'Maach-bhaat + dal',d:'Bengali fish curry with rice and yellow dal',k:560},{e:'🍎',n:'Apple + 4 almonds',d:'Whole apple and soaked almonds',k:130},{e:'🐟',n:'Steamed fish + bhaat',d:'Bhapa-style steamed fish with rice',k:540}],
-      vegan:  [{e:'🥣',n:'Chirer pulao',d:'Spiced flattened rice with peanuts and veggies',k:340},{e:'🍛',n:'Bhaat + alu posto + dal',d:'Rice, poppy-seed potato curry, dal',k:530},{e:'🍎',n:'Apple + 4 walnuts',d:'Whole apple with walnuts',k:140},{e:'🥘',n:'Vegan khichuri + labra',d:'Bengali khichdi with mixed vegetable curry',k:550}]
-    },
-    gujarati: {
-      veg:    [{e:'🥞',n:'Thepla + curd',d:'Methi thepla with thick curd',k:350},{e:'🍛',n:'Dal-dhokli + salad',d:'Wheat dumplings simmered in sweet-tangy dal',k:540},{e:'🍎',n:'Apple + 4 almonds',d:'Whole apple with soaked almonds',k:130},{e:'🥘',n:'Khichdi + kadhi',d:'Comforting moong dal khichdi with yogurt kadhi',k:520}],
-      nonveg: [{e:'🥞',n:'Thepla + egg bhurji',d:'Methi thepla with scrambled eggs',k:380},{e:'🍛',n:'Dal-dhokli + salad',d:'Wheat dumplings simmered in sweet-tangy dal',k:540},{e:'🍎',n:'Apple + 4 almonds',d:'Whole apple with soaked almonds',k:130},{e:'🥘',n:'Khichdi + kadhi + grilled chicken',d:'Khichdi with kadhi and lean grilled chicken',k:560}],
-      vegan:  [{e:'🥞',n:'Vegan thepla + peanut chutney',d:'Methi thepla with protein-rich chutney',k:340},{e:'🍛',n:'Dal-dhokli + salad',d:'Wheat dumplings in spiced dal',k:530},{e:'🍎',n:'Apple + 4 walnuts',d:'Whole apple with walnuts',k:140},{e:'🥘',n:'Vegan khichdi + papad',d:'Moong dal khichdi with roasted papad',k:520}]
-    },
-    maharashtrian: {
-      veg:    [{e:'🥣',n:'Poha + peanuts',d:'Flattened rice with peanuts and turmeric',k:330},{e:'🍛',n:'Bhakri + pithla + salad',d:'Sorghum bhakri with chickpea-flour curry',k:530},{e:'🍎',n:'Apple + 4 almonds',d:'Whole apple with soaked almonds',k:130},{e:'🥘',n:'Misal + 2 pav',d:'Sprouts curry with whole-wheat pav',k:540}],
-      nonveg: [{e:'🍳',n:'Poha + egg bhurji',d:'Maharashtrian poha with scrambled eggs',k:380},{e:'🍗',n:'Chicken sukka + bhakri',d:'Dry chicken curry with sorghum flatbread',k:550},{e:'🍎',n:'Apple + 4 almonds',d:'Whole apple with soaked almonds',k:130},{e:'🥘',n:'Mutton curry + rice',d:'Lean mutton curry with steamed rice',k:560}],
-      vegan:  [{e:'🥣',n:'Vegan poha + peanuts',d:'Flattened rice with peanuts and turmeric',k:330},{e:'🍛',n:'Bhakri + pithla',d:'Sorghum bhakri with chickpea-flour curry',k:530},{e:'🍎',n:'Apple + 4 walnuts',d:'Whole apple with walnuts',k:140},{e:'🥘',n:'Misal pav (vegan)',d:'Sprouts curry with whole-wheat pav',k:530}]
-    },
-    punjabi: {
-      veg:    [{e:'🥞',n:'Aloo paratha + curd',d:'Stuffed paratha with thick curd',k:380},{e:'🍛',n:'Rajma + jeera rice + salad',d:'Kidney beans curry with cumin rice',k:550},{e:'🍎',n:'Apple + 4 almonds',d:'Whole apple with soaked almonds',k:130},{e:'🥘',n:'Sarson da saag + makki roti',d:'Mustard greens with maize flatbread',k:560}],
-      nonveg: [{e:'🍳',n:'Egg paratha + curd',d:'Whole-wheat paratha stuffed with egg',k:400},{e:'🍗',n:'Butter chicken + 2 roti',d:'Lean butter chicken with whole-wheat roti',k:560},{e:'🍎',n:'Apple + 4 almonds',d:'Whole apple with soaked almonds',k:130},{e:'🥘',n:'Tandoori chicken + dal makhani',d:'Grilled tandoori chicken with dal makhani',k:570}],
-      vegan:  [{e:'🥞',n:'Vegan aloo paratha + chutney',d:'Stuffed paratha with green chutney',k:370},{e:'🍛',n:'Chole + jeera rice',d:'Spiced chickpeas with cumin rice',k:540},{e:'🍎',n:'Apple + 4 walnuts',d:'Whole apple with walnuts',k:140},{e:'🥘',n:'Sarson da saag + makki roti',d:'Mustard greens with maize flatbread',k:550}]
-    },
-    multi: {
-      veg:    [{e:'🥣',n:'Vegetable upma + curd',d:'Light semolina with veggies and curd',k:340},{e:'🍛',n:'Dal-rice + sabzi + salad',d:'Yellow dal, rice, seasonal sabzi, kachumber',k:520},{e:'🍎',n:'Apple + 4 almonds',d:'Whole apple with soaked almonds',k:130},{e:'🥘',n:'Khichdi + sautéed greens',d:'Moong dal khichdi with garlic palak',k:560}],
-      nonveg: [{e:'🍳',n:'Egg bhurji + 2 phulka',d:'Scrambled eggs with whole-wheat flatbread',k:380},{e:'🍗',n:'Grilled chicken + brown rice',d:'Lean chicken with brown rice and salad',k:550},{e:'🍎',n:'Apple + 4 almonds',d:'Whole apple with soaked almonds',k:130},{e:'🐟',n:'Fish curry + rice',d:'Coastal-style fish curry with rice',k:540}],
-      vegan:  [{e:'🥣',n:'Vegan upma + peanut chutney',d:'Semolina with veggies and chutney',k:330},{e:'🍛',n:'Dal-rice + sabzi',d:'Yellow dal, rice, seasonal sabzi',k:530},{e:'🍎',n:'Apple + 4 walnuts',d:'Whole apple with walnuts',k:140},{e:'🥘',n:'Vegan khichdi + greens',d:'Moong dal khichdi with sautéed palak',k:550}]
-    },
-    continental: {
-      veg:    [{e:'🥗',n:'Avocado toast + boiled egg',d:'Multigrain toast with mashed avocado',k:360},{e:'🥗',n:'Paneer salad bowl',d:'Grilled paneer with greens, quinoa, vinaigrette',k:520},{e:'🍎',n:'Apple + 4 almonds',d:'Whole apple with soaked almonds',k:130},{e:'🥗',n:'Veg wrap + soup',d:'Whole-wheat wrap with hummus, veggies, lentil soup',k:540}],
-      nonveg: [{e:'🍳',n:'Egg-white omelette + toast',d:'Egg-white omelette on multigrain toast',k:340},{e:'🥗',n:'Grilled chicken salad bowl',d:'Grilled chicken with greens, quinoa, vinaigrette',k:520},{e:'🍎',n:'Apple + 4 almonds',d:'Whole apple with soaked almonds',k:130},{e:'🥗',n:'Chicken wrap + soup',d:'Whole-wheat wrap with grilled chicken and soup',k:540}],
-      vegan:  [{e:'🥗',n:'Avocado toast + tofu',d:'Multigrain toast with avocado and seasoned tofu',k:360},{e:'🥗',n:'Tofu salad bowl',d:'Grilled tofu with greens, quinoa, vinaigrette',k:510},{e:'🍎',n:'Apple + 4 walnuts',d:'Whole apple with walnuts',k:140},{e:'🥗',n:'Vegan wrap + soup',d:'Whole-wheat wrap with hummus and lentil soup',k:540}]
-    }
-  };
-  const CUISINE_LABELS = {
-    north:'North Indian week', south:'South Indian week', bengali:'Bengali week',
-    gujarati:'Gujarati week', maharashtrian:'Maharashtrian week', punjabi:'Punjabi week',
-    multi:'Multi-cuisine week', continental:'Indo-Continental week'
-  };
-  const MEAL_TIMES = ['Breakfast · 8:00 AM', 'Lunch · 1:30 PM', 'Mid-morning · 11:00 AM', 'Dinner · 8:00 PM'];
-
-  function renderPreviewMeals(u) {
-    const list = document.getElementById('preview-meal-list');
-    const label = document.getElementById('preview-cuisine-label');
-    if (!list) return;
-
-    // Determine cuisine
-    let cuisine = (u && u.cuisine) || 'multi';
-    if (!PREVIEW_DISHES[cuisine]) cuisine = 'multi';
-
-    // Determine diet: veg / nonveg / vegan
-    let diet = 'veg';
-    const dietPref = (u && u.diet) || '';
-    if (dietPref === 'vegan') diet = 'vegan';
-    else if (dietPref === 'non-veg' || dietPref === 'nonveg' || dietPref === 'pescatarian' || dietPref === 'eggetarian') diet = 'nonveg';
-    else diet = 'veg';
-
-    const meals = PREVIEW_DISHES[cuisine][diet] || PREVIEW_DISHES.multi.veg;
-
-    if (label) label.textContent = CUISINE_LABELS[cuisine] || 'plan';
-
-    // Build the preview list (4 sample meals)
-    list.innerHTML = meals.map((m, i) => `
-      <div class="meal-row" style="display:flex;align-items:center;gap:14px;padding:14px;background:var(--cream);border:1px solid var(--line);border-radius:var(--r-sm)">
-        <div class="meal-emoji" style="width:52px;height:52px;min-width:52px;border-radius:14px;background:var(--sage-l);display:flex;align-items:center;justify-content:center;font-size:26px">${m.e}</div>
-        <div style="flex:1;min-width:0">
-          <div style="font-size:10.5px;color:var(--green-d);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px">${MEAL_TIMES[i] || 'Sample meal'}</div>
-          <div class="meal-name" style="font-family:var(--font-serif);font-size:1.05rem;font-weight:500;color:var(--text);margin-bottom:3px">${m.n}</div>
-          <div style="font-size:12.5px;color:var(--text-m);line-height:1.45">${m.d}</div>
-        </div>
-        <div style="text-align:right;color:var(--green-d);font-family:var(--font-serif)"><strong style="font-size:1.05rem">${m.k}</strong><div style="font-size:10.5px;color:var(--text-l);font-family:var(--font-sans)">kcal</div></div>
-      </div>
-    `).join('');
-  }
 
   // ---- MY DIET: render dashboard with user data ----
   function renderMyDiet() {
@@ -4121,16 +4047,6 @@
     }
   }
   // When the diet plan page is shown, auto-select the matching service-tier card
-  function applyPreferredTierToPlan() {
-    if (!_preferredTier) return;
-    const cards = document.querySelectorAll('.service-tier');
-    cards.forEach(card => {
-      const onclick = card.getAttribute('onclick') || '';
-      if (onclick.includes("'" + _preferredTier + "'")) {
-        pickServiceTier(card, _preferredTier);
-      }
-    });
-  }
 
   // ---- assessment stepper ----
   function goStep(n) {
