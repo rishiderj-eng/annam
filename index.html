@@ -5263,10 +5263,48 @@
         assessedAt: new Date().toISOString()
       };
       localStorage.setItem('annam_user', JSON.stringify(userData));
+      annamPersistAssessment(userData);   // persist to Supabase, linked to the auth user
     } catch (e) { console.warn('localStorage failed:', e); }
 
     // Navigate
     show('lifestyle');
+  }
+
+  // Persist the completed assessment to Supabase (real customer health-record
+  // source for My Diet). RLS ties the row to the logged-in auth user. localStorage
+  // remains only an in-progress convenience — never the source of truth for My Diet.
+  async function annamPersistAssessment(data) {
+    try {
+      if (!annamAuth) return;
+      const { data: s } = await annamAuth.auth.getSession();
+      const uid = (s && s.session && s.session.user) ? s.session.user.id : null;
+      if (!uid) return; // not authenticated (shouldn't happen after the 2B gate)
+      const num = function (v) { var n = parseFloat(v); return isNaN(n) ? null : n; };
+      const row = {
+        auth_user_id: uid,
+        full_name: data.name || null,
+        email: data.email || null,
+        phone: data.phone || null,
+        age: data.age ? (parseInt(data.age, 10) || null) : null,
+        sex: data.sex || null,
+        height_cm: num(data.height),
+        weight_kg: num(data.startWeight),
+        target_weight_kg: num(data.targetWeight),
+        bmi: num(data.bmi),
+        goal: data.goal || null,
+        activity_level: data.activity || null,
+        sleep_pattern: data.sleep || null,
+        plan_timeline: data.planTimeline || null,
+        cuisine: data.cuisine || null,
+        dietary_preference: data.diet || null,
+        favourite_foods: (data.favourites && data.favourites.length) ? data.favourites.join(', ') : null,
+        allergies: (data.allergies && data.allergies.length) ? data.allergies.join(', ') : null,
+        raw: data,
+        status: 'submitted'
+      };
+      const { error } = await annamAuth.from('assessments').insert(row);
+      if (error) console.warn('Assessment persist failed:', error.message);
+    } catch (e) { console.warn('Assessment persist error:', e); }
   }
 
   // ---- DYNAMIC PRICING ENGINE ----
