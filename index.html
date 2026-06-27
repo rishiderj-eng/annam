@@ -134,7 +134,7 @@
   .hero h1 .underline::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 8px; background: var(--gold-l); opacity: .55; z-index: -1; border-radius: 2px; }
   .hero-sub { font-size: 1.05rem; color: var(--text-m); line-height: 1.7; max-width: 480px; margin-bottom: 2rem; }
   .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-  .hero-trust { display: flex; align-items: center; gap: 16px; margin-top: 2rem; padding-top: 1.75rem; border-top: 1px solid var(--line); }
+  .hero-trust { display: flex; align-items: center; gap: 16px; margin-top: 2rem; padding-top: 1.75rem; border-top: 1px solid var(--line); position: relative; z-index: 3; }
   .trust-avatars { display: flex; }
   .trust-avatars div { width: 34px; height: 34px; border-radius: 50%; border: 2.5px solid var(--cream); margin-left: -10px; background-size: cover; background-position: center; font-family: var(--font-serif); display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:12px;}
   .trust-avatars div:first-child { margin-left: 0; background: linear-gradient(135deg,#D87A5B,#A85439); }
@@ -692,8 +692,8 @@
   /* corners — base art reads stem-top-left, leaves fanning down-right */
   .hcl-tl { top: -2%;  left: -1%;  transform: rotate(0deg); }
   .hcl-tr { top: -2%;  right: -1%; transform: scaleX(-1); }
-  .hcl-bl { bottom: -3%; left: -1%;  transform: scaleY(-1); }
-  .hcl-br { bottom: -3%; right: -1%; transform: scale(-1,-1); }
+  .hcl-bl { bottom: -7%; left: -4%;  max-width: 170px; transform: scaleY(-1); }
+  .hcl-br { bottom: -7%; right: -4%; max-width: 170px; transform: scale(-1,-1); }
 
   @media (prefers-reduced-motion: no-preference) {
     .hcl-tl { animation: hclSwayTL 8.5s ease-in-out infinite; }
