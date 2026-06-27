@@ -133,7 +133,9 @@
   .hero h1 .underline { position: relative; display: inline-block; }
   .hero h1 .underline::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 8px; background: var(--gold-l); opacity: .55; z-index: -1; border-radius: 2px; }
   .hero-sub { font-size: 1.05rem; color: var(--text-m); line-height: 1.7; max-width: 480px; margin-bottom: 2rem; }
-  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; }
+  .hero-cta-secondary { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+  .hero-cta-caption { font-size: 11.5px; color: var(--text-l); letter-spacing: .2px; line-height: 1.3; }
   .hero-trust { display: flex; align-items: center; gap: 16px; margin-top: 2rem; padding-top: 1.75rem; border-top: 1px solid var(--line); position: relative; z-index: 3; background: var(--cream); }
   .trust-avatars { display: flex; }
   .trust-avatars div { width: 34px; height: 34px; border-radius: 50%; border: 2.5px solid var(--cream); margin-left: -10px; background-size: cover; background-position: center; font-family: var(--font-serif); display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:12px;}
@@ -936,6 +938,7 @@
   @keyframes awFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   @media (prefers-reduced-motion: reduce) { .aw-fade { opacity: 1 !important; animation: none !important; transform: none !important; } }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -982,7 +985,10 @@
 
     <div class="hero-cta">
       <button class="btn btn-primary btn-lg" onclick="show('assess-welcome')">Start free assessment →</button>
-      <button class="btn btn-outline btn-lg" onclick="show('dietitian')">Already completed your assessment? Book ₹199 Consultation</button>
+      <div class="hero-cta-secondary">
+        <button class="btn btn-outline" onclick="show('dietitian')">Book Consultation</button>
+        <span class="hero-cta-caption">₹199 consultation • Adjusted against your membership</span>
+      </div>
     </div>
 
     <div class="hero-trust" style="padding-top:1.25rem;align-items:center;gap:10px">
@@ -992,8 +998,6 @@
     </div>
 
     <!-- ===== PREMIUM FOOD SHOWCASE (replaces the old dietitian-chat hero) ===== -->
-    <!-- DROP YOUR PHOTOS HERE: edit the MEALS object in the <script> (search "MEALS ="). -->
-    <!-- Each category needs 1 center thali image + 6 dish images (transparent-bg cutouts look best). -->
     <div class="food-showcase" id="food-showcase">
 
       <div class="fs-stage" id="fs-stage">
@@ -3790,7 +3794,10 @@
   function goFaq(topic){ show('faqs'); setTimeout(()=>{ const el=document.querySelector('#page-faqs [data-faq="'+topic+'"]'); if(el){ el.open=true; el.scrollIntoView({behavior:'smooth',block:'center'}); } },420); }
 
   // ---- MY DIET: render dashboard with user data ----
-  function renderMyDiet() {
+  async function renderMyDiet() {
+    // Authoritative gate: My Diet is protected behind a real Supabase session.
+    const session = await annamGetSession();
+    annamSyncCache(session);
     let u = {};
     try { u = JSON.parse(localStorage.getItem('annam_user') || '{}'); } catch (e) {}
 
@@ -3798,7 +3805,7 @@
     const loggedIn = document.getElementById('mydiet-loggedin');
     if (!loggedOut || !loggedIn) return;
 
-    if (!u.loggedIn) {
+    if (!session || !u.loggedIn) {
       loggedOut.style.display = 'flex';
       loggedIn.style.display = 'none';
       return;
@@ -4450,37 +4457,40 @@
     document.getElementById('su-error').textContent = '';
   }
 
-  function handleSignIn(viaGoogle) {
+  async function handleSignIn(viaGoogle) {
     const errEl = document.getElementById('si-error');
-    let displayName = 'there';
-    if (!viaGoogle) {
-      const email = document.getElementById('si-email').value.trim();
-      const pass  = document.getElementById('si-pass').value;
-      if (!email) { errEl.textContent = 'Please enter your email or phone.'; return; }
-      if (!pass)  { errEl.textContent = 'Please enter your password.'; return; }
-      // Prototype-only: any email + password navigates in.
-      const name = email.includes('@') ? email.split('@')[0] : email;
-      displayName = name.charAt(0).toUpperCase() + name.slice(1).split(/[\.\-_0-9]/)[0];
-    } else {
-      displayName = 'Friend';
-    }
+    if (viaGoogle) { comingSoon('Google sign-in'); return; }
+    if (!annamAuth) { errEl.textContent = 'Sign-in is temporarily unavailable. Please try again shortly.'; return; }
+    const email = document.getElementById('si-email').value.trim();
+    const pass  = document.getElementById('si-pass').value;
+    if (!email || !email.includes('@')) { errEl.textContent = 'Please enter your email address.'; return; }
+    if (!pass)  { errEl.textContent = 'Please enter your password.'; return; }
 
-    // Save login state
-    try {
-      const existing = JSON.parse(localStorage.getItem('annam_user') || '{}');
-      existing.loggedIn = true;
-      existing.firstName = existing.firstName || displayName;
-      existing.name = existing.name || displayName;
-      localStorage.setItem('annam_user', JSON.stringify(existing));
-    } catch (e) {}
-
-    // Update old dashboard if present
+    const btn = document.querySelector('#auth-form-signin .btn-primary');
+    const orig = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Signing in…'; }
     errEl.textContent = '';
-    refreshNavAuth();
-    show('mydiet');
+    try {
+      const { data, error } = await annamAuth.auth.signInWithPassword({ email, password: pass });
+      if (error) {
+        const msg = (error.message || '').toLowerCase();
+        if (msg.includes('confirm')) errEl.textContent = 'Please confirm your email first — check your inbox for the confirmation link.';
+        else if (msg.includes('invalid')) errEl.textContent = 'Incorrect email or password.';
+        else errEl.textContent = error.message || 'Could not sign in. Please try again.';
+        return;
+      }
+      annamSyncCache(data.session);
+      refreshNavAuth();
+      show('mydiet');
+      annamToast('Welcome back.', 'success');
+    } catch (e) {
+      errEl.textContent = 'Could not sign in right now. Please try again.';
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = orig; }
+    }
   }
 
-  function handleSignUp() {
+  async function handleSignUp() {
     const errEl  = document.getElementById('su-error');
     const first  = document.getElementById('su-first').value.trim();
     const last   = document.getElementById('su-last').value.trim();
@@ -4495,25 +4505,50 @@
     if (pass.length < 8) { errEl.textContent = 'Password must be at least 8 characters.'; return; }
     if (pass !== pass2)  { errEl.textContent = 'Passwords do not match.'; return; }
     if (!terms)          { errEl.textContent = 'Please agree to the Terms to continue.'; return; }
+    if (!annamAuth) { errEl.textContent = 'Sign-up is temporarily unavailable. Please try again shortly.'; return; }
     errEl.textContent = '';
 
-    // Save user
+    const btn = document.querySelector('#auth-form-signup .btn-primary');
+    const orig = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Creating account…'; }
     try {
-      localStorage.setItem('annam_user', JSON.stringify({
-        loggedIn: true,
-        name: first + ' ' + last,
-        firstName: first,
-        email, phone,
-        signedUpAt: new Date().toISOString()
-      }));
-    } catch (e) {}
+      const { data, error } = await annamAuth.auth.signUp({
+        email, password: pass,
+        options: { data: { first_name: first, last_name: last, phone: phone } }
+      });
+      if (error) {
+        const msg = (error.message || '').toLowerCase();
+        if (msg.includes('already') || msg.includes('registered')) errEl.textContent = 'An account with this email already exists — try signing in.';
+        else errEl.textContent = error.message || 'Could not create your account. Please try again.';
+        return;
+      }
+      // Cache name/phone for prefill regardless of confirmation state.
+      try {
+        const u = JSON.parse(localStorage.getItem('annam_user') || '{}');
+        u.firstName = first; u.name = first + ' ' + last; u.email = email; u.phone = phone;
+        localStorage.setItem('annam_user', JSON.stringify(u));
+      } catch (e) {}
 
-    refreshNavAuth();
-    show('assess');
-    // Surface the account-created banner + toast
-    const banner = document.getElementById('assess-welcome-banner');
-    if (banner) banner.style.display = 'flex';
-    annamToast('Account created — complete your assessment.', 'success');
+      if (data.session) {
+        // Email confirmation is OFF — user is signed in immediately.
+        annamSyncCache(data.session);
+        refreshNavAuth();
+        show('assess');
+        const banner = document.getElementById('assess-welcome-banner');
+        if (banner) banner.style.display = 'flex';
+        annamToast('Account created — complete your assessment.', 'success');
+      } else {
+        // Email confirmation is ON — guide the user to confirm, then sign in.
+        switchAuthTab('signin');
+        const si = document.getElementById('si-email'); if (si) si.value = email;
+        document.getElementById('si-error').textContent = '';
+        annamToast('Account created. Check your email to confirm, then sign in.', 'success');
+      }
+    } catch (e) {
+      errEl.textContent = 'Could not create your account right now. Please try again.';
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = orig; }
+    }
   }
 
   // ---- TOAST (lightweight, no dependencies) ----
@@ -4670,18 +4705,20 @@
     else go();
   })();
 
-  function signOut() {
-    // Clear inputs and login state
+  async function signOut() {
+    // Clear inputs
     ['si-email','si-pass','su-first','su-last','su-email','su-phone','su-pass','su-pass2'].forEach(id => {
       const el = document.getElementById(id); if (el) el.value = '';
     });
+    try { if (annamAuth) await annamAuth.auth.signOut(); } catch (e) {}
     try {
       const existing = JSON.parse(localStorage.getItem('annam_user') || '{}');
-      existing.loggedIn = false;
+      existing.loggedIn = false; delete existing.authUserId;
       localStorage.setItem('annam_user', JSON.stringify(existing));
     } catch (e) {}
     refreshNavAuth();
     show('home');
+    annamToast('Signed out.', 'info');
   }
 
   // ---- NAV AUTH UI ----
@@ -5326,6 +5363,58 @@
 const ANNAM_SUPABASE_URL = 'https://zyicpvprijthknwpvusr.supabase.co';
 const ANNAM_SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5aWNwdnByaWp0aGtud3B2dXNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMzgxOTgsImV4cCI6MjA5NDYxNDE5OH0.Q9INGFlweBmz9m2kAv4ZCxFTalXiuFv-yl3u6vSbhSM';
 const ANNAM_CONSULT_AMOUNT = 199;
+
+// ===== Supabase Auth client (real auth — source of truth is the session) =====
+const annamAuth = (window.supabase && window.supabase.createClient)
+  ? window.supabase.createClient(ANNAM_SUPABASE_URL, ANNAM_SUPABASE_ANON, {
+      auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storageKey: 'annam-auth' }
+    })
+  : null;
+
+// Keep the lightweight `annam_user` cache (used by booking/greeting/prefill)
+// in sync with the real Supabase session. The session is authoritative.
+function annamSyncCache(session) {
+  try {
+    const u = JSON.parse(localStorage.getItem('annam_user') || '{}');
+    if (session && session.user) {
+      const m = session.user.user_metadata || {};
+      u.loggedIn = true;
+      u.firstName = m.first_name || u.firstName || (session.user.email || '').split('@')[0];
+      u.name = (m.first_name ? (m.first_name + (m.last_name ? ' ' + m.last_name : '')) : u.name) || u.firstName;
+      u.email = session.user.email || u.email;
+      if (m.phone) u.phone = m.phone;
+      u.authUserId = session.user.id;
+    } else {
+      u.loggedIn = false;
+      delete u.authUserId;
+    }
+    localStorage.setItem('annam_user', JSON.stringify(u));
+  } catch (e) {}
+}
+
+// Returns the current session (or null) — the authoritative auth check.
+async function annamGetSession() {
+  if (!annamAuth) return null;
+  try { const { data } = await annamAuth.auth.getSession(); return data.session || null; }
+  catch (e) { return null; }
+}
+
+// Boot: reconcile cache with the real session, then react to auth changes.
+if (annamAuth) {
+  annamAuth.auth.getSession().then(({ data }) => {
+    annamSyncCache(data.session);
+    if (typeof refreshNavAuth === 'function') refreshNavAuth();
+    const cur = document.querySelector('.page.active');
+    if (cur && cur.id === 'page-mydiet' && typeof renderMyDiet === 'function') renderMyDiet();
+  });
+  annamAuth.auth.onAuthStateChange((_event, session) => {
+    annamSyncCache(session);
+    if (typeof refreshNavAuth === 'function') refreshNavAuth();
+    const cur = document.querySelector('.page.active');
+    if (cur && cur.id === 'page-mydiet' && typeof renderMyDiet === 'function') renderMyDiet();
+  });
+}
+
 
 let _razorpayLoaded = false;
 let _jspdfLoaded = false;
