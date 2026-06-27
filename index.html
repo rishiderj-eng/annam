@@ -29,6 +29,7 @@
 <meta name="twitter:image" content="og-image.png" />
 
 <!-- Favicons + app icons -->
+<link rel="canonical" href="https://annam.life/" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png" />
@@ -473,13 +474,19 @@
 
   /* === FOOTER === */
   footer { background: var(--text); color: rgba(251,247,238,.65); padding: 4rem 2.5rem 2rem; }
-  .footer-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr 1fr; gap: 2.25rem; margin-bottom: 3rem; }
   .ft-brand .logo { color: var(--cream); margin-bottom: 1rem; }
   .ft-brand p { font-size: 13.5px; line-height: 1.7; }
   .ft-col h5 { font-family: var(--font-serif); font-size: 14px; color: var(--cream); font-weight: 500; margin-bottom: 1rem; }
   .ft-col ul { list-style: none; }
   .ft-col li { padding: 5px 0; font-size: 13px; cursor: pointer; transition: color .2s; }
   .ft-col li:hover { color: var(--gold-l); }
+  .ft-col li a, .ft-bottom a { color: inherit; text-decoration: none; }
+  .ft-col li a:hover { color: var(--gold-l); }
+  .ft-social { display: flex; gap: 12px; margin-top: .25rem; flex-wrap: wrap; }
+  .ft-social a { width: 38px; height: 38px; border-radius: 10px; background: rgba(251,247,238,.08); display: flex; align-items: center; justify-content: center; color: rgba(251,247,238,.75); transition: background .2s, color .2s; }
+  .ft-social a:hover { background: rgba(229,187,92,.2); color: var(--gold-l); }
+  .ft-social svg { width: 18px; height: 18px; }
   .ft-bottom { border-top: 1px solid rgba(251,247,238,.1); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 12px; flex-wrap: wrap; gap: 1rem; }
 
   /* === LIFESTYLE INSIGHTS === */
@@ -649,7 +656,7 @@
   /* === Tablet (601–900px): dashboard 3-col → 2-col instead of collapsing straight to 1-col === */
   @media (min-width: 601px) and (max-width: 900px) {
     .mydiet-bottom, .grid-dash-3 { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
-    .footer-inner { grid-template-columns: 1fr 1fr 1fr 1fr; }
+    .footer-inner { grid-template-columns: repeat(3, 1fr); }
   }
 
   /* === Vendor / comparison tables: horizontal scroll on mobile instead of forcing page-wide overflow === */
@@ -838,13 +845,57 @@
   .b2-check .tick { width:24px; height:24px; min-width:24px; border-radius:50%; background:var(--green-d); color:var(--cream); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; }
   .b2-check span.lbl { font-size:13.5px; color:var(--text); font-weight:500; line-height:1.4; align-self:center; }
   @media (max-width:520px){ .b2-grid, .b2-checks { grid-template-columns:1fr; } }
+  /* centered 4+3 card layout (membership / weekly support) */
+  .b2-grid.b2-grid-center { display:flex; flex-wrap:wrap; justify-content:center; }
+  .b2-grid.b2-grid-center .b2-card { flex:0 1 258px; max-width:300px; }
+  @media (max-width:560px){ .b2-grid.b2-grid-center .b2-card { flex:1 1 100%; max-width:none; } }
+  /* consult 'what happens after booking' timeline */
+  .ab-step { position:relative; background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); padding:1.5rem 1.1rem; text-align:center; }
+  .ab-num { width:40px; height:40px; border-radius:50%; background:var(--green-d); color:var(--cream); display:flex; align-items:center; justify-content:center; font-family:var(--font-serif); font-size:1.1rem; margin:0 auto .9rem; }
+  .ab-step h3 { font-family:var(--font-serif); font-size:1.02rem; font-weight:500; color:var(--text); margin-bottom:.4rem; }
+  .ab-step p { font-size:12.5px; color:var(--text-m); line-height:1.55; }
+  @media (max-width:860px){ .ab-steps { grid-template-columns:1fr 1fr !important; } }
+  @media (max-width:560px){ .ab-steps { grid-template-columns:1fr !important; } }
+  /* My Diet journey tracker */
+  .jt { display:grid; grid-template-columns:repeat(6,1fr); gap:.5rem; margin:1.5rem 0 0; }
+  .jt-step { text-align:center; position:relative; padding-top:34px; }
+  .jt-step::before { content:""; position:absolute; top:11px; left:0; right:0; height:2px; background:rgba(251,247,238,.2); }
+  .jt-step:first-child::before { left:50%; }
+  .jt-step:last-child::before { right:50%; }
+  .jt-dot { position:absolute; top:0; left:50%; transform:translateX(-50%); width:24px; height:24px; border-radius:50%; background:var(--green-d); border:2px solid rgba(251,247,238,.25); display:flex; align-items:center; justify-content:center; font-size:11px; color:rgba(251,247,238,.5); z-index:1; }
+  .jt-step.done .jt-dot { background:var(--gold-l); border-color:var(--gold-l); color:var(--green-d); font-weight:700; }
+  .jt-step.active .jt-dot { background:var(--cream); border-color:var(--gold-l); color:var(--green-d); font-weight:700; box-shadow:0 0 0 4px rgba(229,187,92,.25); }
+  .jt-step.active::before, .jt-step.done::before { background:var(--gold-l); }
+  .jt-label { font-size:11px; color:rgba(251,247,238,.7); line-height:1.35; }
+  .jt-step.active .jt-label { color:var(--cream); font-weight:600; }
+  @media (max-width:720px){ .jt { grid-template-columns:1fr 1fr 1fr; gap:1rem .5rem; } .jt-step:nth-child(3)::before{right:50%} .jt-step:nth-child(4)::before{left:50%} }
+  /* FAQ accordion */
+  .faq-wrap { max-width:760px; margin:2.5rem auto 0; }
+  .faq-item { border:1px solid var(--line); border-radius:var(--r-sm); background:#fff; margin-bottom:.75rem; overflow:hidden; }
+  .faq-item summary { list-style:none; cursor:pointer; padding:16px 18px; font-family:var(--font-serif); font-size:1.02rem; color:var(--text); display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-item summary::-webkit-details-marker { display:none; }
+  .faq-item summary::after { content:"+"; font-size:1.4rem; color:var(--green-d); line-height:1; flex-shrink:0; transition:transform .2s; }
+  .faq-item[open] summary::after { content:"−"; }
+  .faq-item summary:focus-visible { outline:2px solid var(--green-d); outline-offset:-2px; }
+  .faq-a { padding:0 18px 16px; font-size:13.5px; color:var(--text-m); line-height:1.65; }
 
+  /* ===== Accessibility ===== */
+  .skip-link { position:absolute; left:-9999px; top:0; z-index:2000; background:var(--green-d); color:var(--cream); padding:12px 18px; border-radius:0 0 8px 0; font-size:14px; font-weight:600; text-decoration:none; }
+  .skip-link:focus { left:0; }
+  a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  }
 </style>
 </head>
 <body>
 
+<a href="#page-home" class="skip-link">Skip to main content</a>
+
 <!-- =================== NAV =================== -->
-<nav>
+<nav aria-label="Primary">
   <div class="logo" onclick="show('home')">Annam<span class="dot">.</span></div>
   <ul class="nav-links" id="nav-links">
     <li><a onclick="show('home')" id="nl-home" class="active">Home</a></li>
@@ -863,7 +914,7 @@
 </nav>
 
 <!-- =================== HOME =================== -->
-<div class="page active" id="page-home">
+<div class="page active" id="page-home" role="main" tabindex="-1">
 
   <!-- HERO -->
 
@@ -884,7 +935,7 @@
 
     <div class="hero-cta">
       <button class="btn btn-primary btn-lg" onclick="show('assess')">Start free assessment →</button>
-      <button class="btn btn-outline btn-lg" onclick="show('dietitian')">Book ₹199 dietitian consult</button>
+      <button class="btn btn-outline btn-lg" onclick="show('dietitian')">Already completed your assessment? Book ₹199 Consultation</button>
     </div>
 
     <div class="hero-trust" style="padding-top:1.25rem;align-items:center;gap:10px">
@@ -989,7 +1040,7 @@
     </div>
   </section>
 
-  <section class="block how">
+  <section class="block how" id="how-it-works">
     <div class="block-inner">
       <div class="section-head">
         <div class="section-eyebrow">How it works</div>
@@ -1036,7 +1087,7 @@
         <p class="section-sub">Real transformation happens through continuous support — not one consultation. You're not buying a plan; you're getting a professional who walks the whole way with you.</p>
       </div>
 
-      <div class="b2-grid">
+      <div class="b2-grid b2-grid-center">
         <div class="b2-card">
           <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/></svg></div>
           <h3>Weekly follow-ups</h3>
@@ -1066,6 +1117,11 @@
           <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
           <h3>Progress reviews</h3>
           <p>Regular reviews of weight, body measurements, energy, adherence and challenges — so progress is measured, not guessed.</p>
+        </div>
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="3.2"/><path d="M22 20v-2a4 4 0 0 0-3-3.87M16 3.5a4 4 0 0 1 0 7"/></svg></div>
+          <h3>A team behind you</h3>
+          <p>Your dietitian leads your care, with our wider team and specialists supporting them — so you always have the right guidance when you need it.</p>
         </div>
       </div>
     </div>
@@ -1281,7 +1337,7 @@
           <h3 class="pkg-name">Foundation</h3>
           <p class="pkg-tagline">3 months · For getting started</p>
           <div style="font-family:var(--font-serif);font-size:2rem;font-weight:500;color:var(--gold-l);line-height:1;letter-spacing:-1px;margin:1.25rem 0 .5rem">3 months</div>
-          <span class="pkg-save" style="color:rgba(251,247,238,.7)">For anyone beginning their health journey who wants expert structure and early momentum.</span>
+          <div style="margin:0"><span style="display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold-l);margin-bottom:5px">Best for</span><span class="pkg-save" style="color:rgba(251,247,238,.7);margin-top:0">For anyone beginning their health journey who wants expert structure and early momentum.</span></div>
           <ul style="margin-top:1.5rem">
             <li>Your own certified dietitian</li>
             <li>Personalised diet plan</li>
@@ -1298,7 +1354,7 @@
           <h3 class="pkg-name">Transformation</h3>
           <p class="pkg-tagline">6 months · For lasting change</p>
           <div style="font-family:var(--font-serif);font-size:2rem;font-weight:500;color:var(--cream);line-height:1;letter-spacing:-1px;margin:1.25rem 0 .5rem">6 months</div>
-          <span class="pkg-save" style="color:var(--gold-l)">For people serious about a real lifestyle shift, with deeper support and ongoing coaching.</span>
+          <div style="margin:0"><span style="display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold-l);margin-bottom:5px">Best for</span><span class="pkg-save" style="color:var(--gold-l);margin-top:0">For people serious about a real lifestyle shift, with deeper support and ongoing coaching.</span></div>
           <ul style="margin-top:1.5rem">
             <li>Everything in Foundation</li>
             <li>Lifestyle &amp; behaviour coaching</li>
@@ -1314,7 +1370,7 @@
           <h3 class="pkg-name">Lifestyle</h3>
           <p class="pkg-tagline">12 months · A long-term health membership</p>
           <div style="font-family:var(--font-serif);font-size:2rem;font-weight:500;color:var(--gold-l);line-height:1;letter-spacing:-1px;margin:1.25rem 0 .5rem">12 months</div>
-          <span class="pkg-save" style="color:rgba(251,247,238,.7)">For those investing in preventive, year-round health with a dedicated dietitian relationship.</span>
+          <div style="margin:0"><span style="display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold-l);margin-bottom:5px">Best for</span><span class="pkg-save" style="color:rgba(251,247,238,.7);margin-top:0">For those investing in preventive, year-round health with a dedicated dietitian relationship.</span></div>
           <ul style="margin-top:1.5rem">
             <li>Everything in Transformation</li>
             <li>Dedicated long-term dietitian</li>
@@ -1345,7 +1401,7 @@
         <p class="section-sub">Life isn't linear, and your membership shouldn't be either. Everything is built to remove the anxiety of committing.</p>
       </div>
 
-      <div class="b2-grid">
+      <div class="b2-grid b2-grid-center">
         <div class="b2-card">
           <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg></div>
           <h3>Pause anytime</h3>
@@ -1367,9 +1423,19 @@
           <p>Your reports, history, plans and progress stay available in My Diet — your health record is yours to keep.</p>
         </div>
         <div class="b2-card">
-          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 4.5 1.5c0 1.5-2.5 2-2.5 3.5M12 17h.01"/></svg></div>
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10M7 7l-1 2.5M17 7l1 2.5"/><path d="M6 9.5h12l-1 8a2 2 0 0 1-2 1.8H9a2 2 0 0 1-2-1.8z"/></svg></div>
           <h3>No hidden charges</h3>
           <p>Everything is explained clearly before you pay anything. The price you agree on with your dietitian is the price — full stop.</p>
+        </div>
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <h3>Take a break, not a reset</h3>
+          <p>Take time off when you need to. Your plan can be paused and resumed without starting over.</p>
+        </div>
+        <div class="b2-card">
+          <div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg></div>
+          <h3>Built around you</h3>
+          <p>Your schedule, preferences and lifestyle aren't changed to fit the program — the program adapts to you.</p>
         </div>
       </div>
     </div>
@@ -1510,29 +1576,104 @@
     </div>
   </section>
 
+  <!-- BETA — honest, no fake testimonials -->
+  <section class="block" style="background:var(--cream)" aria-labelledby="beta-heading">
+    <div class="block-inner" style="max-width:720px;text-align:center">
+      <div class="section-eyebrow" style="justify-content:center;display:inline-block">Early days, honestly</div>
+      <h2 class="section-title" id="beta-heading">Customer stories are <em>on the way.</em></h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto">We're a new platform, and we'd rather show you real results than invent them. Customer stories and transformations will be added here once our first beta members complete their programs — verified, with their consent. Until then, what we can promise is simple: a qualified human dietitian, a plan built around your life, and weekly support.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="block" style="background:linear-gradient(180deg,var(--cream-d) 0%,var(--cream) 100%)" id="faq" aria-labelledby="faq-heading">
+    <div class="block-inner">
+      <div class="section-head">
+        <div class="section-eyebrow">Questions</div>
+        <h2 class="section-title" id="faq-heading">Frequently asked <em>questions.</em></h2>
+        <p class="section-sub">Everything you might want to know before you start. Still unsure? <a onclick="show('dietitian')" style="color:var(--green-d);font-weight:600;cursor:pointer;border-bottom:1.5px solid var(--gold-l)">book a ₹199 consult</a> and ask your dietitian directly.</p>
+      </div>
+      <div class="faq-wrap">
+        <details class="faq-item"><summary class="faq-q">How does an Annam membership work?</summary><div class="faq-a">You start with a free assessment, then a ₹199 video consultation. Your dietitian recommends a program (3, 6 or 12 months), explains everything, and only then — if you choose to continue — do you begin. You get a personalised plan plus weekly follow-ups and adjustments throughout.</div></details>
+        <details class="faq-item"><summary class="faq-q">Why don't you show prices on the website?</summary><div class="faq-a">Nutrition isn't one-size-fits-all, so neither is the right program for you. Your dietitian shares clear, honest pricing during your consultation, based on your goals and the level of support you need — with no hidden charges and no obligation to continue.</div></details>
+        <details class="faq-item" data-faq="consult"><summary class="faq-q">What's included in the ₹199 consultation?</summary><div class="faq-a">A 30-minute video call covering your goals, a review of your health assessment and any reports, your lifestyle, and a clear recommendation of the right program. The ₹199 is adjusted against any program you purchase within 7 days.</div></details>
+        <details class="faq-item" data-faq="ai"><summary class="faq-q">Do you use AI to create my diet plan?</summary><div class="faq-a">No. Annam never uses AI to generate customer diet plans. Every plan is created, reviewed and approved by a qualified human dietitian (MSc / RD). We use technology only behind the scenes — to organise information, schedule follow-ups and keep your records secure.</div></details>
+        <details class="faq-item" data-faq="pcos"><summary class="faq-q">Can Annam help with PCOS / PCOD?</summary><div class="faq-a">Yes. Our dietitians build PCOS-focused plans around insulin sensitivity, balanced meals and sustainable habits — using regional Indian food you already eat. Bring any recent reports to your consultation so your dietitian can personalise accordingly. (This is nutrition guidance and supports, but does not replace, your doctor's care.)</div></details>
+        <details class="faq-item" data-faq="diabetes"><summary class="faq-q">Can Annam help with diabetes or pre-diabetes?</summary><div class="faq-a">Yes. Plans can be tailored for blood-sugar management — meal timing, carbohydrate quality and portion structure — in coordination with your medical treatment. Please continue any medication and check-ups with your doctor; our dietitians complement that care, they don't replace it.</div></details>
+        <details class="faq-item"><summary class="faq-q">Is the food vegetarian, and is it regional?</summary><div class="faq-a">Your plan is built around your preferences — vegetarian, non-vegetarian, eggetarian, Jain, and regional cuisines (North Indian, South Indian, Bengali, Gujarati and more). The whole point is to work with the food you already love, not against it.</div></details>
+        <details class="faq-item"><summary class="faq-q">Do I get recipes?</summary><div class="faq-a">Yes. Your plan includes personalised recipes and food guidance so you know exactly what to cook and how. Meal delivery and chef-at-home are future services — for now, you cook, and your dietitian guides you.</div></details>
+        <details class="faq-item"><summary class="faq-q">How do the weekly follow-ups work?</summary><div class="faq-a">Your dietitian checks your progress every week, answers questions over WhatsApp, and adjusts your plan as your body, schedule and goals change. You're never left to figure it out alone.</div></details>
+        <details class="faq-item"><summary class="faq-q">Can I pause my membership?</summary><div class="faq-a">Yes. Travelling, on vacation, or just need a break? You can pause your membership and resume whenever you're ready — your plans, history and progress stay safe in My Diet.</div></details>
+        <details class="faq-item"><summary class="faq-q">Can I cancel, and what about refunds?</summary><div class="faq-a">There's no obligation to continue after your consultation. The ₹199 consult is covered by our satisfaction policy, and your dietitian explains all terms clearly before you pay for any program. Longer programs are structured commitments, not silent auto-renewals.</div></details>
+        <details class="faq-item"><summary class="faq-q">Do I need lab reports to start?</summary><div class="faq-a">No — they're optional but helpful. If you have recent reports (lipid profile, HbA1c, thyroid, vitamin D/B12, etc.), sharing them helps your dietitian personalise faster. If not, your dietitian will advise whether any tests are worth doing.</div></details>
+        <details class="faq-item"><summary class="faq-q">Do you deliver meals or send a chef?</summary><div class="faq-a">Not yet. At launch, Annam offers personalised diet plans only. Meal delivery and chef-at-home are on our roadmap as future services — we'll launch them only once they meet our quality standards.</div></details>
+        <details class="faq-item"><summary class="faq-q">Who are the dietitians?</summary><div class="faq-a">Qualified nutrition professionals holding MSc / RD credentials. You work with a real human dietitian throughout — during your consult, in your plan, and in your weekly follow-ups.</div></details>
+        <details class="faq-item"><summary class="faq-q">How is my health data handled?</summary><div class="faq-a">Your information is private and used only to personalise your care. Health records, reports and plans are kept secure and visible only to you and your assigned dietitian. See our Privacy page for details.</div></details>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
       <div class="ft-brand">
         <div class="logo">Annam<span class="dot">.</span></div>
         <p>Food is life. We make yours healthier. Dietitian-led, personalised nutrition built around the regional Indian food you already love.</p>
+        <div class="ft-social" aria-label="Annam on social media">
+          <a href="https://instagram.com/annam.life" target="_blank" rel="noopener noreferrer" aria-label="Annam on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="https://www.linkedin.com/company/annam-life" target="_blank" rel="noopener noreferrer" aria-label="Annam on LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-4 0v6h-4v-10h4v2"/><rect x="2" y="9" width="4" height="11"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://youtube.com/@annam.life" target="_blank" rel="noopener noreferrer" aria-label="Annam on YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/></svg></a>
+        </div>
       </div>
-      <div class="ft-col">
-        <h5>Product</h5>
-        <ul><li onclick="show('dietitian')">Book a consult</li><li onclick="show('home');setTimeout(()=>document.getElementById('packages').scrollIntoView({behavior:'smooth'}),100)">Our programs</li><li onclick="show('mydiet')">My Diet</li><li onclick="show('assess')">Free assessment</li></ul>
-      </div>
-      <div class="ft-col">
-        <h5>Partners</h5>
-        <ul><li onclick="show('cook-with-annam')" style="color:var(--green-l);font-weight:600">🤝 Cook with Annam</li><li onclick="show('start-kitchen')" style="color:var(--gold-l);font-weight:600">★ Start your kitchen</li><li onclick="show('vendor-login')">Vendor sign-in</li></ul>
-      </div>
-      <div class="ft-col">
+      <nav class="ft-col" aria-label="Clinical">
+        <h5>Clinical</h5>
+        <ul>
+          <li><a onclick="show('assess')" role="link" tabindex="0">Personalised diet plans</a></li>
+          <li><a onclick="show('dietitian')" role="link" tabindex="0">Dietitian consultation</a></li>
+          <li><a onclick="goFaq('pcos')" role="link" tabindex="0">PCOS nutrition</a></li>
+          <li><a onclick="goFaq('diabetes')" role="link" tabindex="0">Diabetes nutrition</a></li>
+          <li><a onclick="show('home');scrollToId('packages')" role="link" tabindex="0">Our programs</a></li>
+        </ul>
+      </nav>
+      <nav class="ft-col" aria-label="Company">
         <h5>Company</h5>
-        <ul><li onclick="show('home');setTimeout(()=>{const t=document.getElementById('story-toggle');if(t){t.scrollIntoView({behavior:'smooth',block:'center'});const c=document.getElementById('founder-story-collapse');if(c&&!c.classList.contains('open')){setTimeout(()=>toggleFounderStory(),500)}}},150)">About · Our story</li><li onclick="show('contact')">Contact</li><li onclick="show('privacy')">Privacy</li><li onclick="show('terms')">Terms</li></ul>
-      </div>
+        <ul>
+          <li><a onclick="show('home');setTimeout(()=>{const t=document.getElementById('story-toggle');if(t){t.scrollIntoView({behavior:'smooth',block:'center'});const c=document.getElementById('founder-story-collapse');if(c&&!c.classList.contains('open')){setTimeout(()=>toggleFounderStory(),500)}}},150)" role="link" tabindex="0">About · Our story</a></li>
+          <li><a onclick="show('contact')" role="link" tabindex="0">Contact</a></li>
+          <li><a onclick="show('privacy')" role="link" tabindex="0">Privacy</a></li>
+          <li><a onclick="show('terms')" role="link" tabindex="0">Terms</a></li>
+        </ul>
+      </nav>
+      <nav class="ft-col" aria-label="Partners">
+        <h5>Partners</h5>
+        <ul>
+          <li><a onclick="show('cook-with-annam')" role="link" tabindex="0" style="color:var(--green-l);font-weight:600">Cook with Annam</a></li>
+          <li><a onclick="show('start-kitchen')" role="link" tabindex="0" style="color:var(--gold-l);font-weight:600">Start your kitchen</a></li>
+          <li><a onclick="show('vendor-login')" role="link" tabindex="0">Vendor sign-in</a></li>
+        </ul>
+      </nav>
+      <nav class="ft-col" aria-label="Support">
+        <h5>Support</h5>
+        <ul>
+          <li><a onclick="show('home');scrollToId('faq')" role="link" tabindex="0">FAQ</a></li>
+          <li><a onclick="show('home');scrollToId('how-it-works')" role="link" tabindex="0">How it works</a></li>
+          <li><a onclick="show('contact')" role="link" tabindex="0">Contact support</a></li>
+          <li><a onclick="show('dietitian')" role="link" tabindex="0">Book a consult</a></li>
+        </ul>
+      </nav>
+      <nav class="ft-col" aria-label="Connect">
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://instagram.com/annam.life" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/company/annam-life" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="https://youtube.com/@annam.life" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          <li><a onclick="show('mydiet')" role="link" tabindex="0">My Diet</a></li>
+        </ul>
+      </nav>
     </div>
     <div class="ft-bottom">
       <span>© 2026 Annam. All rights reserved.</span>
-      <span>Made with care in India 🇮🇳</span>
+      <span>Made with care in India</span>
     </div>
   </footer>
 </div>
@@ -1546,16 +1687,16 @@
         <span>Account created — complete your assessment.</span>
       </div>
       <div class="assess-progress">
-        <div class="ap-step current" id="aps-1"></div>
-        <div class="ap-step" id="aps-2"></div>
-        <div class="ap-step" id="aps-3"></div>
-        <div class="ap-step" id="aps-4"></div>
+        <div class="ap-step current" id="aps-1" role="img" aria-label="Step 1: About You"></div>
+        <div class="ap-step" id="aps-2" role="img" aria-label="Step 2: Health"></div>
+        <div class="ap-step" id="aps-3" role="img" aria-label="Step 3: Goals"></div>
+        <div class="ap-step" id="aps-4" role="img" aria-label="Step 4: Food Preferences"></div>
       </div>
 
       <!-- Step 1: Basics -->
       <div class="assess-step" id="as-1">
         <h2>Tell us <em style="font-style:italic;color:var(--green-d)">about you.</em></h2>
-        <p class="step-sub">Step 1 of 4 · We use this to calculate your daily energy needs (BMR + TDEE).</p>
+        <p class="step-sub">About You · We use this to calculate your daily energy needs (BMR + TDEE).</p>
         <div class="form-row">
           <div class="field"><label>Full name</label><input type="text" id="m-name" placeholder="Your full name" /></div>
           <div class="field"><label>Email</label><input type="email" id="m-email" placeholder="Your email" /></div>
@@ -1578,7 +1719,7 @@
       <!-- Step 2: Body metrics -->
       <div class="assess-step hidden" id="as-2">
         <h2>Your <em>body metrics.</em></h2>
-        <p class="step-sub">Step 2 of 4 · Your dietitian uses these to calibrate calories and macros.</p>
+        <p class="step-sub">Health · Your dietitian uses these to calibrate calories and macros.</p>
         <div class="form-row">
           <div class="field">
             <div class="field-label-row">
@@ -1649,7 +1790,7 @@
       <!-- Step 3: Goal -->
       <div class="assess-step hidden" id="as-3">
         <h2>What's your <em>goal</em>?</h2>
-        <p class="step-sub">Step 3 of 4 · Pick your transformation outcome and timeline.</p>
+        <p class="step-sub">Goals · Pick your transformation outcome and timeline.</p>
 
         <div class="form-section-title">Primary goal</div>
         <div class="opt-grid" data-group="goal">
@@ -1677,7 +1818,7 @@
       <!-- Step 4: Diet & meals -->
       <div class="assess-step hidden" id="as-4">
         <h2>Your <em>plate,</em> your way.</h2>
-        <p class="step-sub">Step 4 of 4 · Your food preferences and favourite dishes.</p>
+        <p class="step-sub">Food Preferences · Your food preferences and favourite dishes.</p>
 
         <div class="form-section-title">Diet preference</div>
         <div class="opt-grid opt-grid-4" data-group="diet">
@@ -1988,8 +2129,15 @@
         </div>
       </div>
 
-      <div style="text-align:center;margin-top:2rem;padding:1.25rem 1.5rem;background:var(--sage-l);border-radius:var(--r-sm);max-width:680px;margin-left:auto;margin-right:auto">
-        <p style="font-size:14px;color:var(--green-d);line-height:1.6;margin:0">Your certified dietitian will now review this information and create your personalised diet plan during your consultation. <strong>No AI-generated plans — every plan is built by a qualified human dietitian.</strong></p>
+      <div style="text-align:center;margin-top:2rem;padding:1.75rem 1.5rem;background:var(--sage-l);border-radius:var(--r-lg);max-width:720px;margin-left:auto;margin-right:auto">
+        <div style="font-size:34px;line-height:1;margin-bottom:.6rem" aria-hidden="true">🌿</div>
+        <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:500;color:var(--green-d);margin:0 0 .5rem">Nicely done — your summary is ready.</h3>
+        <p style="font-size:14px;color:var(--green-d);line-height:1.65;margin:0 0 1.25rem">Your certified dietitian will review this and build your personalised diet plan during your consultation. <strong>No AI-generated plans — every plan is created by a qualified human dietitian.</strong></p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;text-align:left;max-width:640px;margin:0 auto">
+          <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-family:var(--font-serif);font-size:1.1rem;color:var(--gold);font-weight:600;line-height:1.2">1</span><div><div style="font-weight:600;font-size:13px;color:var(--text)">Book your consult</div><div style="font-size:12px;color:var(--text-m);line-height:1.5">A 30-min video call with your dietitian — ₹199.</div></div></div>
+          <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-family:var(--font-serif);font-size:1.1rem;color:var(--gold);font-weight:600;line-height:1.2">2</span><div><div style="font-weight:600;font-size:13px;color:var(--text)">Dietitian reviews you</div><div style="font-size:12px;color:var(--text-m);line-height:1.5">They study this summary and any lab reports beforehand.</div></div></div>
+          <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-family:var(--font-serif);font-size:1.1rem;color:var(--gold);font-weight:600;line-height:1.2">3</span><div><div style="font-weight:600;font-size:13px;color:var(--text)">Your plan is created</div><div style="font-size:12px;color:var(--text-m);line-height:1.5">A personalised plan, built around the food you love.</div></div></div>
+        </div>
       </div>
 
       <div style="display:flex;justify-content:space-between;margin-top:2rem;flex-wrap:wrap;gap:1rem">
@@ -2034,6 +2182,16 @@
         <button class="btn" style="background:var(--gold-l);color:var(--green-d);padding:12px 22px;font-weight:600" onclick="show('dietitian')">Book ₹199 consult →</button>
         <button class="btn btn-outline" style="border-color:rgba(251,247,238,.5);color:var(--cream);padding:12px 22px" onclick="show('assess')">Complete assessment</button>
       </div>
+
+      <!-- Journey tracker -->
+      <ol class="jt" aria-label="Your Annam journey" style="margin-top:2.5rem">
+        <li class="jt-step done"><span class="jt-dot" aria-hidden="true">✓</span><span class="jt-label">Assessment completed</span></li>
+        <li class="jt-step active"><span class="jt-dot" aria-hidden="true">2</span><span class="jt-label">Consultation pending</span></li>
+        <li class="jt-step"><span class="jt-dot" aria-hidden="true">3</span><span class="jt-label">Dietitian review</span></li>
+        <li class="jt-step"><span class="jt-dot" aria-hidden="true">4</span><span class="jt-label">Plan creation</span></li>
+        <li class="jt-step"><span class="jt-dot" aria-hidden="true">5</span><span class="jt-label">Weekly check-ins</span></li>
+        <li class="jt-step"><span class="jt-dot" aria-hidden="true">6</span><span class="jt-label">Progress tracking</span></li>
+      </ol>
     </div>
 
     <!-- What will appear here -->
@@ -2221,6 +2379,22 @@
         </div>
       </div>
     </div>
+
+    <!-- What happens after booking -->
+    <section class="after-booking" aria-labelledby="after-booking-heading" style="max-width:1100px;margin:3.5rem auto 0;padding-top:2.5rem;border-top:1px solid var(--line)">
+      <div style="text-align:center;margin-bottom:2.25rem">
+        <div class="section-eyebrow" style="justify-content:center;display:inline-block">Your path</div>
+        <h2 id="after-booking-heading" style="font-family:var(--font-serif);font-size:clamp(1.5rem,3vw,2rem);font-weight:500;color:var(--text);letter-spacing:-.3px;margin:.5rem 0 .4rem">What happens after booking?</h2>
+        <p style="font-size:14px;color:var(--text-m);max-width:560px;margin:0 auto;line-height:1.6">A calm, guided healthcare journey — every step led by your dietitian.</p>
+      </div>
+      <ol class="ab-steps" style="list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;counter-reset:ab">
+        <li class="ab-step"><div class="ab-num">1</div><h3>Assessment review</h3><p>Your dietitian studies your assessment before you meet.</p></li>
+        <li class="ab-step"><div class="ab-num">2</div><h3>Lab review <span style="font-weight:400;color:var(--text-l)">(optional)</span></h3><p>Share any recent lab reports — helpful, never required.</p></li>
+        <li class="ab-step"><div class="ab-num">3</div><h3>Consultation</h3><p>A 30-minute video call to understand your goals and lifestyle.</p></li>
+        <li class="ab-step"><div class="ab-num">4</div><h3>Plan creation</h3><p>Your dietitian builds your personalised plan — by hand, never AI.</p></li>
+        <li class="ab-step"><div class="ab-num">5</div><h3>Weekly follow-ups</h3><p>Regular check-ins and adjustments as you progress.</p></li>
+      </ol>
+    </section>
   </div>
 </div>
 
@@ -3503,6 +3677,10 @@
       try { window.history.replaceState({ page: 'home' }, '', window.location.pathname); } catch(e){}
     }
   });
+
+  // ---- smooth-scroll + FAQ deep-link helpers (footer/nav) ----
+  function scrollToId(id){ const el=document.getElementById(id); if(el){ setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),120); } }
+  function goFaq(topic){ show('home'); scrollToId('faq'); setTimeout(()=>{ const el=document.querySelector('[data-faq="'+topic+'"]'); if(el){ el.open=true; el.scrollIntoView({behavior:'smooth',block:'center'}); } },420); }
 
   // ---- MY DIET: render dashboard with user data ----
   function renderMyDiet() {
@@ -5567,6 +5745,86 @@ async function emailInvoice() {
   if (!result) {
     alert('We could not send the email automatically right now. Please email us at hello.annam.life@gmail.com and we will resend it.');
   }
+}
+</script>
+
+<!-- ===== Accessibility: keyboard activation for onclick links ===== -->
+<script>
+window.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('a[onclick]:not([href]), .logo[onclick]').forEach(function (el) {
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    if (!el.hasAttribute('role')) el.setAttribute('role', 'link');
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+    });
+  });
+});
+</script>
+
+<!-- ===== Structured data (SEO) ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://annam.life/#organization",
+      "name": "Annam",
+      "url": "https://annam.life/",
+      "logo": "https://annam.life/apple-touch-icon.png",
+      "description": "Annam is a premium, dietitian-led personalised nutrition platform for India. Certified MSc/RD dietitians design evidence-based diet plans around your goals and favourite regional Indian food. Plans are created by qualified humans, never AI.",
+      "email": "hello.annam.life@gmail.com",
+      "areaServed": "IN",
+      "sameAs": [
+        "https://instagram.com/annam.life",
+        "https://www.linkedin.com/company/annam-life",
+        "https://youtube.com/@annam.life"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://annam.life/#business",
+      "name": "Annam — Personalised Indian Diet Plans",
+      "image": "https://annam.life/apple-touch-icon.png",
+      "url": "https://annam.life/",
+      "email": "hello.annam.life@gmail.com",
+      "priceRange": "$$",
+      "description": "Dietitian-led personalised nutrition. Start with a free assessment and a Rs 199 video consultation; your certified dietitian creates a personalised diet plan with weekly follow-ups.",
+      "address": { "@type": "PostalAddress", "addressCountry": "IN" },
+      "areaServed": { "@type": "Country", "name": "India" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://annam.life/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://annam.life/" },
+        { "@type": "ListItem", "position": 2, "name": "Consult", "item": "https://annam.life/#consult" },
+        { "@type": "ListItem", "position": 3, "name": "Programs", "item": "https://annam.life/#packages" },
+        { "@type": "ListItem", "position": 4, "name": "FAQ", "item": "https://annam.life/#faq" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://annam.life/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "How does an Annam membership work?", "acceptedAnswer": { "@type": "Answer", "text": "You start with a free assessment, then a Rs 199 video consultation. Your dietitian recommends a 3, 6 or 12-month program, explains everything, and only if you choose to continue do you begin. You get a personalised plan plus weekly follow-ups and adjustments." } },
+        { "@type": "Question", "name": "Why don't you show prices on the website?", "acceptedAnswer": { "@type": "Answer", "text": "Nutrition isn't one-size-fits-all. Your dietitian shares clear, honest pricing during your consultation based on your goals and the support you need, with no hidden charges and no obligation to continue." } },
+        { "@type": "Question", "name": "What's included in the Rs 199 consultation?", "acceptedAnswer": { "@type": "Answer", "text": "A 30-minute video call covering your goals, a review of your assessment and any reports, your lifestyle, and a clear program recommendation. The Rs 199 is adjusted against any program purchased within 7 days." } },
+        { "@type": "Question", "name": "Do you use AI to create my diet plan?", "acceptedAnswer": { "@type": "Answer", "text": "No. Annam never uses AI to generate customer diet plans. Every plan is created, reviewed and approved by a qualified human dietitian (MSc/RD). Technology is used only behind the scenes for scheduling and secure records." } },
+        { "@type": "Question", "name": "Can Annam help with PCOS or PCOD?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Our dietitians build PCOS-focused plans around insulin sensitivity, balanced meals and sustainable habits, using regional Indian food. It supports, but does not replace, your doctor's care." } },
+        { "@type": "Question", "name": "Can Annam help with diabetes or pre-diabetes?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Plans can be tailored for blood-sugar management — meal timing, carbohydrate quality and portions — alongside your medical treatment. Continue medication and check-ups with your doctor; our dietitians complement that care." } },
+        { "@type": "Question", "name": "Is the food vegetarian, and is it regional?", "acceptedAnswer": { "@type": "Answer", "text": "Your plan is built around your preferences — vegetarian, non-vegetarian, eggetarian, Jain and regional cuisines such as North Indian, South Indian, Bengali and Gujarati. It works with the food you already love." } },
+        { "@type": "Question", "name": "Do I get recipes?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your plan includes personalised recipes and food guidance. Meal delivery and chef-at-home are future services; for now you cook and your dietitian guides you." } },
+        { "@type": "Question", "name": "How do the weekly follow-ups work?", "acceptedAnswer": { "@type": "Answer", "text": "Your dietitian checks your progress every week, answers questions over WhatsApp, and adjusts your plan as your body, schedule and goals change." } },
+        { "@type": "Question", "name": "Can I pause my membership?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can pause your membership when travelling or busy and resume whenever you're ready. Your plans, history and progress stay safe in My Diet." } },
+        { "@type": "Question", "name": "Can I cancel, and what about refunds?", "acceptedAnswer": { "@type": "Answer", "text": "There's no obligation to continue after your consultation. The Rs 199 consult is covered by our satisfaction policy, and your dietitian explains all terms before you pay. Longer programs are structured commitments, not silent auto-renewals." } },
+        { "@type": "Question", "name": "Do I need lab reports to start?", "acceptedAnswer": { "@type": "Answer", "text": "No, they're optional but helpful. Recent reports (lipid profile, HbA1c, thyroid, vitamin D/B12) help your dietitian personalise faster. If you don't have them, your dietitian advises whether any tests are worth doing." } },
+        { "@type": "Question", "name": "Do you deliver meals or send a chef?", "acceptedAnswer": { "@type": "Answer", "text": "Not yet. At launch Annam offers personalised diet plans only. Meal delivery and chef-at-home are future services we will launch only once they meet our quality standards." } },
+        { "@type": "Question", "name": "Who are the dietitians?", "acceptedAnswer": { "@type": "Answer", "text": "Qualified nutrition professionals holding MSc/RD credentials. You work with a real human dietitian during your consult, in your plan, and in your weekly follow-ups." } },
+        { "@type": "Question", "name": "How is my health data handled?", "acceptedAnswer": { "@type": "Answer", "text": "Your information is private and used only to personalise your care. Records, reports and plans are kept secure and visible only to you and your assigned dietitian." } }
+      ]
+    }
+  ]
 }
 </script>
 </body>
