@@ -133,9 +133,10 @@
   .hero h1 .underline { position: relative; display: inline-block; }
   .hero h1 .underline::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 8px; background: var(--gold-l); opacity: .55; z-index: -1; border-radius: 2px; }
   .hero-sub { font-size: 1.05rem; color: var(--text-m); line-height: 1.7; max-width: 480px; margin-bottom: 2rem; }
-  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
   .hero-cta-secondary { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
-  .hero-cta-caption { font-size: 11.5px; color: var(--text-l); letter-spacing: .2px; line-height: 1.3; }
+  .hero-cta-caption { display: block; margin-top: 10px; font-size: 12px; color: var(--text-l); letter-spacing: .2px; line-height: 1.4; }
+  .hero-cta-caption strong { color: var(--green-d); font-weight: 600; }
   .hero-trust { display: flex; align-items: center; gap: 16px; margin-top: 2rem; padding-top: 1.75rem; border-top: 1px solid var(--line); position: relative; z-index: 3; background: var(--cream); }
   .trust-avatars { display: flex; }
   .trust-avatars div { width: 34px; height: 34px; border-radius: 50%; border: 2.5px solid var(--cream); margin-left: -10px; background-size: cover; background-position: center; font-family: var(--font-serif); display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:12px;}
@@ -1050,12 +1051,12 @@
     <p class="hero-clarity" style="font-family:var(--font-serif);font-size:clamp(1.15rem,2vw,1.5rem);color:var(--green-d);font-weight:500;line-height:1.4;margin:1rem 0 .6rem;letter-spacing:-.2px">Personalised Indian diet plans.<br/>Built around the food you already love.</p>
     <p class="hero-sub">Designed and approved by a certified dietitian — never an algorithm. Real food, real habits, real follow-up.</p>
 
-    <div class="hero-cta">
-      <button class="btn btn-primary btn-lg" onclick="show('assess-welcome')">Start free assessment →</button>
-      <div class="hero-cta-secondary">
-        <button class="btn btn-outline" onclick="show('dietitian')">Book Consultation</button>
-        <span class="hero-cta-caption">₹199 consultation • Adjusted against your membership</span>
+    <div class="hero-cta-wrap">
+      <div class="hero-cta">
+        <button class="btn btn-primary btn-lg" onclick="show('assess-welcome')">Start free assessment →</button>
+        <button class="btn btn-outline btn-lg" onclick="show('dietitian')">Book Consultation</button>
       </div>
+      <span class="hero-cta-caption"><strong>₹199 consultation</strong> • adjusted against your membership</span>
     </div>
 
     <div class="hero-trust" style="padding-top:1.25rem;align-items:center;gap:10px">
