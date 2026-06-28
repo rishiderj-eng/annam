@@ -3830,9 +3830,10 @@
     var subsP     = annamAuth.from('subscriptions').select('*').order('start_date',{ascending:false}).then(arr).catch(function(){return [];});
     var payP      = annamAuth.from('payments').select('*').order('created_at',{ascending:false}).then(arr).catch(function(){return [];});
     var labsP     = annamAuth.from('lab_uploads').select('*').then(arr).catch(function(){return [];});
+    var reviewsP  = annamAuth.from('weekly_reviews_customer').select('*').order('review_date',{ascending:false,nullsFirst:false}).then(arr).catch(function(){return [];});
 
-    var r = await Promise.all([customerP, assessP, consultP, subsP, payP, labsP]);
-    var customer=r[0], assessment=r[1], consults=r[2], subs=r[3], pays=r[4], labs=r[5];
+    var r = await Promise.all([customerP, assessP, consultP, subsP, payP, labsP, reviewsP]);
+    var customer=r[0], assessment=r[1], consults=r[2], subs=r[3], pays=r[4], labs=r[5], reviews=r[6];
 
     annamEhrMeta(customer, subs);
     annamEhrJourney(customer, assessment, consults, pays, subs);
@@ -3841,7 +3842,8 @@
     annamEhrDietitian(customer);
     annamEhrPlan();
     annamEhrLabs(labs, customer);
-    annamEhrProgress(customer, assessment, consults, pays, subs, labs);
+    annamEhrReviews(reviews, subs);
+    annamEhrProgress(customer, assessment, consults, pays, subs, labs, reviews);
   }
 
   function annamEhrMeta(customer, subs){
@@ -4215,7 +4217,7 @@
     document.body.appendChild(mask);
   }
 
-  function annamEhrProgress(customer, assessment, consults, pays, subs, labs){
+  function annamEhrProgress(customer, assessment, consults, pays, subs, labs, reviews){
     var el=document.getElementById('ehr-progress'); if(!el) return;
     var items=[];
     if(customer && customer.created_at) items.push({d:customer.created_at,t:'Account created'});
@@ -4224,9 +4226,42 @@
     (pays||[]).forEach(function(p){ if(p.status==='paid' && p.created_at) items.push({d:p.created_at,t:'Payment received'}); });
     (subs||[]).forEach(function(s){ if(s.start_date) items.push({d:s.start_date,t:annamTitle(s.plan_type)+' membership started'}); });
     (labs||[]).forEach(function(l){ var w=l.created_at||l.uploaded_at; if(w) items.push({d:w,t:'Lab report uploaded'}); });
+    (reviews||[]).forEach(function(rw){ var w=rw.completed_at||rw.review_date; if(w) items.push({d:w,t:(rw.week_number?('Week '+rw.week_number+' '):'')+'review completed'}); });
     if(!items.length){ el.innerHTML=annamEmpty('\ud83d\udcc8','Your journey will appear here','As you complete your assessment, consultation and plan, each milestone is recorded here.'); return; }
     items.sort(function(a,b){ return new Date(a.d)-new Date(b.d); });
     el.innerHTML='<ul class="ehr-timeline">'+items.map(function(it){ return '<li><div class="tl-t">'+annamEsc(it.t)+'</div><div class="tl-d">'+annamDate(it.d)+'</div></li>'; }).join('')+'</ul>';
+  }
+
+  function annamMembershipWeek(subs){
+    var active=(subs||[]).filter(function(s){return ['active','ending_soon','renewal_due','renewed'].indexOf(s.status)>=0;})[0];
+    if(!active || !active.start_date) return null;
+    var start=new Date(active.start_date); if(isNaN(start.getTime())) return null;
+    var cur=Math.floor((Date.now()-start.getTime())/(7*86400000))+1;
+    var total=null;
+    if(active.end_date){ var end=new Date(active.end_date); if(!isNaN(end.getTime())) total=Math.round((end.getTime()-start.getTime())/(7*86400000)); }
+    if(cur<1)cur=1; if(total && cur>total)cur=total;
+    return {cur:cur,total:total};
+  }
+
+  function annamEhrReviews(reviews, subs){
+    var rv=document.getElementById('ehr-reviews'); if(!rv) return;
+    var mw=annamMembershipWeek(subs);
+    var head = mw ? '<div style="font-size:12.5px;color:var(--text-l);margin-bottom:14px">Membership progress — <strong style="color:var(--green-d)">Week '+mw.cur+(mw.total?(' of '+mw.total):'')+'</strong></div>' : '';
+    var list=reviews||[];
+    if(!list.length){ rv.innerHTML=head+annamEmpty('\ud83d\uddd2\ufe0f','No weekly reviews yet','After your plan begins, your dietitian\u2019s weekly observations and notes will appear here.'); return; }
+    function sub(label,val){ if(!val) return ''; return '<div style="margin-top:10px"><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--text-l);margin-bottom:3px">'+annamEsc(label)+'</div><div style="font-size:13.5px;line-height:1.6;color:var(--text);white-space:pre-wrap">'+annamEsc(val)+'</div></div>'; }
+    var html=head;
+    list.forEach(function(rw){
+      var wk = rw.week_number ? ('Week '+rw.week_number) : 'Weekly review';
+      html+='<div style="border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px">'
+        +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-weight:600;color:var(--text);font-size:14px">'+annamEsc(wk)+'</span>'
+        +(rw.review_date?'<span style="font-size:12px;color:var(--text-l)">'+annamDate(rw.review_date)+'</span>':'')+'</div>';
+      if(rw.summary) html+='<div style="font-size:14px;line-height:1.65;color:var(--text);white-space:pre-wrap">'+annamEsc(rw.summary)+'</div>';
+      html+=sub('Achievements',rw.achievements)+sub('Focus for next week',rw.next_week_focus)+sub('From your dietitian',rw.dietitian_comments);
+      html+='</div>';
+    });
+    html+='<div style="margin-top:6px;font-size:11.5px;color:var(--text-l);font-style:italic">Each review is written by your dietitian. Annam never uses AI for your care.</div>';
+    rv.innerHTML=html;
   }
 
   function annamEhrStatic(){
