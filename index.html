@@ -3920,10 +3920,47 @@
       '<p style="font-size:12px;color:var(--text-l);margin-top:6px">Every Annam plan is created by a qualified human dietitian \u2014 never AI.</p>';
   }
 
-  function annamEhrPlan(){
+  async function annamEhrPlan(){
     var el=document.getElementById('ehr-plan'); if(!el) return;
-    el.innerHTML=annamEmpty('\ud83c\udf7d\ufe0f','Your personalised plan is being prepared','Your dietitian creates your plan after reviewing your assessment and consultation. It will appear here \u2014 built for you by a human, never AI.')+
-      '<div style="text-align:center;margin-top:4px"><button class="btn btn-ghost ehr-btn-soon" disabled title="Available once your plan is ready">\u2b07 Download PDF \u00b7 with your plan</button></div>';
+    var emptyState = function(){ return annamEmpty('\ud83c\udf7d\ufe0f','Your personalised plan is being prepared','Your dietitian creates your plan after reviewing your assessment and consultation. It will appear here \u2014 built for you by a human, never AI.'); };
+    if(!annamAuth){ el.innerHTML=emptyState(); return; }
+
+    var p=null;
+    try{
+      // RLS returns only THIS customer's own rows; published filter is explicit.
+      var r=await annamAuth.from('diet_plans').select('*').eq('status','published').order('published_at',{ascending:false}).limit(1);
+      p=(r && r.data && r.data[0]) || null;
+    }catch(e){ p=null; }
+
+    if(!p){ el.innerHTML=emptyState(); return; }
+
+    function block(label,val){ if(!val && val!==0) return ''; return '<div style="margin-top:16px"><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:var(--text-l);margin-bottom:5px">'+annamEsc(label)+'</div><div style="font-size:14px;line-height:1.65;color:var(--text);white-space:pre-wrap">'+annamEsc(val)+'</div></div>'; }
+
+    var meals=[['Breakfast',p.breakfast],['Lunch',p.lunch],['Dinner',p.dinner],['Snacks',p.snacks]].filter(function(m){return m[1];});
+    var mealsHtml = meals.length ? '<div style="margin-top:16px"><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:var(--text-l);margin-bottom:8px">Daily meals</div>'+meals.map(function(m){return '<div class="ehr-row"><div class="ehr-row-ic" aria-hidden="true">\ud83c\udf7d\ufe0f</div><div style="flex:1"><div class="t">'+annamEsc(m[0])+'</div><div class="s" style="white-space:pre-wrap">'+annamEsc(m[1])+'</div></div></div>';}).join('')+'</div>' : '';
+
+    var meta=[];
+    if(p.published_at) meta.push('Published '+annamDate(p.published_at));
+    if(p.author_name) meta.push('by '+annamEsc(p.author_name));
+
+    el.innerHTML =
+      '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">'+
+        '<span class="ehr-status ok">\u2713 Published</span>'+
+        '<span style="font-size:11.5px;color:var(--text-l)">Created by your dietitian \u00b7 Not AI-generated</span>'+
+      '</div>'+
+      (p.title?'<h3 style="font-family:var(--font-serif);font-size:1.3rem;font-weight:500;color:var(--text);margin:4px 0 2px">'+annamEsc(p.title)+'</h3>':'')+
+      (meta.length?'<div style="font-size:12px;color:var(--text-l);margin-bottom:6px">'+meta.join(' \u00b7 ')+'</div>':'')+
+      block('Clinical goal',p.clinical_goal)+
+      block('From your dietitian',p.dietitian_notes)+
+      block('Daily structure',p.daily_structure)+
+      mealsHtml+
+      block('Hydration & lifestyle',p.hydration_lifestyle)+
+      block('Foods to prefer',p.foods_prefer)+
+      block('Foods to limit',p.foods_limit)+
+      block('Allergies & cautions',p.cautions)+
+      (p.review_date?block('Review date',annamDate(p.review_date)):'')+
+      block('Follow-up',p.followup_note)+
+      '<div style="margin-top:18px;padding-top:12px;border-top:1px solid var(--line);font-size:11.5px;color:var(--text-l);font-style:italic">This plan was written and approved by your qualified dietitian. Annam never uses AI to create diet plans.</div>';
   }
 
   // ---- Sprint 2D · Lab upload (healthcare-grade) ----
