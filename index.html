@@ -981,6 +981,29 @@
   @media (prefers-reduced-motion: reduce){ .ehr-skel{ animation:none; } }
   .ehr-btn-soon { opacity:.5; cursor:not-allowed; }
   @media (max-width:600px){ #mydiet-loggedin{ padding:1.5rem 1rem 3rem; } .ehr-card{ padding:1.25rem 1.1rem; } }
+  /* ---- Sprint 2D · Lab upload ---- */
+  .lab-help { font-size:12px; color:var(--text-l); margin-bottom:12px; }
+  .lab-chip { display:inline-block; font-size:11.5px; font-weight:600; color:var(--text-m); background:var(--cream); border:1px solid var(--line); border-radius:100px; padding:4px 11px; margin:0 6px 6px 0; }
+  .lab-drop { padding:16px; border:1px dashed var(--line); border-radius:var(--r-sm); background:var(--cream); }
+  .lab-drop-t { font-size:13px; font-weight:600; color:var(--text); margin-bottom:4px; }
+  .lab-preview { display:flex; gap:12px; align-items:flex-start; padding:14px; border:1px solid var(--line); border-radius:var(--r-sm); background:#fff; }
+  .lab-preview-ic { width:46px; height:46px; min-width:46px; border-radius:var(--r-sm); background:var(--gold-l,#f6ecd2); display:flex; align-items:center; justify-content:center; font-size:22px; overflow:hidden; }
+  .lab-preview-ic img { width:100%; height:100%; object-fit:cover; }
+  .lab-prog { height:6px; border-radius:100px; background:var(--line); overflow:hidden; margin-top:10px; }
+  .lab-prog > i { display:block; height:100%; width:38%; border-radius:100px; background:var(--green-d); animation:labProg 1.05s ease-in-out infinite; }
+  @keyframes labProg { 0%{transform:translateX(-110%)} 100%{transform:translateX(300%)} }
+  .lab-badge { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:600; padding:3px 10px; border-radius:100px; letter-spacing:.2px; }
+  .lab-badge.pending { background:#fdf3e0; color:#9a6b14; }
+  .lab-badge.reviewing { background:#e8eef6; color:#2d5278; }
+  .lab-badge.reviewed { background:#e7f3ec; color:#1f6b46; }
+  .lab-badge.locked { background:#eceae4; color:#5b5447; }
+  .lab-mask { position:fixed; inset:0; background:rgba(74,59,42,.45); z-index:1100; display:flex; align-items:center; justify-content:center; padding:20px; -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); }
+  .lab-modal { background:var(--cream); border:1px solid var(--line); border-radius:var(--r-lg); max-width:400px; width:100%; padding:24px; box-shadow:0 20px 60px rgba(43,35,23,.25); }
+  .lab-modal h3 { font-family:var(--font-serif); font-size:1.25rem; font-weight:500; color:var(--text); margin:0 0 8px; }
+  .lab-modal p { font-size:13.5px; color:var(--text-m); line-height:1.55; margin:0 0 18px; }
+  .lab-modal-row { display:flex; gap:10px; justify-content:flex-end; }
+  .lab-btn-danger { background:#B5532F; color:#FBF7EE; }
+  .lab-btn-danger:hover { background:#9a4427; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -3816,7 +3839,7 @@
     annamEhrConsult(consults, customer);
     annamEhrDietitian(customer);
     annamEhrPlan();
-    annamEhrLabs(labs);
+    annamEhrLabs(labs, customer);
     annamEhrProgress(customer, assessment, consults, pays, subs, labs);
   }
 
@@ -3903,15 +3926,255 @@
       '<div style="text-align:center;margin-top:4px"><button class="btn btn-ghost ehr-btn-soon" disabled title="Available once your plan is ready">\u2b07 Download PDF \u00b7 with your plan</button></div>';
   }
 
-  function annamEhrLabs(labs){
+  // ---- Sprint 2D · Lab upload (healthcare-grade) ----
+  var annamStagedLab = null;            // File staged for upload (pre-confirm)
+  var annamSuggestedLabs = ['CBC','HbA1c','Lipid Profile','Thyroid','Liver Function','Kidney Function','Vitamin D','Vitamin B12'];
+
+  function annamLabBadge(status){
+    var map = {
+      pending_review: ['pending','\u23f3','Pending review'],
+      under_review:   ['reviewing','\ud83d\udd0d','Under review'],
+      reviewed:       ['reviewed','\u2713','Reviewed'],
+      locked:         ['locked','\ud83d\udd12','Locked']
+    };
+    var m = map[status] || map.pending_review;
+    return '<span class="lab-badge '+m[0]+'">'+m[1]+' '+m[2]+'</span>';
+  }
+
+  function annamEhrLabs(labs, customer){
     var el=document.getElementById('ehr-labs'); if(!el) return;
-    if(!labs || !labs.length){ el.innerHTML=annamEmpty('\ud83e\uddea','No lab reports yet','When your dietitian requests lab work, your uploaded reports will appear here. Secure upload arrives in a later update.'); return; }
-    el.innerHTML=labs.map(function(l){
-      var name=l.file_name||l.name||l.filename||'Lab report';
-      var when=l.created_at||l.uploaded_at||l.created;
-      var st=l.status||l.review_status||'uploaded';
-      return '<div class="ehr-row"><div class="ehr-row-ic" aria-hidden="true">\ud83e\uddea</div><div style="flex:1"><div class="t">'+annamEsc(name)+'</div><div class="s">Uploaded '+annamDate(when)+'</div><div style="margin-top:6px"><span class="ehr-status wait">'+annamTitle(st)+'</span></div></div></div>';
-    }).join('');
+    var cid = (customer && customer.id) ? customer.id : null;
+    annamStagedLab = null;
+    window.__annamLabs = labs || [];   // kept for duplicate-detection
+
+    var html = '';
+
+    // Suggested reports helper
+    if(cid){
+      html += '<div class="lab-help">Common reports you may upload:</div>';
+      html += '<div style="margin-bottom:14px">'+annamSuggestedLabs.map(function(s){return '<span class="lab-chip">'+annamEsc(s)+'</span>';}).join('')+'</div>';
+      // Dropzone (file picker) — preview replaces this on selection
+      html += '<div class="lab-drop" id="lab-drop">'+
+          '<div class="lab-drop-t">Upload a lab report</div>'+
+          '<div class="lab-help" style="margin-bottom:10px">PDF, JPG or PNG \u00b7 up to 10 MB \u00b7 only you and your dietitian can see it.</div>'+
+          '<input type="file" id="ehr-lab-file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" style="font-size:12.5px;max-width:230px" onchange="annamLabStage(\''+cid+'\')" />'+
+        '</div>';
+      html += '<div id="lab-preview-slot"></div>';
+    }
+
+    // Existing reports
+    if(!labs || !labs.length){
+      html += annamEmpty('\ud83e\uddea','No lab reports yet',
+        cid ? 'Upload recent reports so your dietitian can personalise your plan faster.'
+            : 'When your dietitian requests lab work, your uploaded reports will appear here.');
+    } else {
+      html += '<div style="margin-top:'+(cid?'18px':'0')+'">'+labs.map(function(l){
+        var name = l.file_name || 'Lab report';
+        var when = l.uploaded_at || l.created_at;
+        var st   = l.review_status || 'pending_review';
+        var sizeKb = l.file_size_kb;
+        var sizeTxt = sizeKb ? (sizeKb>=1024 ? (sizeKb/1024).toFixed(1)+' MB' : sizeKb+' KB') : '';
+        var path = l.file_path || '';
+        var editable = (st==='pending_review');
+        var meta = ['Uploaded '+annamDate(when)]; if(sizeTxt) meta.push(sizeTxt);
+        var actions = '';
+        if(path) actions += '<button class="btn btn-ghost" style="padding:4px 12px;font-size:12px" onclick="annamViewLab(\''+encodeURIComponent(path)+'\')">View</button>';
+        if(editable && l.id){
+          actions += '<button class="btn btn-ghost" style="padding:4px 12px;font-size:12px;margin-left:6px" onclick="annamReplaceLab(\''+l.id+'\',\''+encodeURIComponent(path)+'\')">Replace</button>';
+          actions += '<button class="btn btn-ghost lab-btn-danger" style="padding:4px 12px;font-size:12px;margin-left:6px" onclick="annamConfirmDeleteLab(\''+l.id+'\',\''+encodeURIComponent(path)+'\',\''+annamEsc(name).replace(/'/g,"")+'\')">Delete</button>';
+        }
+        var lockNote = editable ? '' : '<div class="lab-help" style="margin-top:6px;font-style:italic">Reviewed by your dietitian \u2014 part of your clinical record, read-only.</div>';
+        return '<div class="ehr-row"><div class="ehr-row-ic" aria-hidden="true">\ud83e\uddea</div><div style="flex:1">'+
+            '<div class="t">'+annamEsc(name)+'</div>'+
+            '<div class="s">'+meta.join(' \u00b7 ')+'</div>'+
+            '<div style="margin-top:6px">'+annamLabBadge(st)+'</div>'+
+            (actions?'<div style="margin-top:8px">'+actions+'</div>':'')+ lockNote +
+          '</div></div>';
+      }).join('')+'</div>';
+    }
+    el.innerHTML = html;
+  }
+
+  // File selected -> show a preview card (confirm before upload)
+  function annamLabStage(customerId){
+    var input = document.getElementById('ehr-lab-file');
+    var slot  = document.getElementById('lab-preview-slot');
+    var drop  = document.getElementById('lab-drop');
+    if(!input || !slot) return;
+    var f = input.files && input.files[0];
+    if(!f){ slot.innerHTML=''; if(drop) drop.style.display=''; annamStagedLab=null; return; }
+
+    var okType = ['application/pdf','image/jpeg','image/png'];
+    if(okType.indexOf(f.type) < 0){ annamToast('Only PDF, JPG or PNG files are allowed.','error'); input.value=''; return; }
+    if(f.size > 10*1024*1024){ annamToast('That file is over 10 MB. Please choose a smaller file.','error'); input.value=''; return; }
+
+    annamStagedLab = f;
+    if(drop) drop.style.display='none';
+
+    var kb = Math.round(f.size/1024);
+    var sizeTxt = kb>=1024 ? (kb/1024).toFixed(1)+' MB' : kb+' KB';
+    var typeTxt = f.type==='application/pdf' ? 'PDF document' : (f.type==='image/png'?'PNG image':'JPG image');
+    var thumb = (f.type==='image/jpeg'||f.type==='image/png') ? '<img alt="" src="'+URL.createObjectURL(f)+'" />' : '\ud83d\udcc4';
+
+    slot.innerHTML =
+      '<div class="lab-preview">'+
+        '<div class="lab-preview-ic">'+thumb+'</div>'+
+        '<div style="flex:1">'+
+          '<div class="t" style="font-weight:600">'+annamEsc(f.name)+'</div>'+
+          '<div class="s">'+typeTxt+' \u00b7 '+sizeTxt+' \u00b7 Selected today</div>'+
+          '<div class="lab-prog" id="lab-prog" style="display:none"><i></i></div>'+
+          '<div id="lab-prog-label" class="lab-help" style="margin-top:6px;display:none"></div>'+
+          '<div id="lab-preview-actions" style="margin-top:10px">'+
+            '<button class="btn btn-primary" id="ehr-lab-upload-btn" style="padding:7px 16px;font-size:13px" onclick="annamUploadLab(\''+customerId+'\')">Upload report</button>'+
+            '<button class="btn btn-ghost" style="padding:7px 14px;font-size:13px;margin-left:6px" onclick="annamLabReplace()">Replace file</button>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+  }
+
+  // "Replace file" in preview = clear selection, reopen the picker
+  function annamLabReplace(){
+    annamStagedLab = null;
+    var input=document.getElementById('ehr-lab-file'); if(input) input.value='';
+    var slot=document.getElementById('lab-preview-slot'); if(slot) slot.innerHTML='';
+    var drop=document.getElementById('lab-drop'); if(drop) drop.style.display='';
+  }
+
+  function annamLabProg(show, text){
+    var bar=document.getElementById('lab-prog'); var lbl=document.getElementById('lab-prog-label');
+    if(bar) bar.style.display = show ? 'block':'none';
+    if(lbl){ lbl.style.display = show ? 'block':'none'; if(text) lbl.textContent=text; }
+  }
+
+  async function annamUploadLab(customerId){
+    var f = annamStagedLab;
+    var btn = document.getElementById('ehr-lab-upload-btn');
+    if(!annamAuth){ annamToast('You appear to be signed out. Please sign in again.','error'); return; }
+    if(!f){ annamToast('Choose a file first.','error'); return; }
+
+    // Duplicate protection: same name + size already uploaded in the last 10 min
+    var kb = Math.round(f.size/1024);
+    var labs = window.__annamLabs || [];
+    var dup = labs.filter(function(l){
+      if(l.file_name!==f.name || l.file_size_kb!==kb) return false;
+      var t = new Date(l.uploaded_at || l.created_at).getTime();
+      return (Date.now()-t) < 10*60*1000;
+    })[0];
+    if(dup){
+      annamModal({
+        title:'Upload again?',
+        body:'You uploaded a file named "'+f.name+'" of the same size a few minutes ago. Upload it again?',
+        confirmLabel:'Upload again',
+        onConfirm:function(){ annamDoUpload(customerId, f, btn); }
+      });
+      return;
+    }
+    annamDoUpload(customerId, f, btn);
+  }
+
+  async function annamDoUpload(customerId, f, btn){
+    if(btn){ btn.disabled=true; btn.textContent='Uploading\u2026'; }
+    annamLabProg(true, 'Uploading report\u2026');
+
+    var safe = f.name.replace(/[^a-zA-Z0-9._-]/g,'_').slice(-60);
+    var path = customerId + '/' + Date.now() + '-' + safe;
+    try {
+      var up = await annamAuth.storage.from('lab-reports').upload(path, f, { upsert:false, contentType:f.type });
+      if(up.error) throw up.error;
+
+      annamLabProg(true, 'Saving to your record\u2026');
+      var ins = await annamAuth.from('lab_uploads').insert({
+        customer_id:  customerId,
+        file_name:    f.name,
+        file_path:    path,
+        file_size_kb: Math.round(f.size/1024),
+        mime_type:    f.type,
+        review_status:'pending_review'
+      });
+      if(ins.error){
+        try { await annamAuth.storage.from('lab-reports').remove([path]); } catch(e){}
+        throw ins.error;
+      }
+
+      annamLabProg(true, 'Complete \u00b7 awaiting dietitian review');
+      annamToast('Report uploaded \u2014 your dietitian will review it.','success');
+      annamStagedLab = null;
+      if(typeof renderMyDiet === 'function') setTimeout(renderMyDiet, 600);
+    } catch(err){
+      annamLabProg(false);
+      if(btn){ btn.disabled=false; btn.textContent='Upload report'; }
+      annamToast('Upload failed: ' + ((err && err.message) ? err.message : 'please try again.'),'error');
+    }
+  }
+
+  async function annamViewLab(encPath){
+    if(!annamAuth) return;
+    var path = decodeURIComponent(encPath);
+    try {
+      var r = await annamAuth.storage.from('lab-reports').createSignedUrl(path, 300);
+      if(r.error) throw r.error;
+      window.open(r.data.signedUrl, '_blank', 'noopener');
+    } catch(err){
+      annamToast('Could not open the file: ' + ((err && err.message) ? err.message : 'unknown error'),'error');
+    }
+  }
+
+  // Replace an already-uploaded (pending) report: delete it, then reopen picker
+  async function annamReplaceLab(id, encPath){
+    annamModal({
+      title:'Replace this report?',
+      body:'This removes the current file so you can upload a new one. Only possible while the report is still pending review.',
+      confirmLabel:'Remove & choose new',
+      onConfirm:async function(){
+        await annamDeleteLab(id, encPath, true);
+        annamToast('Removed \u2014 choose the new file to upload.','success');
+      }
+    });
+  }
+
+  function annamConfirmDeleteLab(id, encPath, name){
+    annamModal({
+      title:'Delete this report?',
+      body:'"'+name+'" will be permanently removed from your record. You can upload it again any time while it is pending review.',
+      confirmLabel:'Delete report',
+      danger:true,
+      onConfirm:function(){ annamDeleteLab(id, encPath, false); }
+    });
+  }
+
+  async function annamDeleteLab(id, encPath, silent){
+    if(!annamAuth || !id) return;
+    var path = encPath ? decodeURIComponent(encPath) : '';
+    try {
+      var del = await annamAuth.from('lab_uploads').delete().eq('id', id);
+      if(del.error) throw del.error;
+      if(path){ try { await annamAuth.storage.from('lab-reports').remove([path]); } catch(e){} }
+      if(!silent) annamToast('Report deleted.','success');
+      if(typeof renderMyDiet === 'function') renderMyDiet();
+    } catch(err){
+      annamToast('Could not remove the report: ' + ((err && err.message) ? err.message : 'unknown error'),'error');
+    }
+  }
+
+  // Generic confirm modal (design-system) — replaces native confirm()
+  function annamModal(opt){
+    var mask=document.createElement('div'); mask.className='lab-mask';
+    function close(){ if(mask.parentNode) mask.parentNode.removeChild(mask); }
+    var confirmCls = opt.danger ? 'btn btn-primary lab-btn-danger' : 'btn btn-primary';
+    mask.innerHTML =
+      '<div class="lab-modal" role="dialog" aria-modal="true">'+
+        '<h3>'+annamEsc(opt.title||'Are you sure?')+'</h3>'+
+        '<p>'+annamEsc(opt.body||'')+'</p>'+
+        '<div class="lab-modal-row">'+
+          '<button class="btn btn-ghost" style="padding:8px 16px;font-size:13px" data-act="cancel">'+annamEsc(opt.cancelLabel||'Cancel')+'</button>'+
+          '<button class="'+confirmCls+'" style="padding:8px 16px;font-size:13px" data-act="ok">'+annamEsc(opt.confirmLabel||'Confirm')+'</button>'+
+        '</div>'+
+      '</div>';
+    mask.addEventListener('click', function(e){
+      if(e.target===mask || e.target.getAttribute('data-act')==='cancel'){ close(); }
+      else if(e.target.getAttribute('data-act')==='ok'){ close(); if(typeof opt.onConfirm==='function') opt.onConfirm(); }
+    });
+    document.body.appendChild(mask);
   }
 
   function annamEhrProgress(customer, assessment, consults, pays, subs, labs){
