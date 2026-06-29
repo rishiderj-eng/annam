@@ -3950,6 +3950,8 @@
       '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">'+
         '<span class="ehr-status ok">\u2713 Published</span>'+
         '<span style="font-size:11.5px;color:var(--text-l)">Created by your dietitian \u00b7 Not AI-generated</span>'+
+        '<span style="flex:1"></span>'+
+        '<button class="btn btn-outline" style="padding:7px 14px;font-size:13px" onclick="annamDownloadPlanPdf()">\u2b07 Download PDF</button>'+
       '</div>'+
       (p.title?'<h3 style="font-family:var(--font-serif);font-size:1.3rem;font-weight:500;color:var(--text);margin:4px 0 2px">'+annamEsc(p.title)+'</h3>':'')+
       (meta.length?'<div style="font-size:12px;color:var(--text-l);margin-bottom:6px">'+meta.join(' \u00b7 ')+'</div>':'')+
@@ -3964,6 +3966,89 @@
       (p.review_date?block('Review date',annamDate(p.review_date)):'')+
       block('Follow-up',p.followup_note)+
       '<div style="margin-top:18px;padding-top:12px;border-top:1px solid var(--line);font-size:11.5px;color:var(--text-l);font-style:italic">This plan was written and approved by your qualified dietitian. Annam never uses AI to create diet plans.</div>';
+  }
+
+  // Client-side PDF of the customer's PUBLISHED plan (reuses loadJsPDF; no server/storage).
+  async function annamDownloadPlanPdf(){
+    if(!annamAuth) return;
+    var p=null;
+    try{
+      var r=await annamAuth.from('diet_plans').select('*').eq('status','published').order('published_at',{ascending:false}).limit(1);
+      p=(r && r.data && r.data[0]) || null;
+    }catch(e){ p=null; }
+    if(!p){ if(typeof annamToast==='function') annamToast('No published plan to download yet','info'); return; }
+
+    loadJsPDF(function(err){
+      if(err || !window.jspdf){ if(typeof annamToast==='function') annamToast('Could not load the PDF tool. Please try again.','error'); return; }
+      try{
+        var jsPDF=window.jspdf.jsPDF;
+        var doc=new jsPDF({unit:'pt',format:'a4'});
+        var PAGE_W=doc.internal.pageSize.getWidth(), PAGE_H=doc.internal.pageSize.getHeight();
+        var M=48, CW=PAGE_W-M*2;
+        var GREEN=[45,95,79], TEXT=[43,35,23], MUTE=[120,114,100], LINE=[225,219,194];
+        var y=0;
+
+        doc.setFillColor(GREEN[0],GREEN[1],GREEN[2]); doc.rect(0,0,PAGE_W,84,'F');
+        doc.setTextColor(251,247,238); doc.setFont('helvetica','bold'); doc.setFontSize(22);
+        doc.text('Annam', M, 50);
+        doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(229,221,194);
+        doc.text('Personalised Indian diets, delivered.', M, 68);
+        doc.setFontSize(9);
+        doc.text('Created by your dietitian \u00b7 Not AI-generated', PAGE_W-M, 50, {align:'right'});
+        y=84+34;
+
+        doc.setTextColor(TEXT[0],TEXT[1],TEXT[2]); doc.setFont('helvetica','bold'); doc.setFontSize(17);
+        var titleLines=doc.splitTextToSize(p.title||'Your diet plan', CW);
+        doc.text(titleLines, M, y); y+=titleLines.length*20+4;
+
+        var meta=[];
+        if(p.published_at) meta.push('Published '+new Date(p.published_at).toLocaleDateString());
+        if(p.author_name) meta.push('by '+p.author_name);
+        if(meta.length){ doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(MUTE[0],MUTE[1],MUTE[2]); doc.text(meta.join('   \u00b7   '), M, y); y+=18; }
+        y+=8;
+
+        function ensure(h){ if(y+h>PAGE_H-64){ doc.addPage(); y=M+8; } }
+        function section(label,val){
+          if(!val) return;
+          ensure(46);
+          doc.setFont('helvetica','bold'); doc.setFontSize(10.5); doc.setTextColor(GREEN[0],GREEN[1],GREEN[2]);
+          doc.text(String(label).toUpperCase(), M, y); y+=7;
+          doc.setDrawColor(LINE[0],LINE[1],LINE[2]); doc.setLineWidth(0.8); doc.line(M,y,M+CW,y); y+=13;
+          doc.setFont('helvetica','normal'); doc.setFontSize(11); doc.setTextColor(TEXT[0],TEXT[1],TEXT[2]);
+          var lines=doc.splitTextToSize(String(val), CW);
+          for(var i=0;i<lines.length;i++){ ensure(16); doc.text(lines[i], M, y); y+=15; }
+          y+=13;
+        }
+
+        section('Clinical goal', p.clinical_goal);
+        section('From your dietitian', p.dietitian_notes);
+        section('Daily structure', p.daily_structure);
+        section('Breakfast', p.breakfast);
+        section('Lunch', p.lunch);
+        section('Dinner', p.dinner);
+        section('Snacks', p.snacks);
+        section('Hydration & lifestyle', p.hydration_lifestyle);
+        section('Foods to prefer', p.foods_prefer);
+        section('Foods to limit', p.foods_limit);
+        section('Allergies & cautions', p.cautions);
+        if(p.review_date) section('Review date', new Date(p.review_date).toLocaleDateString());
+        section('Follow-up', p.followup_note);
+
+        var pages=doc.internal.getNumberOfPages();
+        for(var pg=1; pg<=pages; pg++){
+          doc.setPage(pg);
+          doc.setDrawColor(LINE[0],LINE[1],LINE[2]); doc.setLineWidth(0.8); doc.line(M,PAGE_H-48,PAGE_W-M,PAGE_H-48);
+          doc.setFont('helvetica','italic'); doc.setFontSize(8.5); doc.setTextColor(MUTE[0],MUTE[1],MUTE[2]);
+          doc.text('Written and approved by your qualified dietitian. Annam never uses AI to create diet plans.', M, PAGE_H-34);
+          doc.setFont('helvetica','normal');
+          doc.text('Annam \u00b7 annam.life', M, PAGE_H-20);
+          doc.text('Page '+pg+' of '+pages, PAGE_W-M, PAGE_H-20, {align:'right'});
+        }
+        doc.save('Annam-Diet-Plan.pdf');
+      }catch(e){
+        if(typeof annamToast==='function') annamToast('Could not generate the PDF. Please try again.','error');
+      }
+    });
   }
 
   // ---- Sprint 2D · Lab upload (healthcare-grade) ----
